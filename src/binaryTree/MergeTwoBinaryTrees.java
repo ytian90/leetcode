@@ -1,4 +1,7 @@
 package binaryTree;
+
+import util.BTreePrinter;
+
 /**
  * 617. Merge Two Binary Tree
  * @author ytian
