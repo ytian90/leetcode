@@ -23,7 +23,7 @@ public class AddOneRowtoTree {
 			}
 			return nn;
 		}
-		if (node == null) return null;
+		if (node == null) return null; // Should not be at top, corner case is below
 		node.left = helper(node.left, v, d, level + 1, 0);
 		node.right = helper(node.right, v, d, level + 1, 1);
 		return node;
@@ -49,6 +49,15 @@ public class AddOneRowtoTree {
 		n7.left = n8; n8.left = n9; n8.right = n0;
 		
 		BTreePrinter.printTreeNode(addOneRow(n7, 1, 3));
+		
+		// corner case for line 26
+		TreeNode n11 = new TreeNode(1);
+		TreeNode n12 = new TreeNode(2);
+		TreeNode n13 = new TreeNode(3);
+		TreeNode n14 = new TreeNode(4);
+		n11.left = n12; n11.right = n13; n12.left = n14;
+		
+		BTreePrinter.printTreeNode(addOneRow(n11, 5, 4));
 		
 	}
 
