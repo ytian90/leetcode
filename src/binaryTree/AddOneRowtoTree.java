@@ -14,7 +14,6 @@ public class AddOneRowtoTree {
     }
 	
 	private static TreeNode helper(TreeNode node, int v, int d, int level, int dir) {
-		if (node == null) return null;
 		if (d == level) {
 			TreeNode nn = new TreeNode(v);
 			if (dir == 0) {
@@ -24,6 +23,7 @@ public class AddOneRowtoTree {
 			}
 			return nn;
 		}
+		if (node == null) return null;
 		node.left = helper(node.left, v, d, level + 1, 0);
 		node.right = helper(node.right, v, d, level + 1, 1);
 		return node;
