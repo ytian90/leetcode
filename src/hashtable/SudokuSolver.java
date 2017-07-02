@@ -1,4 +1,4 @@
-package hashTable;
+package hashtable;
 /**
  * Sudoku Solver
  * @author yutian

@@ -1,4 +1,4 @@
-package hashTable;
+package hashtable;
 /**
  * Bulls and Cows
  * @author yutian

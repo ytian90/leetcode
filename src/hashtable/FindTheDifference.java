@@ -1,4 +1,4 @@
-package hashTable;
+package hashtable;
 /**
  * 389. Find the Difference
  * @author yutian

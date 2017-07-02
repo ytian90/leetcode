@@ -1,4 +1,4 @@
-package hashTable;
+package hashtable;
 /**
  * 463. Island Perimeter
  * @author ytian

@@ -1,4 +1,4 @@
-package hashTable;
+package hashtable;
 /**
  * 358. Rearrange String k Distance Apart
  * @author yutian
