@@ -8,15 +8,15 @@ public class MaximumProductOfWordLengths {
 	
 	public static int maxProduct(String[] words) {
         int max = 0;
-        int[] rec = new int[words.length];
-        for (int i = 0; i < rec.length; i++) {
+        int[] res = new int[words.length];
+        for (int i = 0; i < res.length; i++) {
         	for (char c: words[i].toCharArray()) {
-        		rec[i] |= 1 << (c - 'a');
+        		res[i] |= 1 << (c - 'a');
         	}
         }
-        for (int i = 0; i < rec.length - 1; i++) {
-        	for (int j = i + 1; j < rec.length; j++) {
-        		if ((rec[i] & rec[j]) == 0) {
+        for (int i = 0; i < res.length - 1; i++) {
+        	for (int j = i + 1; j < res.length; j++) {
+        		if ((res[i] & res[j]) == 0) {
         			max = Math.max(max, words[i].length() * words[j].length());
         		}
         	}
