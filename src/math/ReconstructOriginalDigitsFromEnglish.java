@@ -6,7 +6,7 @@ package math;
  */
 public class ReconstructOriginalDigitsFromEnglish {
 	
-	public String originalDigits(String s) {
+	public static String originalDigits(String s) {
 		int[] count = new int[10];
 	    for (int i = 0; i < s.length(); i++){
 	        char c = s.charAt(i);
@@ -36,8 +36,9 @@ public class ReconstructOriginalDigitsFromEnglish {
     }
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		System.out.println(originalDigits("owoztneoer"));
+		System.out.println(originalDigits("fviefuro"));
+		System.out.println(originalDigits("fviefviefurofuro"));
 	}
 
 }
