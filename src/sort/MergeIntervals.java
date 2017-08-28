@@ -1,7 +1,8 @@
 package sort;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
  */
 public class MergeIntervals {
 	
-	public List<Interval> merge(List<Interval> intervals) {
+	public static List<Interval> merge(List<Interval> intervals) {
 		if (intervals.size() <= 1) return intervals;
 		Collections.sort(intervals, (a, b) -> a.start - b.start);
 		
@@ -34,7 +35,18 @@ public class MergeIntervals {
 		return res;
 	}
 	
-	public class Interval {
+	public static void main(String[] args) {
+		Interval a = new Interval(1, 3);
+		Interval b = new Interval(2, 6);
+		Interval c = new Interval(8, 10);
+		Interval d = new Interval(15, 18);
+		List<Interval> t = new ArrayList<>(Arrays.asList(a, b, c, d));
+		for (Interval i : merge(t)) {
+			System.out.println(i.start + " " + i.end);
+		}
+	}
+	
+	public static class Interval {
 		int start;
 		int end;
 		Interval() { start = 0; end = 0; }
