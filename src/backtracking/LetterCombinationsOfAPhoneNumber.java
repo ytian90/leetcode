@@ -17,7 +17,7 @@ public class LetterCombinationsOfAPhoneNumber {
 	public List<String> letterCombinations(String digits) {
         List<String> res = new ArrayList<>();
         if (digits == null || digits.length() == 0) return res;
-        String[] map = new String[]{"0", "1", "abc", "def", "ghi", "jkl", 
+        String[] map = {"0", "1", "abc", "def", "ghi", "jkl", 
         		"mno", "pqrs", "tuv", "wxyz"};
         addUp(digits, 0, new StringBuilder(), map, res);
         return res;
@@ -43,7 +43,7 @@ public class LetterCombinationsOfAPhoneNumber {
 	public List<String> letterCombinations2(String digits) {
 		LinkedList<String> res = new LinkedList<>();
 		if (digits == null || digits.length() == 0) return res;
-		String[] map = new String[]{"0", "1", "abc", "def", "ghi", "jkl", 
+		String[] map = {"0", "1", "abc", "def", "ghi", "jkl", 
 									"mno", "pqrs", "tuv", "wxyz"};
 		res.add("");
 		for (int i = 0; i < digits.length(); i++) {
