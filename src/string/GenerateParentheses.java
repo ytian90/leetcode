@@ -4,36 +4,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Generate Parentheses
+ * 22. Generate Parentheses
  * @author yutian
  * @since Aug 18, 2015
  */
 public class GenerateParentheses {
 	// Solution 1
-	public List<String> generateParenthesis(int n) {
+	public static List<String> generateParenthesis(int n) {
 		List<String> list = new ArrayList<>();
 		helper("", list, n, n);
 		return list;
 	}
 
-	private void helper(String sublist, List<String> list, int left, int right) {
+	private static void helper(String str, List<String> list, int left, int right) {
 		if (left > right) return;
 		if (left == 0 && right == 0) {
-			list.add(sublist);
+			list.add(str);
 			return;
 		}
-		if (left > 0) helper(sublist + "(", list, left - 1, right);
-		if (right > 0) helper(sublist + ")", list, left, right - 1);
+		if (left > 0) helper(str + "(", list, left - 1, right);
+		if (right > 0) helper(str + ")", list, left, right - 1);
 	}
 	
 	// Solution 2
-	public List<String> generateParenthesis2(int n) {
+	public static List<String> generateParenthesis2(int n) {
 		List<String> list = new ArrayList<>();
 		addUp(n, 0, 0, new StringBuilder(), list);
 		return list;
 	}
 
-	private void addUp(int n, int left, int right, StringBuilder str,
+	private static void addUp(int n, int left, int right, StringBuilder str,
 			List<String> list) {
 		if (left == n) {
 			while (right < n) {
@@ -49,6 +49,10 @@ public class GenerateParentheses {
 			str.delete(len, str.length());
 			addUp(n, left, right + 1, str.append(')'), list);
 		}
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(generateParenthesis(3));
 	}
 	
 }
