@@ -18,7 +18,7 @@ public class ValidParentheses {
 			}};
 			
 	// Solution 1 Stack
-	public boolean isValid(String s) {
+	public static boolean isValid(String s) {
 		Stack<Character> stack = new Stack<>();
 		for (char c : s.toCharArray()) {
 			if (map.containsKey(c)) {
@@ -30,24 +30,33 @@ public class ValidParentheses {
 		return stack.isEmpty();
 	}
 	
-	public boolean isValid1(String s) {
-		Stack<Character> stack = new Stack<>();
-		for (char c : s.toCharArray()) {
+	public static boolean isValid1(String str) {
+		Stack<Character> s = new Stack<>();
+		for (char c : str.toCharArray()) {
 			if (c == '(') {
-				stack.push(')');
+				s.push(')');
 			} else if (c == '{') {
-				stack.push('}');
+				s.push('}');
 			} else if (c == '[') {
-				stack.push(']');
-			} else if (stack.isEmpty() || stack.pop() != c) {
+				s.push(']');
+			} else if (s.isEmpty() || s.pop() != c) {
 				return false;
 			}
 		}
-		return stack.isEmpty();
+		return s.isEmpty();
 	}
 	
-	// a little slow due to replace()
-	public boolean isValid2(String s) {
+	public static void main(String[] args) {
+		System.out.println(isValid1("()"));
+		System.out.println(isValid1("()[]{}"));
+		System.out.println(isValid1("(]"));
+		System.out.println(isValid1("([)]"));
+		System.out.println(isValid1("()({[]}{})"));
+		System.out.println(isValid1("()({[]}{)"));
+	}
+	
+	// a little slow due to replace() 
+	public static boolean isValid2(String s) {
 		int length;
 		do { 
 			length = s.length();
@@ -57,7 +66,7 @@ public class ValidParentheses {
 	}
 	
 	// Follow up space O(1) only one kind of ( )
-	public boolean isValid9(String s) {
+	public static boolean isValid9(String s) {
 		int ch = 0;
 		for (char c : s.toCharArray()) {
 			if (c == '(') ch++;
