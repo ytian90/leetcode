@@ -1,10 +1,59 @@
 package dynamicProgramming;
+
+import java.util.Stack;
+
 /**
- * Longest Valid Parentheses
+ * 32. Longest Valid Parentheses
  * @author yutian
  * @since Aug 18, 2015
  */
 public class LongestValidParentheses {
+	
+	public static int longestValidParentheses2(String s) {
+		Stack<Integer> stack = new Stack<Integer>();
+		int max = 0;
+		int left = -1;
+		for (int i = 0; i < s.length(); i++) {
+			if (s.charAt(i) == '(') stack.push(i);
+			else {
+				if (stack.isEmpty()) left = i;
+				else {
+					stack.pop();
+					if (stack.isEmpty()) max = Math.max(max, i - left);
+					else max = Math.max(max, i - stack.peek());
+				}
+			}
+		}
+		return max;
+	}
+	
+	public static int longestValidParentheses3(String s) {
+		if (s.length() <= 1) return 0;
+		int max = 0;
+		int[] dp = new int[s.length()];
+		for (int i = 1; i < s.length(); i++) {
+			if (s.charAt(i) == ')') {
+				if (s.charAt(i - 1) == '(') {
+					dp[i] = i >= 2 ? dp[i - 2] + 2 : 2;
+					max = Math.max(max, dp[i]);
+				} else { // if s.charAt(i - 1) is ')', combine the previous length
+					int t = i - dp[i - 1] - 1; // magic number
+					if (t >= 0 && s.charAt(t) == '(') {
+						dp[i] = dp[i - 1] + 2 + (t >= 1 ? dp[t - 1] : 0);
+						max = Math.max(max, dp[i]);
+					}
+				}
+			}
+		}
+		return max;
+	}
+	
+	public static void main(String[] args) {
+		String s = ")(()())()";
+		int num = longestValidParentheses3(s);
+		System.out.println(num);
+	}
+	
 	public static int longestValidParentheses(String s) {
 		// d(i): length of the longest valid parentheses starting from s[i], i = N - 1...0
 		// d(i) = 0 if s[i] == ')'
@@ -27,9 +76,5 @@ public class LongestValidParentheses {
 		}
 		return max;
 	}
-	public static void main(String[] args) {
-		String s = ")(()())()";
-		int num = longestValidParentheses(s);
-		System.out.println(num);
-	}
+	
 }
