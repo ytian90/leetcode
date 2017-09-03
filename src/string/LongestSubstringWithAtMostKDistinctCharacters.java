@@ -11,10 +11,10 @@ public class LongestSubstringWithAtMostKDistinctCharacters {
         int[] count = new int[256];
         int num = 0, i = 0, res = 0;
         for (int j = 0; j < s.length(); j++) {
-        	if (count[s.charAt(j) - 'a']++ == 0) num++;
+        	if (count[s.charAt(j)]++ == 0) num++;
         	if (num > k) {
         		// left pointer move forward until some letter is out
-        		while (--count[s.charAt(i++) - 'a'] > 0);
+        		while (--count[s.charAt(i++)] > 0);
         		num--;
         	}
         	res = Math.max(res, j - i + 1);

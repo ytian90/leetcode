@@ -14,7 +14,7 @@ public class LongestSubstringWithAtMostTwoDistinctCharacters {
 	public static int lengthOfLongestSubstringTwoDistinct(String s) {
 		if (s == null || s.length() < 1) return 0;
         Map<Character, Integer> map = new HashMap<>();
-        int prev = 0, maxLen = 0;
+        int prev = 0, max = 0;
         for (int i = 0; i < s.length(); ) {
         	if (map.size() <= 2) {
         		map.put(s.charAt(i), i);
@@ -28,9 +28,9 @@ public class LongestSubstringWithAtMostTwoDistinctCharacters {
         		map.remove(s.charAt(leftMost));
         		prev = leftMost + 1;
         	}
-        	maxLen = Math.max(maxLen, i - prev);
+        	max = Math.max(max, i - prev);
         }
-        return maxLen;
+        return max;
     }
 	
 	// two pointers
@@ -52,11 +52,10 @@ public class LongestSubstringWithAtMostTwoDistinctCharacters {
 	}
 
 	public static void main(String[] args) {
-		String s = "eceba";
-		String s2 = "a";
-		String s3 = "aac";
-		String s4 = "abc";
-		System.out.println(lengthOfLongestSubstringTwoDistinct2(s3));
+		System.out.println(lengthOfLongestSubstringTwoDistinct2("eceba"));
+		System.out.println(lengthOfLongestSubstringTwoDistinct2("a"));
+		System.out.println(lengthOfLongestSubstringTwoDistinct2("aac"));
+		System.out.println(lengthOfLongestSubstringTwoDistinct2("abc"));
 	}
 
 }
