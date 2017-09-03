@@ -1,5 +1,6 @@
 package hashtable;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,10 +22,7 @@ public class LongestSubstringWithAtMostTwoDistinctCharacters {
         		i++;
         	}
         	if (map.size() > 2) {
-        		int leftMost = s.length();
-        		for (int k: map.values()) {
-        			leftMost = Math.min(leftMost, k);
-        		}
+        		int leftMost = Collections.min(map.values());
         		map.remove(s.charAt(leftMost));
         		prev = leftMost + 1;
         	}
@@ -39,16 +37,16 @@ public class LongestSubstringWithAtMostTwoDistinctCharacters {
 		// i is first, j is second
 		if (s == null) return 0;
         if (s.length() < 3) return s.length();
-        int i = 0, j = -1, maxLen = 0;
+        int i = 0, j = -1, max = 0;
         for (int k = 1; k < s.length(); k++) {
             if (s.charAt(k) == s.charAt(k - 1)) continue;
             if (j > -1 && s.charAt(k) != s.charAt(j)) {
-                maxLen = Math.max(maxLen, k - i);
+                max = Math.max(max, k - i);
                 i = j + 1;
             }
             j = k - 1;
         }
-        return maxLen > (s.length() - i) ? maxLen: s.length() - i;
+        return max > (s.length() - i) ? max: s.length() - i; // aac
 	}
 
 	public static void main(String[] args) {
