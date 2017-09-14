@@ -37,7 +37,7 @@ public class FractionToRecurringDecimal {
 				map.put(r, sb.length());
 				r *= 10;
 				sb.append(r / d);
-				r = r % d;
+				r %= d;
 			}
 		}
 		return sb.toString();
