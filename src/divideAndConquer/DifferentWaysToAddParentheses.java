@@ -4,48 +4,48 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Different Ways to Add Parentheses
+ * 286. Different Ways to Add Parentheses
  * @author yutian
  * @since Aug 13, 2015
  */
 public class DifferentWaysToAddParentheses {
 	public static List<Integer> diffWaysToCompute(String input) {
-		List<Integer> ret = new LinkedList<Integer>();
+		List<Integer> res = new LinkedList<>();
 		for (int i = 0; i < input.length(); i++) {
 			if (input.charAt(i) == '-' || input.charAt(i) == '*' || input.charAt(i) == '+') {
-				String part1 = input.substring(0, i);
-				String part2 = input.substring(i + 1);
-				List<Integer> part1Ret = diffWaysToCompute(part1);
-				List<Integer> part2Ret = diffWaysToCompute(part2);
-				for (Integer p1: part1Ret) {
-					for (Integer p2: part2Ret) {
+				String aStr = input.substring(0, i);
+				String bStr = input.substring(i + 1);
+				List<Integer> aRes = diffWaysToCompute(aStr);
+				List<Integer> bRes = diffWaysToCompute(bStr);
+				for (Integer a: aRes) {
+					for (Integer b: bRes) {
 						int c = 0;
 						switch(input.charAt(i)) {
 						case '+':
-							c = p1 + p2;
+							c = a + b;
 							break;
 						case '-':
-							c = p1 - p2;
+							c = a - b;
 							break;
 						case '*':
-							c = p1 * p2;
+							c = a * b;
 							break;
 						}
-						ret.add(c);
+						res.add(c);
 					}
 				}
 			}
 		}
-		if (ret.size() == 0) {
-			ret.add(Integer.valueOf(input));
+		if (res.size() == 0) {
+			res.add(Integer.valueOf(input));
 		}
-		return ret;
+		return res;
 	}
 	
 	public static void main(String[] args) {
-		String s1 = "0+1";
-//		String s2 = "2*3-4*5";
-		System.out.println(diffWaysToCompute(s1));
-//		System.out.println(diffWaysToCompute(s2));
+		System.out.println(diffWaysToCompute("100"));
+		System.out.println(diffWaysToCompute("2-1-1"));
+		System.out.println(diffWaysToCompute("0+1"));
+		System.out.println(diffWaysToCompute("2*3-4*5"));
 	}
 }
