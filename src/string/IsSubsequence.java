@@ -23,19 +23,17 @@ public class IsSubsequence {
 		if (t.length() < s.length()) return false;
 		int prev = 0;
 		for (int i = 0; i < s.length(); i++) {
-			char tempChar = s.charAt(i);
-			prev = t.indexOf(tempChar, prev);
+			char c = s.charAt(i);
+			prev = t.indexOf(c, prev);
 			if (prev == -1) return false;
 			prev++;
 		}
 		return true;
 	}
-	
 
 	public static void main(String[] args) {
 		System.out.println(isSubsequence("abc", "ahbgdc"));
 		System.out.println(isSubsequence("axc", "ahbgdc"));
-		
 	}
 
 }
