@@ -12,15 +12,15 @@ import java.util.List;
 public class Permutations {
 	
 	// Solution 2: backtracking time ~O(N!) Space ~O(N)
-	List<List<Integer>> res = new ArrayList<>();
-    List<Integer> list = new ArrayList<>();
-    
+	
     public List<List<Integer>> permute2(int[] nums) {
-        helper(nums);
+    	List<List<Integer>> res = new ArrayList<>();
+        List<Integer> list = new ArrayList<>();
+        helper(nums, list, res);
         return res;
     }
     
-    private void helper(int[] n) {
+    private void helper(int[] n, List<Integer> list, List<List<Integer>> res) {
         if (list.size() == n.length) {
             res.add(new ArrayList<>(list));
             return;
@@ -28,7 +28,7 @@ public class Permutations {
         for (int i : n) {
             if (list.contains(i)) continue;
             list.add(i);
-            helper(n);
+            helper(n, list, res);
             list.remove(list.size() - 1);
         }
     }
