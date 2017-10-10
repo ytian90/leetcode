@@ -1,4 +1,7 @@
 package array;
+
+import java.util.Arrays;
+
 /**
  * 360. Sort Transformed Array
  * @author yutian
@@ -6,7 +9,7 @@ package array;
  */
 public class SortTransformedArray {
 	
-	public int[] sortTransformedArray(int[] nums, int a, int b, int c) {
+	public static int[] sortTransformedArray(int[] nums, int a, int b, int c) {
 		int n = nums.length;
         int[] sorted = new int[n];
         int i = 0, j = n - 1;
@@ -23,12 +26,13 @@ public class SortTransformedArray {
         return sorted;
     }
 	
-	private int cal(int x, int a, int b, int c) {
+	private static int cal(int x, int a, int b, int c) {
 		return a * x * x + b * x + c;
 	}
 
 	public static void main(String[] args) {
-
+		System.out.println(Arrays.toString(sortTransformedArray(new int[]{-4, -2, 2, 4}, 1, 3, 5)));
+		System.out.println(Arrays.toString(sortTransformedArray(new int[]{-4, -2, 2, 4}, -1, 3, 5)));
 	}
 
 }
