@@ -1,6 +1,5 @@
 package binaryTree;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,7 +28,7 @@ interface Monarchy {
  */
 public class BornDeathMonarchy implements Monarchy {
 	
-	List<List<String>> res = new ArrayList<>();
+	
 	
 	@Override
 	public void birth(String child, String parent) {
