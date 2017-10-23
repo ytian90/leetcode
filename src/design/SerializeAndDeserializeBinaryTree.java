@@ -4,9 +4,12 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+import binaryTree.TreeNode;
+import util.BTreePrinter;
+
 
 /**
- * Serialize and Deserialize Binary Tree
+ * 297. Serialize and Deserialize Binary Tree
  * @author yutian
  * @since Dec 19, 2015
  */
@@ -49,9 +52,7 @@ public class SerializeAndDeserializeBinaryTree {
 		}
 		
 	}
-	
 
-	
 	/*
 	 * 			3
 	 * 		9		20	
@@ -72,30 +73,8 @@ public class SerializeAndDeserializeBinaryTree {
 		String result = serialize(n0);
 		System.out.println(result);
 		
-		TreeNode res = deserialize(result);
-		showTree(res);
+		binaryTree.TreeNode res = deserialize(result);
+		BTreePrinter.printTreeNode(res);
 	}
-	
-	private static void showTree(TreeNode node) {
-		if (node == null) {
-			System.out.println("null");
-			return;
-		}
-		System.out.println(node.val);
-		showTree(node.left);
-		showTree(node.right);
-	}
-	
 
-	// Your Codec object will be instantiated and called as such:
-	// Codec codec = new Codec();
-	// codec.deserialize(codec.serialize(root));
-	
-	 // Definition for a binary tree node.
-	 public static class TreeNode {
-	     int val;
-	     TreeNode left;
-	     TreeNode right;
-	     TreeNode(int x) { val = x; }
-	 }
 }

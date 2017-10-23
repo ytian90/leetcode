@@ -20,17 +20,17 @@ public class IntegerToRoman {
 	};
 	
 	public static String intToRoman(int num) {
-		StringBuilder roman = new StringBuilder();
+		StringBuilder sb = new StringBuilder();
 		int i = 0;
 		while (num > 0) {
 			int k = num / values[i];
 			for (int j = 0; j < k; j++) {
-				roman.append(symbols[i]);
+				sb.append(symbols[i]);
 				num -= values[i];
 			}
 			i++;
 		}
-		return roman.toString();
+		return sb.toString();
 	}
 	
 	public static void main(String[] args) {

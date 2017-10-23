@@ -11,7 +11,7 @@ public class DecodeWays {
 	 * @return
 	 */
 	public static int numDecodings(String s) {
-		// d(i) = {d(i -1), if s[i - 1] != '0'} + {d(i-2), if 1X (X = 1..9) or 2X (X = 1...6)}
+		// d(i) = {d(i - 1), if s[i - 1] != '0'} + {d(i-2), if 1X (X = 1..9) or 2X (X = 1...6)}
 		// d(0) = 0, but set d(0) = 1 for computing d(i)
 		// Time ~ O(N), Space ~ O(N) 
 		int n = s.length();

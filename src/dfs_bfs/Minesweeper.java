@@ -5,6 +5,8 @@ import java.util.Queue;
 
 /**
  * 529. Minesweeper
+ * GG MJ
+ * https://instant.1point3acres.com/thread/204403
  * @author ytian
  *
  */
@@ -24,7 +26,7 @@ public class Minesweeper {
 	 * @param click
 	 * @return
 	 */
-	public char[][] updateBoard(char[][] board, int[] click) {
+	public static char[][] updateBoard(char[][] board, int[] click) {
         int m = board.length, n = board[0].length;
         int row = click[0], col = click[1];
         if (board[row][col] == 'M') {
@@ -56,6 +58,36 @@ public class Minesweeper {
         }
 		return board;
     }
+	
+	public static void main(String[] args) {
+		
+		// create a new board
+		char[][] board = new char[5][5];
+		for (int i = 0; i < board.length; i++) {
+			for (int j = 0; j < board[0].length; j++) {
+				if (Math.random() < 0.3) board[i][j] = 'M';
+				else board[i][j] = 'E';
+			}
+		}
+		
+		print(board);
+		
+		// update the board based on click
+		board = updateBoard(board, new int[]{0, 1});
+		
+		print(board);
+	}
+	
+	public static void print(char[][] board) {
+		System.out.println();
+		for (int i = 0; i < board.length; i++) {
+			for (int j = 0; j < board[0].length; j++) {
+				System.out.print(board[i][j] + " ");
+			}
+			System.out.println();
+		}
+	}
+
 	
 	/**
 	 * BFS
@@ -109,10 +141,46 @@ public class Minesweeper {
 		return board;
     }
 	
+	public static void methodFromPrinceton(String[] args) {
+		int m = Integer.parseInt(args[0]);
+		int n = Integer.parseInt(args[1]);
+		double p = Double.parseDouble(args[2]);
+		
+		// game grid is [1..m][1..n], border is used to handle boundary cases
+        boolean[][] bombs = new boolean[m][n];
+        for (int i = 0; i < m; i++)
+            for (int j = 0; j < n; j++)
+                bombs[i][j] = (Math.random() < p);
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+        // print game
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++)
+                if (bombs[i][j]) System.out.print("* ");
+                else             System.out.print(". ");
+            System.out.println();
+        }
 
+        // sol[i][j] = # bombs adjacent to cell (i, j)
+        int[][] sol = new int[m][n];
+        for (int i = 0; i < m; i++)
+            for (int j = 0; j < n; j++)
+                // (ii, jj) indexes neighboring cells
+                for (int ii = i - 1; ii <= i + 1; ii++)
+                    for (int jj = j - 1; jj <= j + 1; jj++) {
+                    	if (ii < 0 || ii >= m || jj < 0 || jj >=n) continue;
+                        if (bombs[ii][jj]) sol[i][j]++;
+                    }
+
+        // print solution
+        System.out.println();
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (bombs[i][j]) System.out.print("* ");
+                else             System.out.print(sol[i][j] + " ");
+            }
+            System.out.println();
+        }
 	}
 
+	
 }
