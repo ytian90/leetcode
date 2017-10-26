@@ -24,6 +24,24 @@ public class ConvertBSTtoGreaterTree {
 		sum = node.val;
 		helper(node.left);
 	}
+	
+	public TreeNode convertBST2(TreeNode root) {
+        helper(root, 0);
+        return root;
+    }
+    
+    private int helper(TreeNode root, int sum) {
+        if (root == null) return 0;
+        if (root.right != null) {
+            sum = helper(root.right, sum);
+        }
+        sum += root.val;
+        root.val = sum;
+        if (root.left != null) {
+            sum = helper(root.left, sum);
+        }
+        return sum;
+    }
 
 	public static void main(String[] args) {
 		TreeNode n1 = new TreeNode(5);
