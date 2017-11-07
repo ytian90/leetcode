@@ -13,6 +13,14 @@ import java.util.Set;
  * @since Jan 29, 2016
  */
 public class RemoveInvalidParentheses {
+
+	public static void main(String[] args) {
+		RemoveInvalidParentheses t = new RemoveInvalidParentheses();
+		System.out.println(t.removeInvalidParentheses("()())()"));
+		System.out.println(t.removeInvalidParentheses("(a)())()"));
+		System.out.println(t.removeInvalidParentheses(")("));
+		System.out.println(t.removeInvalidParentheses("((())())())()"));
+	}
 	
 	// time ~ n * 2 ^ (n-1)
 	public List<String> removeInvalidParentheses(String s) {
@@ -121,14 +129,5 @@ public class RemoveInvalidParentheses {
 	/*********************************************************************************************/
 	
 
-	public static void main(String[] args) {
-		RemoveInvalidParentheses t = new RemoveInvalidParentheses();
-		System.out.println(t.removeInvalidParentheses("()())()"));
-		System.out.println(t.removeInvalidParentheses("(a)())()"));
-		System.out.println(t.removeInvalidParentheses(")("));
-		System.out.println(t.removeInvalidParentheses("((())())())()"));
-		
-		
-	}
 
 }
