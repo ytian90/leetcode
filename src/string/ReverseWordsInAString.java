@@ -24,8 +24,11 @@ public class ReverseWordsInAString {
 	}
 
 	public static void main(String[] args) {
-		String s = "the sky is blue  ";
-		System.out.println(reverseWords(s));
+		System.out.println(reverseWords("the sky is blue"));
+		System.out.println(reverseWords("  the sky"));
+		System.out.println(reverseWords("the sky  "));
+		System.out.println(reverseWords("  the sky  "));
+		System.out.println(reverseWords("the  sky    is blue"));
 	}
 
 }

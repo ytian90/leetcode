@@ -14,7 +14,7 @@ public class IntersectionOfTwoArrays2 {
         HashMap<Integer, Integer> map = new HashMap<>();
         ArrayList<Integer> result = new ArrayList<Integer>();
         for (int n : nums1) {
-        	map.put(n, map.getOrDefault(n, 0) + 1);
+        		map.put(n, map.getOrDefault(n, 0) + 1);
         }
         for (int n : nums2) {
         	if (map.containsKey(n) && map.get(n) > 0) {
@@ -22,12 +22,7 @@ public class IntersectionOfTwoArrays2 {
         		map.put(n, map.get(n) - 1);
         	}
         }
-        int[] r = new int[result.size()];
-        for(int i = 0; i < result.size(); i++)
-        {
-            r[i] = result.get(i);
-        }
-        return r;
+        return result.stream().mapToInt(i -> i).toArray();
     }
 
 	public static void main(String[] args) {

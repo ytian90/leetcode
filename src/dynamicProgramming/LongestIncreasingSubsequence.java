@@ -1,8 +1,6 @@
 package dynamicProgramming;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * 300. Longest Increasing Subsequence
@@ -19,16 +17,20 @@ public class LongestIncreasingSubsequence {
         Arrays.fill(d, 1);
         int result = 1;
         for (int i = 1; i < len; i++) {
-        	for (int j = 0; j < i; j++) {
-        		if (nums[j] < nums[i]) {
-        			d[i] = Math.max(d[i], d[j] + 1);
-        		}
-        	}
-        	result = Math.max(result, d[i]);
+	        	for (int j = 0; j < i; j++) {
+	        		if (nums[j] < nums[i]) {
+	        			d[i] = Math.max(d[i], d[j] + 1);
+	        		}
+	        	}
+	        	result = Math.max(result, d[i]);
         }
         return result;
     }
-	
+
+	public static void main(String[] args) {
+		int[] test = new int[]{ 10,9,2,5,3,7,101,18 };
+		System.out.println(lengthOfLIS2(test));
+	}
 
 	// Solution 2: Binary search O(NlongN)
 	public static int lengthOfLIS2(int[] nums) {
@@ -82,9 +84,5 @@ public class LongestIncreasingSubsequence {
     }
 
 
-	public static void main(String[] args) {
-		int[] test = new int[]{ 10,9,2,5,3,7,101,18 };
-		System.out.println(lengthOfLIS2(test));
-	}
 
 }
