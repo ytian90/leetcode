@@ -4,14 +4,37 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Copy List with Random Pointer
+ * 138. Copy List with Random Pointer
  * @author yutian
  * @since Jul 26, 2015
  */
 public class CopyListWithRandomPointer {
 	
-	// Solution 1 Time O(n) Space O(n)
+	// Solution 0 Recursion
 	public RandomListNode copyRandomList(RandomListNode head) {
+		if (head == null)
+			return null;
+		Map<RandomListNode, RandomListNode> map = new HashMap<>();
+		// loop 1 copy all the nodes
+		RandomListNode node = head;
+		while (node != null) {
+			map.put(node, new RandomListNode(node.label));
+			node = node.next;
+		}
+		
+		// loop 2 assign next and random pointers
+		node = head;
+		while (node != null) {
+			map.get(node).next = map.get(node.next);
+			map.get(node).random = map.get(node.random);
+			node = node.next;
+		}
+		
+		return map.get(head);
+	}
+	
+	// Solution 1 Time O(n) Space O(n)
+	public RandomListNode copyRandomList1(RandomListNode head) {
 		Map<RandomListNode, RandomListNode> map = new HashMap<>();
 		RandomListNode p = head;
 		RandomListNode dummy = new RandomListNode(0);

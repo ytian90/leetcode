@@ -6,8 +6,18 @@ package string;
  */
 public class ImplementStrStr {
 	
-	// Brute Time Complexity O(n^2)
 	public static int strStr(String haystack, String needle) {
+		if (needle.isEmpty()) return 0;
+		for (int i = 0; i <= haystack.length() - needle.length(); i++) {
+			for (int j = 0; j < needle.length() && haystack.charAt(i + j) == needle.charAt(j); j++) {
+				if (j == needle.length() - 1) return i;
+			}
+		}
+		return -1;
+	}
+	
+	// Brute Time Complexity O(n^2)
+	public static int strStr1(String haystack, String needle) {
 		for (int i = 0; ; i++) {
 			for (int j = 0; ; j++) {
 				if (j == needle.length()) return i; // match
@@ -53,11 +63,9 @@ public class ImplementStrStr {
 	}
 
 	public static void main(String[] args) {
-		String h1 = "aaaba", n1 = "ba";
-		String h2 = "mississippi", n2 = "issi";
-		
-		System.out.println(strStr(h1, n1));
-//		System.out.println(strStr(h2, n2));
+		System.out.println(strStr("a", "a"));
+		System.out.println(strStr("aaaba", "ba"));
+		System.out.println(strStr("mississippi", "issi"));
 	}
 
 }

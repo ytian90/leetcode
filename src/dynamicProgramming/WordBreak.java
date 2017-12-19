@@ -1,14 +1,34 @@
 package dynamicProgramming;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
- * Word Break
+ * 139. Word Break
  * @author yutian
  * @since Aug 23, 2015
  */
 public class WordBreak {
+	
+	public static boolean wordBreak(String s, List<String> wordDict) {
+		boolean[] dp = new boolean[s.length() + 1];
+		Set<String> set = new HashSet<>();
+		set.addAll(wordDict);
+		
+		dp[0] = true;
+		for (int i = 1; i <= s.length(); i++) {
+			for (int j = 0; j < i; j++) {
+				if (dp[j] = true && set.contains(s.substring(j, i))) {
+					dp[i] = true;
+					break;
+				}
+			}
+		}
+		return dp[s.length()];
+	}
+	
 	public static boolean wordBreak(String s, Set<String> wordDict) {
 		// d[i]: s[0..i-1] is breakable
 		// d(i) = d(j) && s[j, i], j = 0..i - 1
@@ -29,7 +49,7 @@ public class WordBreak {
 	
 	public static void main(String[] args) {
 		String s = "leetcode";
-		Set<String> d = new HashSet<>();
+		List<String> d = new ArrayList<>();
 		d.add("leet"); d.add("code");
 		System.out.println(wordBreak(s, d));
 	}

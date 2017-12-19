@@ -1,6 +1,6 @@
 package dynamicProgramming;
 /**
- * Maximum Product Subarray
+ * 152. Maximum Product Subarray
  * @author yutian
  * @since Aug 1, 2015
  */

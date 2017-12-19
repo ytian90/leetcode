@@ -5,6 +5,12 @@ package math;
  *
  */
 public class NthDigit {
+	
+	/*
+	 * 1. find the length of the number where the nth digit is from
+	 * 2. find the actual number where the nth digit is from
+	 * 3. find the nth digit and return
+	 */
 
 	public static int findNthDigit(int n) {
         int len = 1;
@@ -12,10 +18,10 @@ public class NthDigit {
         int start = 1;
         
         while (n > len * count) {
-        	n -= len * count;
-        	len++;
-        	count *= 10;
-        	start *= 10;
+	        	n -= len * count;
+	        	len++;
+	        	count *= 10;
+	        	start *= 10;
         }
         
         start += (n - 1) / len;
@@ -24,7 +30,6 @@ public class NthDigit {
     }
 	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		System.out.println(findNthDigit(3));
 		System.out.println(findNthDigit(11));
 		

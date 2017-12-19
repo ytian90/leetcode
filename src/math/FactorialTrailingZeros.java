@@ -7,11 +7,11 @@ package math;
 public class FactorialTrailingZeros {
 	
 	public static void main(String[] args) {
-		System.out.println(findTrailingZeros(5));
+		System.out.println(trailingZeroes(5));
 	}
 	
 	// Time ~ O(log5N), Space ~ O(1) 
-	public static int findTrailingZeros(int n) {
+	public static int trailingZeroes(int n) {
 		int count = 0;
 		for (long i = 5; n / i >= 1; i *= 5) {
 			count += n / i;
@@ -19,12 +19,12 @@ public class FactorialTrailingZeros {
 		return count;
 	}
 	
-	public static int findTrailingZeros2(int n) {
-		return n == 0 ? 0 : n / 5 + findTrailingZeros2(n / 5);
+	public static int trailingZeroes2(int n) {
+		return n == 0 ? 0 : n / 5 + trailingZeroes2(n / 5);
 	}
 	
 	// Time ~ O(log5N), Space ~ O(1) 
-	public static int findTrailingZeros3(int n) {
+	public static int trailingZeroes3(int n) {
 		int count = 0;
 		while (n > 0) {
 			n = n / 5;

@@ -7,11 +7,20 @@ package math;
 public class ExcelSheetColumnNumber {
 	
 	public static void main(String[] args) {
-		System.out.println(titleToNumber("AB"));
+		System.out.println(titleToNumber("AZ"));
+		System.out.println(titleToNumber("AAB"));
+	}
+	
+	public static int titleToNumber(String s) {
+		int res = 0;
+		for (char c  :s.toCharArray()) {
+			res = res * 26 + (c - 'A' + 1);
+		}
+		return res;
 	}
 	
 	// Solution 1
-	public static int titleToNumber(String s) {
+	public static int titleToNumber1(String s) {
 		int result = 0;
 		for (int i = 0; i < s.length(); i++) {
 			result = result * 26 + (s.charAt(i) - 'A' + 1);
