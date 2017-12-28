@@ -15,7 +15,7 @@ public class EncodeAndDecodeStrings {
     public String encode(List<String> strs) {
         StringBuilder sb = new StringBuilder();
         for (String s: strs) {
-        	sb.append(s.length()).append('*').append(s);
+        		sb.append(s.length()).append('*').append(s);
         }
         return sb.toString();
     }
@@ -25,14 +25,13 @@ public class EncodeAndDecodeStrings {
         List<String> result = new ArrayList<>();
         int i = 0;
         while (i < s.length()) {
-        	int sl = s.indexOf('*', i);
-        	int size = Integer.valueOf(s.substring(i, sl));
-        	result.add(s.substring(sl + 1, sl + size + 1));
-        	i = sl + size + 1;
+	        	int sl = s.indexOf('*', i);
+	        	int size = Integer.valueOf(s.substring(i, sl));
+	        	result.add(s.substring(sl + 1, sl + size + 1));
+	        	i = sl + size + 1;
         }
         return result;
     }
-	
 
 	public static void main(String[] args) {
 		List<String> t1 = new LinkedList<>();

@@ -1,4 +1,7 @@
 package array;
+
+import java.util.Arrays;
+
 /**
  * 59. Spiral Matrix II
  * @author yutian
@@ -9,22 +12,22 @@ public class SpiralMatrix2 {
 	public static int[][] generateMatrix(int n) {
 		int[][] result = new int[n][n];
 		int left = 0, top = 0;
-		int right = n - 1, down = n - 1;
+		int right = n - 1, bottom = n - 1;
 		int count = 1;
 		while (left <= right) {
 			for (int j = left; j <= right; j++) {
 				result[top][j] = count++;
 			}
 			top++;
-			for (int i = top; i <= down; i++) {
+			for (int i = top; i <= bottom; i++) {
 				result[i][right] = count++;
 			}
 			right--;
 			for (int j = right; j >= left; j--) {
-				result[down][j] = count++;
+				result[bottom][j] = count++;
 			}
-			down--;
-			for (int i = down; i >= top; i--) {
+			bottom--;
+			for (int i = bottom; i >= top; i--) {
 				result[i][left] = count++;
 			}
 			left++;
@@ -33,13 +36,7 @@ public class SpiralMatrix2 {
 	}
 	
 	public static void main(String[] args) {
-		int[][] r = generateMatrix(3);
-		for (int[] i: r) {
-			for (int j: i) {
-				System.out.print(j + " ");
-			}
-			System.out.println();
-		}
+		System.out.println(Arrays.deepToString(generateMatrix(3)));
 	}
 	
 	public static int[][] generateMatrix2(int n) {

@@ -88,10 +88,5 @@ public class GroupAnagrams {
 			if (count[i] > 0) str.append(i).append(count[i]);
 		}
 		return str.toString();
-		
 	}
-	
-
-	
-	
 }

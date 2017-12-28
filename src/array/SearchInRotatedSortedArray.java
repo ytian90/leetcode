@@ -7,6 +7,8 @@ package array;
 public class SearchInRotatedSortedArray {
 	// Binary Search, Time ~O(logN) Space ~O(1)
 	public static int search(int[] nums, int target) {
+		if (nums == null || nums.length == 0)
+			return -1;
 		int lo = 0, hi = nums.length - 1;
 		while (lo < hi) {
 			int mid = lo + (hi - lo) / 2;
@@ -29,6 +31,8 @@ public class SearchInRotatedSortedArray {
 	}
 	
 	public static int search2(int[] nums, int target) {
+		if (nums == null || nums.length == 0)
+			return -1;
 		int n = nums.length;
 		int lo = 0, hi = n - 1;
 		while (lo < hi) {
@@ -52,8 +56,10 @@ public class SearchInRotatedSortedArray {
 	}
 	
 	public static void main(String[] args) {
+		System.out.println(search(new int[] {1}, 0));
 		System.out.println(search(new int[]{3, 1}, 1)); // line 19
 		System.out.println(search(new int[]{1, 3}, 3)); // line 15 =
 		System.out.println(search(new int[]{3, 5, 1}, 3)); // line 21 =
+		System.out.println(search(new int[]{3, 5, 1}, 1));
 	}
 }

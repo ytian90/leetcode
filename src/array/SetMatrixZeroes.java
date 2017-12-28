@@ -1,11 +1,15 @@
 package array;
+
+import java.util.Arrays;
+
 /**
- * Set Matrix Zeroes
+ * 73. Set Matrix Zeroes
  * @author yutian
  * @since Aug 19, 2015
  */
 public class SetMatrixZeroes {
-	public void setZeroes(int[][] matrix) {
+	public static void setZeroes(int[][] matrix) {
+		if (matrix == null) return;
 		int m = matrix.length, n = matrix[0].length;
 		boolean isFirstRowZero = false, isFirstColZero = false;
 		for (int i = 0; i < m; i++) {
@@ -50,5 +54,23 @@ public class SetMatrixZeroes {
 				matrix[i][0] = 0;
 			}
 		}
+	}
+	
+	public static void main(String[] args) {
+		int[][] m = new int[][] {
+			{1, 1, 0, 1},
+			{1, 1, 1, 1},
+			{1, 0, 1, 1},
+			{1, 1, 1, 1},
+		};
+		setZeroes(m);
+		System.out.println(Arrays.deepToString(m));
+		
+		int[][] m2 = new int[][] {
+			{1},
+			{0}
+		};
+		setZeroes(m2);
+		System.out.println(Arrays.deepToString(m2));
 	}
 }
