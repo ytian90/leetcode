@@ -11,27 +11,34 @@ import java.util.List;
  */
 public class CountOfSmallerNumbersAfterSelf {
 	
-	/*
-	 * public class Node {
-	 * 	   Node left, right;
-	 *     int val, sum, dup = 1;
-	 *     public Node (int v, int s) {
-	 * 		   val = v;
-	 * 		   sum = s;
-	 *     }	
-	 * }
-	 */
+	public static class Node {
+		Node left, right;
+		int val, sum, dup = 1;
+		public Node (int v, int s) {
+			val = v;
+			sum = s;
+		}
+	}
 	
 	// Solution 1 BST Time ~O(N^2)
 	public static List<Integer> countSmaller(int[] nums) {
         Integer[] ans = new Integer[nums.length];
         Node root = null;
         for (int i = nums.length - 1; i >= 0; i--) {
-        	root = insert(nums[i], root, ans, i, 0);
+        		root = insert(nums[i], root, ans, i, 0);
         }
         return Arrays.asList(ans);
     }
 
+	/**
+	 * 
+	 * @param num current number
+	 * @param node
+	 * @param ans
+	 * @param i
+	 * @param preSum
+	 * @return
+	 */
 	private static Node insert(int num, Node node, Integer[] ans, int i, int preSum) {
 		if (node == null) {
 			node = new Node(num, 0);

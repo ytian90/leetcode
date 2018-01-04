@@ -1,6 +1,6 @@
 package binarySearch;
 /**
- * Find Minimum in Sorted Rotated Array
+ * 153. Find Minimum in Sorted Rotated Array
  * @author yutian
  * @since Aug 1, 2015
  */
@@ -10,9 +10,9 @@ public class FindMinimumInSortedRotatedArray {
         while (lo < hi) {
             int mid = lo + (hi - lo) / 2;
             if (nums[mid] > nums[hi]) {
-            	lo = mid + 1;
+            		lo = mid + 1;
             } else {
-            	hi = mid;
+            		hi = mid;
             }
         }
         return nums[lo];

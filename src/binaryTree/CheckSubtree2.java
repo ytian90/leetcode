@@ -9,6 +9,15 @@ package binaryTree;
  */
 public class CheckSubtree2 {
 	
+	public class Node {
+		Node left, right;
+		int val, sum, dup = 1;
+		public Node (int v, int s) {
+			val = v;
+			sum = s;
+		}
+	}
+	
 	public static class Passing {
 		int i;
 		int m = 0;

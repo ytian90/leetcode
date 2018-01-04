@@ -1,6 +1,6 @@
 package binarySearch;
 /**
- * Find Minimum in Rotated Sorted Array II
+ * 154. Find Minimum in Rotated Sorted Array II
  * @author yutian
  * @since Sep 9, 2015
  */
@@ -10,9 +10,9 @@ public class FindMinimumInSortedRotatedArray2 {
         while (lo < hi) {
             int mid = lo + (hi - lo) / 2;
             if (nums[mid] > nums[hi]) {
-            	lo = mid + 1;
+            		lo = mid + 1;
             } else if (nums[mid] < nums[hi]) {
-            	hi = mid;
+            		hi = mid;
             } else {
                 hi--;
             }
@@ -21,6 +21,7 @@ public class FindMinimumInSortedRotatedArray2 {
 	}
 	
 	public static void main(String[] args) {
+		System.out.println(findMin(new int[]{1})); 
 		System.out.println(findMin(new int[]{3, 1, 1, 2})); 
 		System.out.println(findMin(new int[]{3, 3, 1})); 
 		System.out.println(findMin(new int[]{1, 1, 3})); 

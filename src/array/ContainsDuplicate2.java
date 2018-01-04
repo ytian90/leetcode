@@ -2,6 +2,7 @@ package array;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -12,8 +13,8 @@ import java.util.Set;
  */
 public class ContainsDuplicate2 {
 	// HashMap Time O(N) Space O(N)
-	public boolean containsNearbyDuplicate(int[] nums, int k) {
-        HashMap<Integer, Integer> map = new HashMap<>();
+	public static boolean containsNearbyDuplicate(int[] nums, int k) {
+        Map<Integer, Integer> map = new HashMap<>();
         for (int i = 0; i < nums.length; i++) {
 	        	if (map.containsKey(nums[i])) {
 	        		if (i - map.get(nums[i]) <= k) {
@@ -33,6 +34,11 @@ public class ContainsDuplicate2 {
 			if (!set.add(nums[i])) return true;
 		}
 		return false;
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(containsNearbyDuplicate(new int[] {1, 2, 3, 1}, 2));
+		System.out.println(containsNearbyDuplicate(new int[] {1, 2, 1}, 2));
 	}
 	
 }

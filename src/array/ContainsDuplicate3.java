@@ -5,23 +5,27 @@ import java.util.Map;
 import java.util.TreeSet;
 
 /**
- * Contains Duplicate 3
+ * 220. Contains Duplicate 3
  * @author yutian
  * @since Aug 13, 2015
  */
 public class ContainsDuplicate3 {
 	// BST + slide window: Time O(NlogK), Space O(K)
 	public static boolean containsNearbyAlmostDuplicate(int[] nums, int k, int t) {
-		if (k < 1 || t < 0) return false;
-		TreeSet<Integer> set = new TreeSet<>();
-		for (int i = 0; i < nums.length; i++) {
-			int c = nums[i];
-			if (set.floor(c) != null && set.floor(c) >= c - t
-					|| set.ceiling(c) != null && set.ceiling(c) <= c + t) {
+		if (nums.length < 2 || k == 0) {
+			return false;
+		}
+		TreeSet<Long> set = new TreeSet<>();
+		int i = 0;
+		while (i < nums.length) {
+			Long floor = set.floor((long) nums[i]);
+			Long ceiling = set.ceiling((long) nums[i]);
+			if ((floor != null && nums[i] - floor <= t) || (ceiling != null && ceiling - nums[i] <= t)) {
 				return true;
-			} else {
-				set.add(c);
-				if (i >= k) set.remove(nums[i - k]);
+			}
+			set.add((long) nums[i++]);
+			if (i > k) {
+				set.remove((long) nums[i - k - 1]);
 			}
 		}
 		return false;
@@ -48,7 +52,10 @@ public class ContainsDuplicate3 {
 	}
 	
 	public static void main(String[] args) {
+		System.out.println(containsNearbyAlmostDuplicate(new int[]{1}, 1, 1));
 		System.out.println(containsNearbyAlmostDuplicate(new int[]{2, 1}, 1, 1));
+		System.out.println(containsNearbyAlmostDuplicate(new int[]{1, 3, 1}, 1, 1)); // line 24
+		System.out.println(containsNearbyAlmostDuplicate(new int[]{-2147483648,-2147483647}, 3, 3));
 	}
 
 }
