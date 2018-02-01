@@ -5,28 +5,28 @@ package string;
  * @since Aug 3, 2015
  */
 public class ZigZagConversion {
-	public String convert(String s, int numRows) {
+	public static String convert(String s, int numRows) {
         if (s == null || numRows <= 0)
-        	return "";
+        		return "";
         if (numRows == 1)
-        	return s;
+        		return s;
         StringBuilder result = new StringBuilder();
         int size = 2 * numRows - 2;
         for (int i = 0; i < numRows; i++) {
-        	for (int j = i; j < s.length(); j += size) {
-        		result.append(s.charAt(j));
-        		if (i != 0 && i != numRows - 1) { // except the first row and last row
-        			int temp = j + size - 2 * i;
-        			if (temp < s.length()) {
-        				result.append(s.charAt(temp));
-        			}
+	        	for (int j = i; j < s.length(); j += size) {
+	        		result.append(s.charAt(j));
+	        		if (i != 0 && i != numRows - 1) { // except the first row and last row
+	        			int temp = j + size - 2 * i;
+	        			if (temp < s.length()) {
+	        				result.append(s.charAt(temp));
+	        			}
+	        		}
         		}
-        	}
         }
         return result.toString();
     }
 	
-	public String convert2(String s, int numRows) {
+	public static String convert2(String s, int numRows) {
 		char[] c = s.toCharArray();
 		int len = c.length;
 		StringBuffer[] sb = new StringBuffer[numRows];
@@ -42,5 +42,11 @@ public class ZigZagConversion {
 		for (int j = 1; j < sb.length; j++)
 			sb[0].append(sb[j]);
 		return sb[0].toString();
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(convert("A", 1));
+		System.out.println(convert("AB", 1));
+		System.out.println(convert("PAYPALISHIRING", 3));
 	}
 }

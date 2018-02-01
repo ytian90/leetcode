@@ -9,7 +9,7 @@ import java.util.HashMap;
  */
 public class LongestSubstringWithoutRepeatingCharacters {
 	// Solution 1 Time ~O(N)
-	public int lengthOfLongestSubstring(String s) {
+	public static int lengthOfLongestSubstring(String s) {
 		boolean[] exist = new boolean[256];
 		int start = 0, max = 0;
 		for (int i = 0; i < s.length(); i++) {
@@ -52,9 +52,9 @@ public class LongestSubstringWithoutRepeatingCharacters {
 	}
 
 	public static void main(String[] args) {
-		String s1 = "abcabcbb", s2 = "bbbbb";
-		System.out.println(lengthOfLongestSubstring2(s1));
-//		System.out.println(lengthOfLongestSubstring2(s2));
+		System.out.println(lengthOfLongestSubstring("abcabcbb"));
+		System.out.println(lengthOfLongestSubstring("bbbbb"));
+		System.out.println(lengthOfLongestSubstring("pwwkew"));
 	}
 
 }

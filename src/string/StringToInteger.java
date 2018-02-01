@@ -46,9 +46,17 @@ public class StringToInteger {
 	}
 
 	public static void main(String[] args) {
-		String s = "2147483648";
-		int ans = atoi(s);
-		System.out.println(ans);
+		System.out.println(atoi("   +123"));
+		System.out.println(atoi("   123"));
+		System.out.println(atoi("d   123"));
+		System.out.println(atoi("   12d3"));
+		System.out.println(atoi("   123afd"));
+		System.out.println(atoi("   -123"));
+		System.out.println(atoi("2147483647"));
+		System.out.println(atoi("2147483648"));
+		System.out.println(atoi("-2147483648"));
+		System.out.println(atoi("-2147483649"));
+		
 	}
 
 }

@@ -1,6 +1,6 @@
 package array;
 /**
- * Median of Two Sorted Arrays
+ * 4. Median of Two Sorted Arrays
  * @author yutian
  * @since Aug 1, 2015
  */

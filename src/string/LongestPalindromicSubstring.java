@@ -29,32 +29,33 @@ public class LongestPalindromicSubstring {
 	}
 	
 	// Solution 2
-	private int lo, maxLen;
+	private static int start, max;
 	
-	public String longestPalindrome2(String s) {
+	public static String longestPalindrome2(String s) {
 		int len = s.length();
 		if (len < 2) return s;
 		for (int i = 0; i < len - 1; i++) {
 			helper(s, i, i);
 			helper(s, i, i + 1);
 		}
-		return s.substring(lo, lo + maxLen);
+		return s.substring(start, start + max);
 	}
 
-	private void helper(String s, int i, int j) {
+	private static void helper(String s, int i, int j) {
 		while (i >= 0 && j < s.length() && s.charAt(i) == s.charAt(j)) {
 			i--;
 			j++;
 		}
-		if (maxLen < j - i - 1) { // bb test case
-			lo = i + 1;
-			maxLen = j - i - 1;
-		}
+		i++; // at this time, i is out boundary
+		if (j - i > max) {
+            start = i;
+            max = j - i;
+        }
 	}
 
 	public static void main(String[] args) {
 		System.out.println(longestPalindrome("abacdfgdcaba").toString());
-		System.out.println(longestPalindrome("bb").toString());
+		System.out.println(longestPalindrome2("bb").toString());
 		System.out.println(longestPalindrome("a").toString());
 		System.out.println(longestPalindrome("babad").toString());
 	}
