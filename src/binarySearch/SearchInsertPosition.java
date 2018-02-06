@@ -7,16 +7,16 @@ package binarySearch;
 public class SearchInsertPosition {
 	// time ~O(logn)
 	public static int searchInsert(int[] nums, int target) {
-		int L = 0, R = nums.length - 1;
-		while (L < R) {
-			int M = L + (R - L) / 2;
-			if (nums[M] < target) {
-				L = M + 1;
+		int lo = 0, hi = nums.length - 1;
+		while (lo < hi) {
+			int mid = lo + (hi - lo) / 2;
+			if (nums[mid] < target) {
+				lo = mid + 1;
 			} else {
-				R = M;
+				hi = mid;
 			}
 		}
-		return (nums[L] < target) ? L + 1 : L;
+		return (nums[lo] < target) ? lo + 1 : lo;
 	}
 	
 	public static void main(String[] args) {

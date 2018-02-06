@@ -34,12 +34,23 @@ public class NextPermutation {
 		nums[a] = nums[b];
 		nums[b] = temp;
 	}
-	
 
 	public static void main(String[] args) {
 		int[] test1 = new int[]{1, 2, 3};
 		nextPermutation(test1);
 		for (int i : test1) {
+			System.out.print(i + " ");
+		}
+		System.out.println();
+		int[] test2 = new int[]{3, 2, 1};
+		nextPermutation(test2);
+		for (int i : test2) {
+			System.out.print(i + " ");
+		}
+		System.out.println();
+		int[] test3 = new int[]{1, 1, 5};
+		nextPermutation(test3);
+		for (int i : test3) {
 			System.out.print(i + " ");
 		}
 	}

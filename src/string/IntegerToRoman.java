@@ -34,10 +34,9 @@ public class IntegerToRoman {
 	}
 	
 	public static void main(String[] args) {
-		int t1 = 1222, t2 = 231, t3 = 1;
-		System.out.println(intToRoman(t1));
-		System.out.println(intToRoman(t2));
-		System.out.println(intToRoman(t3));
+		System.out.println(intToRoman(1222));
+		System.out.println(intToRoman(231));
+		System.out.println(intToRoman(1));
 	}
 	
 }

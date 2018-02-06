@@ -24,7 +24,10 @@ public class PalindromeNumber {
 	}
 
 	public static void main(String[] args) {
-//		System.out.println(isPalindrome(12331));
+		System.out.println(isPalindrome(-12));
+		System.out.println(isPalindrome(3));
+		System.out.println(isPalindrome(12));
+		System.out.println(isPalindrome(12331));
 		System.out.println(isPalindrome(12321));
 	}
 

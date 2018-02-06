@@ -15,19 +15,17 @@ public class DivideTwoIntegers {
 		long p = Math.abs((long) dividend);
 		long q = Math.abs((long) divisor);
 		long res = 0;
+		int sign = ((dividend < 0) ^ (divisor < 0)) ? -1 : 1;
 		while (p >= q) {
 			int count = 0;
 			while (p >= (q << count)) // q * 2 ^ n < p < q * 2 ^ (n + 1)
 				count++;
 			//dividend minus the largest shifted divisor
-			res += (long) 1 << (count - 1); // add 2 ^ n
-			p -= q << (count - 1); // p <= p - q * 2 ^ n
+			count--;
+			res += (long) 1 << count; // add 2 ^ n
+			p -= q << count; // p <= p - q * 2 ^ n
 		}
-		if (dividend > 0 ^ divisor > 0) {
-            return (int) -res;
-        } else {
-            return (res > Integer.MAX_VALUE) ? Integer.MAX_VALUE : (int) res;
-        }
+		return sign == 1 ? (int) res : (int) -res;
 	}
 
 	public static void main(String[] args) {

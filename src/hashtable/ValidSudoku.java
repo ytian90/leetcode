@@ -1,6 +1,8 @@
 package hashtable;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * 36. Valid Sudoku
@@ -9,8 +11,50 @@ import java.util.Arrays;
  */
 public class ValidSudoku {
 	
-	// Solution 1 Time ~ O(3N^2), Space ~ O(N) 
 	public static boolean isValidSudoku(char[][] board) {
+		Set<String> seen = new HashSet<>();
+		for (int i = 0; i < 9; i++) {
+			for (int j = 0; j < 9; j++) {
+				char num = board[i][j];
+				if (num != '.') {
+					if (!seen.add(num + " in row " + i) ||
+						!seen.add(num + " in column " + j) ||
+						!seen.add(num + " in block " + i / 3 + "-" + j / 3))
+						return false;
+				}
+			}
+		}
+		return true;
+	}
+	
+	// Solution 2
+	public static boolean isValidSudoku2(char[][] board) {
+		boolean[][] row = new boolean[9][9];
+		// i - row index, j - index of '1' to '9'
+		boolean[][] col = new boolean[9][9];
+		boolean[][] box = new boolean[9][9];
+		for (int i = 0; i < 9; i++) {
+			for (int j = 0; j < 9; j++) {
+				char cell = board[i][j];
+				if (cell != '.') {
+					cell -= '1';
+					// check row
+					if (row[i][cell]) return false;
+					else row[i][cell] = true;
+					// check col
+					if (col[j][cell]) return false;
+					else col[j][cell] = true;
+					// check subbox
+					if (box[i / 3 * 3 + j / 3][cell]) return false;
+					else box[i / 3 * 3 + j / 3][cell] = true;
+				}
+			}
+		}
+		return true;
+	}
+	
+	// Solution 1 Time ~ O(3N^2), Space ~ O(N) 
+	public static boolean isValidSudoku1(char[][] board) {
 		boolean[] visited = new boolean[9];
 		// check 9 rows
 		for (int i = 0; i < 9; i++) {
@@ -50,33 +94,6 @@ public class ValidSudoku {
 		return true;
 	}
 	
-	// Solution 2
-	public static boolean isValidSudoku2(char[][] board) {
-		boolean[][] row = new boolean[9][9];
-		// i - row index, j - index of '1' to '9'
-		boolean[][] col = new boolean[9][9];
-		boolean[][] box = new boolean[9][9];
-		for (int i = 0; i < 9; i++) {
-			for (int j = 0; j < 9; j++) {
-				char cell = board[i][j];
-				if (cell != '.') {
-					cell -= '1';
-					// check row
-					if (row[i][cell]) return false;
-					else row[i][cell] = true;
-					// check col
-					if (col[j][cell]) return false;
-					else col[j][cell] = true;
-					// check subbox
-					if (box[i / 3 * 3 + j / 3][cell]) return false;
-					else box[i / 3 * 3 + j / 3][cell] = true;
-				}
-			}
-		}
-		return true;
-	}
-	
-
 	public static void main(String[] args) {
 		char[][] board = new char[9][9];
 		for (int r = 0; r < 9; r++) {

@@ -7,17 +7,18 @@ package math;
 public class ContainerWithMostWater {
 	// Greedy algorithm: Time ~O(N), Space ~O(1)
 	public static int maxArea(int[] height) {
-		if (height == null || height.length < 2)
-			return 0;
-		int maxArea = 0;
-		int left = 0, right = height.length - 1;
-		while (left < right) {
-			maxArea = Math.max(maxArea, (right - left) * 
-					Math.min(height[left], height[right]));
-			if (height[left] < height[right]) left++;
-			else right--;
-		}
-		return maxArea;
+		if (height.length < 2) return 0;
+        int max = 0;
+        int l = 0, r = height.length - 1;
+        while (l < r) {
+            max = Math.max(max, (r - l) * Math.min(height[l], height[r]));
+            if (height[l] < height[r]) {
+                l++;
+            } else {
+                r--;
+            }
+        }
+        return max;
 	}
 	
 	public static void main(String[] args) {

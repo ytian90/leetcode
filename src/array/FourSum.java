@@ -5,15 +5,15 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * 4 Sum
+ * 18. 4 Sum
  * @author yutian
  * @since Aug 18, 2015
  */
 public class FourSum {
 	// Two pointers: Time ~ O(N^3), Space ~ O(1) 
 	public List<List<Integer>> fourSum(int[] nums, int target) {
-		List<List<Integer>> listSet = new ArrayList<List<Integer>>();
-		if (nums.length < 4) return listSet;
+		List<List<Integer>> res = new ArrayList<List<Integer>>();
+		if (nums.length < 4) return res;
 		Arrays.sort(nums);
 		for (int i = 0; i < nums.length - 3; i = increment(nums, i)) {
 			for (int j = i + 1; j < nums.length - 2; j = increment(nums, j)) {
@@ -23,7 +23,7 @@ public class FourSum {
 					int sum = a + b + c + d;
 					if (sum == target) {
 						List<Integer> list = Arrays.asList(a, b, c, d);
-						listSet.add(list);
+						res.add(list);
 						lo = increment(nums, lo);
 						hi = decrement(nums, hi);
 					} else if (sum < target) {
@@ -34,7 +34,7 @@ public class FourSum {
 				}
 			}
 		}
-		return listSet;
+		return res;
 	}
 
 	private int increment(int[] nums, int low) {

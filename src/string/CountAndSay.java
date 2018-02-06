@@ -7,7 +7,11 @@ package string;
 public class CountAndSay {
 	
 	public static void main(String[] args) {
+		System.out.println(countAndSay(1));
+		System.out.println(countAndSay(2));
 		System.out.println(countAndSay(3));
+		System.out.println(countAndSay(4));
+		System.out.println(countAndSay(5));
 	}
 	
 	// Solution 1 better Time ~ O(N^2), Space ~ O(N) 

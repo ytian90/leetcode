@@ -10,6 +10,26 @@ import java.util.List;
  * @since Aug 15, 2015
  */
 public class ThreeSum {
+
+	public static List<List<Integer>> threeSum2(int[] nums) {
+		Arrays.sort(nums);
+	    List<List<Integer>> res = new ArrayList<>(); 
+	    for (int i = 0; i < nums.length-2; i++) {
+	        if (i == 0 || (i > 0 && nums[i] != nums[i-1])) {
+	            int lo = i + 1, hi = nums.length-1;
+	            while (lo < hi) {
+	                if (nums[lo] + nums[hi] + nums[i] == 0) {
+	                    res.add(Arrays.asList(nums[i], nums[lo], nums[hi]));
+	                    while (lo < hi && nums[lo] == nums[lo + 1]) lo++;
+	                    while (lo < hi && nums[hi] == nums[hi - 1]) hi--;
+	                    lo++; hi--;
+	                } else if (nums[lo] + nums[hi] + nums[i] < 0) lo++;
+	                else hi--;
+	           }
+	        }
+	    }
+	    return res;
+	}
 	
 	// Time ~ O(N^2), Space ~ O(1) 
 	public static List<List<Integer>> threeSum(int[] nums) {
@@ -46,28 +66,6 @@ public class ThreeSum {
 		while (high > 0 && nums[high] == nums[--high]) { }
 		return high;
 	}
-	
-
-	public static List<List<Integer>> threeSum2(int[] nums) {
-		Arrays.sort(nums);
-	    List<List<Integer>> res = new ArrayList<>(); 
-	    for (int i = 0; i < nums.length-2; i++) {
-	        if (i == 0 || (i > 0 && nums[i] != nums[i-1])) {
-	            int lo = i+1, hi = nums.length-1, sum = 0 - nums[i];
-	            while (lo < hi) {
-	                if (nums[lo] + nums[hi] == sum) {
-	                    res.add(Arrays.asList(nums[i], nums[lo], nums[hi]));
-	                    while (lo < hi && nums[lo] == nums[lo+1]) lo++;
-	                    while (lo < hi && nums[hi] == nums[hi-1]) hi--;
-	                    lo++; hi--;
-	                } else if (nums[lo] + nums[hi] < sum) lo++;
-	                else hi--;
-	           }
-	        }
-	    }
-	    return res;
-	}
-	
 	
 	public static void main(String[] args) {
 		int[] test1 = new int[]{-1, 0, 1, 2, -1, -4};
