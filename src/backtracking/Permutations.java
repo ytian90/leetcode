@@ -12,9 +12,8 @@ import java.util.List;
 public class Permutations {
 	
 	// Solution 2: backtracking time ~O(N!) Space ~O(N)
-	
-    public List<List<Integer>> permute2(int[] nums) {
-    	List<List<Integer>> res = new ArrayList<>();
+    public List<List<Integer>> permute_recur(int[] nums) {
+    		List<List<Integer>> res = new ArrayList<>();
         List<Integer> list = new ArrayList<>();
         helper(nums, list, res);
         return res;
@@ -33,36 +32,55 @@ public class Permutations {
         }
     }
     
-    public List<List<Integer>> permute5(int[] nums) {
-    	List<List<Integer>> res = new ArrayList<>();
-    	if (nums == null || nums.length == 0)
-    		return res;
-    	
-    	List<Integer> list = new ArrayList<>();
-    	list.add(nums[0]);
-    	res.add(list);
-    	for (int i = 1; i < nums.length; i++) {
-    		List<List<Integer>> res2 = new ArrayList<>();
-    		for (int j = 0; j <= i; j++) {
-    			for (List<Integer> l : res) {
-    				List<Integer> list2 = new ArrayList<>(l);
-    				list2.add(j, nums[i]);
-    				res2.add(list2);
-    			}
-    		}
-    		res = res2;
-    	}
-    	return res;
+    // iterative
+    public List<List<Integer>> permute_iter(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+        if (nums == null || nums.length == 0) {
+            return res;
+        }
+        res.add(new ArrayList<>());
+        for (int i = 0; i < nums.length; i++) {
+            List<List<Integer>> next = new ArrayList<>();
+            for (List<Integer> l : res) {
+                for (int j = 0; j < l.size() + 1; j++) {
+                    l.add(j, nums[i]);
+                    next.add(new ArrayList<>(l));
+                    l.remove(j);
+                }
+            }
+            res = next;
+        }
+        return res;
     }
-    
 
 	public static void main(String[] args) {
 		Permutations t = new Permutations();
-		for (List<Integer> l: t.permute5(new int[]{1, 2, 3})) {
+		for (List<Integer> l: t.permute_recur(new int[]{1, 2, 3})) {
 			System.out.println(l);
 		}
 	}
     
+    public List<List<Integer>> permute5(int[] nums) {
+	    	List<List<Integer>> res = new ArrayList<>();
+	    	if (nums == null || nums.length == 0)
+	    		return res;
+	    	
+	    	List<Integer> list = new ArrayList<>();
+	    	list.add(nums[0]);
+	    	res.add(list);
+	    	for (int i = 1; i < nums.length; i++) {
+	    		List<List<Integer>> res2 = new ArrayList<>();
+	    		for (int j = 0; j <= i; j++) {
+	    			for (List<Integer> l : res) {
+	    				List<Integer> list2 = new ArrayList<>(l);
+	    				list2.add(j, nums[i]);
+	    				res2.add(list2);
+	    			}
+	    		}
+	    		res = res2;
+	    	}
+	    	return res;
+    }
     ////////////////////////////////////////////////////////////////////////////////
     
     // iterative too  long..

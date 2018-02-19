@@ -1,12 +1,37 @@
 package array;
 /**
- * Rotate Image
+ * 48. Rotate Image
  * @author yutian
  * @since Aug 18, 2015
  */
 public class RotateImage {
-	// Solution 1
+	
+	/*
+	 * clockwise rotate
+	 * first reverse up to down, then swap the symmetry 
+	 * 1 2 3     7 8 9     7 4 1
+	 * 4 5 6  => 4 5 6  => 8 5 2
+	 * 7 8 9     1 2 3     9 6 3
+	*/
 	public void rotate(int[][] matrix) {
+		int s = 0, e = matrix.length - 1;
+		while (s < e) {
+			int[] t = matrix[s];
+			matrix[s] = matrix[e];
+			matrix[e] = t;
+			s++; e--;
+		}
+		for (int i = 0; i < matrix.length; i++) {
+			for (int j = i + 1; j < matrix[0].length; j++) {
+				int t = matrix[i][j];
+				matrix[i][j] = matrix[j][i];
+				matrix[j][i] = t;
+			}
+		}
+	}
+	
+	// Solution 1
+	public void rotate1(int[][] matrix) {
 		int N = matrix.length;
 		int n = (N % 2 == 0) ? N / 2 : N / 2 + 1;
 		for (int i = 0; i < n; i++) {

@@ -23,12 +23,12 @@ public class GroupAnagrams {
 			Arrays.sort(ch);
 			String s = new String(ch);
 			if (map.containsKey(s)) {
-				List<String> li = result.get(map.get(s));
-				li.add(str);
+				List<String> l = result.get(map.get(s));
+				l.add(str);
 			} else {
-				List<String> li = new ArrayList<>();
-				li.add(str);
-				result.add(li);
+				List<String> l = new ArrayList<>();
+				l.add(str);
+				result.add(l);
 				map.put(s, result.size() - 1);
 			}
 		}

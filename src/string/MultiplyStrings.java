@@ -19,7 +19,7 @@ public class MultiplyStrings {
         }
         int carry = 0;
         for (int i = p.length - 1; i >= 0; i--) {
-        	int sum = carry + p[i];
+        		int sum = carry + p[i];
             p[i] = sum % 10;
             carry = sum / 10;
         }
@@ -31,11 +31,10 @@ public class MultiplyStrings {
 	
 	public static void main(String[] args) {
 		MultiplyStrings t = new MultiplyStrings();
-//		System.out.println(t.multiply("99", "99"));
-//		System.out.println(t.multiply("0", "0"));
-		System.out.println(t.multiply("22", "1"));
+		System.out.println(t.multiply("102", "18"));
+		System.out.println(t.multiply("0", "0"));
+		System.out.println(t.multiply("98", "9"));
 	}
-	
 	
 	// Solution 2 reverse the string 
 	public String multiply2(String num1, String num2) {

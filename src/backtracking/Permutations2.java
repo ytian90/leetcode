@@ -9,103 +9,61 @@ import java.util.Set;
 
 /**
  * 47. Permutations II
+ * 
  * @author yutian
  * @since Aug 18, 2015
  */
 public class Permutations2 {
 	// recursion backtracking time O(N!)
-	public static List<List<Integer>> permuteUnique(int[] nums) {
-        List<List<Integer>> result = new ArrayList<List<Integer>>();
-        List<Integer> list = new ArrayList<Integer>();
-        Set<Integer> visited = new HashSet<>();
+	public static List<List<Integer>> permuteUnique_recur(int[] nums) {
+		List<List<Integer>> res = new ArrayList<List<Integer>>();
+		Arrays.sort(nums);
+		helper(nums, new ArrayList<Integer>(), new HashSet<>(), res);
+		return res;
+	}
+
+	private static void helper(int[] nums, List<Integer> list, Set<Integer> visited, List<List<Integer>> res) {
+		if (list.size() == nums.length) {
+			res.add(new ArrayList<Integer>(list));
+			return;
+		}
+		for (int i = 0; i < nums.length; i++) {
+			// skip the duplicated elements
+			if (visited.contains(i) || i > 0 && !visited.contains(i - 1) && nums[i - 1] == nums[i])
+				continue;
+			list.add(nums[i]);
+			visited.add(i);
+			helper(nums, list, visited, res);
+			list.remove(list.size() - 1);
+			visited.remove(i);
+		}
+	}
+
+	// iterative
+	public List<List<Integer>> permuteUnique_itera(int[] nums) {
+		Set<List<Integer>> res = new HashSet<>();
         Arrays.sort(nums);
-        dfs(nums, list, visited, result);
-        return result;
-    }
-    private static void dfs(int[] nums, List<Integer> list, Set<Integer> visited, 
-    		List<List<Integer>> result) {
-        if (list.size() == nums.length) {
-            result.add(new ArrayList<Integer>(list));
-            return;
-        } 
+        res.add(new ArrayList<>());
         for (int i = 0; i < nums.length; i++) {
-         	// skip the duplicated elements
-            if (i > 0 && !visited.contains(i - 1) && nums[i - 1] == nums[i]) continue;
-            if (!visited.contains(i)) {
-                list.add(nums[i]);
-                visited.add(i);
-                dfs(nums, list, visited, result);
-                list.remove(list.size() - 1);
-                visited.remove(i);
-            }
-        }
-    }
-    
-    // iterative
-    public ArrayList<ArrayList<Integer>> permuteUnique(ArrayList<Integer> nums) {
-        // write your code here
-        Set<ArrayList<Integer>> result = new HashSet<ArrayList<Integer>>();
-        Collections.sort(nums);
-        int[] visited = new int[nums.size()];
-        
-        result.add(new ArrayList<Integer>());
-        for (int i = 0; i < nums.size(); i++) {
-            Set<ArrayList<Integer>> nextResult = new HashSet<ArrayList<Integer>>();
-            for (ArrayList<Integer> l : result) {
-                for (int j = 0; j <= l.size(); j++) {
-                    //skip duplicates
-                    //while (j < l.size() && nums.get(i) == nums.get(j)) {
-                    //    j++;
-                    //}
-                    l.add(j, nums.get(i));
-                    nextResult.add(new ArrayList<Integer>(l));
+            Set<List<Integer>> next = new HashSet<>();
+            for (List<Integer> l : res) {
+                for (int j = 0; j < l.size() + 1; j++) {
+                    l.add(j, nums[i]);
+                    next.add(new ArrayList<>(l));
                     l.remove(j);
                 }
             }
-            result = nextResult;
+            res = next;
         }
-        return new ArrayList<ArrayList<Integer>>(result);
-    }
-    
-    public static void main(String[] args) {
-    	List<List<Integer>> r = permuteUnique(new int[]{1, 1, 2});
-//    	List<List<Integer>> r2 = permuteUnique(new int[]{1, 1});
-    	for (List<Integer> i: r) {
-    		System.out.println(i);
-    	}
-    }	
-	
-//	private List<List<Integer>> listSet;
-//	private List<Integer> list;
-//	private Set<Integer> visited;
-//	
-//	public List<List<Integer>> permuteUnique(int[] nums) {
-//		listSet = new ArrayList<List<Integer>>();
-//		list = new ArrayList<Integer>();
-//		visited = new HashSet<>();
-//		Arrays.sort(nums);
-//		dfs(nums);
-//		return listSet;
-//	}
-//
-//	private void dfs(int[] nums) {
-//		if (list.size() == nums.length) {
-//			listSet.add(new ArrayList<Integer>(list));
-//		} else {
-//			for (int i = 0; i < nums.length; i++) {
-//				// skip the duplicated elements
-//				if (i > 0 && !visited.contains(i - 1) && nums[i - 1] == nums[i])
-//					continue;
-//				if (!visited.contains(i)) {
-//					list.add(nums[i]);
-//					visited.add(i);
-//					dfs(nums);
-//					list.remove(list.size() - 1);
-//					visited.remove(i);
-//				}
-//			}
-//		}
-//	}
-	
+        return new ArrayList<List<Integer>>(res);
+	}
+
+	public static void main(String[] args) {
+		List<List<Integer>> r = permuteUnique_recur(new int[] { 1, 1, 2 });
+		// List<List<Integer>> r2 = permuteUnique(new int[]{1, 1});
+		for (List<Integer> i : r) {
+			System.out.println(i);
+		}
+	}
 
 }

@@ -1,6 +1,6 @@
 package math;
 /**
- * Pow(x, n)
+ * 50. Pow(x, n)
  * @author yutian
  * @since Aug 12, 2015
  */
