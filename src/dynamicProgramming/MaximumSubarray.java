@@ -1,11 +1,11 @@
 package dynamicProgramming;
 /**
- * 53. Maximum Sum Subarray
+ * 53. Maximum Subarray (Maximum Sum Subarray)
  * name has been changed to Maximum Subarray
  * @author yutian
  * @since Aug 1, 2015
  */
-public class MaximumSumSubarray {
+public class MaximumSubarray {
 	// Solution 1: Divide and Conquer
 	public static int maxSubArray(int[] nums) {
 		return helper(nums, 0, nums.length - 1);
@@ -55,7 +55,7 @@ public class MaximumSumSubarray {
 	
 	public static void main(String[] args) {
 		int[] test1 = new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4};
-		System.out.println(maxSubArray(test1));
+		System.out.println(maxSubArray2(test1));
 	}
 	
 }
