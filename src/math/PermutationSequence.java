@@ -39,7 +39,7 @@ public class PermutationSequence {
 	}
 	
 	public static void main(String[] args) {
-		System.out.println(getPermutation(4, 14));
+		System.out.println(getPermutation(3, 4));
 	}
 	
 	

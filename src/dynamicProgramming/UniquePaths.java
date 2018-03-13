@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Unique Paths
+ * 62. Unique Paths
  * @author yutian
  * @since Jul 31, 2015
  */
@@ -25,6 +25,19 @@ public class UniquePaths {
 		}
 		return d[m - 1][n - 1];
 	}
+
+	// Solution 3: Bottom-up dynamic programming
+	// 2-d DP: Time ~ O(M*N), Space ~ O(M*N) 
+	public int uniquePaths3(int m, int n) {
+		int[][] d = new int[m + 1][n + 1];
+		d[m - 1][n] = 1;
+		for (int i = m - 1; i >= 0; i--) {
+			for (int j = n - 1; j >= 0; j--) {
+				d[i][j] = d[i + 1][j] + d[i][j + 1];
+			}
+		}
+		return d[0][0];
+	}
 	
 	// 1-d DP（滚动数组）: Time ~ O(M*N), Space ~ O(min{M, N}) 
 	public int uniquePaths4(int m, int n) {
@@ -40,19 +53,6 @@ public class UniquePaths {
 			}
 		}
 		return d[min - 1];
-	}
-	
-	// Solution 3: Bottom-up dynamic programming
-	// 2-d DP: Time ~ O(M*N), Space ~ O(M*N) 
-	public int uniquePaths3(int m, int n) {
-		int[][] d = new int[m + 1][n + 1];
-		d[m - 1][n] = 1;
-		for (int r = m - 1; r >= 0; r--) {
-			for (int c = n - 1; c >= 0; c--) {
-				d[r][c] = d[r + 1][c] + d[r][c + 1];
-			}
-		}
-		return d[0][0];
 	}
 	
 	// Solution 0: DP

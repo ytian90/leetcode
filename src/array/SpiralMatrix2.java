@@ -11,26 +11,26 @@ public class SpiralMatrix2 {
 	// Time ~O(N), Space ~O(n)
 	public static int[][] generateMatrix(int n) {
 		int[][] result = new int[n][n];
-		int left = 0, top = 0;
-		int right = n - 1, bottom = n - 1;
+		int colStart = 0, rowStart = 0;
+		int colEnd = n - 1, rowEnd = n - 1;
 		int count = 1;
-		while (left <= right) {
-			for (int j = left; j <= right; j++) {
-				result[top][j] = count++;
+		while (colStart <= colEnd) {
+			for (int j = colStart; j <= colEnd; j++) {
+				result[rowStart][j] = count++;
 			}
-			top++;
-			for (int i = top; i <= bottom; i++) {
-				result[i][right] = count++;
+			rowStart++;
+			for (int i = rowStart; i <= rowEnd; i++) {
+				result[i][colEnd] = count++;
 			}
-			right--;
-			for (int j = right; j >= left; j--) {
-				result[bottom][j] = count++;
+			colEnd--;
+			for (int j = colEnd; j >= colStart; j--) {
+				result[rowEnd][j] = count++;
 			}
-			bottom--;
-			for (int i = bottom; i >= top; i--) {
-				result[i][left] = count++;
+			rowEnd--;
+			for (int i = rowEnd; i >= rowStart; i--) {
+				result[i][colStart] = count++;
 			}
-			left++;
+			colStart++;
 		}
 		return result;
 	}

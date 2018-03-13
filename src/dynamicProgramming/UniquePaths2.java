@@ -7,9 +7,7 @@ package dynamicProgramming;
 public class UniquePaths2 {
 	// 2-d DP: Time ~ O(M*N), Space ~ O(M*N) 
 	public static int uniquePathsWithObstacles(int[][] obstacleGrid) {
-		int m = obstacleGrid.length;
-        if (m == 0) return 0;
-        int n = obstacleGrid[0].length;
+		int m = obstacleGrid.length, n = obstacleGrid[0].length;
         int[][] d = new int[m][n];
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
@@ -23,6 +21,20 @@ public class UniquePaths2 {
             }
         }
         return d[m - 1][n - 1];
+	}
+	
+	// bottom up
+	public static int uniquePathsWithObstacles3(int[][] obstacleGrid) {
+		int m = obstacleGrid.length, n = obstacleGrid[0].length;
+        int[][] d = new int[m + 1][n + 1];
+        d[m - 1][n] = 1;
+        for (int i = m - 1; i >= 0; i--) {
+            for (int j = n - 1; j >= 0; j--) {
+                d[i][j] = (obstacleGrid[i][j] == 1) ? 0 :
+                    d[i + 1][j] + d[i][j + 1];
+            }
+        }
+        return d[0][0];
 	}
 	
 	// 1-d DP : Time ~ O(M*N), Space ~ O(min{M, N}) 
@@ -45,22 +57,6 @@ public class UniquePaths2 {
 			}
 		}
 		return steps[min - 1];
-	}
-	
-	// bottom up
-	public static int uniquePathsWithObstacles3(int[][] obstacleGrid) {
-		int m = obstacleGrid.length;
-        if (m == 0) return 0;
-        int n = obstacleGrid[0].length;
-        int[][] mat = new int[m + 1][n + 1];
-        mat[m - 1][n] = 1;
-        for (int r = m - 1; r >= 0; r--) {
-            for (int c = n - 1; c >= 0; c--) {
-                mat[r][c] = (obstacleGrid[r][c] == 1) ? 0 : 
-                	mat[r + 1][c] + mat[r][c + 1];
-            }
-        }
-        return mat[0][0];
 	}
 	
 	public static void main(String[] args) {

@@ -1,7 +1,6 @@
 package sort;
 
 import java.util.Arrays;
-import java.util.Comparator;
 
 /**
  * 252. Meeting Rooms
@@ -12,15 +11,7 @@ public class MeetingRooms {
 	// Time O(nlogn) space O(n)
 	public static boolean canAttendMeetings(Interval[] intervals) {
 		if (intervals == null) return true;
-//		Arrays.sort(intervals, new Comparator<Interval>(){
-//			@Override
-//			public int compare(Interval o1, Interval o2) {
-//				return o1.start - o2.start;
-//			}
-//		});
-		
 		Arrays.sort(intervals, (a, b) -> a.start - b.start);
-		
 		for (int i = 0; i < intervals.length - 1; i++) {
 			if (intervals[i].end > intervals[i + 1].start) {
 				return false;

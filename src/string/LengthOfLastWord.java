@@ -1,11 +1,11 @@
 package string;
 /**
- * Length of Last Word
+ * 58. Length of Last Word
  * @author yutian
  * @since Aug 11, 2015
  */
 public class LengthOfLastWord {
-	public int lengthOfLastWord(String s) {
+	public static int lengthOfLastWord(String s) {
 		if (s == null || s.length() == 0) return 0;
 		int i = s.length() - 1, count = 0;
 		while (i >= 0 && s.charAt(i) == ' ') i--;
@@ -14,5 +14,12 @@ public class LengthOfLastWord {
 			i--;
 		}
 		return count;
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(lengthOfLastWord(""));
+		System.out.println(lengthOfLastWord(" "));
+		System.out.println(lengthOfLastWord("Hello World"));
+		System.out.println(lengthOfLastWord("Hello World "));
 	}
 }

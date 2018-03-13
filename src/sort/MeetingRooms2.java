@@ -1,8 +1,6 @@
 package sort;
 
 import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
 import java.util.PriorityQueue;
 
 /**
@@ -16,14 +14,14 @@ public class MeetingRooms2 {
 	// Time Complexity - O(nlogn)， Space Complexity - O(n)
 	public static int minMeetingRooms(Interval[] intervals) {
         if (intervals == null || intervals.length == 0) {
-        	return 0;
+        		return 0;
         }
         Arrays.sort(intervals, (a, b) -> a.start - b.start);
         PriorityQueue<Interval> pq = new PriorityQueue<Interval>(intervals.length, (a, b) -> a.end - b.end);
         pq.offer(intervals[0]);
         for (int i = 1; i < intervals.length; i++) {
-        	// get the meeting room that finishes earliest
-        	Interval curr = pq.poll();
+			// get the meeting room that finishes earliest
+			Interval curr = pq.poll();
             if (curr.end <= intervals[i].start) {
             	// if the current meeting starts right after, no need for new room, merge
                 curr.end = intervals[i].end;

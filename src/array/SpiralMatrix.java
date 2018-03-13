@@ -82,5 +82,10 @@ public class SpiralMatrix {
 		System.out.println(spiralOrder(new int[][] {
 			{2, 3},
 		}));
+		System.out.println(spiralOrder(new int[][] {
+			{7},
+			{9},
+			{6}
+		}));
 	}
 }
