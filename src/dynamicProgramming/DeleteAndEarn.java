@@ -21,20 +21,25 @@ public class DeleteAndEarn {
 	 * @return
 	 */
 	
-	public int deleteAndEarn(int[] nums) {
+	public static int deleteAndEarn(int[] nums) {
         int n = 10001;
         int[] values = new int[n];
         for (int num : nums) {
-        		values[num] += num;
+        	values[num] += num;
         }
         int take = 0, skip = 0;
         for (int i = 0; i < n; i++) {
-        		int take2 = skip + values[i];
-        		int skip2 = Math.max(skip, take);
-        		take = take2;
-        		skip = skip2;
+			int take2 = skip + values[i];
+			int skip2 = Math.max(skip, take);
+			take = take2;
+			skip = skip2;
         }
         return Math.max(take, skip);
     }
+
+	public static void main(String[] args) {
+		System.out.println(deleteAndEarn(new int[]{3, 4, 2}));
+		System.out.println(deleteAndEarn(new int[]{2, 2, 3, 3, 3, 4}));
+	}
 
 }

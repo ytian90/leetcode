@@ -7,8 +7,8 @@ package array;
 public class SearchA2DMatrix {
 	// Binary Search: Time ~O(log(MN)), Space ~O(1)
 	public static boolean searchMatrix(int[][] matrix, int target) {
-		int m = matrix.length;
-        int n = matrix[0].length;
+        if (matrix.length == 0 || matrix[0].length == 0) return false;
+        int m = matrix.length, n = matrix[0].length;
         int lo = 0, hi = m * n - 1;
         while (lo < hi) {
             int mid = lo + (hi - lo) / 2;
@@ -22,7 +22,7 @@ public class SearchA2DMatrix {
             }
         }
         if (matrix[lo / n][lo % n] == target) return true;
-        else return false;
+        return false;
 	}
 	
 	public static void main(String[] args) {

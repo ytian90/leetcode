@@ -28,7 +28,7 @@ public class SimplifyPath {
         for (String s : arr) {
             if (s.equals("") || s.equals(".")) continue;
             if (s.equals("..") && !stack.isEmpty()) stack.pop();
-            else if (!s.equals("..")) stack.push(s);
+            if (!s.equals("..")) stack.push(s);
         }
         if (stack.isEmpty()) return "/";
         String result = "";
@@ -37,7 +37,11 @@ public class SimplifyPath {
 	}
 	
 	public static void main(String[] args) {
-		
+		System.out.println(simplifyPath("/home/"));
+		System.out.println(simplifyPath("/a/./b/../../c/"));
+		System.out.println(simplifyPath("/.."));
+		System.out.println(simplifyPath("/../"));
+		System.out.println(simplifyPath("/home//foo/"));
 	}
 	
 	// Solution 2
