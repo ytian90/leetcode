@@ -13,7 +13,8 @@ public class PalindromePermutation {
         if (s == null) return true;
         HashMap<Character, Integer> map = new HashMap<>();
         int count = 0;
-        for (Character c: s.toCharArray()) {
+        for (Character c: s.toLowerCase().toCharArray()) {
+            if (Character.isWhitespace(c)) continue;
             if (map.containsKey(c)) {
                 map.put(c, map.get(c) + 1);
             } else {
@@ -22,6 +23,7 @@ public class PalindromePermutation {
         }
         for (int i: map.values()) {
             if (i % 2 != 0) count++;
+            if (count > 1) return false;
         }
         return (count < 2) ? true : false;
     }
@@ -30,6 +32,7 @@ public class PalindromePermutation {
 		System.out.println(canPermutePalindrome("code"));
 		System.out.println(canPermutePalindrome("aab"));
 		System.out.println(canPermutePalindrome("carerac"));
+        System.out.println(canPermutePalindrome("Tact Coa"));
 	}
 
 }

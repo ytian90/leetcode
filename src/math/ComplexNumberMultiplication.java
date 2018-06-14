@@ -13,14 +13,12 @@ public class ComplexNumberMultiplication {
         String[] A = a.split("\\+");
         String[] B = b.split("\\+");
         int a1 = Integer.parseInt(A[0]);
-        int b1 = Integer.parseInt(A[1].replace("i", ""));
-        int a2 = Integer.parseInt(B[0]);
+        int a2 = Integer.parseInt(A[1].replace("i", ""));
+        int b1 = Integer.parseInt(B[0]);
         int b2 = Integer.parseInt(B[1].replace("i", ""));
-        int a12 = a1 * a2;
-        int b12 = b1 * b2;
-        int ab12 = (a1 * b2) + (b1 * a2);
-        String aa = (a12 + (-1) * b12) + "";
-        String bb = ab12 + "i";
+        int a1b1 = a1 * b1, a2b2 = a2 * b2;
+        String aa = (a1b1 + (-1) * a2b2) + "";
+        String bb = ((a1 * b2) + (a2 * b1)) + "i";
         return aa + "+" + bb;
     }
 	

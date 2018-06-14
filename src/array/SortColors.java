@@ -42,6 +42,16 @@ public class SortColors {
 		nums[i] = nums[j];
 		nums[j] = t;
 	}
+
+	public static void sortColorss(int[] nums) {
+		int l = 0, r = nums.length - 1;
+		for (int i = 0; i <= r; i++) {
+			while (nums[i] == 2 && i < r)
+				swap(nums, i, r--);
+			while (nums[i] == 0 && i > l)
+				swap(nums, i, l++);
+		}
+	}
 	
 	// follow up
 	// category: low={a,c,d}, median={f,w}, high={t,b}, sort as low, median high

@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.*;
 
 /**
- * Find Same Numbers in Pairs from Two Arrays
+ * 349. Find Same Numbers in Pairs from Two Arrays
  * @author yutian
  * @since Jan 28, 2016
  */
@@ -18,21 +18,21 @@ public class IntersectionOfTwoArrays {
 	// use two has sets time : O(N)
 	public int[] intersection(int[] nums1, int[] nums2) {
 		Set<Integer> set = new HashSet<>();
-		Set<Integer> intersect = new HashSet<>();
+		Set<Integer> res = new HashSet<>();
 		for (int i = 0; i < nums1.length; i++) {
 			set.add(nums1[i]);
 		}
 		for (int i = 0; i < nums2.length; i++) {
 			if (set.contains(nums2[i])) {
-				intersect.add(nums2[i]);
+				res.add(nums2[i]);
 			}
 		}
-		return intersect.stream().mapToInt(i->i).toArray();
+		return res.stream().mapToInt(i->i).toArray();
 	}
 	
 	// sort both arrays, two pointers O(nlogn)
 	public int[] intersection2(int[] nums1, int[] nums2) {
-		Set<Integer> intersect = new HashSet<>();
+		Set<Integer> res = new HashSet<>();
 		Arrays.sort(nums1);
 		Arrays.sort(nums2);
 		int i = 0, j = 0;
@@ -42,11 +42,11 @@ public class IntersectionOfTwoArrays {
 			} else if (nums1[i] > nums2[j]) {
 				j++;
 			} else {
-				intersect.add(nums1[i]);
+				res.add(nums1[i]);
 				i++; j++;
 			}
 		}
-		return intersect.stream().mapToInt(t->t).toArray();
+		return res.stream().mapToInt(t->t).toArray();
 	}
 	
 	// binary search time 

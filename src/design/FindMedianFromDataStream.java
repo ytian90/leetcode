@@ -5,6 +5,7 @@ import java.util.PriorityQueue;
 
 /**
  * 295. Find Median from Data Stream
+ * cc: page 72
  * @author yutian
  * @since Feb 19, 2016
  */

@@ -5,25 +5,25 @@ package string;
  *
  */
 public class ReverseWordsInAString3 {
-	
+
 	public static String reverseWords(String s) {
-        char[] s1 = s.toCharArray();
-        int i = 0;
-        for (int j = 0; j < s1.length; j++) {
-        	if (s1[j] == ' ') {
-        		reverse(s1, i, j - 1);
-        		i = j + 1;
-        	}
-        }
-        reverse(s1, i, s1.length - 1);
-        return new String(s1);
-    }
-	
-	public static void reverse(char[] s, int i, int j) {
+		char[] c = s.toCharArray();
+		int pos = 0;
+		for (int i = 0; i < c.length; i++) {
+			if (c[i] == ' ') {
+				reverse(c, pos, i - 1);
+				pos = i + 1;
+			}
+		}
+		reverse(c, pos, c.length - 1);
+		return new String(c);
+	}
+
+	private static void reverse(char[] c, int i, int j) {
 		while (i < j) {
-			char t = s[i];
-			s[i] = s[j];
-			s[j] = t;
+			char t = c[i];
+			c[i] = c[j];
+			c[j] = t;
 			i++; j--;
 		}
 	}

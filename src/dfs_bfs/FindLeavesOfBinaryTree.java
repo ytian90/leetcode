@@ -9,17 +9,16 @@ import java.util.List;
  * @since Jul 3, 2016
  */
 public class FindLeavesOfBinaryTree {
-	
-	private static List<List<Integer>> res = new ArrayList<>();
-	
+
 	public static List<List<Integer>> findLeaves(TreeNode root) {
-        helper(root);
-        return res;
-    }
-	
-	private static int helper(TreeNode node) {
+		List<List<Integer>> res = new ArrayList<>();
+		helper(root, res);
+		return res;
+	}
+
+	private static int helper(TreeNode node, List<List<Integer>> res) {
 		if (node == null) return -1;
-		int level = 1 + Math.max(helper(node.left), helper(node.right));
+		int level = 1 + Math.max(helper(node.left, res), helper(node.right, res));
 		if (res.size() - 1 < level) {
 			res.add(new ArrayList<>());
 		}

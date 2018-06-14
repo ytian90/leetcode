@@ -22,15 +22,18 @@ public class BattleshipsInABoard {
         return res;
     }
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		char[][] test = new char[][]{
-			{'X', '.', '.', 'X'},
-			{'.', '.', '.', 'X'},
-			{'.', '.', '.', 'X'}
-		};
-		
-		System.out.println(countBattleships(test));
-		
+		System.out.println(countBattleships(new char[][]{
+				{'X', '.', '.', 'X'},
+				{'.', '.', '.', 'X'},
+				{'.', '.', '.', 'X'}
+		}));
+
+		// this will not happen
+//		System.out.println(countBattleships(new char[][]{
+//				{'.', '.', '.', 'X'},
+//				{'X', 'X', 'X', 'X'},
+//				{'.', '.', '.', 'X'}
+//		}));
 	}
 
 }

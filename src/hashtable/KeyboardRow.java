@@ -13,27 +13,27 @@ import java.util.Map;
 public class KeyboardRow {
 
 	public static String[] findWords(String[] words) {
-        String[] strs = {"qwertyuiop", "asdfghjkl", "zxcvbnm"};
-        Map<Character, Integer> map = new HashMap<>();
-        for (int i = 0; i < strs.length; i++) {
-        	for (char c : strs[i].toCharArray()) {
-        		map.put(c, i);
-        	}
-        }
-        List<String> res = new LinkedList<>();
-        for (String w : words) {
-        	if (w.equals("")) continue;
-        	int index = map.get(w.toLowerCase().charAt(0));
-        	for (char c : w.toLowerCase().toCharArray()) {
-        		if (map.get(c) != index) {
-        			index = -1;
-        			break;
-        		}
-        	}
-        	if (index != -1) res.add(w); 
-        }
-        return res.toArray(new String[0]);
-    }
+		String[] strs = {"qwertyuiop", "asdfghjkl", "zxcvbnm"};
+		Map<Character, Integer> map = new HashMap<>();
+		for (int i = 0; i < strs.length; i++) {
+			for (char c : strs[i].toCharArray()) {
+				map.put(c, i);
+			}
+		}
+		List<String> res = new LinkedList<>();
+		for (String w : words) {
+			String s = w.toLowerCase();
+			int index = map.get(s.charAt(0));
+			for (char c : s.toCharArray()) {
+				if (map.get(c) != index) {
+					index = -1;
+					break;
+				}
+			}
+			if (index != -1) res.add(w);
+		}
+		return res.toArray(new String[0]);
+	}
 	
 	
 	public static void main(String[] args) {

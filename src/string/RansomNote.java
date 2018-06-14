@@ -1,22 +1,21 @@
 package string;
 /**
- * 
+ * 383. Ransom Note
+ * cc189: page 71
  * @author yutian
  * @since Aug 31, 2016
  */
 public class RansomNote {
 	
 	public static boolean canConstruct(String ransomNote, String magazine) {
-        int[] a = new int[26];
-        for (int i = 0; i < magazine.length(); i++) {
-        	a[magazine.charAt(i) - 'a']++;
-        }
-        for (int i = 0; i < ransomNote.length(); i++) {
-        	if (--a[ransomNote.charAt(i) - 'a'] < 0) {
-        		return false;
-        	}
-        }
-        return true;
+		int[] map = new int[26];
+		for (char c : magazine.toCharArray()) {
+			map[c - 'a']++;
+		}
+		for (char c : ransomNote.toCharArray()) {
+			if (--map[c - 'a'] < 0) return false;
+		}
+		return true;
     }
 
 	public static void main(String[] args) {

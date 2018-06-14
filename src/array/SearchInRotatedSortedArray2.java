@@ -27,8 +27,31 @@ public class SearchInRotatedSortedArray2 {
 				hi--;
 			}
 		}
-		if (nums[lo] == target) return true;
-		else return false;
+		return (nums[lo] == target);
+	}
+
+	public static boolean seaach(int[] nums, int target) {
+		int lo = 0, hi = nums.length - 1, mid = -1;
+		while (lo <= hi) {
+			mid = lo + (hi - lo) / 2;
+			if (nums[mid] == target) return true;
+			if (nums[mid] < nums[hi]) {
+				if (nums[mid] < target && nums[hi] <= target) {
+					lo = mid + 1;
+				} else {
+					hi = mid - 1;
+				}
+			} else if (nums[mid] > nums[hi]) {
+				if (nums[lo] <= target && target < nums[mid]) {
+					hi = mid - 1;
+				} else {
+					lo = mid + 1;
+				}
+			} else {
+				hi--;
+			}
+		}
+		return (nums[lo] == target);
 	}
 	
 	public static void main(String[] args) {

@@ -6,28 +6,28 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Combinations
+ * 77. Combinations
  * @author yutian
  * @since Aug 15, 2015
  */
 public class Combinations {
 	
 	// 1. backtracking
-	List<List<Integer>> res = new ArrayList<>();
-    List<Integer> list = new ArrayList<>();
-	
-	public List<List<Integer>> combine(int n, int k) {
-        helper(n, k, 1);
+    public List<List<Integer>> combine(int n, int k) {
+        List<List<Integer>> res = new ArrayList<>();
+        List<Integer> list = new ArrayList<>();
+        helper(n, k, 1, list, res);
         return res;
     }
-    private void helper(int n, int k, int start) {
+
+    private void helper(int n, int k, int start, List<Integer> list, List<List<Integer>> res) {
         if (k == list.size()) {
             res.add(new ArrayList<Integer>(list));
             return;
         }
         for (int i = start; i <= n; i++) {
             list.add(i);
-            helper(n, k, i + 1);
+            helper(n, k, i + 1, list, res);
             list.remove(list.size() - 1);
         }
     }

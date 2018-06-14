@@ -26,7 +26,7 @@ public class CountingBits {
 	public int[] countBits2(int num) {
 		int[] res = new int[num + 1];
 		for (int i = 0; i <= num; i++) {
-			res[i] = res[i >> 1] + (i & 1);
+			res[i] = res[i / 2] + (i & 1); // or use res[i >> 1]
 		}
 		return res;
 	}

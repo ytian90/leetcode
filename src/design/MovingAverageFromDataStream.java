@@ -41,7 +41,6 @@ public class MovingAverageFromDataStream {
 		System.out.println(t.next(10));
 		System.out.println(t.next(3));
 		System.out.println(t.next(5));
-		
 	}
 
 }
