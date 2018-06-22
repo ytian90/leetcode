@@ -1,6 +1,7 @@
 package binaryTree;
 
 import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * Invert Binary Tree
@@ -17,34 +18,34 @@ public class InvertBinaryTree {
 		return root;
 	}
 
-	private static void helper(TreeNode p) {
-		TreeNode temp = p.left;
-		p.left = p.right;
-		p.right = temp;
-		if (p.left != null) {
-			helper(p.left);
+	private static void helper(TreeNode node) {
+		TreeNode t = node.left;
+		node.left = node.right;
+		node.right = t;
+		if (node.left != null) {
+			helper(node.left);
 		}
-		if (p.right != null) {
-			helper(p.right);
+		if (node.right != null) {
+			helper(node.right);
 		}
 	}
 	
 	// Solution 2: Iterative
 	public static TreeNode invertTree2(TreeNode root) {
-		LinkedList<TreeNode> queue = new LinkedList<TreeNode>();
-		if (root != null) {
-			queue.add(root);
-		}
-		while (!queue.isEmpty()) {
-			TreeNode p = queue.poll();
-			if (p.left != null)
-				queue.add(p.left);
-			if (p.right != null)
-				queue.add(p.right);
-			
-			TreeNode temp = p.left;
-			p.left = p.right;
-			p.right = temp;
+		Queue<TreeNode> q = new LinkedList<>();
+		if (root == null) return null;
+		q.add(root);
+		while (!q.isEmpty()) {
+			TreeNode curr = q.poll();
+			TreeNode t = curr.left;
+			curr.left = curr.right;
+			curr.right = t;
+			if (curr.left != null) {
+				q.add(curr.left);
+			}
+			if (curr.right != null) {
+				q.add(curr.right);
+			}
 		}
 		return root;
 	}

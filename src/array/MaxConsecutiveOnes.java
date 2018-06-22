@@ -17,7 +17,6 @@ public class MaxConsecutiveOnes {
     }
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		int[] test1 = {1, 1, 0, 1, 1, 1};
 		int[] test2 = {1, 1, 0, 1, 1, 0};
 		System.out.println(findMaxConsecutiveOnes(test1));

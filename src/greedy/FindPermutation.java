@@ -1,4 +1,7 @@
 package greedy;
+
+import java.util.Arrays;
+
 /**
  * 484. Find Permutation
  * @author ytian
@@ -6,7 +9,7 @@ package greedy;
  */
 public class FindPermutation {
 	
-	public int[] findPermutation(String s) {
+	public static int[] findPermutation(String s) {
         int n = s.length(), res[] = new int[n + 1];
         for (int i = 0; i <= n; i++) {
         	res[i] = i + 1;
@@ -21,7 +24,7 @@ public class FindPermutation {
         return res;
     }
 
-	private void reverse(int[] res, int lo, int hi) {
+	private static void reverse(int[] res, int lo, int hi) {
 		while (lo < hi) {
 			int t = res[lo];
 			res[lo] = res[hi];
@@ -31,8 +34,10 @@ public class FindPermutation {
 	}
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		System.out.println(Arrays.toString(findPermutation("I")));
+		System.out.println(Arrays.toString(findPermutation("DI")));
+		System.out.println(Arrays.toString(findPermutation("DDDI")));
+		System.out.println(Arrays.toString(findPermutation("DIDIDI")));
 	}
 
 }

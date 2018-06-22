@@ -10,11 +10,11 @@ import java.util.List;
  * @since Jan 1, 2016
  */
 public class ShortestWordDistance2 {
-	
-	private static HashMap<String, List<Integer>> map;
+
+    private static HashMap<String, List<Integer>> map;
 
     public ShortestWordDistance2(String[] words) {
-        map = new HashMap<String, List<Integer>>();
+        map = new HashMap<>();
         for (int i = 0; i < words.length; i++) {
             if (map.containsKey(words[i])) {
                 map.get(words[i]).add(i);
@@ -35,17 +35,13 @@ public class ShortestWordDistance2 {
         int min = Integer.MAX_VALUE;
         int i = 0, j = 0;
         while (i < list1.size() && j < list2.size()) {
-        	int a = list1.get(i), b = list2.get(j);
+            int a = list1.get(i), b = list2.get(j);
             min = Math.min(min, Math.abs(a - b));
-            if (a < b) {
-                i++;
-            } else {
-                j++;
-            }
+            if (a < b) i++;
+            else j++;
         }
         return min;
     }
-
 	public static void main(String[] args) {
 		String[] words = new String[]{"practice", "makes", "perfect", "coding", "makes"};
 		ShortestWordDistance2 wd = new ShortestWordDistance2(words);

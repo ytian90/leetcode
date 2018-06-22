@@ -5,6 +5,25 @@ package dynamicProgramming;
  *
  */
 public class PalindromicSubstrings {
+
+	public static int countSubstring(String s) {
+		int res = 0;
+		for (int i = 0; i < s.length(); i++) {
+			res += count(s, i, i);
+			res += count(s, i, i + 1);
+		}
+		return res;
+	}
+
+	private static int count(String s, int i, int j) {
+		int c = 0;
+		while (i >= 0 && j < s.length() && (s.charAt(i) == s.charAt(j))) {
+			i--;
+			j++;
+			c++;
+		}
+		return c;
+	}
 	
 	static int count = 0;
 	

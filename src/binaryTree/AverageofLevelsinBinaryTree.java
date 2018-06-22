@@ -1,9 +1,6 @@
 package binaryTree;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * 637. Average of Levels in Binary Tree
@@ -14,7 +11,7 @@ public class AverageofLevelsinBinaryTree {
 	
 	public static List<Double> averageOfLevels(TreeNode root) {
         List<Double> res = new ArrayList<>();
-        Queue<TreeNode> q = new ArrayDeque<>();
+        Queue<TreeNode> q = new LinkedList<>();
         if (root == null) return res;
         q.add(root);
         while (!q.isEmpty()) {

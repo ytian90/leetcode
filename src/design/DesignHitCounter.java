@@ -1,6 +1,7 @@
 package design;
 
 import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * 362. Design Hit Counter
@@ -11,26 +12,26 @@ import java.util.LinkedList;
  */
 public class DesignHitCounter {
 	
-	LinkedList<Integer> list;
+	Queue<Integer> q;
 	
 	/** Initialize your data structure here. */
     public DesignHitCounter() {
-        list = new LinkedList<>();
+        q = new LinkedList<>();
     }
     
     /** Record a hit.
         @param timestamp - The current timestamp (in seconds granularity). */
     public void hit(int timestamp) {
-        list.offer(timestamp);
+        q.offer(timestamp);
     }
     
     /** Return the number of hits in the past 5 minutes.
         @param timestamp - The current timestamp (in seconds granularity). */
     public int getHits(int timestamp) {
-        while(!list.isEmpty() && timestamp - list.peek() >= 300) {
-        	list.poll();
+        while(!q.isEmpty() && timestamp - q.peek() >= 300) {
+        	q.poll();
         }
-        return list.size();
+        return q.size();
     }
 
 	public static void main(String[] args) {

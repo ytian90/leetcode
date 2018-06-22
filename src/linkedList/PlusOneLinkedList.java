@@ -50,7 +50,7 @@ public class PlusOneLinkedList {
 	public static void main(String[] args) {
 		ListNode n0 = new ListNode(1);
 		ListNode n1 = new ListNode(9);
-		ListNode n2 = new ListNode(9);
+		ListNode n2 = new ListNode(2);
 		n0.next = n1; n1.next = n2;
 		ListNode res = plusOne(n0);
 		while (res != null) {

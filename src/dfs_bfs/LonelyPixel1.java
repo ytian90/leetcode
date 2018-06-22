@@ -9,24 +9,24 @@ public class LonelyPixel1 {
 	//  O(nm) Time, O(n+m) Space
 	public static int findLonelyPixel(char[][] picture) {
         int n = picture.length, m = picture[0].length;
-        int[] rc = new int[n]; // row counter
-        int[] cc = new int[m]; // column counter
+        int[] r = new int[n]; // row counter
+        int[] c = new int[m]; // column counter
         for (int i = 0; i < n; i++) {
         	for (int j = 0; j < m; j++) {
         		if (picture[i][j] == 'B') {
-        			rc[i]++; cc[j]++;
+        			r[i]++; c[j]++;
         		}
         	}
         }
-        int count = 0;
+        int res = 0;
         for (int i = 0; i < n; i++) {
         	for (int j = 0; j < m; j++) {
-        		if (picture[i][j] == 'B' && rc[i] == 1 && cc[j] == 1) {
-        			count++;
+        		if (picture[i][j] == 'B' && r[i] == 1 && c[j] == 1) {
+        			res++;
         		}
         	}
         }
-        return count;
+        return res;
     }
 	
 	// O(nm) Time, O(1) Space
