@@ -8,21 +8,23 @@ package math;
 public class MinimumMovesToEqualArrayElements {
 	
 	public static int minMoves(int[] nums) {
-        if (nums.length == 0) return 0;
-        int min = nums[0];
-        for (int n : nums) min = Math.min(min, n);
-        int res = 0;
-        for (int n : nums) res += n - min;
-        return res;
+        if (nums.length == 0)
+            return 0;
+        int min = nums[0], sum = 0;
+        for (int n : nums) {
+            min = Math.min(min, n);
+        }
+        for (int n : nums) {
+            sum += n - min;
+        }
+        return sum;
     }
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		int[] nums = new int[]{1, 2, 3};
 		int[] nums2 = new int[]{2, 2, 3, 5};
 		System.out.println(minMoves(nums));
 		System.out.println(minMoves(nums2));
-		
 	}
 
 }

@@ -16,6 +16,17 @@ public class AddDigits {
 		}
 		return addDigits(sum);
 	}
+
+	public static int addDigit(int num) {
+		if (num == 0) {
+			return 0;
+		}
+		if (num % 9 == 0) {
+			return 9;
+		} else {
+			return num % 9;
+		}
+	}
 	
 	// Math 
 	public static int addDigits2(int num) {

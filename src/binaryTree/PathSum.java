@@ -1,6 +1,7 @@
 package binaryTree;
 
-import java.util.Stack;
+import java.util.Deque;
+import java.util.LinkedList;
 
 /**
  * 112. Path Sum
@@ -10,33 +11,39 @@ import java.util.Stack;
 public class PathSum {
 	// Solution 1 Recursion Time ~O(N) Space ~O(logN)
 	public static boolean hasPathSum(TreeNode root, int sum) {
-		if (root == null) return false;
-		if (root.left == null && root.right == null)
-			return root.val == sum;
-		return hasPathSum(root.left, sum - root.val) || hasPathSum(root.right, sum - root.val);
+		return helper(root, sum);
+	}
+
+	private static boolean helper(TreeNode node, int sum) {
+		if (node == null) return false;
+		if (node.left == null && node.right == null) {
+			return node.val == sum;
+		}
+		return helper(node.left, sum - node.val) || helper(node.right, sum - node.val);
 	}
 	
 	// Solution 2 Stack BFS Time ~O(N) Space ~O(2N)
 	public static boolean hasPathSum2(TreeNode root, int sum) {
 		if (root == null) return false;
-        Stack<TreeNode> stack = new Stack<>();
-        Stack<Integer> sums = new Stack<>();
-        stack.push(root);
-        sums.push(sum);
-        while (!stack.isEmpty()) {
-            int value = sums.pop();
-            TreeNode n = stack.pop();
-            if (n.left == null && n.right == null && n.val == value) return true;
-            if (n.left != null) {
-                stack.push(n.left);
-                sums.push(value - n.val);
-            }
-            if (n.right != null) {
-                stack.push(n.right);
-                sums.push(value - n.val);
-            }
-        }
-        return false;
+		Deque<TreeNode> stack = new LinkedList<>();
+		Deque<Integer> sums = new LinkedList<>();
+		stack.push(root);
+		sums.push(sum);
+		while (!stack.isEmpty()) {
+			TreeNode curr = stack.pop();
+			int val = sums.pop();
+			if (curr.left == null && curr.right == null && curr.val == val)
+				return true;
+			if (curr.left != null) {
+				stack.push(curr.left);
+				sums.push(val - curr.val);
+			}
+			if (curr.right != null) {
+				stack.push(curr.right);
+				sums.push(val - curr.val);
+			}
+		}
+		return false;
 	}
 	
 

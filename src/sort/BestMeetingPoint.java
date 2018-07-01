@@ -10,21 +10,22 @@ import java.util.List;
  * @since Dec 31, 2015
  */
 public class BestMeetingPoint {
-	
+
+	// help to understand: http://www.cnblogs.com/grandyang/p/5291058.html
 	// time complexity: O(mn), space complexity: O(mn)
 	public static int minTotalDistance(int[][] grid) {
-		int m = grid.length, n = grid[0].length;
+		int n = grid.length, m = grid[0].length;
 		List<Integer> r = new ArrayList<>();
 		List<Integer> c = new ArrayList<>();
-		for (int i = 0; i < m; i++) {
-			for (int j = 0; j < n; j++) {
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < m; j++) {
 				if (grid[i][j] == 1) {
 					r.add(i);
 				}
 			}
 		}
-		for (int j = 0; j < n; j++) {
-			for (int i = 0; i < m; i++) {
+		for (int j = 0; j < m; j++) {
+			for (int i = 0; i < n; i++) {
 				if (grid[i][j] == 1) {
 					c.add(j);
 				}

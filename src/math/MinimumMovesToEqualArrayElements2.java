@@ -11,14 +11,12 @@ public class MinimumMovesToEqualArrayElements2 {
 	
 	public static int minMoves2(int[] nums) {
         Arrays.sort(nums);
-        int i = 0, j = nums.length - 1;
-        int count = 0;
+        int i = 0, j = nums.length - 1, sum = 0;
         while (i < j) {
-        	count += nums[j] - nums[i];
-        	i++;
-        	j--;
+            sum += nums[j] - nums[i];
+            i++; j--;
         }
-        return count;
+        return sum;
     }
 
 	public static void main(String[] args) {

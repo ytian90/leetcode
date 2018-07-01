@@ -1,6 +1,7 @@
 package binaryTree;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 437. Path Sum III
@@ -10,26 +11,22 @@ import java.util.HashMap;
 public class PathSum3 {
 	
 	public static int pathSum(TreeNode root, int sum) {
-        HashMap<Integer, Integer> map = new HashMap<>();
-        map.put(0, 1);
-        return helper(root, 0, sum, map);
+		Map<Integer, Integer> map = new HashMap<>();
+		map.put(0, 1);
+		return helper(root, 0, sum, map);
     }
 
-	private static int helper(TreeNode root, int sum, int target, HashMap<Integer, Integer> map) {
-		// TODO Auto-generated method stub
-		if (root == null) {
-			return 0;
-		}
-		sum += root.val;
+	private static int helper(TreeNode node, int sum, int target, Map<Integer, Integer> map) {
+		if (node == null) return 0;
+		sum += node.val;
 		int res = map.getOrDefault(sum - target, 0);
 		map.put(sum, map.getOrDefault(sum, 0) + 1);
-		res += helper(root.left, sum, target, map) + helper(root.right, sum, target, map);
+		res += helper(node.left, sum, target, map) + helper(node.right, sum, target, map);
 		map.put(sum, map.get(sum) - 1);
 		return res;
 	}
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		TreeNode n0 = new TreeNode(10);
 		TreeNode n1 = new TreeNode(5);
 		TreeNode n2 = new TreeNode(-3);

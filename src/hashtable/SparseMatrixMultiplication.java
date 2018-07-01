@@ -12,18 +12,20 @@ import java.util.List;
 public class SparseMatrixMultiplication {
 	
 	public static int[][] multiply(int[][] A, int[][] B) {
-        int a = A.length, b = A[0].length, c = B[0].length;
-        int[][] C = new int[a][c];
-        for (int i = 0; i < a; i++) {
-        	for (int k = 0; k < b; k++) {
-        		if (A[i][k] != 0) {
-        			for (int j = 0; j < c; j++) {
-        				if (B[k][j] != 0) C[i][j] += A[i][k] * B[k][j];
-        			}
-        		}
-        	}
-        }
-        return C;
+		int a = A.length, b = A[0].length, c = B[0].length;
+		int[][] C = new int[a][c];
+		for (int i = 0; i < a; i++) {
+			for (int j = 0; j < b; j++) {
+				if (A[i][j] != 0) {
+					for (int k = 0; k < c; k++) {
+						if (B[j][k] != 0) {
+							C[i][k] += A[i][j] * B[j][k];
+						}
+					}
+				}
+			}
+		}
+		return C;
     }
 	
 	public static int[][] multiply2(int[][] A, int[][] B) {

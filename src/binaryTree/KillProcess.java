@@ -1,13 +1,6 @@
 package binaryTree;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Deque;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 582. Kill Process
@@ -39,6 +32,34 @@ public class KillProcess {
 
 		return res;
 	}
+
+	public static List<Integer> killProcees(List<Integer> pid, List<Integer> ppid, int kill) {
+		if (kill == 0) return pid;
+		int n = pid.size();
+		Map<Integer, Set<Integer>> tree = new HashMap<>();
+		for (int i = 0; i < n; i++) {
+			tree.put(pid.get(i), new HashSet<>());
+		}
+		for (int i = 0; i < n; i++) {
+			if (tree.containsKey(ppid.get(i))) {
+				Set<Integer> children = tree.get(ppid.get(i));
+				children.add(pid.get(i));
+				tree.put(ppid.get(i), children);
+			}
+		}
+		List<Integer> res = new ArrayList<>();
+		traverse(tree, res, kill);
+		return res;
+	}
+
+	private static void traverse(Map<Integer,Set<Integer>> tree, List<Integer> res, int pid) {
+		res.add(pid);
+		Set<Integer> children = tree.get(pid);
+		for (Integer child : children) {
+			traverse(tree, res, child);
+		}
+	}
+
 
 	public static void main(String[] args) {
 		System.out.println(killProcess(new ArrayList<>(Arrays.asList(1, 3, 10, 5)),

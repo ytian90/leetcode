@@ -15,40 +15,39 @@ public class EmployeeImportance {
 	
 	// dfs
 	public int getImportance(List<Employee> employees, int id) {
-        Map<Integer, Employee> map = new HashMap<>();
-        for (Employee e : employees) {
-            map.put(e.id, e);
-        }
-        return helper(id, map);
+		Map<Integer, Employee> map = new HashMap<>();
+		for (Employee e : employees) {
+			map.put(e.id, e);
+		}
+		return helper(map, id);
     }
     
-    private int helper(int id, Map<Integer, Employee> map) {
-        Employee e = map.get(id);
-        int total = e.importance;
-        
-        for (int n : e.subordinates) {
-            total += helper(n, map);
-        }
-        return total;
+    private int helper(Map<Integer, Employee> map, int id) {
+		Employee e = map.get(id);
+		int sum = e.importance;
+		for (int n : e.subordinates) {
+			sum += helper(map, n);
+		}
+		return sum;
     }
     
     // bfs
     public int getImportance2(List<Employee> employees, int id) {
-    	int total = 0;
-    	Map<Integer, Employee> map = new HashMap<>();
-    	for (Employee e : employees) {
-    		map.put(e.id, e);
-    	}
-    	Queue<Employee> q = new LinkedList<>();
-    	q.offer(map.get(id));
-    	while (!q.isEmpty()) {
-    		Employee curr = q.poll();
-    		total += curr.importance;
-    		for (int s : curr.subordinates) {
-    			q.offer(map.get(s));
-    		}
-    	}
-    	return total;
+		Map<Integer, Employee> map = new HashMap<>();
+		for (Employee e : employees) {
+			map.put(e.id, e);
+		}
+		Queue<Employee> q = new LinkedList<>();
+		int sum = 0;
+		q.add(map.get(id));
+		while (!q.isEmpty()) {
+			Employee e = q.poll();
+			sum += e.importance;
+			for (int sub : e.subordinates) {
+				q.add(map.get(sub));
+			}
+		}
+		return sum;
     }
 
 	public static void main(String[] args) {

@@ -10,22 +10,20 @@ import java.util.Stack;
 public class ValidateBinarySearchTree {
 	
 	// Solution 3: Top-down recursion (discussion)
-	public static boolean isValidBST3(TreeNode root) {
+	public static boolean isValidBTS(TreeNode root) {
 		return helper(root, Long.MIN_VALUE, Long.MAX_VALUE);
 	}
-	
-	private static boolean helper(TreeNode root, long minVal, long maxVal) {
-		if (root == null) return true;
-		if (root.val >= maxVal || root.val <= minVal) return false;
-		return helper(root.left, minVal, root.val) 
-				&& helper(root.right, root.val, maxVal);
-	}	
+
+	private static boolean helper(TreeNode node, long min, long max) {
+		if (node == null) return true;
+		if (node.val >= max || node.val <= min) return false;
+		return helper(node.left, min, node.val) && helper(node.right, node.val, max);
+	}
 
 	// Iteration
 	public static boolean isValidBST(TreeNode root) {
 		Stack<TreeNode> stack = new Stack<>();
-		TreeNode prev = null;
-		TreeNode curr = root;
+		TreeNode prev = null, curr = root;
 		while (curr != null || !stack.isEmpty()) {
 			while (curr != null) {
 				stack.push(curr);
@@ -81,7 +79,7 @@ public class ValidateBinarySearchTree {
 		TreeNode n3 = new TreeNode(Integer.MAX_VALUE);
 		n2.right = n3;
 		System.out.println(isValidBST2(n2));
-		System.out.println(isValidBST3(n2));
+		System.out.println(isValidBTS(n2));
 	}
 	
 }
