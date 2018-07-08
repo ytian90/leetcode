@@ -5,19 +5,19 @@ package binaryTree;
  * @since Jul 27, 2015
  */
 public class BinaryTreeMaximumPathSum {
-	
+
 	public static int maxPathSum(TreeNode root) {
 		int[] max = new int[]{Integer.MIN_VALUE};
-		helper(root, max); // easy to make mistake !!
+		helper(root, max);
 		return max[0];
 	}
 
-	private static int helper(TreeNode p, int[] max) {
-		if (p == null) return 0;
-		int left = helper(p.left, max);
-		int right = helper(p.right, max);
-		max[0] = Math.max(p.val + left + right, max[0]);
-		int res = p.val + Math.max(left, right);
+	private static int helper(TreeNode node, int[] max) {
+		if (node == null) return 0;
+		int left = helper(node.left, max);
+		int right = helper(node.right, max);
+		max[0] = Math.max(max[0], node.val + left + right);
+		int res = node.val + Math.max(left, right);
 		return res > 0 ? res : 0;
 	}
 

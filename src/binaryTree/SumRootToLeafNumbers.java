@@ -10,16 +10,16 @@ import java.util.Queue;
  */
 public class SumRootToLeafNumbers {
 	
-	// recursion
+	// DFS recursion
 	public static int sumNumbers(TreeNode root) {
-		return dfs(root, 0);
+		return helper(root, 0);
 	}
 
-	private static int dfs(TreeNode root, int sum) {
-		if (root == null) return 0;
-		sum = sum * 10 + root.val;
-		if (root.left == null && root.right == null) return sum;
-		return dfs(root.left, sum) + dfs(root.right, sum);
+	private static int helper(TreeNode node, int sum) {
+		if (node == null) return 0;
+		sum = 10 * sum + node.val;
+		if (node.left == null && node.right == null) return sum;
+		return helper(node.left, sum) + helper(node.right, sum);
 	}
 	
 	// BFS iterative

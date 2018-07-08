@@ -11,62 +11,54 @@ import java.util.Queue;
 public class SurroundedRegions {
 	// Solution 1: BFS
 	public void solve(char[][] board) {
-		int m = board.length;
-		if (m < 1) return;
-		int n = board[0].length;
-		if (m <= 2 || n <= 2) return;
-		
-		// run flood fill algorithm (BFS) on every boundary point
-		for (int i = 0; i < m; i++) {
-			bfs(board, i, 0); // first column
-			bfs(board, i, n - 1); // last column
+		int n = board.length;
+		if (n < 1) return;
+		int m = board[0].length;
+		for (int i = 0; i < n; i++) {
+			helper(board, i, 0);
+			helper(board, i, m - 1);
 		}
-		
-		for (int j = 1; j < n - 1; j++) {
-			bfs(board, 0, j); // first row
-			bfs(board, m - 1, j); // last row
+		for (int j = 0; j < m; j++) {
+			helper(board, 0, j);
+			helper(board, n - 1, j);
 		}
-		
-		// flip 'O' to 'X' and recover '#' to 'O'
-		for (int i = 0; i < m; i++) {
-			for (int j = 0; j < n; j++) {
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < m; j++) {
 				if (board[i][j] == 'O') board[i][j] = 'X';
 				else if (board[i][j] == '#') board[i][j] = 'O';
 			}
 		}
-		
 	}
-	
-	private static int[][] dirs = {{-1, 0}, {1, 0}, {0, 1}, {0, -1}};
 
-	private void bfs(char[][] board, int i, int j) {
+	private int[][] dirs = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+
+	private void helper(char[][] b, int i, int j) {
 		Queue<Point> q = new LinkedList<>();
-		visit(board, i, j, q);
+		visit(b, i, j, q);
 		while (!q.isEmpty()) {
 			Point curr = q.poll();
 			for (int[] d : dirs) {
-			    int x = curr.x + d[0];
-			    int y = curr.y + d[1];
-			    visit(board, x, y, q);
+				int x = curr.x + d[0];
+				int y = curr.y + d[1];
+				visit(b, x, y, q);
 			}
 		}
 	}
 
-	private void visit(char[][] board, int i, int j, Queue<Point> q) {
-		if (i < 0 || i > board.length - 1 || j < 0 
-				|| j > board[0].length - 1 || board[i][j] != 'O')
+	private void visit(char[][] b, int i, int j, Queue<Point> q) {
+		if (i < 0 || i >= b.length || j < 0 || j >= b[0].length || b[i][j] != 'O') {
 			return;
-		// make 'O' on the boundary to be '#' (we can recover it to 'X' later)
-		board[i][j] = '#'; 
+		}
+		b[i][j] = '#';
 		q.add(new Point(i, j));
 	}
-	
+
 	class Point {
-	    int x, y;
-	    public Point(int x, int y) {
-	        this.x = x;
-	        this.y = y;
-	    }
+		int x, y;
+		public Point(int x, int y) {
+			this.x = x;
+			this.y = y;
+		}
 	}
 	
 	// Solution 2

@@ -58,7 +58,6 @@ public class SubtreeofAnotherTree {
 		
 		System.out.println(isSubtree2(n1, n2));
 		
-		
 	}
 
 }

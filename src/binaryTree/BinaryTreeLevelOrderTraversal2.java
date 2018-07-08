@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Queue;
 
 /**
- * Binary Tree Level Order Traversal 2
+ * 107. Binary Tree Level Order Traversal 2
  * @author yutian
  * @since Aug 10, 2015
  */
@@ -16,7 +16,7 @@ public class BinaryTreeLevelOrderTraversal2 {
 	public static List<List<Integer>> levelOrderBottom(TreeNode root) {
 		List<List<Integer>> result = new ArrayList<List<Integer>>();
 		if (root == null) return result;
-		Queue<TreeNode> q = new LinkedList<TreeNode>();
+		Queue<TreeNode> q = new LinkedList<>();
 		q.add(root);
 		while (!q.isEmpty()) {
 			int size = q.size(); // get size of level first
@@ -35,18 +35,18 @@ public class BinaryTreeLevelOrderTraversal2 {
 		
 	// Solution 2 recursion Time ~ O(N), Space ~ O(N) 
 	public static List<List<Integer>> levelOrderBottom2(TreeNode root) {
-		List<List<Integer>> result = new ArrayList<List<Integer>>();
-		helper(root, 0, result);
-		return result;
+		List<List<Integer>> res = new ArrayList<>();
+		helper(root, 0, res);
+		return res;
 	}
-	private static void helper(TreeNode node, int i, List<List<Integer>> result) {
+	private static void helper(TreeNode node, int i, List<List<Integer>> res) {
 		if (node == null) return;
-		if (result.size() == i) result.add(0, new ArrayList<Integer>()); // modification
-		result.get(result.size() - 1 - i).add(node.val); // modification
-		helper(node.left, i + 1, result);
-		helper(node.right, i + 1, result);
+		if (res.size() == i)
+			res.add(0, new ArrayList<>());
+		res.get(res.size() - 1 - i).add(node.val);
+		helper(node.left, i + 1, res);
+		helper(node.right, i + 1, res);
 	}
-	
 
 	public static void main(String[] args) {
 		TreeNode n0 = new TreeNode(3);

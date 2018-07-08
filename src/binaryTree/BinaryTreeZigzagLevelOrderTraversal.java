@@ -7,7 +7,7 @@ import java.util.Queue;
 import java.util.Stack;
 
 /**
- * Binary Tree Zigzag Level Order Traversal
+ * 103. Binary Tree Zigzag Level Order Traversal
  * @author yutian
  * @since Aug 17, 2015
  */
@@ -15,17 +15,17 @@ public class BinaryTreeZigzagLevelOrderTraversal {
 	
 	// Solution 1 Time ~O(N) Space ~O(N)
 	public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
-		List<List<Integer>> result = new ArrayList<List<Integer>>();
-		if (root == null) return result;
+		List<List<Integer>> res = new ArrayList<>();
+		if (root == null) return res;
 		Queue<TreeNode> q = new LinkedList<>();
+		boolean ch = true;
 		q.add(root);
-		boolean odd = true;
 		while (!q.isEmpty()) {
 			int size = q.size();
 			List<Integer> list = new ArrayList<>();
 			for (int i = 0; i < size; i++) {
 				TreeNode curr = q.poll();
-				if (odd) {
+				if (ch) {
 					list.add(curr.val);
 				} else {
 					list.add(0, curr.val);
@@ -33,28 +33,29 @@ public class BinaryTreeZigzagLevelOrderTraversal {
 				if (curr.left != null) q.add(curr.left);
 				if (curr.right != null) q.add(curr.right);
 			}
-			result.add(list);
-			odd = !odd;
+			res.add(list);
+			ch = !ch;
 		}
-		return result;
+		return res;
 	}
 	
 	// Solution 2 Better way DFS
 //		private static List<List<Integer>> result = new ArrayList<List<Integer>>();
 		
 	public static List<List<Integer>> zigzagLevelOrder2(TreeNode root) {
-		List<List<Integer>> result = new ArrayList<List<Integer>>();
-		zigzag(result, root, 0);
-		return result;
+		List<List<Integer>> res = new ArrayList<List<Integer>>();
+		helper(root, 0, res);
+		return res;
 	}
-	
-	private static void zigzag(List<List<Integer>> result, TreeNode root, int n) {
-		if (root == null) return;
-		if (result.size() == n) result.add(new ArrayList<Integer>());
-		if (n % 2 == 1) result.get(n).add(0, root.val);
-		if (n % 2 == 0) result.get(n).add(root.val);
-		zigzag(result, root.left, n + 1);
-		zigzag(result, root.right, n + 1);
+
+	private static void helper(TreeNode node, int n, List<List<Integer>> res) {
+		if (node == null) return;
+		if (res.size() == n)
+			res.add(new ArrayList<>());
+		if (n % 2 == 0) res.get(n).add(node.val);
+		if (n % 2 == 1) res.get(n).add(0, node.val);
+		helper(node.left, n + 1, res);
+		helper(node.right, n + 1, res);
 	}
 	
 	// BFS: Time ~ O(N), Space ~ O(N)

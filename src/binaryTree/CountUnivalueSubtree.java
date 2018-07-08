@@ -6,26 +6,22 @@ package binaryTree;
  */
 public class CountUnivalueSubtree {
     
-	private int count = 0;
-
-	public int countUnivalSubtrees(TreeNode root) {
-		postOrder(root);
-		return count;
+	public static int countUnivalSubtrees(TreeNode root) {
+		if (root == null) return 0;
+		int[] res = new int[1];
+		helper(root, res, root.val);
+		return res[0];
 	}
 
-	private boolean postOrder(TreeNode root) {
-		if (root == null) return true;
-		boolean left = postOrder(root.left);
-		boolean right = postOrder(root.right);
-		if (left && right) {
-			if (root.left != null && root.left.val != root.val) return false;
-			if (root.right != null && root.right.val != root.val) return false;
-			count++;
-			return true;
+	private static boolean helper(TreeNode node, int[] res, int val) {
+		if (node == null) return true;
+		boolean l = helper(node.left, res, node.val);
+		boolean r = helper(node.right, res, node.val);
+		if (l && r) {
+			res[0]++;
 		}
-		return false;
+		return l && r && val == node.val;
 	}
-
 
 	public static void main(String[] args) {
 		/*
@@ -45,8 +41,7 @@ public class CountUnivalueSubtree {
 		n1.left = n3;
 		n1.right = n4;
 		n2.right = n5;
-		CountUnivalueSubtree t = new CountUnivalueSubtree();
-		System.out.println(t.countUnivalSubtrees(n0));
+		System.out.println(countUnivalSubtrees(n0));
 	}
 
 }

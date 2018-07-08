@@ -25,11 +25,6 @@ public class BinaryTreePaths {
 	public static List<String> binaryTreePaths(TreeNode root) {
         List<String> result = new ArrayList<String>();
         dfs(root, "", result);
-//        String longest = "";
-//        for (String s: result) {
-//        	longest = (longest.length() < s.length()) ? s: longest;
-//        }
-//        System.out.println(longest);
         return result;
     }
     
@@ -40,6 +35,24 @@ public class BinaryTreePaths {
         path += "->";
         dfs(root.left, path, result);
         dfs(root.right, path, result);
+    }
+
+    public List<String> binaryTreePathss(TreeNode root) {
+        List<String> res = new ArrayList<>();
+        helper(root, "", res);
+        return res;
+    }
+
+    private void helper(TreeNode node, String path, List<String> res) {
+        if (node == null) return;
+        if (node.left == null && node.right == null) {
+            res.add((path.length() == 0) ? node.val + "" : path + "->" + node.val);
+            return;
+        }
+        if (node.left != null)
+            helper(node.left, (path.length() == 0) ? node.val + "" : path + "->" + node.val, res);
+        if (node.right != null)
+            helper(node.right, (path.length() == 0) ? node.val + "" : path + "->" + node.val, res);
     }
     
     // iteration Time Complexity: O(n)

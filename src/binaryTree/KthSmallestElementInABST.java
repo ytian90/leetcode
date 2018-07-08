@@ -1,5 +1,6 @@
 package binaryTree;
 
+import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
@@ -10,29 +11,64 @@ import java.util.Stack;
  * @since Aug 29, 2015
  */
 public class KthSmallestElementInABST {
-	
-	// time O(k)
-	private static int number = 0;
-	private static int count = 0;
-	
+
+	// DFS in-order recursive O(N)
 	public int kthSmallest0(TreeNode root, int k) {
-		count = k;
-		helper(root);
-		return number;
+		int[] num = new int[]{0, k}; // 0: number, 1: count
+		helper(root, num);
+		return num[0];
 	}
 
-	private void helper(TreeNode n) {
-		if (n.left != null) helper(n.left);
-		count--;
-		if (count == 0) {
-			number = n.val;
+	private void helper(TreeNode node, int[] num) {
+		if (node.left != null) helper(node.left, num);
+		num[1]--;
+		if (num[1] == 0) {
+			num[0] = node.val;
 			return;
 		}
-		if (n.right != null) helper(n.right);
+		if (node.right != null) helper(node.right, num);
 	}
 
+	// iterative in-order O(N)
+	public int kthSmallestt(TreeNode root, int k) {
+		Deque<TreeNode> stack = new LinkedList<>();
+		TreeNode curr = root;
+		while (curr != null || !stack.isEmpty()) {
+			while (curr != null) {
+				stack.push(curr);
+				curr = curr.left;
+			}
+			curr = stack.pop();
+			k--;
+			if (k == 0) return curr.val;
+			curr = curr.right;
+		}
+		return -1;
+	}
 
-	// kth smallest element :time O(N)==========================
+	public static void main(String[] args) {
+		TreeNode n0 = new TreeNode(10);
+		TreeNode n1 = new TreeNode(5);
+		TreeNode n2 = new TreeNode(15);
+		TreeNode n3 = new TreeNode(3);
+		TreeNode n4 = new TreeNode(7);
+		TreeNode n5 = new TreeNode(13);
+		TreeNode n6 = new TreeNode(18);
+
+		n0.left = n1;
+		n0.right = n2;
+		n1.left = n3;
+		n1.right = n4;
+		n2.left = n5;
+		n2.right = n6;
+
+		KthSmallestElementInABST t = new KthSmallestElementInABST();
+
+		System.out.println(t.kthSmallest0(n0, 2));
+		System.out.println(kthLargest(n0, 2));
+	}
+
+	// bianry search :time O(N^2)==========================
 	public static int kthSmallest(TreeNode root, int k) {
 		int count = countNodes(root.left);
 		if (k <= count) {
@@ -102,25 +138,5 @@ public class KthSmallestElementInABST {
 	}
 
 	//===================================================================
-	public static void main(String[] args) {
-		TreeNode n0 = new TreeNode(10);
-		TreeNode n1 = new TreeNode(5);
-		TreeNode n2 = new TreeNode(15);
-		TreeNode n3 = new TreeNode(3);
-		TreeNode n4 = new TreeNode(7);
-		TreeNode n5 = new TreeNode(13);
-		TreeNode n6 = new TreeNode(18);
-		
-		n0.left = n1;
-		n0.right = n2;
-		n1.left = n3;
-		n1.right = n4;
-		n2.left = n5;
-		n2.right = n6;
-		
-		KthSmallestElementInABST t = new KthSmallestElementInABST();
-		
-		System.out.println(t.kthSmallest0(n0, 2));
-		System.out.println(kthLargest(n0, 2));
-	}
+
 }
