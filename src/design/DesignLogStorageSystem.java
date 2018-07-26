@@ -29,10 +29,12 @@ public class DesignLogStorageSystem {
 	public List<Integer> retrieve(String s, String e, String gra) {
 		List<Integer> res = new ArrayList<>();
 		int index = indices[units.indexOf(gra)];
-		for (String[] timestamp : timestamps) {
-			if (timestamp[1].substring(0, index).compareTo(s.substring(0, index)) >= 0
-					&& timestamp[1].substring(0, index).compareTo(e.substring(0, index)) <= 0) {
-				res.add(Integer.parseInt(timestamp[0]));
+		for (String[] t : timestamps) {
+			String curr = t[1].substring(0, index);
+			String start = s.substring(0, index);
+			String end = e.substring(0, index);
+			if (curr.compareTo(start) >= 0 && curr.compareTo(end) <= 0) {
+				res.add(Integer.parseInt(t[0]));
 			}
 		}
 		return res;

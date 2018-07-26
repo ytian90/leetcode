@@ -4,13 +4,14 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * Number of Islands
+ * 200. Number of Islands
  * @author yutian
  * @since Aug 24, 2015
  */
 public class NumbersOfIslands {
 	
 	// Solution 3: DFS (discussion)
+	// time: O(M * N), space: O(M * N)
 	public int numIslands(char[][] grid) {
 		if (grid == null) return 0;
 		int count = 0;

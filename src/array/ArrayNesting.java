@@ -7,18 +7,18 @@ package array;
 public class ArrayNesting {
 	
 	public static int arrayNesting(int[] nums) {
-        int max = 0;
-        for (int i = 0; i < nums.length; i++) {
-        	int size = 0, k = i;
-        	while (nums[k] >= 0) {
-        		int t = nums[k];
-        		nums[k] = -1;
-        		k = t;
-        		size++;
-        	}
-        	max = Math.max(max, size);
-        }
-        return max;
+		int max = 0;
+		for (int i = 0; i < nums.length; i++) {
+			int curr = 0, k = i;
+			while (nums[k] >= 0) {
+				int t = nums[k];
+				nums[k] = -1;
+				k = t;
+				curr++;
+			}
+			max = Math.max(max, curr);
+		}
+		return max;
     }
 
 	public static void main(String[] args) {

@@ -6,15 +6,15 @@ package dynamicProgramming;
  */
 public class FourKeysKeyboard {
 	
-	public static int maxA(int n) {
-		int[] dp = new int[n + 1];
-		for (int i = 0; i <= n; i++) {
+	public static int maxA(int N) {
+		int[] dp = new int[N + 1];
+		for (int i = 0; i <= N; i++) {
 			dp[i] = i;
 			for (int j = 1; j <= i - 3; j++) {
 				dp[i] = Math.max(dp[i], dp[j] * (i - j - 1));
 			}
 		}
-		return dp[n];
+		return dp[N];
 	}
 	
 	/*We use i steps to reach maxA(i) then use the remaining 

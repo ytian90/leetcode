@@ -14,31 +14,31 @@ import java.util.stream.Collectors;
  *
  */
 public class FindDuplicateFileinSystem {
-	
+
 	public static List<List<String>> findDuplicate(String[] paths) {
-        List<List<String>> res = new ArrayList<>();
-        int n = paths.length;
-        if (n == 0) return res;
-        
-        Map<String, Set<String>> map = new HashMap<>();
-        for (String path: paths) {
-        	String[] strs = path.split("\\s+");
-        	for (int i = 1; i < strs.length; i++) {
-        		int index = strs[i].indexOf("(");
-        		String content = strs[i].substring(index);
-        		String filename = strs[0] + "/" + strs[i].substring(0, index);
-        		Set<String> filenames = map.getOrDefault(content, new HashSet<String>());
-        		filenames.add(filename);
-        		map.put(content, filenames);
-        	}
-        }
-        for (String key : map.keySet()) {
-        	if (map.get(key).size() > 1) {
-        		res.add(new ArrayList<String>(map.get(key)));
-        	}
-        }
-        return res;
-    }
+		List<List<String>> res = new ArrayList<>();
+		int n = paths.length;
+		if (n == 0) return res;
+
+		Map<String, Set<String>> map = new HashMap<>();
+		for (String path: paths) {
+			String[] strs = path.split(" "); // path.split("\\s+");
+			for (int i = 1; i < strs.length; i++) {
+				int index = strs[i].indexOf("(");
+				String content = strs[i].substring(index);
+				String filename = strs[0] + "/" + strs[i].substring(0, index);
+				Set<String> set = map.getOrDefault(content, new HashSet<>());
+				set.add(filename);
+				map.put(content, set);
+			}
+		}
+		for (String key : map.keySet()) {
+			if (map.get(key).size() > 1) {
+				res.add(new ArrayList<>(map.get(key)));
+			}
+		}
+		return res;
+	}
 	
 	public static List<List<String>> findDuplicate2(String[] paths) {
 		Map<String, List<String>> map = new HashMap<>();

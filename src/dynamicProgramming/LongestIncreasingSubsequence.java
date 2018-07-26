@@ -17,12 +17,12 @@ public class LongestIncreasingSubsequence {
         Arrays.fill(d, 1);
         int result = 1;
         for (int i = 1; i < len; i++) {
-	        	for (int j = 0; j < i; j++) {
-	        		if (nums[j] < nums[i]) {
-	        			d[i] = Math.max(d[i], d[j] + 1);
-	        		}
-	        	}
-	        	result = Math.max(result, d[i]);
+			for (int j = 0; j < i; j++) {
+				if (nums[j] < nums[i]) {
+					d[i] = Math.max(d[i], d[j] + 1);
+				}
+			}
+			result = Math.max(result, d[i]);
         }
         return result;
     }

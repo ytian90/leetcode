@@ -7,15 +7,13 @@ package array;
 public class ProductOfArrayExceptSelf {
 	public int[] productExceptSelf(int[] nums) {
 		int[] res = new int[nums.length];
-		// left to right
-		for (int i = 0, temp = 1; i < nums.length; i++) {
-			res[i] = temp;
-			temp *= nums[i];
+		for (int i = 0, t = 1; i < nums.length; i++) {
+			res[i] = t;
+			t *= nums[i];
 		}
-		// right to left
-		for (int i = nums.length - 1, temp = 1; i >= 0; i--) {
-			res[i] *= temp;
-			temp *= nums[i];
+		for (int i = nums.length - 1, t = 1; i >= 0; i--) {
+			res[i] *= t;
+			t *= nums[i];
 		}
 		return res;
 	}

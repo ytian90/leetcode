@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Majority Element
+ * 169. Majority Element
  * @author yutian
  * @since Aug 6, 2015
  */

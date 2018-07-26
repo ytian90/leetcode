@@ -1,28 +1,54 @@
 package design;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
+/**
+ * 251. Flatten 2D Vector
+ */
 public class Flatten2DVector {
-	
-	private static Iterator<List<Integer>> i;
-	private static Iterator<Integer> j;
-	
+
+	static Queue<Iterator<Integer>> q;
+
 	public Flatten2DVector(List<List<Integer>> vec2d) {
-        i = vec2d.iterator();
-    }
+		q = new LinkedList<>();
+		for (List<Integer> l : vec2d) {
+			if (!l.isEmpty()) {
+				q.add(l.iterator());
+			}
+		}
+	}
 
-    public static int next() {
-        hasNext();
-        return j.next();
-    }
+	public static int next() {
+		Iterator<Integer> iterator = q.peek();
+		Integer res = iterator.next();
+		if (!iterator.hasNext()) {
+			q.remove();
+		}
+		return res;
+	}
 
-    public static boolean hasNext() {
-        while ((j == null || !j.hasNext()) && i.hasNext())
-        	j = i.next().iterator();
-        return j != null && j.hasNext();
-    }
+	public static boolean hasNext() {
+		return !q.isEmpty();
+	}
+
+	// follow up
+//	private static Iterator<List<Integer>> i;
+//	private static Iterator<Integer> j;
+//
+//	public Flatten2DVector(List<List<Integer>> vec2d) {
+//        i = vec2d.iterator();
+//    }
+//
+//    public static int next() {
+//        hasNext();
+//        return j.next();
+//    }
+//
+//    public static boolean hasNext() {
+//        while ((j == null || !j.hasNext()) && i.hasNext())
+//        	j = i.next().iterator();
+//        return j != null && j.hasNext();
+//    }
 
 	public static void main(String[] args) {
 		List<List<Integer>> vec2d = new ArrayList<List<Integer>>();

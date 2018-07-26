@@ -16,6 +16,7 @@ public class SumOfTwoIntegers {
     }
 
 	public static void main(String[] args) {
+		System.out.println(getSum(3, 5));
 		System.out.println(getSum(2, 5));
 		System.out.println(getSum(-2, 3));
 		System.out.println(getSum(3, -5));

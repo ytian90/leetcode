@@ -5,19 +5,21 @@ package binaryTree;
  *
  */
 public class ConstructStringFromBinaryTree {
-	
+
 	public static String tree2str(TreeNode t) {
-        if (t == null) return "";
-        String result = String.valueOf(t.val);
-        String left = tree2str(t.left);
-        String right = tree2str(t.right);
-        
-        if (left == "" && right == "") return result;
-        if (left == "") return result + "()" + "(" + right + ")";
-        if (right == "") return result + "(" + left + ")";
-        return result + "(" + left + ")" + "(" + right + ")";
-        
-    }
+		return helper(t);
+	}
+
+	private static String helper(TreeNode node) {
+		if (node == null) return "";
+		String num = String.valueOf(node.val);
+		String left = helper(node.left);
+		String right = helper(node.right);
+		if (left == "" && right == "") return num;
+		if (left == "") return num + "()" + "(" + right + ")";
+		if (right == "") return num + "(" + left + ")";
+		return num + "(" + left + ")" + "(" + right + ")";
+	}
 
 	public static void main(String[] args) {
 		TreeNode n1 = new TreeNode(1);
