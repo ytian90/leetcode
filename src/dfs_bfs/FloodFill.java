@@ -4,20 +4,53 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 /**
- * Flood Fill Algorithm
- * https://shawnlincoding.wordpress.com/page/4/
- * 就上面题目的各种变种，题目是有一个矩阵. 
-	1代表已经染色，0代表没有染色。
-	完成一个函数，
-	输入：矩阵a，整数x， 整数y
-	输出: 
-	返回一个矩阵，为以(x,y)点（0-based）为开始点的染色结果，将其周围区域染色，直到遇到已经染色的位置或边界为止。
-	若(x, y)已经染色则直接返回。注意：只能向上下左右四个方向染色。
- * @author yutian
- * @since Dec 14, 2015
+ * 733. Flood Fill
  */
 public class FloodFill {
-	
+
+	public static int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
+		if (image[sr][sc] == newColor) return image;
+		helper(image, sr, sc, image[sr][sc], newColor);
+		return image;
+	}
+
+	public static void helper(int[][] image, int r, int c, int color, int newColor) {
+		if (r < 0 || r == image.length || c < 0
+				|| c == image[0].length || image[r][c] != color)
+			return;
+		image[r][c] = newColor;
+		helper(image, r + 1, c, color, newColor);
+		helper(image, r - 1, c, color, newColor);
+		helper(image, r, c - 1, color, newColor);
+		helper(image, r, c + 1, color, newColor);
+	}
+
+	public static void main(String[] args) {
+		int[][] image = new int[][]{
+				{1, 1, 1},
+				{1, 1, 0},
+				{1, 0, 1}
+		};
+		for (int[] a : floodFill(image, 1, 1, 2)) {
+			System.out.println(Arrays.toString(a));
+		}
+	}
+
+
+	/**
+	 * Flood Fill Algorithm
+	 * https://shawnlincoding.wordpress.com/page/4/
+	 * 就上面题目的各种变种，题目是有一个矩阵.
+	 1代表已经染色，0代表没有染色。
+	 完成一个函数，
+	 输入：矩阵a，整数x， 整数y
+	 输出:
+	 返回一个矩阵，为以(x,y)点（0-based）为开始点的染色结果，将其周围区域染色，直到遇到已经染色的位置或边界为止。
+	 若(x, y)已经染色则直接返回。注意：只能向上下左右四个方向染色。
+	 * @author yutian
+	 * @since Dec 14, 2015
+	 */
+
 	public int[][] floodFill(int[][] matrix, int x, int y) {
 		if (matrix == null || matrix.length == 0) return null;
 		if (!isValidIndex(matrix, x, y) || matrix[x][y] == 1) 
@@ -29,21 +62,21 @@ public class FloodFill {
 				result[i][j] = matrix[i][j];
 			}
 		}
-		boolean[][] marked = new boolean[m][n];
-		dfs(result, x, y, marked);
+		boolean[][] visited = new boolean[m][n];
+		dfs(result, x, y, visited);
 		return result;
 	}
 	
 	
-	private void dfs(int[][] matrix, int i, int j, boolean[][] marked) {
-		if (!isValidIndex(matrix, i, j) || marked[i][j] || matrix[i][j] == 1)
+	private void dfs(int[][] matrix, int i, int j, boolean[][] visited) {
+		if (!isValidIndex(matrix, i, j) || visited[i][j] || matrix[i][j] == 1)
 			return;
-		marked[i][j] = true;
+		visited[i][j] = true;
 		matrix[i][j] = 1;
-		dfs(matrix, i + 1, j, marked);
-		dfs(matrix, i - 1, j, marked);
-		dfs(matrix, i, j + 1, marked);
-		dfs(matrix, i, j - 1, marked);
+		dfs(matrix, i + 1, j, visited);
+		dfs(matrix, i - 1, j, visited);
+		dfs(matrix, i, j + 1, visited);
+		dfs(matrix, i, j - 1, visited);
 	}
 
 
@@ -51,26 +84,26 @@ public class FloodFill {
 		return i >= 0 && i < matrix.length && j >= 0 && j < matrix[0].length;
 	}
 
-	public static void main(String[] args) {
-		int[][] matrix = {{1, 1, 0, 0, 1, 1},
-						  {1, 0, 0, 1, 0, 0},
-						  {1, 0, 1, 0, 1, 0}};
-		for(int i = 0; i < matrix.length; i++){
-            for(int j = 0; j < matrix[0].length; j++){
-                System.out.print(matrix[i][j] + " ");
-            }
-            System.out.println();
-        }
-		System.out.println();
-		int[][] res = new FloodFill().floodFill(matrix, 2, 1);
-		for(int i = 0; i < res.length; i++){
-            for(int j = 0; j < res[0].length; j++){
-                System.out.print(res[i][j] + " ");
-            }
-            System.out.println();
-        }
-		
-	}
+//	public static void main(String[] args) {
+//		int[][] matrix = {{1, 1, 0, 0, 1, 1},
+//						  {1, 0, 0, 1, 0, 0},
+//						  {1, 0, 1, 0, 1, 0}};
+//		for(int i = 0; i < matrix.length; i++){
+//            for(int j = 0; j < matrix[0].length; j++){
+//                System.out.print(matrix[i][j] + " ");
+//            }
+//            System.out.println();
+//        }
+//		System.out.println();
+//		int[][] res = new FloodFill().floodFill(matrix, 2, 1);
+//		for(int i = 0; i < res.length; i++){
+//            for(int j = 0; j < res[0].length; j++){
+//                System.out.print(res[i][j] + " ");
+//            }
+//            System.out.println();
+//        }
+//
+//	}
 	
 	/*
 	// Time O(N^2) Space O(N)

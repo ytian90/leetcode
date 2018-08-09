@@ -12,7 +12,7 @@ import java.util.Set;
  */
 public class FirstUniqueCharacterInAString {
 	
-	public int firstUniqChar(String s) {
+	public static int firstUniqChar(String s) {
         if (s == null || s.length() == 0) return -1;
         char[] c = s.toCharArray();
         int[] counter = new int[256];
@@ -26,7 +26,7 @@ public class FirstUniqueCharacterInAString {
     }
 	
 	// LinkedHashMap 1 pass
-	public int firstUniqChar2(String s) {
+	public static int firstUniqChar2(String s) {
 		Map<Character, Integer> map = new LinkedHashMap<>();
 		Set<Character> set = new HashSet<>();
 		for (int i = 0; i < s.length(); i++) {
@@ -43,7 +43,8 @@ public class FirstUniqueCharacterInAString {
 	}
 	
 	public static void main(String[] args) {
-		
+		System.out.println(firstUniqChar("leetcode"));
+		System.out.println(firstUniqChar("loveleetcode"));
 	}
 
 }

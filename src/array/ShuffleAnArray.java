@@ -1,5 +1,6 @@
 package array;
 
+import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -40,10 +41,12 @@ public class ShuffleAnArray {
     }
 
 	public static void main(String[] args) {
-		int[] nums = {};
+		int[] nums = {1, 2, 3};
 		ShuffleAnArray obj = new ShuffleAnArray(nums);
 		int[] param_1 = obj.reset();
 		int[] param_2 = obj.shuffle();
+        System.out.println(Arrays.toString(param_1));
+        System.out.println(Arrays.toString(param_2));
 	}
 
 }

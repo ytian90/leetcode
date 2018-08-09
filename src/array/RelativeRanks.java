@@ -1,6 +1,7 @@
 package array;
 
 import java.util.Arrays;
+import java.util.TreeMap;
 
 /**
  * 506. Relative Ranks
@@ -8,6 +9,17 @@ import java.util.Arrays;
  *
  */
 public class RelativeRanks {
+
+	public static String[] findRelativeRank(int[] nums) {
+		if (nums == null || nums.length == 0) {
+			return null;
+		}
+		TreeMap<Integer, Integer> map = new TreeMap<>();
+		for (int i = 0; i < nums.length; i++) {
+			map.put(nums[i], i);
+		}
+		
+	}
 	
 	public static String[] findRelativeRanks(int[] nums) {
         Integer[] index = new Integer[nums.length];

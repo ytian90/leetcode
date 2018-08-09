@@ -1,7 +1,7 @@
 package binaryTree;
 
-import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.LinkedList;
 
 /**
  * 404. Sum of Left Leaves
@@ -26,29 +26,27 @@ public class SumOfLeftLeaves {
 	public static int sumOfLeftLeaves2(TreeNode root) {
 		if (root == null) return 0;
 		int res = 0;
-		Deque<TreeNode> stack = new ArrayDeque<>();
+		Deque<TreeNode> stack = new LinkedList<>();
 		stack.push(root);
 		while (!stack.isEmpty()) {
-			TreeNode node = stack.pop();
-			if (node.left != null) {
-				if (node.left.left == null && node.left.right == null) {
-					res += node.left.val;
+			TreeNode curr = stack.pop();
+			if (curr.left != null) {
+				if (curr.left.left == null && curr.left.right == null) {
+					res += curr.left.val;
 				} else {
-					stack.push(node.left);
+					stack.push(curr.left);
 				}
 			}
-			if (node.right != null) {
-				if (node.right.left != null || node.right.right != null) {
-					stack.push(node.right);
+			if (curr.right != null) {
+				if (curr.right.left != null || curr.right.right != null) {
+					stack.push(curr.right);
 				}
 			}
 		}
-		
 		return res;
 	}
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		TreeNode n0 = new TreeNode(3);
 		TreeNode n1 = new TreeNode(9);
 		TreeNode n2 = new TreeNode(20);

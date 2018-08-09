@@ -15,15 +15,15 @@ public class TotalHammingDistance {
 	 * k*(n-k) hamming distance to the total.
 	 */
 	public static int totalHammingDistance(int[] nums) {
-        int total = 0, n = nums.length;
-        for (int j = 0; j < 32; j++) {
-        	int bitCount = 0;
-        	for (int i = 0; i < n; i++) {
-        		bitCount += (nums[i] >> j) & 1;
-        	}
-        	total += bitCount * (n - bitCount);
-        }
-        return total;
+		int res = 0;
+		for (int j = 0; j < 32; j++) {
+			int bitCount = 0;
+			for (int n : nums) {
+				bitCount += (n >> j) & 1;
+			}
+			res += bitCount * (nums.length - bitCount);
+		}
+		return res;
     }
 
 	public static void main(String[] args) {

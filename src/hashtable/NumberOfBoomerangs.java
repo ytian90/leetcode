@@ -21,6 +21,8 @@ public class NumberOfBoomerangs {
         		map.put(d, map.getOrDefault(d, 0) + 1);
         	}
         	for (int n : map.values()) {
+        		// combination take 2 from n elements,
+				// total C(2, n) = n! / (n - 2)! = n * (n - 1)
         		res += n * (n - 1);
         	}
         	map.clear();

@@ -8,19 +8,44 @@ import java.util.TreeSet;
  *
  */
 public class MinimumAbsoluteDifferenceInBST {
-	
+
+	public static int getMinimumDifference(TreeNode root) {
+		int[] res = new int[]{Integer.MAX_VALUE, -1};
+		helper(root, res);
+		return res[0];
+	}
+
+	private static void helper(TreeNode node, int[] res) {
+		if (node == null) return;
+		helper(node.left, res);
+		if (res[1] != -1) {
+			res[0] = Math.min(res[0], node.val - res[1]);
+		}
+		res[1] = node.val;
+		helper(node.right, res);
+	}
+
+	public static void main(String[] args) {
+		TreeNode n0 = new TreeNode(1);
+		TreeNode n1 = new TreeNode(3);
+		TreeNode n2 = new TreeNode(2);
+		n0.right = n1; n1.left = n2;
+
+		System.out.println(getMinimumDifference(n0));
+	}
+
 	// In-Order Traverse time O(N) space O(1)
 	Integer min = Integer.MAX_VALUE;
 	Integer prev = null;
 	
-	public int getMinimumDifference(TreeNode root) {
+	public int getMinimumDifferencee(TreeNode root) {
         if (root == null) return min;
-        getMinimumDifference(root.left);
+        getMinimumDifferencee(root.left);
         if (prev != null) {
         	min = Math.min(min, root.val - prev);
         }
         prev = root.val;
-        getMinimumDifference(root.right);
+        getMinimumDifferencee(root.right);
         return min;
     }
 	
@@ -42,11 +67,6 @@ public class MinimumAbsoluteDifferenceInBST {
 		getMinimumDifference2(root.left);
 		getMinimumDifference2(root.right);
 		return res;
-	}
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
 	}
 
 }
