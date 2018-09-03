@@ -1,6 +1,7 @@
 package array;
 
 import java.util.Arrays;
+import java.util.Map;
 import java.util.TreeMap;
 
 /**
@@ -18,7 +19,20 @@ public class RelativeRanks {
 		for (int i = 0; i < nums.length; i++) {
 			map.put(nums[i], i);
 		}
-		
+		String[] arr = new String[nums.length];
+		for (int i = nums.length; i > 0; i--) {
+			Map.Entry<Integer, Integer> entry = map.pollFirstEntry();
+			if (i == 1) {
+				arr[entry.getValue()] = "Gold Medal";
+			} else if (i == 2) {
+				arr[entry.getValue()] = "Silver Medal";
+			} else if (i == 3) {
+				arr[entry.getValue()] = "Bronze Medal";
+			} else {
+				arr[entry.getValue()] = String.valueOf(i);
+			}
+		}
+		return arr;
 	}
 	
 	public static String[] findRelativeRanks(int[] nums) {
@@ -43,7 +57,7 @@ public class RelativeRanks {
     }
 	
 	public static void main(String[] args) {
-		System.out.println(Arrays.toString(findRelativeRanks(new int[]{4, 5, 3, 2, 1})));
+		System.out.println(Arrays.toString(findRelativeRank(new int[]{4, 5, 3, 2, 1})));
 	}
 
 }

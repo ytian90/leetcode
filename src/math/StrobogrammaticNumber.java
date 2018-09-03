@@ -1,4 +1,8 @@
 package math;
+
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 246. Strobogrammatic Number
  * @author yutian
@@ -22,6 +26,28 @@ public class StrobogrammaticNumber {
         }
         return true;
     }
+
+    public boolean isStrobogrammaticc(String num) {
+        Map<Character, Character> map = new HashMap<>();
+        map.put('0', '0');
+        map.put('1', '1');
+        map.put('6', '9');
+        map.put('8', '8');
+        map.put('9', '6');
+
+        int n = num.length();
+        for (int i = 0; i < n; i++) {
+            if (map.containsKey(num.charAt(i))) {
+                if (num.charAt(n - 1 -i) != map.get(num.charAt(i))) {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        }
+        return true;
+    }
+
 
 	public static void main(String[] args) {
 		System.out.println(isStrobogrammatic("69"));

@@ -20,10 +20,8 @@ public class ConvertANumberToHexadecimal {
     }
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		System.out.println(toHex(-1));
 		System.out.println(toHex(26));
-		
 	}
 
 }

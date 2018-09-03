@@ -1,6 +1,6 @@
 package binaryTree;
 /**
- * Lowest Common Ancestor of a Binary Search Tree
+ * 235. Lowest Common Ancestor of a Binary Search Tree
  * @author yutian
  * @since Aug 1, 2015
  */
@@ -8,25 +8,26 @@ public class LowestCommonAncestorOfABinarySearchTree {
 	
 	// Iterative, O(1) space
 	public static TreeNode lowestCommonAncestor1(TreeNode root, TreeNode p, TreeNode q) {
+		// as long as both p and q are in the same subtree
 		while ((root.val - (long)p.val) * (root.val - (long)q.val) > 0) { // in case of overflow
 			root = p.val < root.val ? root.left : root.right;
 		}
 		return root;
 	}
-	
-	// Recursion
-	public static TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-		return (root.val - p.val) * (root.val - q.val) < 1 ? root : 
-			lowestCommonAncestor(p.val < root.val ? root.left : root.right, p, q);
-	}
-	
+
 	// Solution 3 Time O(logN), Space O(logN)
-	public static TreeNode lowestCommonAncestor3(TreeNode root, TreeNode p, TreeNode q) {
+	public static TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
 		if (root == null || root == p || root == q) return root;
 //		if (root == null || p == null || q == null) return null; // Both are fine.
-		if (root.val < Math.min(p.val, q.val)) return lowestCommonAncestor3(root.right, p, q);
-		if (root.val > Math.max(p.val, q.val)) return lowestCommonAncestor3(root.left, p, q);
+		if (root.val < Math.min(p.val, q.val)) return lowestCommonAncestor(root.right, p, q);
+		if (root.val > Math.max(p.val, q.val)) return lowestCommonAncestor(root.left, p, q);
 		return root;
+	}
+	
+	// Recursion
+	public static TreeNode lowestCommonAncestor3(TreeNode root, TreeNode p, TreeNode q) {
+		return (root.val - p.val) * (root.val - q.val) < 1 ? root : 
+			lowestCommonAncestor3(p.val < root.val ? root.left : root.right, p, q);
 	}
 	
 	// Solution 2

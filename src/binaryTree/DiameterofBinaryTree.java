@@ -5,19 +5,18 @@ package binaryTree;
  *
  */
 public class DiameterofBinaryTree {
-	
-	static int max = 0;
-	
+
 	public static int diameterOfBinaryTree(TreeNode root) {
-        helper(root);
-        return max;
-    }
-	
-	private static int helper(TreeNode node) {
+		int[] res = new int[1];
+		helper(root, res);
+		return res[0];
+	}
+
+	private static int helper(TreeNode node, int[] res) {
 		if (node == null) return 0;
-		int left = helper(node.left);
-		int right = helper(node.right);
-		max = Math.max(max, left + right);
+		int left = helper(node.left, res);
+		int right = helper(node.right, res);
+		res[0] = Math.max(res[0], left + right);
 		return 1 + Math.max(left, right);
 	}
 

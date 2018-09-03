@@ -1,6 +1,6 @@
 package linkedList;
 /**
- * Linked List Cycle
+ * 141. Linked List Cycle
  * @author yutian
  * @since Aug 24, 2015
  */

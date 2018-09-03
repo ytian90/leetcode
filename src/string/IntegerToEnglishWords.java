@@ -36,6 +36,14 @@ public class IntegerToEnglishWords {
 		else 
 			return lessThan20[num / 100] + " Hundred " + helper(num % 100);
 	}
+
+	public static void main(String[] args) {
+		IntegerToEnglishWords obj = new IntegerToEnglishWords();
+		System.out.println(obj.numberToWords(123));
+		System.out.println(obj.numberToWords(12345));
+		System.out.println(obj.numberToWords(1234567));
+		System.out.println(obj.numberToWords(1234567891));
+	}
 	
 	/*
 	public String[] digits = {"One", "Two", "Three", "Four", 

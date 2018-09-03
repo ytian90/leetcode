@@ -14,6 +14,14 @@ public class PowerOfThree {
         }
         return n == 1;
     }
+
+    public static boolean isPowerOfThreee(int n) {
+		double x = (double) n;
+		while (x > 3) {
+			x /= 3;
+		}
+		return x == 1 || x == 3;
+	}
 	
 	// recursive
 	public static boolean isPowerOfThree2(int n) {

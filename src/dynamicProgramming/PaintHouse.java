@@ -39,9 +39,16 @@ public class PaintHouse {
 	}
 
 	public static void main(String[] args) {
-		int[][] t = new int[][]{{2, 3, 4}, {5, 1, 2}, {3, 4, 3}};
-		System.out.println(minCost(t));
-		
+		System.out.println(minCost(new int[][]{
+				{2, 3, 4},
+				{5, 1, 2},
+				{3, 4, 3}}));
+
+		System.out.println(minCost(new int[][]{
+				{2, 3, 4},
+				{5, 1, 2},
+				{3, 4, 3}
+		}));
 	}
 
 }

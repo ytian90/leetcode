@@ -10,6 +10,24 @@ import java.util.Set;
  * @since Aug 4, 2015
  */
 public class HappyNumber {
+
+	public static boolean isHappyy(int n) {
+		Set<Integer> set = new HashSet<>();
+		return helper(n, set);
+	}
+
+	private static boolean helper(int n, Set<Integer> set) {
+		set.add(n);
+		int sum = 0;
+		while (n != 0) {
+			int digit = n % 10;
+			sum += digit * digit;
+			n /= 10;
+		}
+		if (sum == 1) return true;
+		if (set.contains(sum)) return false;
+		return helper(sum, set);
+	}
 	
 	// Solution 1 Set
 	public static boolean isHappy(int n) {
@@ -48,8 +66,8 @@ public class HappyNumber {
         return false;
 	}
 	
-	public static void main(String[] args)
-	{
-		 System.out.println(isHappy(19));
+	public static void main(String[] args) {
+//		 System.out.println(isHappy(19));
+		System.out.println(isHappy(7));
 	}
 }

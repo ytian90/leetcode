@@ -9,15 +9,13 @@ public class ClosestBinarySearchTreeValue {
 	// Time Complexity - O(logn)， Space Complexity - O(1)
 	// Solution 1: Iterative 
 	public static int closestValue(TreeNode root, double target) {
-		int closestVal = root.val;
+		int res = root.val;
 		while (root != null) {
-			// update closestVal if the current value is closer to target
-			closestVal = (Math.abs(target - root.val) < Math.abs(target - closestVal)) ?
-					root.val : closestVal;
-			if (closestVal == target) return closestVal;
-			root = (root.val > target) ? root.left: root.right;
+			res = (Math.abs(target - root.val) < Math.abs(target - res)) ? root.val : res;
+			if (res == target) return res;
+			root = (root.val > target) ? root.left : root.right;
 		}
-		return closestVal;
+		return res;
 	}
 	
 	// Solution 2: Recursive

@@ -5,11 +5,31 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 
 /**
- * Merge K Sorted Linked Lists.
+ * 23. Merge K Sorted Linked Lists.
  * @author yutian
  * @since Jul 26, 2015
  */
 public class MergeKSortedLinkedLists {
+
+	// With Priority Queue
+	public ListNode mergeKLists3(ListNode[] lists) {
+		if (lists == null || lists.length == 0)
+			return null;
+		PriorityQueue<ListNode> q = new PriorityQueue<>(lists.length, (x, y) -> x.val - y.val);
+		for (ListNode n : lists) {
+			if (n != null) q.add(n);
+		}
+		ListNode dummy = new ListNode(0);
+		ListNode p = dummy;
+		while (!q.isEmpty()) {
+			ListNode node = q.poll();
+			p.next = node;
+			p = p.next;
+			if (node.next != null)
+				q.add(node.next);
+		}
+		return dummy.next;
+	}
 	
 	// Solution 1 Use Priority Queue Time O(k)
 	// n means the total elements and k means the size of list
@@ -81,25 +101,4 @@ public class MergeKSortedLinkedLists {
         return lists[0];
     }
 
-	// With Priority Queue
-	public ListNode mergeKLists3(ListNode[] lists) {
-        if (lists == null || lists.length == 0) return null;
-        PriorityQueue<ListNode> q = new PriorityQueue<>(lists.length, (x, y) -> x.val - y.val);
-        for (ListNode l: lists) {
-            if (l != null) {
-                q.add(l);
-            }
-        }
-        ListNode dummy = new ListNode(0);
-        ListNode p = dummy;
-        while (!q.isEmpty()) {
-            ListNode curr = q.poll();
-            p.next = curr;
-            p = p.next;
-            if (curr.next != null) {
-                q.add(curr.next);
-            }
-        }
-        return dummy.next;
-    }
 }

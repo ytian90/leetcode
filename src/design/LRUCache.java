@@ -18,7 +18,7 @@ import java.util.Map;
  * 
  */
 public class LRUCache {
-	
+
 	class Node {
 		int key, value;
 		Node prev, next;
@@ -27,18 +27,18 @@ public class LRUCache {
 			this.value = value;
 		}
 	}
-	
+
 	private int capacity;
 	private Map<Integer, Node> map;
 	private Node head, tail;
-	
+
 	public LRUCache(int capacity) {
 		this.capacity = capacity;
 		map = new HashMap<Integer, Node>();
 		head = null;
 		tail = null;
 	}
-	
+
 	public int get(int key) {
 		if (!map.containsKey(key)) return -1;
 		else {
@@ -46,8 +46,8 @@ public class LRUCache {
 			return map.get(key).value;
 		}
 	}
-	
-	public void set(int key, int value) {
+
+	public void put(int key, int value) {
 		if (!map.containsKey(key)) { // if the node doesn't exist, add a new node to end
 			// remove LRU (first node) if it reaches capacity
 			if (map.size() == capacity) {
@@ -63,7 +63,7 @@ public class LRUCache {
 			moveToEnd(map.get(key));
 		}
 	}
-	
+
 	void addToEnd(Node node) {
 		if (head == null) {
 			head = node;
@@ -97,5 +97,17 @@ public class LRUCache {
 		}
 	}
 
-	
+	public static void main(String[] args) {
+		LRUCache obj = new LRUCache(2);
+		obj.put(1, 1);
+		obj.put(2, 2);
+		System.out.println(obj.get(1));
+		obj.put(3, 3);
+		System.out.println(obj.get(2));
+		obj.put(4, 4);
+		System.out.println(obj.get(1));
+		System.out.println(obj.get(3));
+		System.out.println(obj.get(4));
+	}
+
 }

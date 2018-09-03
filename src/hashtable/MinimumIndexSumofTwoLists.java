@@ -22,15 +22,16 @@ public class MinimumIndexSumofTwoLists {
         }
         for (int i = 0; i < list2.length; i++) {
         	Integer j = map.get(list2[i]);
-        	if (j != null && i + j <= min) {
-        		if (i + j < min) {
-        			res.clear();
-        			min = i + j;
-        		}
-        		res.add(list2[i]);
-        	}
+			if (j != null && i + j < min) {
+				res.clear();
+				min = i + j;
+			}
+			if (j != null && i + j == min) {
+				res.add(list2[i]);
+			}
         }
         return res.toArray(new String[res.size()]);
+        // res.toArray(new String[0]);
     }
 
 	public static void main(String[] args) {

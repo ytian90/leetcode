@@ -10,10 +10,13 @@ import java.util.ArrayList;
 public class HouseRobber {
 	
 	public static void main(String[] args) {
-		int[] test = new int[]{3, 2, 0, 2, 3, 1, 2};
-		int[] test2 = new int[]{2, 1};
-		int[] test3 = new int[]{1, 3, 1};
-		System.out.println(rob(test));
+		System.out.println(rob(new int[]{3, 2, 0, 2, 3, 1, 2}));
+		System.out.println(rob(new int[]{2, 1}));
+		System.out.println(rob(new int[]{1, 3, 1}));
+		System.out.println(rob(new int[]{}));
+		System.out.println(rob(new int[]{0}));
+		System.out.println(rob(new int[]{1, 2, 3, 1}));
+		System.out.println(rob(new int[]{2, 1, 1, 2}));
 	}
 	
 	// Solution 0

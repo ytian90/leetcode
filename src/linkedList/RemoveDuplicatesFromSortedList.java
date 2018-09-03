@@ -8,16 +8,16 @@ public class RemoveDuplicatesFromSortedList {
 	
 	// Time ~O(N), Space ~O(1)
 	public static ListNode deleteDuplicates(ListNode head) {
-		if (head == null || head.next == null) return head;
-		ListNode p = head;
-		ListNode q = head.next;
-		while (q != null) {
-			if (p.val == q.val) {
-				p.next = q.next;
+		if (head == null || head.next == null)
+			return head;
+		ListNode slow = head, fast = head.next;
+		while (fast != null) {
+			if (slow.val == fast.val) {
+				slow.next = fast.next;
 			} else {
-				p = q;
+				slow = fast;
 			}
-			q = q.next;
+			fast = fast.next;
 		}
 		return head;
 	}
