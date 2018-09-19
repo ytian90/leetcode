@@ -17,12 +17,12 @@ public class ReverseVowelsOfAString {
         if (s == null || s.length() == 0) return s;
         String vow = "aeiouAEIOU";
         // way 1 too slow.. 117ms
-        Set<Character> set = vow.chars().mapToObj(e->(char)e).collect(Collectors.toSet());
+//        Set<Character> set = vow.chars().mapToObj(e->(char)e).collect(Collectors.toSet());
         // way 2 11ms
-//        Set<Character> set = new HashSet<>();
-//        for (Character c : vow.toCharArray()) {
-//        		set.add(c);
-//        }
+        Set<Character> set = new HashSet<>();
+        for (Character c : vow.toCharArray()) {
+        		set.add(c);
+        }
         char[] chars = s.toCharArray();
         int start = 0, end = s.length() - 1;
         while (start < end) {

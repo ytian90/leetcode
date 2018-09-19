@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class PascalsTriangle2 {
 	public static List<Integer> getRow(int rowIndex) {
-		ArrayList<Integer> result = new ArrayList<Integer>();
+		List<Integer> result = new ArrayList<Integer>();
 		if (rowIndex < 0) {
 			return result;
 		}

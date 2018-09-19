@@ -7,25 +7,21 @@ package string;
 public class NumberOfSegmentsInAString {
 	
 	public static int countSegments(String s) {
-        if (s == null || s.isEmpty()) return 0;
-        int n = s.length(), count = 0;
-        boolean inWord = false;
-        for (int i = 0; i < n; i++) {
-            if (s.charAt(i) != ' ') {
-                inWord = true;
-                continue;
-            } else {
-                if (inWord) count++;
-                inWord = false;
-            }
+        int res = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) != ' ' && (i == 0 || s.charAt(i - 1) == ' '))
+                res++;
         }
-        if (inWord) count++;
-        return count;
+        return res;
+    }
+
+    public static int countSegmentss(String s) {
+        return ("x " + s).split(" +").length - 1;
     }
 
 	public static void main(String[] args) {
-//		System.out.println(countSegments("Hello, my name is John"));
-		System.out.println(11 / 2);
+		System.out.println(countSegmentss("Hello, my name is John"));
+        System.out.println(countSegmentss(", , , ,        a, eaefa"));
 	}
 
 }

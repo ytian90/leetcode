@@ -5,8 +5,16 @@ package binarySearch;
  *
  */
 public class ArrangingCoins {
-	
+
 	public static int arrangeCoins(int n) {
+		int count = 1;
+		while (n >= count) {
+			n -= count++;
+		}
+		return count - 1;
+	}
+	
+	public static int arrangeCoins1(int n) {
         int start = 0, end = n, mid = 0;
         while (start <= end) {
         	mid = start + (end - start) / 2;
