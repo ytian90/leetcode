@@ -17,22 +17,17 @@ public class WordPattern {
 
 	// Solution 1 time O(N^2) space O(N)
 	public static boolean wordPattern(String pattern, String str) {
-		if (pattern == null || str == null)
-            return false;
+        Map<Character, String> map = new HashMap<>();
         String[] strs = str.split(" ");
-        if (pattern.length() != strs.length)
-            return false;
-        HashMap<Character, String> map = new HashMap<>();
-        for (int i = 0; i < strs.length; i++) {
-            char c = pattern.charAt(i);
-            String s = strs[i];
+        if (pattern.length() != strs.length) return false;
+        for (int i = 0; i < pattern.length(); i++) {
+            Character c = pattern.charAt(i);
             if (map.containsKey(c)) {
-                if (map.get(c).equals(s)) continue;
-                else return false;
-            } else if (map.containsValue(s)) { // O(n)
-                return false;
+                if (!map.get(c).equals(strs[i])) return false;
+            } else {
+                if (map.containsValue(strs[i])) return false;
             }
-            map.put(c, s);
+            map.put(c, strs[i]);
         }
         return true;
     }
