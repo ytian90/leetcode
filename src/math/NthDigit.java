@@ -18,10 +18,10 @@ public class NthDigit {
         int start = 1;
         
         while (n > len * count) {
-	        	n -= len * count;
-	        	len++;
-	        	count *= 10;
-	        	start *= 10;
+			n -= len * count;
+			len++;
+			count *= 10;
+			start *= 10;
         }
         
         start += (n - 1) / len;
