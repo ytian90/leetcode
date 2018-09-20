@@ -16,7 +16,7 @@ public class RepeatedSubstringPattern {
 				for (int j = 0; j < len; j++) {
 					sb.append(first);
 				}
-				if (sb.toString().equalsIgnoreCase(s)) return true;
+				if (sb.toString().equals(s)) return true;
 			}
 		}
 		return false;

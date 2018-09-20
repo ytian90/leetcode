@@ -21,6 +21,15 @@ public class ValidPerfectSquare {
         }
         return false;
     }
+
+	// use Newton Method to calculate the square root or num
+	public static boolean isPerfectSquare3(int num) {
+		long x = num;
+		while (x * x > num) {
+			x = (x + num / x) / 2;
+		}
+		return x * x == num;
+	}
 	
 	public static boolean isPerfectSquare2(int num) {
         int i = 1;
@@ -30,15 +39,7 @@ public class ValidPerfectSquare {
         }
         return num == 0;
     }
-	
-	// use Newton Method to calculate the square root or num
-	public static boolean isPerfectSquare3(int num) {
-		long x = num;
-		while (x * x > num) {
-			x = (x + num / x) >> 1;
-		}
-		return x * x == num;
-	}
+
 
 	public static void main(String[] args) {
 		System.out.println(isPerfectSquare(2));

@@ -5,8 +5,25 @@ package binaryTree;
  * @since Jul 27, 2015
  */
 public class BalancedBinaryTree {
-	// Solution 1: Brute force top-down recursion Time ~O(NlogN)
+
 	public boolean isBalanced(TreeNode root) {
+		boolean[] isBalanced = {true};
+		depth(root, isBalanced);
+		return isBalanced[0];
+	}
+
+	private int depth(TreeNode node, boolean[] isBalanced) {
+		if (node == null || !isBalanced[0]) return 0;
+		int left = depth(node.left, isBalanced);
+		int right = depth(node.right, isBalanced);
+		if (Math.abs(left - right) > 1) {
+			isBalanced[0] = false;
+		}
+		return 1 + Math.max(left, right);
+	}
+
+	// Solution 1: Brute force top-down recursion Time ~O(NlogN)
+	public boolean isBalancedd(TreeNode root) {
 		if (root == null) return true;
 		if (Math.abs(depth(root.left) - depth(root.right)) > 1) return false;
 		return isBalanced(root.left) && isBalanced(root.right);

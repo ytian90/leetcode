@@ -8,41 +8,50 @@ import java.util.Stack;
  * @since Aug 2, 2015
  */
 public class ImplementQueuesUsingStacks {
-	private Stack<Integer> stackNew, stackOld;
-	
-	public ImplementQueuesUsingStacks() {
-		stackNew = new Stack<Integer>();
-		stackOld = new Stack<Integer>();
-	}
-	// Push element x to the back of queue.
+    private Stack<Integer> curr, prev;
+
+    /** Initialize your data structure here. */
+    public ImplementQueuesUsingStacks() {
+        curr = new Stack<>();
+        prev = new Stack<>();
+    }
+
+    /** Push element x to the back of queue. */
     public void push(int x) {
-        stackNew.push(x);
+        curr.push(x);
     }
 
-    // Removes the element from in front of queue.
-    public void pop() {
-        shiftStacks(); // Ensure stackOld has the current elements
-        stackOld.pop(); // pop the oldest item
+    /** Removes the element from in front of queue and returns that element. */
+    public int pop() {
+        shiftStack();
+        return prev.pop();
     }
 
-    // Get the front element.
+    /** Get the front element. */
     public int peek() {
-        shiftStacks();
-        return stackOld.peek();
+        shiftStack();
+        return prev.peek();
     }
 
-    // Return whether the queue is empty.
+    /** Returns whether the queue is empty. */
     public boolean empty() {
-        return stackNew.isEmpty() && stackOld.isEmpty();
+        return curr.isEmpty() && prev.isEmpty();
     }
-    
-    // Move elements from stackNew into stackOld. This is usually done
-    // so that we can do operations on stackOld.
-    private void shiftStacks() {
-    	if (stackOld.isEmpty()) {
-    		while (!stackNew.isEmpty()) {
-    			stackOld.push(stackNew.pop());
-    		}
-    	}
+
+    private void shiftStack() {
+        if (prev.isEmpty()) {
+            while (!curr.isEmpty()) {
+                prev.push(curr.pop());
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        ImplementQueuesUsingStacks obj = new ImplementQueuesUsingStacks();
+        obj.push(1);
+        obj.push(2);
+        System.out.println(obj.peek());
+        System.out.println(obj.pop());
+        System.out.println(obj.empty());
     }
 }
