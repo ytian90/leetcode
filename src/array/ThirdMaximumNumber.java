@@ -1,12 +1,37 @@
 package array;
+
+import java.util.HashSet;
+import java.util.PriorityQueue;
+import java.util.Set;
+
 /**
  * 414. Third Maximum Number
  * @author yutian
  *
  */
 public class ThirdMaximumNumber {
+
+    public static int thirdMxx(int[] nums) {
+        if (nums == null || nums.length == 0)
+            throw new IllegalArgumentException();
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        Set<Integer> set = new HashSet<>();
+        for (int n : nums) {
+            if (!set.contains(n)) {
+                pq.add(n);
+                set.add(n);
+                if (pq.size() > 3) {
+                    set.remove(pq.remove());
+                }
+            }
+        }
+        if (pq.size() < 3) {
+            while (pq.size() > 1) pq.remove();
+        }
+        return pq.peek();
+    }
 	
-	public int thirdMax(int[] nums) {
+	public static int thirdMax(int[] nums) {
 		Integer max1 = null;
         Integer max2 = null;
         Integer max3 = null;
@@ -27,7 +52,9 @@ public class ThirdMaximumNumber {
     }
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+        System.out.println(thirdMxx(new int[]{3, 2, 1}));
+        System.out.println(thirdMxx(new int[]{1, 2}));
+        System.out.println(thirdMxx(new int[]{2, 2, 3, 1}));
 
 	}
 

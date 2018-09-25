@@ -5,6 +5,16 @@ package array;
  * @since Aug 7, 2015
  */
 public class RotateArray {
+
+	public void rotato(int[] nums, int k) {
+		int n = nums.length;
+		int[] res = new int[n];
+		k %= n;
+		for (int i = 0; i < n; i++) {
+			res[i] = nums[(n - k + i) % n];
+		}
+		System.arraycopy(res, 0, nums, 0, n);
+	}
 	
 	public static void main(String[] args) {
 		int[] test1 = new int[]{1, 2, 3, 4, 5, 6, 7};
