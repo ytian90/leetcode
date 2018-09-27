@@ -21,15 +21,15 @@ public class DifferentWaysToAddParentheses {
 					for (Integer b: bRes) {
 						int c = 0;
 						switch(input.charAt(i)) {
-						case '+':
-							c = a + b;
-							break;
-						case '-':
-							c = a - b;
-							break;
-						case '*':
-							c = a * b;
-							break;
+							case '+':
+								c = a + b;
+								break;
+							case '-':
+								c = a - b;
+								break;
+							case '*':
+								c = a * b;
+								break;
 						}
 						res.add(c);
 					}
