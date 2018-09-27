@@ -1,10 +1,37 @@
 package linkedList;
 /**
- * Intersection of Two Linked Lists
+ * 160. Intersection of Two Linked Lists
  * @author yutian
  * @since Aug 3, 2015
  */
 public class IntersectionOfTwoLinkedLists {
+
+	public static ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+		// boundary check
+		if (headA == null || headB == null) return null;
+		ListNode a = headA;
+		ListNode b = headB;
+		while (a != b) {
+			a = a == null ? headB : a.next;
+			b = b == null ? headA : b.next;
+		}
+		return a;
+	}
+
+	public static void main(String[] args) {
+		ListNode n0 = new ListNode(0);
+		ListNode n1 = new ListNode(1);
+		ListNode n2 = new ListNode(2);
+		ListNode n3 = new ListNode(3);
+		ListNode n4 = new ListNode(4);
+		ListNode n5 = new ListNode(5);
+		ListNode n6 = new ListNode(6);
+		ListNode n7 = new ListNode(7);
+
+		n0.next = n1; n1.next = n2; n2.next = n3; n3.next = n4;
+		n5.next = n6; n6.next = n7; n7.next = n2;
+		System.out.println(getIntersectionNode(n0, n5).val);
+	}
 	
 	// Solution 1 Time ~O(n), Space ~O(1)
 	public ListNode getIntersectionNode1(ListNode headA, ListNode headB) {

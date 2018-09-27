@@ -32,7 +32,6 @@ public class NthDigit {
 	public static void main(String[] args) {
 		System.out.println(findNthDigit(3));
 		System.out.println(findNthDigit(11));
-		
 	}
 
 }

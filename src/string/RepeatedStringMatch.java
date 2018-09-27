@@ -6,7 +6,7 @@ package string;
  */
 public class RepeatedStringMatch {
 	
-	public int repeatedStringMatch(String A, String B) {
+	public static int repeatedStringMatch(String A, String B) {
         int i = 0, j = 0;
         while (i < A.length()) {
             j = 0;
@@ -14,7 +14,11 @@ public class RepeatedStringMatch {
                 j++;
             }
             if (j == B.length()) {
-                return (i + j) / A.length() + ((i + j) % A.length() == 0 ? 0 : 1);
+                if ((i + j) % A.length() == 0) {
+                    return (i + j) / A.length();
+                } else {
+                    return (i + j) / A.length() + 1;
+                }
             }
             i++;
         }
@@ -22,8 +26,7 @@ public class RepeatedStringMatch {
     }
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+        System.out.println(repeatedStringMatch("abcd", "cdabcdab"));
 	}
 
 }

@@ -16,7 +16,7 @@ public class CountPrimes {
 		Arrays.fill(primes, true);
 		for (int i = 2; i * i < n; i++) {
 			if (primes[i]) {
-				for (int j = (i << 1); j < n; j += i)
+				for (int j = 2 * i; j < n; j += i)
 					primes[j] = false;
 			}
 		}
