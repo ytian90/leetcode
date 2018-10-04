@@ -5,6 +5,18 @@ package dynamicProgramming;
  * @since May 7, 2016
  */
 public class IntegerBreak {
+
+	public int integerBreak2(int n) {
+		if (n == 2) return 1;
+		if (n == 3) return 2;
+		int p = 1; // product
+		while (n > 4) {
+			p *= 3;
+			n -= 3;
+		}
+		p *= n;
+		return p;
+	}
 	
 	public int integerBreak(int n) {
 		int[] dp = new int[n + 1];
@@ -33,18 +45,6 @@ public class IntegerBreak {
 		return dp[n];
 	}
 	
-	public int integerBreak2(int n) {
-		if (n == 2) return 1;
-		if (n == 3) return 2;
-		int product = 1;
-		while (n > 4) {
-			product *= 3;
-			n -= 3;
-		}
-		product *= n;
-		return product;
-	}
-	
 	public int integerBreak3(int n) {
 		if (n == 2) return 1;
         if (n == 3) return 2;
@@ -55,11 +55,12 @@ public class IntegerBreak {
 
 	public static void main(String[] args) {
 		IntegerBreak t = new IntegerBreak();
-		System.out.println(t.integerBreak(2));
-		System.out.println(t.integerBreak(3));
-		System.out.println(t.integerBreak(4));
-		System.out.println(t.integerBreak(5));
-		System.out.println(t.integerBreak(8));
+//		System.out.println(t.integerBreak(2));
+//		System.out.println(t.integerBreak(3));
+//		System.out.println(t.integerBreak(4));
+//		System.out.println(t.integerBreak(5));
+//		System.out.println(t.integerBreak(8));
+		System.out.println(t.integerBreak2(36));
 		
 	}
 

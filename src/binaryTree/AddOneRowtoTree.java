@@ -2,12 +2,85 @@ package binaryTree;
 
 import util.BTreePrinter;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+
 /**
  * 623. Add One Row to Tree
  * @author ytian
  *
  */
 public class AddOneRowtoTree {
+
+	// BFS
+	public static TreeNode addOneRow1(TreeNode root, int v, int d) {
+		if (d == 1) {
+			TreeNode nn = new TreeNode(v);
+			nn.left = root;
+			return nn;
+		}
+		Queue<TreeNode> q = new LinkedList<>();
+		q.add(root);
+		for (int i = 0; i < d - 2; i++) {
+			int size = q.size();
+			for (int j = 0; j < size; j++) {
+				TreeNode t = q.poll();
+				if (t.left != null) q.add(t.left);
+				if (t.right != null) q.add(t.right);
+			}
+		}
+		while (!q.isEmpty()) {
+			TreeNode curr = q.poll();
+			TreeNode t = curr.left;
+			curr.left = new TreeNode(v);
+			curr.left.left = t;
+			t = curr.right;
+			curr.right = new TreeNode(v);
+			curr.right.right = t;
+		}
+		return root;
+	}
+
+	// DFS
+	public static TreeNode addOneRow2(TreeNode root, int v, int d) {
+		if (d == 1) {
+			TreeNode nn = new TreeNode(v);
+			nn.left = root.left;
+			return nn;
+		}
+		dfs(root, v, d, 1);
+		return root;
+	}
+
+	public static void dfs(TreeNode node, int v, int d, int depth) {
+		if (node == null) return;
+		if (depth < d - 1) {
+			dfs(node.left, v, d, depth + 1);
+			dfs(node.right, v, d, depth + 1);
+		} else {
+			TreeNode t = node.left;
+			node.left = new TreeNode(v);
+			node.left.left = t;
+			t = node.right;
+			node.right = new TreeNode(v);
+			node.right.right = t;
+		}
+	}
+
+	// DFS without helper
+	public static TreeNode addOneRow3(TreeNode root, int v, int d) {
+		if (d < 2) {
+			TreeNode nn = new TreeNode(v);
+			if (d == 0) nn.right = root;
+			else nn.left = root;
+			return nn;
+		}
+		if (root == null) return null;
+		root.left = addOneRow3(root.left, v, d == 2 ? 1 : d - 1);
+		root.right = addOneRow3(root.right, v, d == 2 ? 0 : d - 1);
+		return root;
+	}
 	
 	public static TreeNode addOneRow(TreeNode root, int v, int d) {
         return helper(root, v, d, 1, 0);

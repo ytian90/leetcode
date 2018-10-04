@@ -30,8 +30,17 @@ public class RandomPickIndex {
     }
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		RandomPickIndex obj = new RandomPickIndex(new int[]{1, 2, 3, 3, 3});
+		int two = 0, three = 0, four = 0;
+        for (int i = 0; i < 10000; i++) {
+            int res = obj.pick(3);
+            if (res == 2) two++;
+            if (res == 3) three++;
+            if (res == 4) four++;
+        }
+        System.out.println("two: " + two);
+        System.out.println("three: " + three);
+        System.out.println("four: " + four);
 	}
 
 }

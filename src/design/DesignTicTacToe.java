@@ -8,11 +8,13 @@ public class DesignTicTacToe {
 	
 	private int[] rows;
 	private int[] cols;
+	private int n;
 	private int diagonal;
 	private int antiDiagonal;
 	
 	/** Initialize your data structure here. */
     public DesignTicTacToe(int n) {
+    	this.n = n;
         rows = new int[n];
         cols = new int[n];
     }
@@ -38,12 +40,11 @@ public class DesignTicTacToe {
     	if (col == (cols.length - row - 1)) {
     		antiDiagonal += toAdd;
     	}
-    	
-    	int size = rows.length;
-    	if (Math.abs(rows[row]) == size ||
-    			Math.abs(cols[col]) == size ||
-    			Math.abs(diagonal) == size ||
-    			Math.abs(antiDiagonal) == size) {
+
+    	if (Math.abs(rows[row]) == n ||
+    			Math.abs(cols[col]) == n ||
+    			Math.abs(diagonal) == n ||
+    			Math.abs(antiDiagonal) == n) {
     				return player;
     			}
     	
