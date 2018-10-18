@@ -7,9 +7,9 @@ package array;
 public class FindTheDuplicateNumber {
 
 	public static void main(String[] args) {
-		int[] t1 = new int[]{8, 8, 6, 7, 3, 4, 5, 1, 2};
-		int ans1 = findDuplicate2(t1);
-		System.out.println(ans1);
+		System.out.println(findDuplicate2(new int[]{1, 1}));
+		System.out.println(findDuplicate2(new int[]{1, 3, 4, 2, 2}));
+		System.out.println(findDuplicate2(new int[]{8, 8, 6, 7, 3, 4, 5, 1, 2}));
 	}
 	
 	// Method 1: slow and fast pointers, linked list cycle
