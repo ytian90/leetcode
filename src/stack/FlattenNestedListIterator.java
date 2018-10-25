@@ -10,72 +10,35 @@ import java.util.Stack;
  * @since Apr 8, 2016
  */
 public class FlattenNestedListIterator implements Iterator<Integer> {
-	// This is a method without using iterator but easy to understand
 	Stack<NestedInteger> stack = new Stack<>();
-	
+
 	public FlattenNestedListIterator(List<NestedInteger> nestedList) {
-        for (int i = nestedList.size() - 1; i >= 0; i--) {
-        	stack.push(nestedList.get(i));
-        }
-        
-//        // another way to iterate list backward
-//        ListIterator it = list.listIterator(list.size());
-//        while (it.hasPrevious()) {
-//            stack.push((NestedInteger)it.previous());
-//        }
-    }
+		addToStack(nestedList);
+	}
 
-    @Override
-    public Integer next() {
-        return stack.pop().getInteger();
-    }
+	public void addToStack(List<NestedInteger> list) {
+		for (int i = list.size() - 1; i >= 0; i--) {
+			stack.push(list.get(i));
+		}
+	}
 
-    @Override
-    public boolean hasNext() {
-        while (!stack.isEmpty()) {
-        	NestedInteger curr = stack.peek();
-        	if (curr.isInteger()) {
-        		return true;
-        	}
-        	stack.pop();
-        	for (int i = curr.getList().size() - 1; i >= 0; i--) {
-        		stack.push(curr.getList().get(i));
-        	}
-        }
-        return false;
-    }
-    
-    
-    
-//	// a little hard to understand method 
-//	private Stack<ListIterator<NestedInteger>> lists; 
-//	
-//	public FlattenNestedListIterator(List<NestedInteger> nestedList) {
-//        lists = new Stack<>();
-//        lists.push(nestedList.listIterator());
-//    }
-//
-//    @Override
-//    public Integer next() {
-//        hasNext();
-//        return lists.peek().next().getInteger();
-//    }
-//
-//    @Override
-//    public boolean hasNext() {
-//        while (!lists.isEmpty()) {
-//        	if (!lists.peek().hasNext()) {
-//        		lists.pop();
-//        	} else {
-//        		NestedInteger x = lists.peek().next();
-//        		if (x.isInteger()) {
-//        			return lists.peek().previous() == x; // ???
-//        		}
-//        		lists.push(x.getList().listIterator());
-//        	}
-//        }
-//        return false;
-//    }
+	@Override
+	public Integer next() {
+		return stack.pop().getInteger();
+	}
+
+	@Override
+	public boolean hasNext() {
+		while (!stack.isEmpty()) {
+			NestedInteger curr = stack.peek();
+			if (curr.isInteger()) {
+				return true;
+			}
+			stack.pop();
+			addToStack(curr.getList());
+		}
+		return false;
+	}
 
 	public static void main(String[] args) {
 

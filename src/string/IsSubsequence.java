@@ -7,16 +7,16 @@ package string;
 public class IsSubsequence {
 	// Two pointers
 	public static boolean isSubsequence(String s, String t) {
-        if (s.length() == 0) return true;
-        int is = 0, it = 0;
-        while (it < t.length()) {
-        	if (t.charAt(it) == s.charAt(is)) {
-        		is++;
-        		if (is == s.length()) return true;
-        	}
-        	it++;
-        }
-        return false;
+		if (s.length() == 0) return true;
+		int i = 0, j = 0;
+		while (j < t.length()) {
+			if (s.charAt(i) == t.charAt(j)) {
+				i++;
+				if (i == s.length()) return true;
+			}
+			j++;
+		}
+		return false;
     }
 	
 	public static boolean isSubsequence2(String s, String t) {
