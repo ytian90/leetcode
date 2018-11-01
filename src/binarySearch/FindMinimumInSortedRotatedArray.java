@@ -6,6 +6,8 @@ package binarySearch;
  */
 public class FindMinimumInSortedRotatedArray {
 	public static int findMin(int[] nums) {
+		if (nums == null || nums.length == 0)
+			return -1;
 		int lo = 0, hi = nums.length - 1;
         while (lo < hi) {
             int mid = lo + (hi - lo) / 2;

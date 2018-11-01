@@ -58,7 +58,14 @@ public class InsertDeleteGetRandomO1DuplicatesAllowed {
     }
 
 	public static void main(String[] args) {
-
+        InsertDeleteGetRandomO1DuplicatesAllowed obj = new InsertDeleteGetRandomO1DuplicatesAllowed();
+        System.out.println(obj.insert(1));
+        System.out.println(obj.insert(2));
+        System.out.println(obj.insert(2));
+        System.out.println(obj.getRandom());
+        System.out.println(obj.remove(1));
+        System.out.println(obj.insert(2));
+        System.out.println(obj.getRandom());
 	}
 
 }

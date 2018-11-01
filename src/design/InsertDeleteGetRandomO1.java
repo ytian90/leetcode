@@ -50,7 +50,13 @@ public class InsertDeleteGetRandomO1 {
     }
 
 	public static void main(String[] args) {
-
+        InsertDeleteGetRandomO1 obj = new InsertDeleteGetRandomO1();
+        System.out.println(obj.insert(1));
+        System.out.println(obj.insert(2));
+        System.out.println(obj.insert(2));
+        System.out.println(obj.getRandom());
+        System.out.println(obj.remove(1));
+        System.out.println(obj.getRandom());
 	}
 
 }
