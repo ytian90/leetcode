@@ -9,18 +9,22 @@ import java.util.Stack;
  */
 public class LongestValidParentheses {
 	
-	public static int longestValidParentheses2(String s) {
-		Stack<Integer> stack = new Stack<Integer>();
-		int max = 0;
-		int left = -1;
-		for (int i = 0; i < s.length(); i++) {
-			if (s.charAt(i) == '(') stack.push(i);
-			else {
-				if (stack.isEmpty()) left = i;
+	public static int longestValidParentheses(String s) {
+		if (s == null || s.length() == 0)
+			return 0;
+		Stack<Integer> stack = new Stack<>();
+		int i = -1, max = 0;
+		for (int j = 0; j < s.length(); j++) {
+			if (s.charAt(j) == '(') {
+				stack.push(j);
+			} else {
+				if (stack.isEmpty()) i = j;
 				else {
 					stack.pop();
-					if (stack.isEmpty()) max = Math.max(max, i - left);
-					else max = Math.max(max, i - stack.peek());
+					if (stack.isEmpty())
+						max = Math.max(max, j - i);
+					else
+						max = Math.max(max, j - stack.peek());
 				}
 			}
 		}
@@ -49,12 +53,15 @@ public class LongestValidParentheses {
 	}
 	
 	public static void main(String[] args) {
-		String s = ")(()())()";
-		int num = longestValidParentheses3(s);
-		System.out.println(num);
+		System.out.println(longestValidParentheses("(()"));
+		System.out.println(longestValidParentheses(")()())"));
+		System.out.println(longestValidParentheses("()"));
+		System.out.println(longestValidParentheses("("));
+		System.out.println(longestValidParentheses(")"));
+		System.out.println(longestValidParentheses("()())"));
 	}
 	
-	public static int longestValidParentheses(String s) {
+	public static int longestValidParentheses2(String s) {
 		// d(i): length of the longest valid parentheses starting from s[i], i = N - 1...0
 		// d(i) = 0 if s[i] == ')'
 		// d(i) = d(i+1) + 2 + d(i+1+d(i+1)+1) if s[i] == '(' and s[i+1+d(i+1)] == ')'

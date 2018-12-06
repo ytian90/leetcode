@@ -10,24 +10,30 @@ import java.util.Arrays;
 public class MaximalRectangle {
 	
 	// DP
+	/*
+	left(i,j) = max(left(i-1,j), cur_left), cur_left can be determined from the current row
+	right(i,j) = min(right(i-1,j), cur_right), cur_right can be determined from the current row
+	height(i,j) = height(i-1,j) + 1, if matrix[i][j]=='1';
+	height(i,j) = 0, if matrix[i][j]=='0'
+	 */
 	public int maximalRectangle(char[][] matrix) {
-		int m = matrix.length;
-		if (m == 0) return 0;
-		int n = matrix[0].length;
-		int[] left = new int[n];
-		int[] right = new int[n];
-		int[] height = new int[n];
-		Arrays.fill(right, n);
+		int n = matrix.length;
+		if (n == 0) return 0;
+		int m = matrix[0].length;
+		int[] left = new int[m];
+		int[] right = new int[m];
+		int[] height = new int[m];
+		Arrays.fill(right, m);
 		int max = 0;
-		for (int i = 0; i < m; i++) {
-			int cl = 0, cr = n; // current left and right
+		for (int i = 0; i < n; i++) {
+			int cl = 0, cr = m; // current left and right
 			// compute height
-			for (int j = 0; j < n; j++) {
+			for (int j = 0; j < m; j++) {
 				if (matrix[i][j] == '1') height[j]++;
 				else height[j] = 0;
 			}
 			// compute left
-			for (int j = 0; j < n; j++) {
+			for (int j = 0; j < m; j++) {
 				if (matrix[i][j] == '1') left[j] = Math.max(left[j], cl);
 				else {
 					left[j] = 0;
@@ -35,15 +41,15 @@ public class MaximalRectangle {
 				}
 			}
 			// compute right
-			for (int j = n - 1; j >= 0; j--) {
+			for (int j = m - 1; j >= 0; j--) {
 				if (matrix[i][j] == '1') right[j] = Math.min(right[j], cr);
 				else {
-					right[j] = n;
+					right[j] = m;
 					cr = j;
 				}
 			}
 			// compute the area of rectangle
-			for (int j = 0; j < n; j++) {
+			for (int j = 0; j < m; j++) {
 				max = Math.max(max, (right[j] - left[j]) * height[j]);
 			}
 		}

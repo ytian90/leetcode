@@ -12,7 +12,7 @@ import java.util.Queue;
 import java.util.Set;
 
 /**
- * Word Ladder II
+ * 126. Word Ladder II
  * @author yutian
  * @since Aug 22, 2015
  */

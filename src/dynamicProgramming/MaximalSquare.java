@@ -1,6 +1,6 @@
 package dynamicProgramming;
 /**
- * Maximal Square
+ * 221. Maximal Square
  * @author yutian
  * @since Aug 13, 2015
  */

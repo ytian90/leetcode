@@ -3,7 +3,7 @@ package binaryTree;
 import java.util.Stack;
 
 /**
- * Flatten Binary Tree to Linked List
+ * 114. Flatten Binary Tree to Linked List
  * @author yutian
  * @since Aug 21, 2015
  */

@@ -3,6 +3,7 @@ package array;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * 239. Sliding Window Maximum
@@ -13,36 +14,34 @@ import java.util.LinkedList;
 public class SlidingWindowMaximum {
 	
 	public static int[] maxSlidingWindow(int[] nums, int k) {
-        if (nums == null || k <= 0) return new int[]{};
-        int n = nums.length;
-        int[] r = new int[n - k + 1];
-        int ri = 0;
-        // store index
-        Deque<Integer> q = new ArrayDeque<>();
-        for (int i = 0; i < nums.length; i++) {
-        	// remove numbers out of range k
-        	while (!q.isEmpty() && q.peek() < i - k + 1) {
-        		q.poll();
-        	}
-        	// remove smaller numbers in k range as they are useless
-        	while (!q.isEmpty() && nums[q.peekLast()] < nums[i]) {
-        		q.pollLast();
-        	}
-        	// q contains index ... r contains content
-        	q.offer(i);
-        	if (i >= k - 1) {
-        		r[ri++] = nums[q.peek()];
-        	}
-        }
-        return r;
+		if (nums == null || nums.length == 0 || k < 0)
+			return new int[]{};
+		int n = nums.length;
+		int[] res = new int[n - k + 1];
+		int pos = 0;
+		LinkedList<Integer> q = new LinkedList<>();
+		for (int i = 0; i < n; i++) {
+			while (!q.isEmpty() && q.peek() < i - k + 1) {
+				q.poll();
+			}
+			while (!q.isEmpty() && nums[q.peekLast()] < nums[i]) {
+				q.pollLast();
+			}
+			q.add(i);
+			if (i >= k - 1) {
+				res[pos++] = nums[q.peek()];
+			}
+		}
+
+		return res;
     }
 	
 	public static void main(String[] args) {
-		int[] t = maxSlidingWindow(new int[]{1, 3, -1, -3, 5, 3, 6, 7}, 3);
-		int[] t2 = maxSlidingWindow(new int[]{1, 3, -1}, 3);
-		for (int i: t) System.out.print(i + " ");
+		for (int i: maxSlidingWindow(new int[]{1, 3, -1, -3, 5, 3, 6, 7}, 3))
+			System.out.print(i + " ");
 		System.out.println();
-//		for (int i: t2) System.out.print(i + " ");
+//		for (int i: maxSlidingWindow(new int[]{1, 3, -1}, 3))
+//			System.out.print(i + " ");
 	}
 	
 	public static int[] windowMax(int[] array, int width) {

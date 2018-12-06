@@ -1,26 +1,16 @@
 package array;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Set;
+import java.util.*;
 
 /**
- * Word Ladder
+ * 127. Word Ladder
  * @author yutian
  * @since Aug 22, 2015
  */
 public class WordLadder {
-	
-	public static void main(String[] args) {
-		String beginword = "hit";
-		String endword = "cog";
-		Set<String> wordList = new HashSet<>(Arrays.asList("hot", "dot", "dog", "lot", "log"));
-		System.out.println(ladderLength(beginword, endword, wordList));
-	}
-	
-	public static int ladderLength(String beginWord, String endWord, Set<String> wordList) {
+
+	public static int ladderLength(String beginWord, String endWord, List<String> wordList) {
+		Set<String> dict = new HashSet<>(wordList);
 		Queue<String> q = new LinkedList<>();
 		q.add(beginWord);
 		int level = 0;
@@ -30,13 +20,13 @@ public class WordLadder {
 				String curr = q.remove();
 				if (curr.equals(endWord)) return level + 1;
 				for (int j = 0; j < curr.length(); j++) {
-					char[] word = curr.toCharArray();
-					for (char ch = 'a'; ch <= 'z'; ch++) {
-						word[j] = ch;
-						String check = new String(word);
-						if (!check.equals(curr) && wordList.contains(check)) {
-							q.add(check);
-							wordList.remove(check);
+					char[] chars = curr.toCharArray();
+					for (char c = 'a'; c <= 'z'; c++) {
+						chars[j] = c;
+						String newStr = new String(chars);
+						if (!newStr.equals(curr) && dict.contains(newStr)) {
+							q.add(newStr);
+							dict.remove(newStr);
 						}
 					}
 				}
@@ -45,7 +35,14 @@ public class WordLadder {
 		}
 		return 0;
 	}
-	
+
+	public static void main(String[] args) {
+		String beginword = "hit";
+		String endword = "cog";
+		List<String> wordList = new LinkedList<>(Arrays.asList("hot", "dot", "dog", "lot", "log"));
+		System.out.println(ladderLength(beginword, endword, wordList));
+	}
+
 	public static int ladderLength1(String start, String end, Set<String> dict) {
 		// Use queue to do BFS
 		Queue<String> q = new LinkedList<>();

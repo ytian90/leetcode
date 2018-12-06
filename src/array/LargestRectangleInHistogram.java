@@ -8,6 +8,29 @@ import java.util.Stack;
  * @since Sep 3, 2015
  */
 public class LargestRectangleInHistogram {
+
+	public static int largestRectangleArea2(int[] heights) {
+		Stack<Integer> s = new Stack<>();
+		int max = 0;
+		int i = 0;
+		while (i < heights.length) {
+			int h = heights[i];
+			if (s.isEmpty() || h >= heights[s.peek()]) {
+				s.push(i++);
+			} else {
+				// don't move i forward
+				int top = s.pop();
+				max = Math.max(max, heights[top] * (s.isEmpty() ? i : i - 1 - s.peek()));
+			}
+		}
+		// Pop the remaining bars from stack and calculate area
+		while (!s.isEmpty()) {
+			int top = s.pop();
+			max = Math.max(max, heights[top] * (s.isEmpty() ? i : i - 1 - s.peek()));
+		}
+		return max;
+	}
+
 	// Time O(n) Space O(n)
 	public static int largestRectangleArea(int[] heights) {
 		int len = heights.length;

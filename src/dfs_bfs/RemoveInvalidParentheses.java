@@ -1,11 +1,6 @@
 package dfs_bfs;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
-import java.util.Set;
+import java.util.*;
 
 /**
  * 301. Remove Invalid Parentheses
@@ -25,7 +20,8 @@ public class RemoveInvalidParentheses {
 	// time ~ n * 2 ^ (n-1)
 	public List<String> removeInvalidParentheses(String s) {
 		List<String> res = new ArrayList<>();
-		if (s == null) return res;
+		if (s.length() == 0)
+			return new ArrayList<>(Arrays.asList(""));
 		Set<String> visited = new HashSet<>();
 		Queue<String> queue = new LinkedList<>();
 		visited.add(s);
@@ -58,7 +54,10 @@ public class RemoveInvalidParentheses {
 		int count = 0;
 		for (Character c : s.toCharArray()) {
 			if (c == '(') count++;
-			if (c == ')' && count-- == 0) return false;
+			if (c == ')') {
+				count--;
+				if (count < 0) return false;
+			}
 		}
 		return count == 0;
 	}

@@ -9,11 +9,45 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Word Break II
+ * 140. Word Break II
  * @author yutian
  * @since Aug 23, 2015
  */
 public class WordBreak2 {
+
+	public List<String> wordBreak(String s, List<String> wordDict) {
+		Set<String> dict = new HashSet<>(wordDict);
+		return helper(s, dict, new HashMap<String, List<String>>());
+	}
+
+	public List<String> helper(String s, Set<String> dict, Map<String, List<String>> map) {
+		if (map.containsKey(s)) {
+			return map.get(s);
+		}
+		List<String> res = new ArrayList<>();
+		if (s.length() == 0) {
+			res.add("");
+			return res;
+		}
+		for (String word : dict) {
+			if (s.startsWith(word)) {
+				List<String> subList = helper(s.substring(word.length()), dict, map);
+				for (String sub : subList) {
+					res.add(word + (sub.isEmpty() ? "" : " ") + sub);
+				}
+			}
+		}
+		map.put(s, res);
+		return res;
+	}
+
+	public static void main(String[] args) {
+		WordBreak2 t = new WordBreak2();
+		List<String> dict = new ArrayList<>();
+		dict.addAll(Arrays.asList("cat", "cats", "and", "sand", "dog"));
+		System.out.println(t.wordBreak("catsanddog", dict));
+	}
+
 	// Solution 1
 	public List<String> wordBreak(String s, Set<String> wordDict) {
 		int n = s.length();
@@ -47,14 +81,7 @@ public class WordBreak2 {
 			}
 		}
 	}
-	
-	public static void main(String[] args) {
-		WordBreak2 t = new WordBreak2();
-		Set<String> dict = new HashSet<>();
-		dict.addAll(Arrays.asList("cat", "cats", "and", "sand", "dog"));
-		System.out.println(t.wordBreak("catsanddog", dict));
-	}
-	
+
 	// Solution 2
 	public List<String> wordBreak2(String s, Set<String> dict) {
 		// d[i] = true iff s[0..i-1] is breakable

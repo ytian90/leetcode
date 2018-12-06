@@ -29,10 +29,35 @@ package mj.linkedin;
  */
 public class FindDepth {
 
+    // method 1: use Java replace
+    /*
+    Time: O(n * depth)
+    Space: O(n)
+     */
     public static int getDepth(String str) {
         int depth = -1;
-
+        while (!str.equals("0")) {
+            String newStr = str.replace("(00)", "0");
+            if (newStr.equals(str)) {
+                return -1;
+            }
+            str = newStr;
+            depth++;
+        }
         return depth;
     }
 
+    public static void main(String[] args) {
+        System.out.println(getDepth("(00)"));
+        System.out.println(getDepth("((00)0)"));
+        System.out.println(getDepth("((00)(00))"));
+        System.out.println(getDepth("((00)(0(00)))"));
+        System.out.println(getDepth("((00)(0(0(00))))"));
+        System.out.println(getDepth("x"));
+        System.out.println(getDepth("0"));
+        System.out.println(getDepth("()"));
+        System.out.println(getDepth("(0)"));
+        System.out.println(getDepth("(00)x"));
+        System.out.println(getDepth("(0p)"));
+    }
 }

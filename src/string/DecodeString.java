@@ -8,45 +8,47 @@ import java.util.Stack;
  * @since Sep 5, 2016
  */
 public class DecodeString {
-	
-	public static String decodeString(String s) {
+
+    public static String decodeString(String s) {
+        if (s == null || s.length() == 0)
+            return "";
+        int i = 0;
+        Stack<String> strs = new Stack<>();
+        Stack<Integer> times = new Stack<>();
         String res = "";
-        Stack<Integer> countStack = new Stack<>();
-        Stack<String> resStack = new Stack<>();
-        int index = 0;
-        while (index < s.length()) {
-            char c = s.charAt(index);
+        while (i < s.length()) {
+            char c = s.charAt(i);
             if (Character.isDigit(c)) {
                 int count = 0;
-                while (Character.isDigit(s.charAt(index))) {
-                    count = 10 * count + (s.charAt(index) - '0');
-                    index++;
+                while (i < s.length() && Character.isDigit(s.charAt(i))) {
+                    count = 10 * count + (s.charAt(i) - '0');
+                    i++;
                 }
-                countStack.push(count);
+                times.add(count);
             } else if (c == '[') {
-                resStack.push(res);
+                strs.add(res);
                 res = "";
-                index++;
+                i++;
             } else if (c == ']') {
-                StringBuilder sb = new StringBuilder(resStack.pop());
-                int times = countStack.pop();
-                for (int i = 0; i < times; i++) {
+                int time = times.pop();
+                StringBuilder sb = new StringBuilder(strs.pop());
+                for (int j = 0; j < time; j++) {
                     sb.append(res);
                 }
                 res = sb.toString();
-                index++;
+                i++;
             } else {
-                res += s.charAt(index++);
+                res += s.charAt(i++);
             }
         }
+
         return res;
     }
-	
-	public static void main(String[] args) {
-		System.out.println(decodeString("3[a]2[bc]"));
-		System.out.println(decodeString("3[a2[c]]"));
-		System.out.println(decodeString("2[abc]3[cd]ef"));
-		
-	}
 
+    public static void main(String[] args) {
+        System.out.println(decodeString("3[a]2[bc]"));
+        System.out.println(decodeString("3[a2[c]]"));
+        System.out.println(decodeString("2[abc]3[cd]ef"));
+
+    }
 }

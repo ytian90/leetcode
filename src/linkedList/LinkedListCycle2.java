@@ -4,7 +4,7 @@ package linkedList;
  * @author yutian
  * @since Aug 24, 2015
  */
-public class LinkedListCycle2 {
+public class  LinkedListCycle2 {
 	public static ListNode detectCycle(ListNode head) {
 		if (head == null || head.next == null) return null;
 		ListNode slow = head, fast = head;

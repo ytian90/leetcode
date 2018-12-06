@@ -1,11 +1,11 @@
 package dynamicProgramming;
 /**
- * Edit Distance
+ * 72. Edit Distance
  * @author yutian
  * @since Sep 2, 2015
  */
 public class EditDistance {
-	public int minDistance(String word1, String word2) {
+	public static int minDistance(String word1, String word2) {
 		if (word1.equals(word2)) {
 			return 0;
 		}
@@ -29,5 +29,10 @@ public class EditDistance {
 			}
 		}
 		return dp[word1.length()][word2.length()];
+	}
+
+	public static void main(String[] args) {
+		System.out.println(minDistance("horse", "ros"));
+		System.out.println(minDistance("intention", "execution"));
 	}
 }
