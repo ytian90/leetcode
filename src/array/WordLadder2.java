@@ -17,17 +17,118 @@ import java.util.Set;
  * @since Aug 22, 2015
  */
 public class WordLadder2 {
+
+    public List<List<String>> findLadders(String beginWord, String endWord, Set<String> wordList) {
+        List<List<String>> res = new ArrayList<>();
+        Set<String> dict = new HashSet<>(wordList);
+        if (!dict.contains(endWord))
+            return res;
+        Set<String> begin = new HashSet<>();
+        Set<String> end = new HashSet<>();
+        begin.add(beginWord);
+        end.add(endWord);
+        Map<String, List<String>> map = new HashMap<>();
+        bfs(dict, begin, end, map);
+        List<String> t = new ArrayList<>(Arrays.asList(beginWord));
+        dfs(res, t, beginWord, endWord, map);
+        return res;
+    }
+
+    private void bfs(Set<String> dict, Set<String> begin, Set<String> end, Map<String,List<String>> map) {
+        boolean reversed = false;
+        boolean terminated = false;
+        while (begin.size() > 0) {
+            dict.removeAll(begin);
+            dict.removeAll(end);
+            if (begin.size() > end.size()) {
+                reversed = !reversed;
+                Set<String> t = new HashSet<>(begin);
+                begin = end;
+                end = t;
+            }
+            Set<String> set = new HashSet<>();
+            for (String s : begin) {
+                for (int i = 0; i < s.length(); i++) {
+                    char[] chars = s.toCharArray();
+                    for (char c = 'a'; c <= 'z'; c++) {
+                        if (chars[i] == c) continue;
+                        chars[i] = c;
+                        String newStr = new String(chars);
+                        if (end.contains(newStr)) {
+                            if (!reversed) {
+                                List<String> list = map.containsKey(s) ? map.get(s) : new ArrayList<>();
+                                list.add(newStr);
+                                map.put(s, list);
+                            } else {
+                                List<String> list = map.containsKey(newStr) ? map.get(newStr) : new ArrayList<>();
+                                list.add(s);
+                                map.put(newStr, list);
+                            }
+                            terminated = true;
+                        }
+                        if (dict.contains(newStr)) {
+                            if (!reversed) {
+                                List<String> list = map.containsKey(s) ? map.get(s) : new ArrayList<>();
+                                list.add(newStr);
+                                map.put(s, list);
+                            } else {
+                                List<String> list = map.containsKey(newStr) ? map.get(newStr) : new ArrayList<>();
+                                list.add(s);
+                                map.put(newStr, list);
+                            }
+                            set.add(newStr);
+                        }
+                    }
+                }
+            }
+            begin = set;
+            if (terminated) return;
+        }
+    }
+
+    private void dfs(List<List<String>> res, List<String> t, String start, String end, Map<String, List<String>> map) {
+        if (start.equals(end)) {
+            res.add(new ArrayList(t));
+            return;
+        }
+        if (map.containsKey(start)) {
+            for (String word : map.get(start)) {
+                t.add(word);
+                dfs(res, t, word, end, map);
+                t.remove(t.size() - 1);
+            }
+        }
+
+    }
+
+
+    public static void main(String[] args) {
+        WordLadder2 t = new WordLadder2();
+//    	Set<String> set1 = new HashSet<String>(Arrays.asList
+//    			("hot","cog","dog","tot","hog","hop","pot","dot"));
+//
+//    	for (List<String> l : t.findLadders("hot", "dog", set1)) {
+//    		System.out.println(l);
+//    	}
+
+        Set<String> set2 = new HashSet<String>(Arrays.asList("a", "b", "c"));
+
+        for (List<String> l : t.findLadders("a", "c", set2)) {
+            System.out.println(l);
+        }
+
+    }
 	
 	// Method 1 dfs
-	public List<List<String>> findLadders(String beginWord, String endWord, Set<String> wordList) {
-        Queue<String> words = new LinkedList<>();
+	public List<List<String>> findLadders1(String beginWord, String endWord, Set<String> wordList) {
+        Queue<String> q = new LinkedList<>();
         Map<String, Integer> map = new HashMap<>(); // add depth to avoid dead circle
-        words.add(beginWord);
+        q.add(beginWord);
         map.put(beginWord, 1);
         
         int minDepth = Integer.MAX_VALUE;
-        while (!words.isEmpty()) {
-            String curr = words.poll();
+        while (!q.isEmpty()) {
+            String curr = q.poll();
             int depth = map.get(curr);
             if (depth >= minDepth) continue;
             if (curr.equals(endWord)) {
@@ -40,7 +141,7 @@ public class WordLadder2 {
                 	arr[i] = c;
                     String next = new String(arr);
                     if (wordList.contains(next) && !map.containsKey(next)) {
-                        words.add(next);
+                        q.add(next);
                         map.put(next, depth + 1);
                     }
                 }
@@ -69,27 +170,10 @@ public class WordLadder2 {
                 arr[i] = c;
                 String next = new String(arr);
                 if (map.containsKey(next) && map.get(next) == depth) {
-                    dfs(next, endWord, map, new ArrayList<String>(path), res);
+                    dfs(next, endWord, map, new ArrayList<>(path), res);
                 }
             }
         }
-    }
-    
-    public static void main(String[] args) {
-    	WordLadder2 t = new WordLadder2();
-//    	Set<String> set1 = new HashSet<String>(Arrays.asList
-//    			("hot","cog","dog","tot","hog","hop","pot","dot"));
-//    	
-//    	for (List<String> l : t.findLadders("hot", "dog", set1)) {
-//    		System.out.println(l);
-//    	}
-    	
-    	Set<String> set2 = new HashSet<String>(Arrays.asList("a", "b", "c"));
-    	
-    	for (List<String> l : t.findLadders("a", "c", set2)) {
-    		System.out.println(l);
-    	}
-    	
     }
     
     // Method 2 bfs too slow

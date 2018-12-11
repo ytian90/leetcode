@@ -5,28 +5,27 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Subsets II
+ * 90. Subsets II
  * @author yutian
  * @since Aug 19, 2015
  */
 public class Subsets2 {
 	
 	// Solution 1 Time complexity is O(2^n)  Space complexity is O(n).
-	List<List<Integer>> res = new ArrayList<>();
-    List<Integer> list = new ArrayList<>();
-    
     public List<List<Integer>> subsetsWithDup(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+        List<Integer> list = new ArrayList<>();
         Arrays.sort(nums);
-        helper(nums, 0);
+        helper(nums, 0, list, res);
         return res;
     }
-    
-    private void helper(int[] nums, int start) {
+
+    public void helper(int[] nums, int start, List<Integer> list, List<List<Integer>> res) {
         res.add(new ArrayList<>(list));
         for (int i = start; i < nums.length; i++) {
             if (i != start && nums[i - 1] == nums[i]) continue;
             list.add(nums[i]);
-            helper(nums, i + 1);
+            helper(nums, i + 1, list, res);
             list.remove(list.size() - 1);
         }
     }

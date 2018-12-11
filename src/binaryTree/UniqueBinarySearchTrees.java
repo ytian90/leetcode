@@ -1,6 +1,6 @@
 package binaryTree;
 /**
- * Unique Binary Search Trees
+ * 96. Unique Binary Search Trees
  * https://leetcode.com/discuss/24282/dp-solution-in-6-lines-with-explanation-f-i-n-g-i-1-g-n-i
  * @author yutian
  * @since Aug 21, 2015

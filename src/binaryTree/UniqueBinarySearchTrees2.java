@@ -10,19 +10,19 @@ import java.util.List;
  */
 public class UniqueBinarySearchTrees2 {
 	public List<TreeNode> generateTrees(int n) {
-		if (n == 0) return new ArrayList<TreeNode>();
-        return add(1, n);
+		if (n == 0) return new ArrayList<>();
+        return helper(1, n);
 	}
 
-	private List<TreeNode> add(int start, int end) {
+	private List<TreeNode> helper(int start, int end) {
 		List<TreeNode> result = new ArrayList<>();
         if (start > end) {
             result.add(null);
             return result;
         }
         for (int i = start; i <= end; i++) {
-            List<TreeNode> left = add(start, i - 1);
-            List<TreeNode> right = add(i + 1, end);
+            List<TreeNode> left = helper(start, i - 1);
+            List<TreeNode> right = helper(i + 1, end);
             for (TreeNode l: left) {
                 for (TreeNode r: right) {
                     TreeNode node = new TreeNode(i);
@@ -44,12 +44,10 @@ public class UniqueBinarySearchTrees2 {
 		}
 	}
 
-	
 	private static void printTree(TreeNode n) {
 		if (n == null) return;
 		System.out.print(n.val + " ");
 		printTree(n.left);
 		printTree(n.right);
 	}
-
 }

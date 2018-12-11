@@ -1,13 +1,58 @@
 package binaryTree;
+
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
- * Populating Next Right Pointers in Each Node
+ * 116 & 117 Populating Next Right Pointers in Each Node
  * Both I and II works!
  * @author yutian
  * @since Aug 22, 2015
  */
 public class PopulatingNextRightPointersInEachNode {
-	
+
 	public void connect(TreeLinkNode root) {
+		if (root == null) return;
+		Queue<TreeLinkNode> q = new LinkedList<>();
+		q.add(root);
+		while (!q.isEmpty()) {
+			int size = q.size();
+			for (int i = 0; i < size; i++) {
+				TreeLinkNode curr = q.poll();
+				if (i == size - 1) {
+					curr.next = null;
+				} else {
+					curr.next = q.peek();
+				}
+				if (curr.left != null) q.add(curr.left);
+				if (curr.right != null) q.add(curr.right);
+			}
+		}
+	}
+
+	public static void main() {
+		TreeLinkNode n1 = new TreeLinkNode(1);
+		TreeLinkNode n2 = new TreeLinkNode(2);
+		TreeLinkNode n3 = new TreeLinkNode(3);
+		TreeLinkNode n4 = new TreeLinkNode(4);
+		TreeLinkNode n5 = new TreeLinkNode(5);
+		TreeLinkNode n7 = new TreeLinkNode(7);
+
+		n1.left = n2; n1.right = n3;
+		n2.left = n4; n2.right = n5;
+		n3.right = n7;
+
+		PopulatingNextRightPointersInEachNode t = new PopulatingNextRightPointersInEachNode();
+		t.connect(n1);
+		System.out.println(n1.next.val);
+		System.out.println(n2.next.val);
+		System.out.println(n3.next.val);
+		System.out.println(n4.next.val);
+		System.out.println(n5.next.val);
+		System.out.println(n7.next.val);
+	}
+	
+	public void connect0(TreeLinkNode root) {
 		if (root == null) return;
 		// dummy is the node above prev
 		// dummy.next stores the leftmost node in the next level
@@ -29,7 +74,6 @@ public class PopulatingNextRightPointersInEachNode {
 		}
 		connect(dummy.next); // go down to the next level
 	}
-	
 
 	// (1) Loop through level 0 to level n - 2; (2) Traverse this level and connect children.
 	public void connect1(TreeLinkNode root) {
@@ -54,31 +98,5 @@ public class PopulatingNextRightPointersInEachNode {
 		}
 		connect2(root.left);
 		connect2(root.right);
-	}
-	
-	
-	public static void main() {
-		TreeLinkNode n1 = new TreeLinkNode(1);
-		TreeLinkNode n2 = new TreeLinkNode(2);
-		TreeLinkNode n3 = new TreeLinkNode(3);
-		TreeLinkNode n4 = new TreeLinkNode(4);
-		TreeLinkNode n5 = new TreeLinkNode(5);
-		TreeLinkNode n7 = new TreeLinkNode(7);
-		
-		n1.left = n2; n1.right = n3;
-		n2.left = n4; n2.right = n5;
-		n3.right = n7;
-		
-		PopulatingNextRightPointersInEachNode t = new PopulatingNextRightPointersInEachNode();
-		t.connect(n1);
-		System.out.println(n1.next.val);
-		System.out.println(n2.next.val);
-		System.out.println(n3.next.val);
-		System.out.println(n4.next.val);
-		System.out.println(n5.next.val);
-		System.out.println(n7.next.val);
-		
-		
-		
 	}
 }
