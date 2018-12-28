@@ -1,6 +1,6 @@
 package dynamicProgramming;
 /**
- * Ugly Number II
+ * 264. Ugly Number II
  * @author yutian
  * @since Aug 30, 2015
  */

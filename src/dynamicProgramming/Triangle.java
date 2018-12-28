@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Triangle
+ * 120. Triangle
  * @author yutian
  * @since Aug 12, 2015
  */

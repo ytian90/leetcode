@@ -1,6 +1,6 @@
 package array;
 /**
- * Best Time to Buy and Sell Stock III
+ * 123. Best Time to Buy and Sell Stock III
  * @author yutian
  * @since Aug 22, 2015
  */
@@ -15,33 +15,47 @@ public class BestTimeToBuyAndSellStock3 {
 		// f(i) = max profit in [0, i]
 		// g(i) = max profit in [i + 1, n - 1]
 		// max profit in [0, n - 1] = max{f(i) + g(i), for all 0 <= i <= n - 1}
-		int N = prices.length;
-		if (N < 2) return 0;
-		int[] f = new int[N];
-		int[] g = new int[N];
-		
-		// calculate f[i]
+		int n = prices.length;
+		if (prices == null || n == 0) return 0;
+		int[] f = new int[n];
+		int[] g = new int[n];
 		int min = prices[0];
-		for (int i = 1; i < N; i++) {
+		for (int i = 1; i < n; i++) {
 			min = Math.min(min, prices[i]);
 			f[i] = Math.max(f[i - 1], prices[i] - min);
 		}
-		
-		// calculate g[i]
-		int max = prices[N - 1];
-		for (int i = N - 2; i >= 0; i--) {
+		int max = prices[n - 1];
+		for (int i = n - 2; i >= 0; i--) {
 			max = Math.max(max, prices[i]);
 			g[i] = Math.max(g[i + 1], max - prices[i]);
 		}
-		
-		// calculate max profit
 		int profit = 0;
-		for (int i = 0; i < N; i++) {
+		for (int i = 0; i < n; i++) {
 			profit = Math.max(profit, f[i] + g[i]);
 		}
 		return profit;
 	}
-	
+
+	public int maxProfit0(int[] prices) {
+		int hold1 = Integer.MIN_VALUE, hold2 = Integer.MIN_VALUE;
+		int release1 = 0, release2 = 0;
+		for (int i : prices) {
+			release2 = Math.max(release2, hold2 + i); // the maximum if we've just sold 2nd stock so far
+			hold2 = Math.max(hold2, release1 - i); // the maximum if we've just buy 2nd stock so far
+			release1 = Math.max(release1, hold1 + i); // the maximum if we've just sold 1st stock so far
+			hold1 = Math.max(hold1, -i); // the maximum if we've just buy 1st stock so far
+		}
+		return release2;
+	}
+
+	public static void main(String[] args) {
+		BestTimeToBuyAndSellStock3 t = new BestTimeToBuyAndSellStock3();
+		System.out.println(t.maxProfit(new int[]{3,3,5,0,0,3,1,4}));
+//		System.out.println(t.maxProfit(new int[]{3, 3}));
+//		System.out.println(t.maxProfit(new int[]{3, 2, 1}));
+//		System.out.println(t.maxProfit(new int[]{1, 2, 1, 2, 3}));
+	}
+
 	/**
 	 * Solution 2
 	 * @param prices
@@ -94,12 +108,5 @@ public class BestTimeToBuyAndSellStock3 {
 		}
 		return a;
 	}
-	
-	public static void main(String[] args) {
-		BestTimeToBuyAndSellStock3 t = new BestTimeToBuyAndSellStock3();
-		System.out.println(t.maxProfit(new int[]{1, 2, 3}));
-		System.out.println(t.maxProfit(new int[]{3, 3}));
-		System.out.println(t.maxProfit(new int[]{3, 2, 1}));
-		System.out.println(t.maxProfit(new int[]{1, 2, 1, 2, 3}));
-	}
+
 }

@@ -1,12 +1,30 @@
 package dynamicProgramming;
 /**
- * House Robber II
+ * 213. House Robber II
  * @author yutian
  * @since Aug 5, 2015
  */
 public class HouseRobber2 {
+
+    public static int rob(int[] nums) {
+        if (nums == null || nums.length == 0)
+            return 0;
+        if (nums.length == 1) return nums[0];
+        return Math.max(rob(nums, 0, nums.length - 2),
+                rob(nums, 1, nums.length - 1));
+    }
+
+    public static int rob(int[] nums, int lo, int hi) {
+        int rob = 0, noRob = 0;
+        for (int i = lo; i <= hi; i++) {
+            int t = noRob;
+            noRob = Math.max(rob, noRob);
+            rob = t + nums[i];
+        }
+        return Math.max(rob, noRob);
+    }
 	// method 1 time ~O(2N), space ~O(2N)
-	public static int rob(int[] nums) {
+	public static int rob0(int[] nums) {
 		int n = nums.length;
         if (nums == null || n == 0) return 0;
         if (n == 1) return nums[0];

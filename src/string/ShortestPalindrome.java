@@ -1,14 +1,49 @@
 package string;
 /**
- * Shortest Palindrome
+ * 214. Shortest Palindrome
  * @author yutian
  * @since Dec 6, 2015
  */
 public class ShortestPalindrome {
+
+	// time O(N^2)
+	public static String shortestPalindrome(String s) {
+		if (s.length() < 2) return s;
+		int end = helper(s);
+		return new StringBuilder(s.substring(end + 1)).reverse() + s;
+	}
+
+	private static int helper(String s) {
+		for (int i = s.length() - 1; i > 0; i--) {
+			if (isPalindrome(s, i))
+				return i;
+		}
+		return 0;
+	}
+
+	public static boolean isPalindrome(String s, int j) {
+		if (s == null || s.length() == 0)
+			return true;
+		int i = 0;
+		while (i < j) {
+			if (s.charAt(i) != s.charAt(j))
+				return false;
+			i++;
+			j--;
+		}
+		return true;
+	}
+
+	public static void main(String[] args) {
+		System.out.println(shortestPalindrome("abcd"));
+		System.out.println(shortestPalindrome("abcda"));
+		System.out.println(shortestPalindrome("aacecaaa"));
+	}
+
 	/*
 	 * Method: Recursion
 	 */
-	public static String shortestPalindrome(String s) {
+	public static String shortestPalindrome1(String s) {
         int j = 0;
         for (int i = s.length() - 1; i >= 0; i--) {
         	if (s.charAt(i) == s.charAt(j)) j++;
@@ -65,15 +100,6 @@ public class ShortestPalindrome {
 		}
 		return table;
 		
-	}
-
-	public static void main(String[] args) {
-		String test1 = "aacecaaa";
-		String test2 = "abcd";
-		String test3 = "abcda";
-		//System.out.println(shortestPalindrome(test1));
-		//System.out.println(shortestPalindrome(test2));
-		System.out.println(shortestPalindrome(test3));
 	}
 
 }

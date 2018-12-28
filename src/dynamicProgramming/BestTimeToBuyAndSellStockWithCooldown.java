@@ -5,12 +5,31 @@ package dynamicProgramming;
  * @since Jan 3, 2016
  */
 public class BestTimeToBuyAndSellStockWithCooldown {
-	
+
+	// https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/discuss/75931/Easiest-JAVA-solution-with-explanations
+	public static int maxProfit(int[] prices) {
+		if (prices == null || prices.length == 0)
+			return 0;
+		int b0 = -prices[0], b1 = b0;
+		int s0 = 0, s1 = 0, s2 = 0;
+		for (int i = 0; i < prices.length; i++) {
+			b0 = Math.max(b1, s2 - prices[i]);
+			s0 = Math.max(s1, b1 + prices[i]);
+			b1 = b0; s2 = s1; s1 = s0;
+		}
+		return s0;
+	}
+
+	public static void main(String[] args) {
+		int[] test = new int[]{1, 2, 3, 0, 2};
+		System.out.println(maxProfit(test));
+	}
+
 	/*
 	 * Solution 1: Space O(n)
 	 * https://leetcode.com/discuss/72030/share-my-dp-solution-by-state-machine-thinking
 	 */
-	public static int maxProfit(int[] prices) {
+	public static int maxProfit1(int[] prices) {
 		int len = prices.length;
         if (len <= 1) return 0;
         int[] s0 = new int[len]; // reset or buy (s0 -> s1)
@@ -39,11 +58,6 @@ public class BestTimeToBuyAndSellStockWithCooldown {
 			rest = Math.max(rest, prevSold);
 		}
 		return Math.max(sold, rest);
-	}
-
-	public static void main(String[] args) {
-		int[] test = new int[]{1, 2, 3, 0, 2};
-		System.out.println(maxProfit(test));
 	}
 
 }

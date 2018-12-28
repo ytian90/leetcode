@@ -1,10 +1,31 @@
 package dynamicProgramming;
 /**
- * Distinct Subsequences
+ * 115. Distinct Subsequences
  * @author yutian
  * @since Nov 9, 2015
  */
 public class DistinctSubsequences {
+
+	public static int numDistinct(String s, String t) {
+		int[][] dp = new int[t.length() + 1][s.length() + 1];
+		for (int j = 0; j <= s.length(); j++) {
+			dp[0][j] = 1;
+		}
+		for (int i = 1; i < dp.length; i++) {
+			for (int j = 1; j < dp[0].length; j++) {
+				if (t.charAt(i - 1) == s.charAt(j - 1)) {
+					dp[i][j] = dp[i - 1][j - 1] + dp[i][j - 1];
+				} else {
+					dp[i][j] = dp[i][j - 1];
+				}
+			}
+		}
+		return dp[t.length()][s.length()];
+	}
+
+	public static void main(String[] args) {
+		System.out.println(numDistinct("rabbbit", "rabbit"));
+	}
 	
 	/* 2-d DP: Time ~O(ST), Space ~O(ST) */
 	// d(i, j): distinct sequence in s[0..i-1] same as T[0..j-1], i = 0..S, j = 0..T
@@ -54,10 +75,6 @@ public class DistinctSubsequences {
 			}
 		}
 		return dp[n];
-	}
-
-	public static void main(String[] args) {
-
 	}
 
 }

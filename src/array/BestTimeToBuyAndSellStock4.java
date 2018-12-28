@@ -1,10 +1,35 @@
 package array;
 /**
- * Best Time to Buy and Sell Stock IV
+ * 188. Best Time to Buy and Sell Stock IV
  * @author yutian
  * @since Aug 22, 2015
  */
 public class BestTimeToBuyAndSellStock4 {
+
+	public int maxProfit(int k, int[] prices) {
+		int len = prices.length;
+		if (k >= len / 2) return helper(prices);
+
+		int[][] dp = new int[k + 1][len];
+		for (int i = 1; i <= k; i++) {
+			int tmpMax = -prices[0];
+			for (int j = 1; j < len; j++) {
+				dp[i][j] = Math.max(dp[i][j - 1], prices[j] + tmpMax);
+				tmpMax = Math.max(tmpMax, dp[i - 1][j - 1] - prices[j]);
+			}
+		}
+		return dp[k][len - 1];
+	}
+
+	public int helper(int[] prices) {
+		int len = prices.length, profit = 0;
+		for (int i = 1; i < len; i++) {
+			if (prices[i] > prices[i - 1])
+				profit += prices[i] - prices[i - 1];
+		}
+		return profit;
+	}
+
 	/**
 	 * dp[i, j] represents the max profit up until prices[j] using at most i transactions. 
 	 * dp[i, j] = max(dp[i, j-1], prices[j] - prices[jj] + dp[i-1, jj]) { jj in range of [0, j-1] }
@@ -14,7 +39,7 @@ public class BestTimeToBuyAndSellStock4 {
 	 */
 
 	// Solution 1
-	public int maxProfit(int k, int[] prices) {
+	public int maxProfit1(int k, int[] prices) {
 		int len = prices.length;
 		int profit = 0;
 		
