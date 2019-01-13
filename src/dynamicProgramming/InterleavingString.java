@@ -41,7 +41,7 @@ public class InterleavingString {
 			match[0][j] = match[0][j - 1] && s2.charAt(j - 1) == s3.charAt(j - 1);
 		}
 		
-		// fill up match
+		// fill incr match
 		for (int i = 1; i <= n1; i++) {
 			for (int j = 1; j <= n2; j++) {
 				match[i][j] = (match[i - 1][j] && s1.charAt(i - 1) == s3.charAt(i + j - 1))

@@ -31,7 +31,7 @@ public class Flatten2DVector {
 		return !q.isEmpty();
 	}
 
-	// follow up
+	// follow incr
 //	private static Iterator<List<Integer>> i;
 //	private static Iterator<Integer> j;
 //

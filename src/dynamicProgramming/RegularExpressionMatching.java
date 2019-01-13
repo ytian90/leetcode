@@ -3,7 +3,7 @@ package dynamicProgramming;
 import java.util.Arrays;
 
 /**
- * Regular Expression Matching
+ * 10. Regular Expression Matching
  * @author yutian
  * @since Oct 12, 2015
  * 
@@ -32,6 +32,7 @@ public class RegularExpressionMatching {
 		System.out.println(isMatch("aa", ".*"));
 		System.out.println(isMatch("ab", ".*"));
 		System.out.println(isMatch("aab", "c*a*b"));
+        System.out.println(isMatch("", "*"));
 	}
 	
 	public static boolean isMatch(String s, String p) {

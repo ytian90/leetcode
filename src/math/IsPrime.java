@@ -6,7 +6,7 @@ package math;
  */
 public class IsPrime {
 	
-	// check up to the sqrt root
+	// check incr to the sqrt root
 	public static boolean isPrime(int n) {
 		if (n < 2) return false;
 		int sqrt = (int) Math.sqrt(n);
@@ -16,7 +16,7 @@ public class IsPrime {
 		return true;
 	}
 	
-	// rule out even number first, then check up to the square root
+	// rule out even number first, then check incr to the square root
 	public static boolean isPrime2(int n) {
 		if (n <= 1) return false;
 		if (n == 2) return true;

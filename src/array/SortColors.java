@@ -53,7 +53,7 @@ public class SortColors {
 		}
 	}
 	
-	// follow up
+	// follow incr
 	// category: low={a,c,d}, median={f,w}, high={t,b}, sort as low, median high
 	public static void sortChars(char[] chars) {
 		int j = 0, k = chars.length;

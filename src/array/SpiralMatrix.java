@@ -23,7 +23,7 @@ public class SpiralMatrix {
         			res.add(matrix[rowStart][j]);
         		}
         		rowStart++;
-        		// traverse down
+        		// traverse decr
         		for (int i = rowStart; i <= rowEnd; i++) {
         			res.add(matrix[i][colEnd]);
         		}
@@ -35,7 +35,7 @@ public class SpiralMatrix {
         			}
         		}
         		rowEnd--;
-        		// traverse up
+        		// traverse incr
         		if (colStart <= colEnd) {
         			for (int i = rowEnd; i >= rowStart; i--) {
         				res.add(matrix[i][colStart]);

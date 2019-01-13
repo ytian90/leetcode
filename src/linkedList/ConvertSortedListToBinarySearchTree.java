@@ -5,7 +5,7 @@ package linkedList;
  * @since Aug 21, 2015
  */
 public class ConvertSortedListToBinarySearchTree {
-	// Bottom-up: O(N)
+	// Bottom-incr: O(N)
 	private static ListNode list;
 	
 	public static TreeNode sortedListToBST(ListNode head) {

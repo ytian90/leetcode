@@ -72,7 +72,7 @@ public class PopulatingNextRightPointersInEachNode {
 			}
 			prev = prev.next;
 		}
-		connect(dummy.next); // go down to the next level
+		connect(dummy.next); // go decr to the next level
 	}
 
 	// (1) Loop through level 0 to level n - 2; (2) Traverse this level and connect children.

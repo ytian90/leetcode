@@ -11,19 +11,19 @@ public class MergeTwoSortedLists {
 	// iterative Time ~ O(Na + Nb), Space ~ O(1)
 	public static ListNode mergeTwoLists(ListNode l1, ListNode l2) {
 		ListNode dummy = new ListNode(0);
-		ListNode p = dummy;
+		ListNode c = dummy;
 		while (l1 != null && l2 != null) {
 			if (l1.val < l2.val) {
-				p.next = l1;
+				c.next = l1;
 				l1 = l1.next;
 			} else {
-				p.next = l2;
+				c.next = l2;
 				l2 = l2.next;
 			}
-			p = p.next;
+			c = c.next;
 		}
-		if (l1 != null) p.next = l1;
-		if (l2 != null) p.next = l2;
+		if (l1 != null) c.next = l1;
+		if (l2 != null) c.next = l2;
 		return dummy.next;
 	}
 	

@@ -9,7 +9,7 @@ import java.util.Stack;
  */
 public class ValidateBinarySearchTree {
 	
-	// Solution 3: Top-down recursion (discussion)
+	// Solution 3: Top-decr recursion (discussion)
 	public static boolean isValidBTS(TreeNode root) {
 		return helper(root, Long.MIN_VALUE, Long.MAX_VALUE);
 	}
@@ -39,7 +39,7 @@ public class ValidateBinarySearchTree {
 		return true;
 	}
 	
-	// Solution 2: Top-down recursion
+	// Solution 2: Top-decr recursion
 	public static boolean isValidBST2(TreeNode root) {
 		return valid(root, null, null);
 	}

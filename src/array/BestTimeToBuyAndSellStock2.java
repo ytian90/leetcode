@@ -14,7 +14,7 @@ public class BestTimeToBuyAndSellStock2 {
 		return profit;
 	}
 	
-	// follow up about transFee
+	// follow incr about transFee
 	public int maxProfit(int[] prices, int[] trans) {
 		int profit = 0;
 		for (int i = 0; i < prices.length - 1; i++) {

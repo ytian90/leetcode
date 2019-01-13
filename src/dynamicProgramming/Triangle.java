@@ -44,7 +44,7 @@ public class Triangle {
 
 	}
 
-	// Solution 1: Bottom-up approach
+	// Solution 1: Bottom-incr approach
 	public static int minimumTotal1(List<List<Integer>> triangle) {
 		int N = triangle.size();
 		int[][] sum = new int[N][N];

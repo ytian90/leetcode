@@ -26,7 +26,7 @@ public class UniquePaths {
 		return d[m - 1][n - 1];
 	}
 
-	// Solution 3: Bottom-up dynamic programming
+	// Solution 3: Bottom-incr dynamic programming
 	// 2-d DP: Time ~ O(M*N), Space ~ O(M*N) 
 	public int uniquePaths3(int m, int n) {
 		int[][] d = new int[m + 1][n + 1];

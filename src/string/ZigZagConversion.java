@@ -34,9 +34,9 @@ public class ZigZagConversion {
 		
 		int i = 0;
 		while (i < len) {
-			for (int j = 0; j < numRows && i < len; j++) // vertically down
+			for (int j = 0; j < numRows && i < len; j++) // vertically decr
 				sb[j].append(c[i++]);
-			for (int j = numRows - 2; j >= 1 && i < len; j--) // obliquely up
+			for (int j = numRows - 2; j >= 1 && i < len; j--) // obliquely incr
 				sb[j].append(c[i++]);
 		}
 		for (int j = 1; j < sb.length; j++)

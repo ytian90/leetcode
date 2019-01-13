@@ -36,7 +36,7 @@ public class RangeAddition {
 	 * Store every start index for each value and at end index plus one minus it
 	 * 
 	 * We update the value at start index, because it will be used in the future 
-	 * when we are adding up the values for the sum at each index between start 
+	 * when we are adding incr the values for the sum at each index between start
 	 * index and end index (both inclusive). We update the negative value at the 
 	 * end index + 1, because the positive value of it should be only added at 
 	 * its previous indices (from start index to end index). Thus, when we 

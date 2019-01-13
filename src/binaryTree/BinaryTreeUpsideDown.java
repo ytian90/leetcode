@@ -5,7 +5,7 @@ package binaryTree;
  * @since Jul 27, 2015
  */
 public class BinaryTreeUpsideDown {
-	// Solution 1: Top down approach
+	// Solution 1: Top decr approach
 	public static TreeNode UpsideDownBinaryTree(TreeNode root) {
 		TreeNode p = root, parent = null, parentRight = null;
 		while (p != null) {
@@ -18,7 +18,7 @@ public class BinaryTreeUpsideDown {
 		}
 		return parent;
 	}
-	// Solution 2: Bottom up approach
+	// Solution 2: Bottom incr approach
 	public static TreeNode UpsideDownBinaryTree2(TreeNode root) {
 		return helper(root, null);
 	}

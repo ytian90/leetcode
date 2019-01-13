@@ -6,28 +6,29 @@ package array;
  *
  */
 public class LongestLineofConsecutiveOneinMatrix {
-	
 	// space O(4MN)
 	public static int longestLine(int[][] M) {
-        int n = M.length, max = 0;
-        if (n == 0) return max;
-        int m = M[0].length;
-        int[][][] dp = new int[n][m][4];
-        for (int i = 0; i < n; i++) {
-        	for (int j = 0; j < m; j++) {
-        		if (M[i][j] == 0) continue;
-        		for (int k = 0; k < 4; k++) dp[i][j][k] = 1;
-        		if (j > 0) dp[i][j][0] += dp[i][j - 1][0]; // horizontal line
-        		if (j > 0 && i > 0) dp[i][j][1] += dp[i - 1][j - 1][1]; // anti-diagonal line
-        		if (i > 0) dp[i][j][2] += dp[i - 1][j][2]; // vertical line
-        		if (j < m - 1 && i > 0) dp[i][j][3] += dp[i - 1][j + 1][3]; // diagonal line
-        		max = Math.max(max, Math.max(dp[i][j][0], dp[i][j][1]));
-                max = Math.max(max, Math.max(dp[i][j][2], dp[i][j][3]));
-        	}
-        }
-        return max;
-    }
-	
+		int n = M.length, max = 0;
+		if (n == 0) return max;
+		int m = M[0].length;
+		int[][][] dp = new int[n][m][4];
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < m; j++) {
+				if (M[i][j] == 0) continue;
+				for (int k = 0; k < 4; k++) {
+					dp[i][j][k] = 1;
+				}
+				if (i > 0) dp[i][j][0] += dp[i - 1][j][0];
+				if (j > 0) dp[i][j][1] += dp[i][j - 1][1];
+				if (i > 0 && j > 0) dp[i][j][2] += dp[i - 1][j - 1][2];
+				if (i > 0 && j < m - 1) dp[i][j][3] += dp[i - 1][j + 1][3];
+				max = Math.max(max, Math.max(Math.max(dp[i][j][0], dp[i][j][1]),
+						Math.max(dp[i][j][2], dp[i][j][3])));
+			}
+		}
+		return max;
+	}
+
 	// space O(m + n)
 	public static int longestLine2(int[][] M) {
 		if (M.length == 0 || M[0].length == 0) {
@@ -62,11 +63,11 @@ public class LongestLineofConsecutiveOneinMatrix {
 
 	public static void main(String[] args) {
 		int[][] t = new int[][]{
-			{1,1,1,1},
-			{0,1,1,0},
-			{0,0,0,1}
+				{1,1,1,1},
+				{0,1,1,0},
+				{0,0,0,1}
 		};
-		
+
 		System.out.println(longestLine(t));
 	}
 

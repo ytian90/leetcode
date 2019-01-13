@@ -24,7 +24,7 @@ public class CombinationSumIV {
         return dp[target];
     }
 
-	// top - down DP table
+	// top - decr DP table
 	public static int combinationSum42(int[] nums, int target) {
 		int[] dp = new int[target + 1];
 		Arrays.fill(dp, -1);
@@ -46,7 +46,7 @@ public class CombinationSumIV {
 		return res;
 	}
 	
-	// bottom - up
+	// bottom - incr
 	public static int combinationSum43(int[] nums, int target) {
 		int[] dp = new int[target + 1];
 		dp[0] = 1;

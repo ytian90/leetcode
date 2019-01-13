@@ -15,24 +15,24 @@ import java.util.Map;
 public class GroupAnagrams {
 	// Solution 2 faster more concise Time ~O(NlogN), Space ~O(N)
 	public static List<List<String>> groupAnagrams2(String[] strs) {
-		List<List<String>> result = new ArrayList<List<String>>();
+		List<List<String>> res = new ArrayList<>();
+		if (strs == null || strs.length == 0)
+			return res;
 		Map<String, Integer> map = new HashMap<>();
-		Arrays.sort(strs);
-		for (String str : strs) {
-			char[] ch = str.toCharArray();
-			Arrays.sort(ch);
-			String s = new String(ch);
-			if (map.containsKey(s)) {
-				List<String> l = result.get(map.get(s));
-				l.add(str);
+		for (String s : strs) {
+			char[] chars = s.toCharArray();
+			Arrays.sort(chars);
+			String key = new String(chars);
+			if (map.containsKey(key)) {
+				res.get(map.get(key)).add(s);
 			} else {
 				List<String> l = new ArrayList<>();
-				l.add(str);
-				result.add(l);
-				map.put(s, result.size() - 1);
+				l.add(s);
+				res.add(l);
+				map.put(key, res.size() - 1);
 			}
 		}
-		return result;
+		return res;
 	}
 	
 	public static void main(String[] args) {

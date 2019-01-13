@@ -47,7 +47,7 @@ public class DistinctSubsequences {
     }
 	
 	/* 1-d DP: Time ~O(ST), Space ~O(T) */
-	// fill up table : j direction forward
+	// fill incr table : j direction forward
 	public int numDistinct2(String s, String t) {
 		int m = s.length(), n = t.length();
 		int[] dp = new int[n + 1];
@@ -64,7 +64,7 @@ public class DistinctSubsequences {
 	}
 	
 	/* 1-d DP: Time ~O(ST), Space ~O(T) */
-	// fill up table: j direction backward
+	// fill incr table: j direction backward
 	public int numDistinct3(String s, String t) {
 		int m = s.length(), n = t.length();
 		int[] dp = new int[n + 1];

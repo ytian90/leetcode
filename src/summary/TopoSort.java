@@ -14,7 +14,7 @@ public class TopoSort {
 
 	/*
 	 * 安装程序 with dependecies，求出任一正确的安装顺序，
-	 * follow up 求出安装顺序但是需要dependecies少的程序先安装
+	 * follow incr 求出安装顺序但是需要dependecies少的程序先安装
 	 */
 	public static void main(String[] args) {
 		

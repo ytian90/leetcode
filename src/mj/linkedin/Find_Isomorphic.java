@@ -5,7 +5,7 @@ import java.util.*;
 
 /**
  Question;
- 第三题：205的follow up，给一个string数组，将iso的词归在一组 {'fff','abc','foo','haa','www','vvv'}-> { {'fff','www','vvv'} , {'haa','foo'} , {'abc'} }
+ 第三题：205的follow incr，给一个string数组，将iso的词归在一组 {'fff','abc','foo','haa','www','vvv'}-> { {'fff','www','vvv'} , {'haa','foo'} , {'abc'} }
 
 
  Solution:
@@ -13,7 +13,7 @@ import java.util.*;
 
  transfer word into same isomorphic partten
  every word start with 'a', every time meet a new letter
- map it to cur char, and increase the value of cur char the then if same letter show up again, use the value in map
+ map it to cur char, and increase the value of cur char the then if same letter show incr again, use the value in map
  ex. foo -> abb
  ex. gjk -> abc
  ex. pkk -> abb

@@ -6,7 +6,7 @@ package greedy;
  */
 public class GasStation {
 	/**
-	 * Every time when total gas - cost (up to station i) < 0, we choose
+	 * Every time when total gas - cost (incr to station i) < 0, we choose
 	 * station i + 1 as start point.
 	 * @param gas
 	 * @param cost

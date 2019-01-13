@@ -13,17 +13,17 @@ public class NextClosestTime {
         Set<Integer> set = new HashSet<>();
         int hour = add(set, val[0]);
         int min = add(set, val[1]);
-        int[] times = new int[] {hour, min};
-        next(times);
-        while (!contains(times[0], times[1], set)) {
-            next(times);
+        int[] t = new int[]{hour, min};
+        next(t);
+        while (!validTime(t, set)) {
+            next(t);
         }
-        return validStr(times[0]) + ":" + validStr(times[1]);
+        return validStr(t[0]) + ":" + validStr(t[1]);
     }
 
-    public void next(int[] times) {
-        int hour = times[0];
-        int min = times[1];
+    public void next(int[] time) {
+        int hour = time[0];
+        int min = time[1];
         min++;
         if (min == 60) {
             hour++;
@@ -32,24 +32,25 @@ public class NextClosestTime {
                 hour = 0;
             }
         }
-        times[0] = hour;
-        times[1] = min;
+        time[0] = hour;
+        time[1] = min;
     }
 
-    public int add(Set<Integer> set, String timeStr) {
-        int time = Integer.parseInt(timeStr);
+    public int add(Set<Integer> set, String s) {
+        int time = Integer.valueOf(s);
         set.add(time / 10);
         set.add(time % 10);
         return time;
     }
 
     public String validStr(int time) {
-        if (time >= 0 && time <= 9) return "0" + time;
-        else return time + "";
+        if (time >= 0 && time <= 9)
+            return "0" + time;
+        return time + "";
     }
 
-    public boolean contains(int hour, int min, Set<Integer> set) {
-        return set.contains(hour / 10) && set.contains(hour % 10) && set.contains(min / 10) && set.contains(min % 10);
+    public boolean validTime(int[] time, Set<Integer> set) {
+        return set.contains(time[0] / 10) && set.contains(time[0] % 10) && set.contains(time[1] / 10) && set.contains(time[1] % 10);
     }
 
     public static void main(String[] args) {

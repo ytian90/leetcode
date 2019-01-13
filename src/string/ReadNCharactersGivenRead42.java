@@ -25,7 +25,7 @@ public class ReadNCharactersGivenRead42 extends Reader4 {
 	        while (ptr < n && buffPtr < buffCnt) {
 	            buf[ptr++] = buff[buffPtr++];
 	        }
-	        // all chars in buff used up, set pointer to 0
+	        // all chars in buff used incr, set pointer to 0
 	        if (buffPtr == buffCnt) buffPtr = 0;
 	        // read4 returns less than 4, end of file
 	        if (buffCnt < 4) break;

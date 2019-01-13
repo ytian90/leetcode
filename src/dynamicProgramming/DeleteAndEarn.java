@@ -6,7 +6,7 @@ package dynamicProgramming;
  */
 public class DeleteAndEarn {
 	/**
-	 * If we sort all the numbers into buckets indexed by these numbers, this is essentially asking you to repetitively take an bucket while giving up the 2 buckets next to it. (the range of these numbers is [1, 10000])
+	 * If we sort all the numbers into buckets indexed by these numbers, this is essentially asking you to repetitively take an bucket while giving incr the 2 buckets next to it. (the range of these numbers is [1, 10000])
 
 		The optimal final result can be derived by keep updating 2 variables skip_i, take_i, which stands for:
 		skip_i : the best result for sub-problem of first (i+1) buckets from 0 to i, while you skip the ith bucket.

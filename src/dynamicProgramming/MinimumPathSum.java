@@ -6,7 +6,7 @@ package dynamicProgramming;
  */
 public class MinimumPathSum {
 	
-	// Solution 3: top-down approach if immutable
+	// Solution 3: top-decr approach if immutable
 	public int minPathSum3(int[][] grid) {
 		// d(i, j) = min{d(i-1, j) if i > 0, d(i, j-1) if j > 0} + g[i, j]
 		int m = grid.length;
@@ -25,7 +25,7 @@ public class MinimumPathSum {
 		return d[m - 1][n - 1];
 	}
 	
-	// Solution: bottom-up approach if immutable
+	// Solution: bottom-incr approach if immutable
 	public int minPathSum0(int[][] grid) {
 		int m = grid.length, n = grid[0].length;
 		int[][] d = new int[m + 1][n + 1];

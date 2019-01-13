@@ -7,8 +7,8 @@ import java.util.HashMap;
  * Shortest Snippet
  * Find shortest snippet，比如给一个Document是A,X,X,B,A,X,B，Query是A,B，要求返回shortestSnippet
 	第一问：如果Query有序（即A一定要在B前面），那么要返回A,X,B. 1point3acres.com/bbs
-	Follow up：如果Query无序（即B在A前面也可以），那么要返回B,A
-	再Follow up：如果Document非常大，如何再优化？
+	Follow incr：如果Query无序（即B在A前面也可以），那么要返回B,A
+	再Follow incr：如果Document非常大，如何再优化？
 	http://www.1point3acres.com/bbs/thread-127894-1-1.html
 	https://shawnlincoding.wordpress.com/2015/04/08/shortest-snippet/
  * @author yutian
@@ -16,7 +16,7 @@ import java.util.HashMap;
  */
 public class ShortestSnippet {
 	
-	private static HashMap<String, ArrayList<Integer>> hashmap; // follow up
+	private static HashMap<String, ArrayList<Integer>> hashmap; // follow incr
 	private static String[] document;
 	
 	public ShortestSnippet(String[] document) {

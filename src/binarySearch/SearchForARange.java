@@ -24,7 +24,7 @@ public class SearchForARange {
 		int lo = 0, hi = a.length; // hi is out of array
 		while (lo < hi) {
 			int mid = lo + ((hi - lo) >> 1);
-			if (a[mid] < target) { // if a[mid] == target, hi will decrease to narrow down
+			if (a[mid] < target) { // if a[mid] == target, hi will decrease to narrow decr
 				lo = mid + 1;
 			} else {
 				hi = mid;

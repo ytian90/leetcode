@@ -8,7 +8,7 @@ import java.util.Stack;
 /**
  Question:
  150        Evaluate Reverse Polish Notation  input 是double，原题是int。
- 第二题有follow up，加一个 factorial “！”。
+ 第二题有follow incr，加一个 factorial “！”。
  */
 public class Evaluate_Reverse_Polish_Notation_modified {
     private static final Set<String> OPERATORS =

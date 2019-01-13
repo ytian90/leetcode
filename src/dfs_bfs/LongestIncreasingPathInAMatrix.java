@@ -6,33 +6,33 @@ package dfs_bfs;
  */
 public class LongestIncreasingPathInAMatrix {
 	// time O(nm)
-	final static int[][] dis = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
-	
-	public static int longestIncreasingPath(int[][] matrix) {
-        if (matrix.length == 0) return 0;
-        int m = matrix.length, n = matrix[0].length;
-        int[][] state = new int[m][n];
-        int res = 0;
-        for (int i = 0; i < m; i++) {
-        	for (int j = 0; j < n; j++) {
-        		res = Math.max(res, dfs(i, j, matrix, state));
-        	}
-        }
-        return res;
-    }
+	static int[][] dir = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 
-	private static int dfs(int i, int j, int[][] matrix, int[][] state) {
-		if (state[i][j] > 0) return state[i][j]; // prevent repeating
-		int max = 0;
-		for (int[] d: dis) {
-			int x = i + d[0], y = j + d[1];
-			if (x >= 0 && x < matrix.length && y >= 0 && y < matrix[0].length 
-					&& matrix[x][y] > matrix[i][j]) {
-				max = Math.max(max, dfs(x, y, matrix, state));
+	public static int longestIncreasingPath(int[][] matrix) {
+		if (matrix.length == 0) return 0;
+		int n = matrix.length, m = matrix[0].length;
+		int[][] dp = new int[n][m];
+		int res = 0;
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < m; j++) {
+				res = Math.max(res, dfs(i, j, matrix, dp));
 			}
 		}
-		state[i][j] = 1 + max;
-		return state[i][j];
+		return res;
+	}
+
+	private static int dfs(int i, int j, int[][] matrix, int[][] dp) {
+		if (dp[i][j] > 0)
+			return dp[i][j];
+		int max = 0;
+		for (int[] d :dir) {
+			int x = d[0] + i, y = d[1] + j;
+			if (x >= 0 && x < matrix.length && y >= 0 && y < matrix[0].length
+					&& matrix[x][y] > matrix[i][j])
+				max = Math.max(max, dfs(x, y, matrix, dp));
+		}
+		dp[i][j] = 1 + max;
+		return dp[i][j];
 	}
 
 	public static void main(String[] args) {

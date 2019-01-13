@@ -44,13 +44,10 @@ public class SerializeAndDeserializeBinaryTree {
 	private static TreeNode buildTree(List<String> nodes) {
 		String val = nodes.remove(0);
 		if (val.equals(nn)) return null;
-		else {
-			TreeNode node = new TreeNode(Integer.valueOf(val));
-			node.left = buildTree(nodes);
-			node.right = buildTree(nodes);
-			return node;
-		}
-		
+		TreeNode node = new TreeNode(Integer.valueOf(val));
+		node.left = buildTree(nodes);
+		node.right = buildTree(nodes);
+		return node;
 	}
 
 	/*

@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * LRU Cache
+ * 146. LRU Cache
  * @author yutian
  * @since Oct 25, 2015
  * 

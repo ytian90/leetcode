@@ -11,6 +11,37 @@ import java.util.List;
  */
 public class ThreeSum {
 
+	public static List<List<Integer>> threeSum(int[] nums) {
+		Arrays.sort(nums);
+		List<List<Integer>> res = new ArrayList<>();
+		for (int i = 0; i < nums.length - 2; i = incr(nums, i)) {
+			int a = nums[i], lo = i + 1, hi = nums.length - 1;
+			while (lo < hi) {
+				int b = nums[lo], c = nums[hi];
+				if (a + b + c == 0) {
+					res.add(Arrays.asList(a, b, c));
+					lo = incr(nums, lo);
+					hi = decr(nums, hi);
+				} else if (a + b + c < 0) {
+					lo = incr(nums, lo);
+				} else {
+					hi = decr(nums, hi);
+				}
+			}
+		}
+		return res;
+	}
+
+	public static int incr(int[] n, int i) {
+		while (i < n.length - 1 && n[i] == n[++i]) {}
+		return i;
+	}
+
+	public static int decr(int[] n, int i) {
+		while (i > 0 && n[i] == n[--i]) {}
+		return i;
+	}
+
 	public static List<List<Integer>> threeSum2(int[] nums) {
 		Arrays.sort(nums);
 	    List<List<Integer>> res = new ArrayList<>(); 
@@ -30,9 +61,9 @@ public class ThreeSum {
 	    }
 	    return res;
 	}
-	
+
 	// Time ~ O(N^2), Space ~ O(1) 
-	public static List<List<Integer>> threeSum(int[] nums) {
+	public static List<List<Integer>> threeSum1(int[] nums) {
 		Arrays.sort(nums);
 		List<List<Integer>> listSet = new ArrayList<List<Integer>>();
 		for (int i = 0; i < nums.length - 2; i = increment(nums, i)) {

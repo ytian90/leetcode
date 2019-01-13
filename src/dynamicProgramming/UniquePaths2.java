@@ -23,7 +23,7 @@ public class UniquePaths2 {
         return d[m - 1][n - 1];
 	}
 	
-	// bottom up
+	// bottom incr
 	public static int uniquePathsWithObstacles3(int[][] obstacleGrid) {
 		int m = obstacleGrid.length, n = obstacleGrid[0].length;
         int[][] d = new int[m + 1][n + 1];

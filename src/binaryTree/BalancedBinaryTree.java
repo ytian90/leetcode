@@ -22,7 +22,7 @@ public class BalancedBinaryTree {
 		return 1 + Math.max(left, right);
 	}
 
-	// Solution 1: Brute force top-down recursion Time ~O(NlogN)
+	// Solution 1: Brute force top-decr recursion Time ~O(NlogN)
 	public boolean isBalancedd(TreeNode root) {
 		if (root == null) return true;
 		if (Math.abs(depth(root.left) - depth(root.right)) > 1) return false;
@@ -34,7 +34,7 @@ public class BalancedBinaryTree {
 		return Math.max(depth(root.left), depth(root.right)) + 1;
 	}
 	
-	// Solution 2: Bottom-up recursion Time ~(N)
+	// Solution 2: Bottom-incr recursion Time ~(N)
 	public boolean isBalanced2(TreeNode root) {
 		return maxDepth(root) != -1;
 	}

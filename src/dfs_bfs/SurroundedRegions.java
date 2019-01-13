@@ -110,7 +110,7 @@ public class SurroundedRegions {
 
 	private int findSet(int x) {
 		if (unionSet[x] == x) return x;
-		x = unionSet[x]; // speed up
+		x = unionSet[x]; // speed incr
 		unionSet[x] = findSet(unionSet[x]);
 		return unionSet[x];
 	}

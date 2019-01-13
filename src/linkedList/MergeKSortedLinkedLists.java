@@ -15,18 +15,18 @@ public class MergeKSortedLinkedLists {
 	public ListNode mergeKLists3(ListNode[] lists) {
 		if (lists == null || lists.length == 0)
 			return null;
-		PriorityQueue<ListNode> q = new PriorityQueue<>(lists.length, (x, y) -> x.val - y.val);
-		for (ListNode n : lists) {
-			if (n != null) q.add(n);
-		}
+		PriorityQueue<ListNode> pq = new PriorityQueue<>(lists.length, (a, b) -> a.val - b.val);
+		for (ListNode n : lists)
+			if (n != null) pq.add(n);
 		ListNode dummy = new ListNode(0);
 		ListNode p = dummy;
-		while (!q.isEmpty()) {
-			ListNode node = q.poll();
-			p.next = node;
+		while (!pq.isEmpty()) {
+			ListNode c = pq.poll();
+			p.next = c;
 			p = p.next;
-			if (node.next != null)
-				q.add(node.next);
+			if (c.next != null) {
+				pq.add(c.next);
+			}
 		}
 		return dummy.next;
 	}

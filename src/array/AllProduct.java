@@ -8,7 +8,7 @@ import java.util.List;
  * All product
  * https://shawnlincoding.wordpress.com/page/2/
  * combination product, give array, output all possible products
- * follow up: dups in array, but result has not dups
+ * follow incr: dups in array, but result has not dups
  * @author yutian
  * @since Feb 5, 2016
  */
@@ -24,7 +24,7 @@ public class AllProduct {
 
 	private static void dfs(int[] nums, int product, int pos, List<Integer> result) {
 		for (int i = pos; i < nums.length; i++) {
-			if (i != pos && nums[i - 1] == nums[i]) continue; // follow up
+			if (i != pos && nums[i - 1] == nums[i]) continue; // follow incr
 			product *= nums[i];
 			result.add(product);
 			dfs(nums, product, i + 1, result);

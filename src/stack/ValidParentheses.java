@@ -65,7 +65,7 @@ public class ValidParentheses {
 		return s.length() == 0;
 	}
 	
-	// Follow up space O(1) only one kind of ( )
+	// Follow incr space O(1) only one kind of ( )
 	public static boolean isValid9(String s) {
 		int ch = 0;
 		for (char c : s.toCharArray()) {

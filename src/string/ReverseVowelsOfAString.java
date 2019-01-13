@@ -49,7 +49,7 @@ public class ReverseVowelsOfAString {
 		if (s == null || s.length() == 0) return s;
         String vow = "aeiouAEIOU";
         Set<Character> set = vow.chars().mapToObj(c -> (char) c).collect(Collectors.toSet());
-        // reverse the vowels while popping up
+        // reverse the vowels while popping incr
         Stack<Character> stack = new Stack<>();
         for (Character c : s.toCharArray()) {
 	        	if (set.contains(c)) {
