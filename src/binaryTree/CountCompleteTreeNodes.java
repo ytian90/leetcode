@@ -1,12 +1,46 @@
 package binaryTree;
 /**
- * Count Complete Tree Nodes
+ * 222. Count Complete Tree Nodes
  * @author yutian
  * @since Aug 13, 2015
  */
 public class CountCompleteTreeNodes {
+
+	public static int countNodes(TreeNode root) {
+		int h = height(root);
+		if (h < 0) return 0;
+		if (height(root.right) == h - 1) {
+			return (1 << h) + countNodes(root.right);
+		} else {
+			return (1 << h - 1) + countNodes(root.left);
+		}
+	}
+
+	public static int height (TreeNode node) {
+		return node == null? -1 : 1 + height(node.left);
+	}
+
+	public static int countNodes1(TreeNode root) {
+		int nodes = 0, h = height(root);
+		while (root != null) {
+			if (height(root.right) == h - 1) {
+				nodes += 1 << h;
+				root = root.right;
+			} else {
+				nodes += 1 << h - 1;
+				root = root.left;
+			}
+			h--;
+		}
+		return nodes;
+	}
+
+	public static void main(String[] args) {
+
+	}
+
 	// Solution 1 time ~O(NlogN) Space ~O(1)
-	public int countNodes(TreeNode root) {
+	public static int countNodes2(TreeNode root) {
 		int leftHeight = 0, rightHeight = 0;
 		TreeNode left = root, right = root;
 		while (left != null) {
@@ -22,14 +56,5 @@ public class CountCompleteTreeNodes {
 		if (leftHeight == rightHeight) return (1 << leftHeight) - 1;
 		else return 1 + countNodes(root.left) + countNodes(root.right);
 	}
-	// Solution 2
-	public int height (TreeNode root) {
-		return root == null? -1 : 1 + height(root.left);
-	}
-	public int countNodes2(TreeNode root) {
-		int h = height(root);
-		return h < 0? 0 : 
-			height(root.right) == h - 1? (1 << h) + countNodes2(root.right)
-										:(1 << h - 1) + countNodes2(root.left);
-	}
+
 }

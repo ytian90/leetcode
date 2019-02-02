@@ -4,25 +4,28 @@ package array;
  * @author yutian
  * @since Jan 3, 2016
  */
-public class FindTheCelebrity extends Relation {
+public class FindTheCelebrity {
 	
-	public int findCelebrity(int n) {
-		int candidate = 0;
+	public static int findCelebrity(int n) {
+		int c = 0;
 		for (int i = 1; i < n; i++) {
-			if (knows(candidate, i)) candidate = i;
+			if (knows(c, i))
+				c = i;
 		}
 		for (int i = 0; i < n; i++) {
-			if (i == candidate) continue;
+			if (c == i) continue;
 			// if candidate knows other people or anyone doesn't know candidate
-			if (knows(candidate, i) || !knows(i, candidate)) {
+			if (knows(c, i) || !knows(i, c))
 				return -1;
-			}
 		}
-		return candidate;
+		return c;
 	}
 
 	public static void main(String[] args) {
-
+		// hard to implement
 	}
 
+	static boolean knows(int a, int b) {
+		return true;
+	}
 }

@@ -20,17 +20,17 @@ public class BinaryTreeLongestConsecutiveSequence2 {
 		int inc = 1, dec = 1;
 		if (node.left != null) {
 			int[] l = helper(node.left);
-			if (node.val == node.left.val + 1) {
+			if (node.val - node.left.val == 1) {
 				dec = l[1] + 1;
-			} else if (node.val == node.left.val - 1) {
+			} else if (node.left.val - node.val == 1) {
 				inc = l[0] + 1;
 			}
 		}
 		if (node.right != null) {
 			int[] r = helper(node.right);
-			if (node.val == node.right.val + 1) {
+			if (node.val - node.right.val == 1) {
 				dec = Math.max(dec, r[1] + 1);
-			} else if (node.val == node.right.val - 1) {
+			} else if (node.right.val - node.val == 1) {
 				inc = Math.max(inc, r[0] + 1);
 			}
 		}

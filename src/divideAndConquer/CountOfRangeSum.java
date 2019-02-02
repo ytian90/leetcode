@@ -5,6 +5,23 @@ package divideAndConquer;
  * @since Feb 15, 2016
  */
 public class CountOfRangeSum {
+
+	public int countRangeSum0(int[] nums, int lower, int upper) {
+		int n = nums.length;
+		long[] sum = new long[n + 1];
+		for (int i = 0; i < n; i++) {
+			sum[i + 1] = sum[i] + nums[i];
+		}
+		int res = 0;
+		for (int i = 0; i < n; i++) {
+			for (int j = i + 1; j <= n; j++) {
+				if (sum[j] - sum[i] >= lower && sum[j] - sum[i] <= upper) {
+					res++;
+				}
+			}
+		}
+		return res;
+	}
 	
 	// time O(n*logn)
 	public int countRangeSum(int[] nums, int lower, int upper) {

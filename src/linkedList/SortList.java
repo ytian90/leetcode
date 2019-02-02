@@ -21,25 +21,25 @@ public class SortList {
 		return merge(left, right); // given the beginning nodes of two lists
 //		return merge2(left, right);
 	}
-	
+
 	// Solution 1 to merge
-	private static ListNode merge(ListNode l1, ListNode l2) {
-		if (l1 == null) return l2;
-		if (l2 == null) return l1;
+	private static ListNode merge(ListNode l, ListNode r) {
+		if (l == null) return r;
+		if (r == null) return l;
 		ListNode dummy = new ListNode(0);
 		ListNode p = dummy;
-		while (l1 != null && l2 != null) {
-			if (l1.val < l2.val) {
-				p.next = l1;
-				l1 = l1.next;
+		while (l != null && r != null) {
+			if (l.val < r.val) {
+				p.next = l;
+				l = l.next;
 			} else {
-				p.next = l2;
-				l2 = l2.next;
+				p.next = r;
+				r = r.next;
 			}
 			p = p.next;
 		}
-		if (l1 != null) p.next = l1;
-		if (l2 != null) p.next = l2;
+		if (l != null) p.next = l;
+		if (r != null) p.next = r;
 		return dummy.next;
 	}
 	
@@ -55,15 +55,15 @@ public class SortList {
 			p = p.next;
 		}
 		System.out.println();
-		
-		n0.next = n1; 
+
+		n0.next = n1;
 		ListNode p2 = sortList(n0);
 		while (p2 != null) {
 			System.out.print(p2.val + " ");
 			p2 = p2.next;
 		}
 		System.out.println();
-		
+
 		n1.next = n2; n2.next = n3;
 		ListNode p3 = sortList(n0);
 		while (p3 != null) {

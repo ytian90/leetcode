@@ -66,10 +66,10 @@ public class CourseSchedule3 {
 	}
 	
 	public static void main(String[] args) {
-		for (int i: findOrder(2, new int[][]{{1, 0}, {0, 1}}))
-			System.out.println(i);
-		System.out.println();
-		for (int i: findOrder(2, new int[][]{{1, 0}}))
+//		for (int i: findOrder(2, new int[][]{{1, 0}, {0, 1}}))
+//			System.out.println(i);
+//		System.out.println();
+		for (int i: findOrder(3, new int[][]{{1, 0}, {2, 1}}))
 			System.out.println(i);
 	}
 }

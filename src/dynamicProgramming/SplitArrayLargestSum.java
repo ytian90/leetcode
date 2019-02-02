@@ -6,32 +6,31 @@ package dynamicProgramming;
  */
 public class SplitArrayLargestSum {
 	
-	public int splitArray(int[] nums, int m) {
+	public static int splitArray(int[] nums, int m) {
 		long max = 0, sum = 0;
-		for (int n: nums) {
-			max = Math.max(max, n);
-			sum += n;
+		for (int i : nums) {
+			max = Math.max(i, max);
+			sum += i;
 		}
 		if (m == 1) return (int) sum;
 		long l = max, r = sum;
-		while (l <= r) {
-			long mid = (l + r) / 2;
+		while (l < r) {
+			long mid = l + (r - l) / 2;
 			if (valid(mid, nums, m)) {
-				r = mid - 1;
+				r = mid;
 			} else {
 				l = mid + 1;
 			}
 		}
 		return (int) l;
 	}
-	
 
-	private boolean valid(long max, int[] nums, int m) {
+	public static boolean valid(long target, int[] nums, int m) {
 		int count = 1;
 		long total = 0;
-		for (int n: nums) {
+		for (int n : nums) {
 			total += n;
-			if (total > max) {
+			if (total > target) {
 				total = n;
 				count++;
 				if (count > m) return false;
@@ -40,9 +39,8 @@ public class SplitArrayLargestSum {
 		return true;
 	}
 
-
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		System.out.println(splitArray(new int[]{7, 2, 5, 10, 8}, 2));
 
 	}
 

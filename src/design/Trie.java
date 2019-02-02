@@ -27,14 +27,14 @@ public class Trie {
 		root = put(root, word, 0);
 	}
 	
-	private TrieNode put(TrieNode node, String str, int i) {
+	private TrieNode put(TrieNode node, String word, int i) {
 		if (node == null) node = new TrieNode();
-		if (i == str.length()) {
+		if (i == word.length()) {
 			node.eow = true;
 			return node;
 		}
-		int c = str.charAt(i) - 'a';
-		node.next[c] = put(node.next[c], str, i + 1);
+		int c = word.charAt(i) - 'a';
+		node.next[c] = put(node.next[c], word, i + 1);
 		return node;
 	}
 

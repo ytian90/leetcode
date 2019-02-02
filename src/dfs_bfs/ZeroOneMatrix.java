@@ -11,38 +11,36 @@ import java.util.Queue;
  *
  */
 public class ZeroOneMatrix {
-	
+
+	private static final int[][] dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+
 	public static int[][] updateMatrix(int[][] matrix) {
-        int n = matrix.length;
-        int m = matrix[0].length;
-        int[][] dirs = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
-        
-        Queue<int[]> q = new LinkedList<>();
-        for (int i = 0; i < n; i++) {
-        	for (int j = 0; j < m; j++) {
-        		if (matrix[i][j] == 0) {
-        			q.offer(new int[]{i, j});
-        		} else {
-        			matrix[i][j] = Integer.MAX_VALUE;
-        		}
-        	}
-        }
-                
-        while (!q.isEmpty()) {
-        	int[] c = q.poll();
-        	for (int[] d : dirs) {
-        		int i = c[0] + d[0];
-        		int j = c[1] + d[1];
-        		if (i < 0 || i >= n || j < 0 || j >= m || matrix[i][j] <= matrix[c[0]][c[1]] + 1) {
-        			continue;
-        		}
-        		q.offer(new int[] {i, j});
-        		matrix[i][j] = matrix[c[0]][c[1]] + 1;
-        	}
-        }
-        
-        return matrix;
-    }
+		if (matrix == null || matrix.length == 0)
+			return new int[][]{};
+		int n = matrix.length, m = matrix[0].length;
+		Queue<int[]> q = new LinkedList<>();
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < m; j++) {
+				if (matrix[i][j] == 0) {
+					q.add(new int[]{i, j});
+				} else {
+					matrix[i][j] = Integer.MAX_VALUE;
+				}
+			}
+		}
+		while (!q.isEmpty()) {
+			int[] c = q.poll();
+			int i = c[0], j = c[1];
+			for (int[] d : dirs) {
+				int x = i + d[0], y = j + d[1];
+				if (x < 0 || x >= n || y < 0 || y >= m || matrix[x][y] <= matrix[i][j] + 1)
+					continue;
+				q.add(new int[]{x, y});
+				matrix[x][y] = matrix[i][j] + 1;
+			}
+		}
+		return matrix;
+	}
 
 	public static void main(String[] args) {
 		int[][] t1 = new int[][]{

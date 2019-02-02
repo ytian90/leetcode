@@ -10,22 +10,21 @@ import java.util.Arrays;
 public class MinimumSizeSubarraySum {
 	// Solution 1: Two Pointers  Time ~ O(N), Space ~ O(1) 
 	public int minSubArrayLen(int s, int[] nums) {
-		int prev = 0, sum = 0, len = Integer.MAX_VALUE;
+		int prev = 0, sum = 0, res = Integer.MAX_VALUE;
 		for (int i = 0; i < nums.length; i++) {
 			sum += nums[i];
 			while (sum >= s) { // it should be while!! NOT IF
-				len = Math.min(len, i - prev + 1);
+				res = Math.min(res, i - prev + 1);
 				sum -= nums[prev++];
 			}
 		}
-		return len == Integer.MAX_VALUE ? 0 : len;
+		return res == Integer.MAX_VALUE ? 0 : res;
 	}
 	
 	public static void main(String[] args) {
 		MinimumSizeSubarraySum t = new MinimumSizeSubarraySum();
-		System.out.println(t.minSubArrayLen2(4, new int[]{1, 4, 4}));
-//		System.out.println(t.minSubArrayLen(10, new int[]{1, 4, 4}));
-		
+		System.out.println(t.minSubArrayLen(4, new int[]{1, 4, 4}));
+		System.out.println(t.minSubArrayLen(3, new int[]{1, 1}));
 	}
 	
 	// Solution 2: Binary Search Time ~ O(NlogN), Space ~ O(N)

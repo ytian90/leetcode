@@ -14,15 +14,15 @@ public class CourseSchedule1 {
 		Graph obj = new Graph(numCourses, prerequisites);
 		return obj.hasTopologicalOrder();
 	}
-	
-	public static class Graph {
-        private int V;
-        private int E;
-        private List<List<Integer>> adj;
-        private boolean hasCycle;
-        private boolean[] visited;
-        private boolean[] onStack;
-        
+
+    public static class Graph {
+        int V;
+        int E;
+        List<List<Integer>> adj;
+        boolean hasCycle;
+        boolean[] visited;
+        boolean[] onstack;
+
         public Graph(int n, int[][] edges) {
             this.V = n;
             this.E = edges.length;
@@ -31,30 +31,30 @@ public class CourseSchedule1 {
                 adj.add(new ArrayList<>());
             }
             for (int i = 0; i < E; i++) {
-                int v = edges[i][1];
-                int w = edges[i][0];
-                adj.get(v).add(w);
+                int a = edges[i][1];
+                int b = edges[i][0];
+                adj.get(a).add(b);
             }
         }
-        
+
         public boolean hasTopologicalOrder() {
             visited = new boolean[V];
-            onStack = new boolean[V];
-            for (int v = 0; v < V; v++) {
-                if (!visited[v]) dfs(v);
+            onstack = new boolean[V];
+            for (int i = 0; i < V; i++) {
+                if (!visited[i]) dfs(i);
             }
             return !hasCycle;
         }
-        
-        private void dfs(int v) {
-            visited[v] = true;
-            onStack[v] = true;
-            for (int w : adj.get(v)) {
+
+        public void dfs(int i) {
+            visited[i] = true;
+            onstack[i] = true;
+            for (int j : adj.get(i)) {
                 if (hasCycle) return;
-                else if (!visited[w]) dfs(w);
-                else if (onStack[w]) hasCycle = true;
+                else if (!visited[j]) dfs(j);
+                else if (onstack[j]) hasCycle = true;
             }
-            onStack[v] = false;
+            onstack[i] = false;
         }
     }
 	

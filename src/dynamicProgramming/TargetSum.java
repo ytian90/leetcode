@@ -26,10 +26,10 @@ public class TargetSum {
 
 	// DFS
 	static int res = 0;
-	
+
 	public static int findTargetSumWays2(int[] nums, int S) {
-		if (nums == null || nums.length == 0) return res;
-		
+		if (nums == null || nums.length == 0)
+			return res;
 		int n = nums.length;
 		int[] sum = new int[n];
 		sum[n - 1] = nums[n - 1];
@@ -46,7 +46,7 @@ public class TargetSum {
 			return;
 		}
 		if (sum[pos] < Math.abs(target)) return;
-		
+
 		helper(nums, sum, target + nums[pos], pos + 1);
 		helper(nums, sum, target - nums[pos], pos + 1);
 	}
@@ -54,5 +54,7 @@ public class TargetSum {
 	public static void main(String[] args) {
 		System.out.println(findTargetSumWays(new int[]{1, 2, 3, 4, 5}, 1));
 		System.out.println(findTargetSumWays(new int[]{1, 1, 1, 1, 1}, 3));
+		System.out.println(findTargetSumWays2(new int[]{1}, 1
+		));
 	}
 }

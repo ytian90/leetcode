@@ -11,27 +11,29 @@ import java.util.Map;
 public class ContinuousSubarraySum {
 	
 	public static boolean checkSubarraySum(int[] nums, int k) {
-        Map<Integer, Integer> map = new HashMap<>();
-        map.put(0, -1);
-        int sumSoFar = 0;
-        for (int i = 0; i < nums.length; i++) {
-        	sumSoFar += nums[i];
-        	if (k != 0) sumSoFar %= k;
-        	Integer prev = map.get(sumSoFar);
-        	if (prev != null) {
-        		if (i - prev > 1) return true;
-        	}
-        	else map.put(sumSoFar, i);
-        }
-        return false;
+		if (nums == null || nums.length == 0)
+			return false;
+		int n = nums.length, sum = 0;
+		Map<Integer, Integer> map = new HashMap<>();
+		map.put(0, -1);
+		for (int i = 0; i < n; i++) {
+			sum += nums[i];
+			if (k != 0) sum %= k;
+			if (map.containsKey(sum)) {
+				if (i - map.get(sum) > 1)
+					return true;
+			} else {
+				map.put(sum, i);
+			}
+		}
+		return false;
     }
 
 	public static void main(String[] args) {
-		int[] test1 = new int[]{23, 2, 4, 6, 7};
-		System.out.println(checkSubarraySum(test1, 6));
-		
-		int[] test2 = new int[]{23, 2, 6, 4, 7};
-		System.out.println(checkSubarraySum(test2, 6));
+		System.out.println(checkSubarraySum(new int[]{23, 2, 4, 6, 7}, 6));
+		System.out.println(checkSubarraySum(new int[]{23, 2, 6, 4, 7}, 6));
+		System.out.println(checkSubarraySum(new int[]{23, 2, 4, 6, 7}, 0));
+		System.out.println(checkSubarraySum(new int[]{0, 0}, 0));
 	}
 
 }
