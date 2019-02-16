@@ -23,6 +23,10 @@ public class LongestPalindromicSubsequence {
         return dp[0][n - 1];
     }
 
+    public static void main(String[] args) {
+        System.out.println(longestPalindromeSubseq("cbbd"));
+    }
+
     public static int longestPalindromeSubseq2(String s) {
         return helper(s, 0, s.length() - 1, new Integer[s.length()][s.length()]);
     }
@@ -39,7 +43,5 @@ public class LongestPalindromicSubsequence {
         return dp[i][j];
     }
 
-    public static void main(String[] args) {
-        System.out.println(longestPalindromeSubseq("cbbd"));
-    }
+
 }

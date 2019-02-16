@@ -4,7 +4,7 @@ import java.util.Stack;
 import java.util.StringTokenizer;
 
 /**
- * Basic Calculator II
+ * 227. Basic Calculator II
  * @author yutian
  * @since Aug 29, 2015
  */
@@ -12,35 +12,38 @@ public class BasicCalculator2 {
 	
 	// Solution 3: Stack very fast
 	public static int calculate(String s) {
-		int len = s.length();
-		if (s == null || len == 0) return 0;
-		Stack<Integer> stack = new Stack<Integer>();
-		int num = 0;
+		if (s == null || s.length() == 0)
+			return 0;
+		Stack<Integer> stack = new Stack<>();
+		int num = 0, n = s.length();
 		char sign = '+';
-		for (int i = 0; i < len; i++) {
-			if (Character.isDigit(s.charAt(i))) {
-				num = num * 10 + s.charAt(i) - '0';
+		for (int i = 0; i < n; i++) {
+			char c = s.charAt(i);
+			if (Character.isDigit(c)) {
+				num = 10 * num + c - '0';
 			}
-			if ((!Character.isDigit(s.charAt(i)) && s.charAt(i) != ' ') || i == len - 1) {
-				if (sign == '-') stack.push(-num);
+			if ((!Character.isDigit(c) && c != ' ') || i == n - 1) {
 				if (sign == '+') stack.push(num);
+				if (sign == '-') stack.push(-num);
 				if (sign == '*') stack.push(stack.pop() * num);
 				if (sign == '/') stack.push(stack.pop() / num);
-				sign = s.charAt(i);
+				sign = c;
 				num = 0;
 			}
 		}
-		int result = 0;
-		for (int i : stack) result += i;
-		return result;
+		int res = 0;
+		for (int i : stack) res += i;
+		return res;
 	}
-	
+
+
+
+
 	public static void main(String[] args) {
 		System.out.println(calculate("1+2*3"));
 		
 	}
-	
-	
+
 	// Solution 1: One pass through the tokens
 	public int calculate1(String s) {
 		StringTokenizer tokens = new StringTokenizer('+' + s.replace(" ", "") + "+0", "+-*/", true);

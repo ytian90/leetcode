@@ -25,7 +25,7 @@ public class AllOneDataStructure {
         int count;
         Set<String> keySet;
         Bucket next;
-        Bucket pre;
+        Bucket prev;
         public Bucket(int cnt) {
             count = cnt;
             keySet = new HashSet<>();
@@ -37,7 +37,7 @@ public class AllOneDataStructure {
         head = new Bucket(Integer.MIN_VALUE);
         tail = new Bucket(Integer.MAX_VALUE);
         head.next = tail;
-        tail.pre = head;
+        tail.prev = head;
         countBucketMap = new HashMap<>();
         keyCountMap = new HashMap<>();
     }
@@ -70,7 +70,7 @@ public class AllOneDataStructure {
     
     /** Returns one of the keys with maximal value. */
     public String getMaxKey() {
-        return tail.pre == head ? "" : (String) tail.pre.keySet.iterator().next();
+        return tail.prev == head ? "" : (String) tail.prev.keySet.iterator().next();
     }
     
     /** Returns one of the keys with Minimal value. */
@@ -81,17 +81,18 @@ public class AllOneDataStructure {
     // helper function to make change on given key according to offset
     private void changeKey(String key, int offset) {
         int count = keyCountMap.get(key);
-        keyCountMap.put(key, count + offset);
+        int value = count + offset;
+        keyCountMap.put(key, value);
         Bucket curBucket = countBucketMap.get(count);
         Bucket newBucket;
-        if (countBucketMap.containsKey(count + offset)) {
+        if (countBucketMap.containsKey(value)) {
             // target Bucket already exists
-            newBucket = countBucketMap.get(count + offset);
+            newBucket = countBucketMap.get(value);
         } else {
             // add new Bucket
-            newBucket = new Bucket(count + offset);
-            countBucketMap.put(count + offset, newBucket);
-            addBucketAfter(newBucket, offset == 1 ? curBucket : curBucket.pre);
+            newBucket = new Bucket(value);
+            countBucketMap.put(value, newBucket);
+            addBucketAfter(newBucket, offset == 1 ? curBucket : curBucket.prev);
         }
         newBucket.keySet.add(key);
         removeKeyFromBucket(curBucket, key);
@@ -106,17 +107,17 @@ public class AllOneDataStructure {
     }
     
     private void removeBucketFromList(Bucket bucket) {
-        bucket.pre.next = bucket.next;
-        bucket.next.pre = bucket.pre;
+        bucket.prev.next = bucket.next;
+        bucket.next.prev = bucket.prev;
         bucket.next = null;
-        bucket.pre = null;
+        bucket.prev = null;
     }
     
     // add newBucket after preBucket
     private void addBucketAfter(Bucket newBucket, Bucket preBucket) {
-        newBucket.pre = preBucket;
+        newBucket.prev = preBucket;
         newBucket.next = preBucket.next;
-        preBucket.next.pre = newBucket;
+        preBucket.next.prev = newBucket;
         preBucket.next = newBucket;
     }
 

@@ -14,63 +14,63 @@ import java.util.Set;
 public class ErectTheFence {
 	
 	public static List<Point> outerTrees(Point[] points) {
-        List<Point> res = new ArrayList<>();
-        if (points == null || points.length == 0) return res;
-        Set<Point> visited = new HashSet<>();
-        
+        Set<Point> res = new HashSet<>();
         Point start = points[0];
         for (int i = 1; i < points.length; i++) {
-            if (points[i].y > start.y || (points[i].y == start.y && points[i].x < start.x)) {
+            if (points[i].x < start.x) {
                 start = points[i];
             }
         }
-        
-        if (points.length == 1) {
-            res.add(start);
-            return res;
-        }
-        
+        res.add(start);
         Point curr = start;
-        while (curr != null && visited.add(curr)) {
-            res.add(curr);
-            for (int i = 0; i < points.length; i++) {
-                if (visited.contains(points[i])) continue;
-                if (isBorder(curr, points[i], points)) {
-                    curr = points[i];
-                    break;
+        List<Point> collinearPoints = new ArrayList<>();
+        do {
+            Point nextTarget = points[0];
+            for (int i = 1; i < points.length; i++) {
+                if (points[i] == curr) {
+                    continue;
+                }
+                int val = crossProduct(curr, nextTarget, points[i]);
+                if (val > 0) {
+                    nextTarget = points[i];
+                    collinearPoints.clear();
+                } else if (val == 0) {
+                    if (distance(curr, nextTarget, points[i]) < 0) {
+                        collinearPoints.add(nextTarget);
+                        nextTarget = points[i];
+                    } else {
+                        collinearPoints.add(points[i]);
+                    }
                 }
             }
-        }
-        
-        for (int i = 0; i < points.length; i++) {
-            if (visited.contains(points[i]) || res.contains(points[i])) continue;
-            int size = res.size();
-            for (int j = 0; j < size; j++) {
-                Point p = res.get(j);
-                if (isBorder(p, points[i], points)) {
-                    visited.add(points[i]);
-                    res.add(points[i]);
-                    break;
-                }
+
+            for (Point p : collinearPoints) {
+                res.add(p);
             }
-        }
-        return res;
+
+            res.add(nextTarget);
+            curr = nextTarget;
+
+        } while (curr != start);
+
+
+        return new ArrayList<>(res);
     }
     
-    private static boolean isBorder(Point p, Point q, Point[] points) {
-        int dx = p.x - q.x, dy = p.y - q.y;
-        int b = p.x * dy - p.y * dx;
-        int prev = 0;
-        for (int i = 0; i < points.length; i++) {
-            int x = points[i].x;
-            int y = points[i].y;
-            int sign = dx * y - dy * x + b;
-            if (sign == 0) continue;
-            if (sign * prev < 0) return false;
-            if (sign < 0) prev = -1;
-            else prev = 1;
-        }
-        return true;
+    public static int crossProduct(Point a, Point b, Point c) {
+        int y1 = a.y - b.y;
+        int y2 = a.y - c.y;
+        int x1 = a.x - b.x;
+        int x2 = a.x - c.x;
+        return y2 * x1 - y1 * x2;
+    }
+
+    public static int distance(Point a, Point b, Point c) {
+        int y1 = a.y - b.y;
+        int y2 = a.y - c.y;
+        int x1 = a.x - b.x;
+        int x2 = a.x - c.x;
+        return Integer.compare(y1 * y1 + x1 * x1, y2 * y2 + x2 * x2);
     }
 
 	public static void main(String[] args) {

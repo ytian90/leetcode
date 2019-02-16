@@ -36,7 +36,6 @@ public class RegularExpressionMatching {
 	}
 	
 	public static boolean isMatch(String s, String p) {
-		if (s == null || p == null) return s.equals(p);
         int n = s.length(), m = p.length();
         if (n == 0 && m == 0) return true;
         boolean[][] dp = new boolean[n + 1][m + 1];

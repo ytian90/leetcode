@@ -9,6 +9,28 @@ import java.util.Stack;
  */
 public class LargestRectangleInHistogram {
 
+	// Time O(n) Space O(n)
+	public static int largestRectangleArea(int[] heights) {
+		int n = heights.length, max = 0;
+		Stack<Integer> s = new Stack<Integer>();
+		for (int i = 0; i <= n; i++) {
+			int h = (i == n ? 0 : heights[i]);
+			if (s.isEmpty() || h >= heights[s.peek()]) {
+				s.push(i);
+			} else {
+				int top = s.pop();
+				max = Math.max(max, heights[top] * (s.isEmpty() ? i : i - 1 - s.peek()));
+				i--; // key
+			}
+		}
+		return max;
+	}
+
+	public static void main(String[] args) {
+//		System.out.println(largestRectangleArea(new int[]{2,1,5,6,2,3}));
+		System.out.println(largestRectangleArea(new int[]{2, 1, 2, 3, 1}));
+	}
+
 	public static int largestRectangleArea2(int[] heights) {
 		Stack<Integer> s = new Stack<>();
 		int max = 0;
@@ -31,25 +53,4 @@ public class LargestRectangleInHistogram {
 		return max;
 	}
 
-	// Time O(n) Space O(n)
-	public static int largestRectangleArea(int[] heights) {
-		int len = heights.length;
-		Stack<Integer> s = new Stack<Integer>();
-		int max = 0;
-		for (int i = 0; i <= len; i++) {
-			int h = (i == len ? 0 : heights[i]);
-			if (s.isEmpty() || h >= heights[s.peek()]) {
-				s.push(i);
-			} else {
-				int top = s.pop();
-				max = Math.max(max, heights[top] * (s.isEmpty() ? i : i - 1 - s.peek()));
-				i--;
-			}
-		}
-		return max;
-	}
-	
-	public static void main(String[] args) {
-		System.out.println(largestRectangleArea(new int[]{2,1,5,6,2,3}));
-	}
 }

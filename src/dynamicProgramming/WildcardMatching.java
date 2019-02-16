@@ -7,20 +7,36 @@ package dynamicProgramming;
 public class WildcardMatching {
 	
 	public boolean isMatch(String s, String p) {
-		int i = 0, j = 0, match = 0, start = -1;
-        while (i < s.length()) {
-            if (j < p.length() && (p.charAt(j) == '?' || s.charAt(i) == p.charAt(j))) {
-                i++; j++;
-            } else if (j < p.length() && p.charAt(j) == '*') {
-                start = j++;
-                match = i;
-            } else if (start != -1) {
-                j = start + 1;
-                i = ++match;
-            } else return false;
-        }
-        while (j < p.length() && p.charAt(j) == '*') j++;
-        return j == p.length();
+		int i = 0, j = 0, start = -1, match = 0;
+		while (i < s.length()) {
+			if (j < p.length() && (s.charAt(i) == p.charAt(j) || p.charAt(j) == '?')) {
+				i++; j++;
+			} else if (j < p.length() && p.charAt(j) == '*') {
+				start = j;
+				match = i;
+				j++;
+			} else if (start != -1) {
+				j = start + 1;
+				match++;
+				i = match;
+			} else {
+				return false;
+			}
+		}
+		while (j < p.length() && p.charAt(j) == '*') j++;
+		return j == p.length();
+	}
+
+	public static void main(String[] args) {
+		WildcardMatching t = new WildcardMatching();
+		System.out.println(t.isMatch("aa", "a"));
+		System.out.println(t.isMatch("aa", "aa"));
+		System.out.println(t.isMatch("aaa", "aa"));
+		System.out.println(t.isMatch("aa", "*"));
+		System.out.println(t.isMatch("aa", "a*"));
+		System.out.println(t.isMatch("ab", "?*"));
+		System.out.println(t.isMatch("aab", "c*a*b"));
+		System.out.println(t.isMatch("", "*"));
 	}
 	
 	// Solution 1
@@ -77,19 +93,5 @@ public class WildcardMatching {
 		}
 		return match[m];
 	}
-	
-	
-	public static void main(String[] args) {
-		WildcardMatching t = new WildcardMatching();
-//		System.out.println(t.isMatch("aa", "a"));
-//		System.out.println(t.isMatch("aa", "aa"));
-//		System.out.println(t.isMatch("aaa", "aa"));
-//		System.out.println(t.isMatch("aa", "*"));
-//		System.out.println(t.isMatch("aa", "a*"));
-//		System.out.println(t.isMatch("ab", "?*"));
-		System.out.println(t.isMatch("aab", "c*a*b"));
-		
-		
-		
-	}
+
 }

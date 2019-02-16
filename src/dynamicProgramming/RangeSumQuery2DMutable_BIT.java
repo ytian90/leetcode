@@ -5,9 +5,9 @@ package dynamicProgramming;
  * @since Feb 19, 2016
  */
 public class RangeSumQuery2DMutable_BIT {
-	
+
 	// time O(log(m) * log(n))
-	
+
 	int[][] tree;
 	int[][] nums;
 	int m;

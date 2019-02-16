@@ -9,9 +9,29 @@ import java.util.Map;
  * @since Apr 8, 2016
  */
 public class LongestSubstringWithAtMostKDistinctCharacters {
-	
-	// Method 1: Using sliding window O(N)
+
+	// Method 1: Using Unicode string with hashMap
 	public static int lengthOfLongestSubstringKDistinct(String s, int k) {
+		if (s == null || s.length() == 0 || k == 0)
+			return 0;
+		int n = s.length(), start = 0, res = 0;
+		Map<Character, Integer> map = new HashMap<>();
+		for (int i = 0; i < n; i++) {
+			char c = s.charAt(i);
+			map.put(c, map.getOrDefault(c, 0) + 1);
+			while (map.size() > k) {
+				char prev = s.charAt(start);
+				map.put(prev, map.get(prev) - 1);
+				if (map.get(prev) == 0) map.remove(prev);
+				start++;
+			}
+			res = Math.max(res, i - start + 1);
+		}
+		return res;
+	}
+	
+	// Method 2: Using sliding window O(N)
+	public static int lengthOfLongestSubstringKDistinct1(String s, int k) {
         int[] count = new int[256];
         int num = 0, i = 0, res = 0;
         for (int j = 0; j < s.length(); j++) {
@@ -25,28 +45,6 @@ public class LongestSubstringWithAtMostKDistinctCharacters {
         }
         return res;
     }
-	
-	// Method 2: Using Unicode string with hashMap
-	public static int lengthOfLongestSubstringKDistinct2(String s, int k) {
-		Map<Character, Integer> map = new HashMap<>();
-		int prev = 0, max = 0;
-		for (int i = 0; i < s.length(); i++) {
-			char c = s.charAt(i);
-			map.put(c, map.getOrDefault(c, 0) + 1);
-			while (map.size() > k) {
-				char prevChar = s.charAt(prev);
-				if (map.containsKey(prevChar)) {
-					map.put(prevChar, map.get(prevChar) - 1);
-					if (map.get(prevChar) == 0) {
-						map.remove(prevChar);
-					}
-				}
-				prev++;
-			}
-			max = Math.max(max, i - prev + 1);
-		}
-		return max;
-	}
 
 	public static void main(String[] args) {
 		System.out.println(lengthOfLongestSubstringKDistinct("eceba", 2));

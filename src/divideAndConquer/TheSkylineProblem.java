@@ -16,38 +16,37 @@ import java.util.TreeMap;
 public class TheSkylineProblem {
 	// Heap + BST
 	public static List<int[]> getSkyline(int[][] buildings) {
-        List<int[]> result = new ArrayList<>();
-        PriorityQueue<Point> points = new PriorityQueue<Point>(new Comparator<Point>(){
-        	public int compare(Point a, Point b) {
-        		if (a.x != b.x)
-        			return a.x - b.x;
-        		return a.y - b.y;
-        	}
-        });
-        TreeMap<Integer, Integer> heights = new TreeMap<Integer, Integer>();
-        for (int[] b : buildings) {
-        	points.add(new Point(b[0], -b[2]));
-        	points.add(new Point(b[1], b[2]));
-        }
-        heights.put(0, 1);
-        int maxHeight = 0;
-        while (!points.isEmpty()) {
-        	Point point = points.poll();
-        	if (point.y < 0) {
-        		if (!heights.containsKey(-point.y))
-        			heights.put(-point.y, 0);
-        		heights.put(-point.y, heights.get(-point.y) + 1);
-        	} else {
-        		heights.put(point.y, heights.get(point.y) - 1);
-        		if (heights.get(point.y) == 0) heights.remove(point.y);
-        	}
-        	int currentMax = heights.lastEntry().getKey();
-        	if (currentMax != maxHeight) {
-        		result.add(new int[] {point.x, currentMax});
-        		maxHeight = currentMax;
-        	}
-        }
-        return result;
+		List<int[]> res = new ArrayList<>();
+		PriorityQueue<Point> points = new PriorityQueue<>(new Comparator<Point>(){
+			public int compare(Point a, Point b) {
+				if (a.x != b.x) {
+					return a.x - b.x;
+				}
+				return a.y - b.y;
+			}
+		});
+		TreeMap<Integer, Integer> heights = new TreeMap<>();
+		for (int[] b : buildings) {
+			points.add(new Point(b[0], -b[2])); // start point, use negative to keep y decr order
+			points.add(new Point(b[1], b[2])); // end point
+		}
+		heights.put(0, 1);
+		int prevHeight = 0;
+		while (!points.isEmpty()) {
+			Point point = points.poll();
+			if (point.y < 0) {
+				heights.put(-point.y, heights.getOrDefault(-point.y, 0) + 1);
+			} else {
+				heights.put(point.y, heights.get(point.y) - 1);
+				if (heights.get(point.y) == 0) heights.remove(point.y);
+			}
+			int currHeight = heights.lastKey();
+			if (currHeight != prevHeight) {
+				res.add(new int[]{point.x, currHeight});
+				prevHeight = currHeight;
+			}
+		}
+		return res;
     }
 	
 	// Divide and Conquer

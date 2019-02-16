@@ -52,9 +52,8 @@ public class TargetSum {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(findTargetSumWays(new int[]{1, 2, 3, 4, 5}, 1));
+//		System.out.println(findTargetSumWays(new int[]{1, 2, 3, 4, 5}, 1));
 		System.out.println(findTargetSumWays(new int[]{1, 1, 1, 1, 1}, 3));
-		System.out.println(findTargetSumWays2(new int[]{1}, 1
-		));
+//		System.out.println(findTargetSumWays2(new int[]{1}, 1));
 	}
 }

@@ -9,8 +9,32 @@ import java.util.Arrays;
  */
 public class LongestSubstringWithAtLeastKRepeatingCharacters {
 
-	// 1. Iteration
 	public static int longestSubstring(String s, int k) {
+		if (s == null || s.length() == 0)
+			return 0;
+		int[] count = new int[26];
+		for (char c : s.toCharArray()) {
+			count[c - 'a']++;
+		}
+		boolean flag = true;
+		for (int i : count) {
+			if (i > 0 && i < k) flag = false;
+		}
+		if (flag == true) return s.length();
+		int res = 0, start = 0, curr = 0;
+		while (curr < s.length()) {
+			if (count[s.charAt(curr) - 'a'] < k) {
+				res = Math.max(res, longestSubstring(s.substring(start, curr), k));
+				start = curr + 1;
+			}
+			curr++;
+		}
+		res = Math.max(res, longestSubstring(s.substring(start), k));
+		return res;
+	}
+
+	// 1. Iteration
+	public static int longestSubstring1(String s, int k) {
         if (s == null || s.length() == 0 || s.length() < k) {
         	return 0;
         }

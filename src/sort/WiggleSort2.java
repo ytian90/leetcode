@@ -23,6 +23,12 @@ public class WiggleSort2 {
         	index += 2;
         }
     }
+
+	public static void main(String[] args) {
+		int[] t1 = new int[]{6, 13, 5, 4, 5, 2};
+		wiggleSort(t1);
+		System.out.println(Arrays.toString(t1));
+	}
 	
 	public void wiggleSort2(int[] nums) {
 		int median = getMedian(nums);
@@ -85,12 +91,5 @@ public class WiggleSort2 {
 //	    a[j] = t;
 //	}
 
-	public static void main(String[] args) {
-		int[] t1 = new int[]{1, 5, 1, 1, 6, 4};
-		wiggleSort(t1);
-		for (int i: t1) {
-			System.out.print(i + " ");
-		}
-	}
 
 }
