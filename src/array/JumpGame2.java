@@ -5,6 +5,20 @@ package array;
  * @since Aug 19, 2015
  */
 public class JumpGame2 {
+
+	public static int jump1(int[] nums) {
+		int jumps = 0, currEnd = 0, currMax = 0;
+		for (int i = 0; i < nums.length - 1; i++) {
+			currMax = Math.max(currMax, i + nums[i]);
+			if (i == currEnd) {
+				jumps++;
+				currEnd = currMax;
+			}
+		}
+		return jumps;
+	}
+
+
 	// Solution 1: Greedy Algorithm
 	public static int jump(int[] nums) {
 		int jumps = 0, next = 0, max = 0;

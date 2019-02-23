@@ -1,6 +1,6 @@
 package array;
 /**
- * Best Time to Buy and Sell Stock
+ * 121. Best Time to Buy and Sell Stock
  * @author yutian
  * @since Aug 22, 2015
  * 
@@ -16,7 +16,7 @@ public class BestTimeToBuyAndSellStock {
 			return 0;
 		}
 		int min = prices[0], res = 0;
-		for (int i = 0; i < prices.length; i++) {
+		for (int i = 1; i < prices.length; i++) {
 			min = Math.min(min, prices[i]);
 			res = Math.max(res, prices[i] - min);
 		}

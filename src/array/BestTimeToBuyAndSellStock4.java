@@ -30,6 +30,16 @@ public class BestTimeToBuyAndSellStock4 {
 		return profit;
 	}
 
+	public static void main(String[] args) {
+		BestTimeToBuyAndSellStock4 t = new BestTimeToBuyAndSellStock4();
+		System.out.println(t.maxProfit(2, new int[]{2, 4, 1}));
+		System.out.println(t.maxProfit(2, new int[]{3, 2, 6, 5, 0, 3}));
+		System.out.println(t.maxProfit(1, new int[]{1, 2, 3}));
+		System.out.println(t.maxProfit(1, new int[]{3, 3}));
+		System.out.println(t.maxProfit(1, new int[]{3, 2, 1}));
+		System.out.println(t.maxProfit(2, new int[]{1, 2, 1, 2, 3}));
+	}
+
 	/**
 	 * dp[i, j] represents the max profit incr until prices[j] using at most i transactions.
 	 * dp[i, j] = max(dp[i, j-1], prices[j] - prices[jj] + dp[i-1, jj]) { jj in range of [0, j-1] }
@@ -95,11 +105,5 @@ public class BestTimeToBuyAndSellStock4 {
 		return global[k];
 	}
 	
-	public static void main(String[] args) {
-		BestTimeToBuyAndSellStock4 t = new BestTimeToBuyAndSellStock4();
-		System.out.println(t.maxProfit(1, new int[]{1, 2, 3}));
-		System.out.println(t.maxProfit(1, new int[]{3, 3}));
-		System.out.println(t.maxProfit(1, new int[]{3, 2, 1}));
-		System.out.println(t.maxProfit(2, new int[]{1, 2, 1, 2, 3}));
-	}
+
 }

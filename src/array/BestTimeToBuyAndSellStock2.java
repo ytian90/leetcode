@@ -1,17 +1,20 @@
 package array;
 /**
- * Best Time to Buy and Sell Stock II
+ * 122. Best Time to Buy and Sell Stock II
  * @author yutian
  * @since Aug 22, 2015
  */
 public class BestTimeToBuyAndSellStock2 {
 	public int maxProfit(int[] prices) {
-		int profit = 0;
+		if (prices == null || prices.length == 0)
+			return 0;
+		int res = 0;
 		for (int i = 0; i < prices.length - 1; i++) {
-			int diff = prices[i + 1] - prices[i];
-			if (diff > 0) profit += diff;
+			if (prices[i] < prices[i + 1]) {
+				res += prices[i + 1] - prices[i];
+			}
 		}
-		return profit;
+		return res;
 	}
 	
 	// follow incr about transFee
