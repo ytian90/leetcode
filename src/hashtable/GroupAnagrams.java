@@ -13,6 +13,27 @@ import java.util.Map;
  * @since Aug 18, 2015
  */
 public class GroupAnagrams {
+	public List<List<String>> groupAnagrams(String[] strs) {
+		List<List<String>> res = new ArrayList<>();
+		Map<String, List<String>> map = new HashMap<>();
+		for (String s : strs) {
+			char[] chars = s.toCharArray();
+			Arrays.sort(chars);
+			String key = new String(chars);
+			if (map.containsKey(key)) {
+				map.get(key).add(s);
+			} else {
+				List<String> list = new ArrayList<>();
+				list.add(s);
+				map.put(key, list);
+			}
+		}
+		for (List<String> l : map.values()) {
+			res.add(l);
+		}
+		return res;
+	}
+
 	// Solution 2 faster more concise Time ~O(NlogN), Space ~O(N)
 	public static List<List<String>> groupAnagrams2(String[] strs) {
 		List<List<String>> res = new ArrayList<>();
@@ -43,7 +64,7 @@ public class GroupAnagrams {
 		}
 	}
 	
-	public List<List<String>> groupAnagrams(String[] strs) {
+	public List<List<String>> groupAnagrams1(String[] strs) {
 		Map<String, List<String>> map = new HashMap<>();
 		for (String s : strs) {
 			// String sortWord = sortStr(s);

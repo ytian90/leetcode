@@ -21,7 +21,7 @@ public class FindAllAnagramsInAString {
         }
         int left = 0, right = 0, count = p.length();
         while (right < s.length()) {
-        	// move right pointer, if Character exists (>= 1), reduce count & map's counter by 1
+        	// move right pointer, if Character exists (>= 1), reduce sort & map's counter by 1
             if (map[s.charAt(right++)]-- >= 1) count--;
             if (count == 0) res.add(left);
             if (right - left == p.length() && map[s.charAt(left++)]++ >= 0)

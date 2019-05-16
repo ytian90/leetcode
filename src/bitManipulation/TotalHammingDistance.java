@@ -8,7 +8,7 @@ public class TotalHammingDistance {
 	
 	/*
 	 * For each bit position 1-32 in a 32-bit integer, 
-	 * we count the number of integers in the array 
+	 * we sort the number of integers in the array
 	 * which have that bit set. Then, if there are n 
 	 * integers in the array and k of them have a particular 
 	 * bit set and (n-k) do not, then that bit contributes 

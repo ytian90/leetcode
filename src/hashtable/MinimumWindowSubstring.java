@@ -27,7 +27,7 @@ public class MinimumWindowSubstring {
 			if (map.containsKey(currChar)) {
 				// record currChar (when all T's chars are found, all map's value <= 0)
 				map.put(currChar, map.get(currChar) - 1);
-				// stop adding length (count) if we have more currChar's than t does
+				// stop adding length (sort) if we have more currChar's than t does
 				if (map.get(currChar) >= 0) count++;
 				// s[prev, i] contains all t's chars, now shrink the left end (prev)
 				while (count == t.length()) {
@@ -41,7 +41,7 @@ public class MinimumWindowSubstring {
 								minLen = i - prev + 1;
 								minStart = prev;
 							}
-							count--; // reduce count to end while loop
+							count--; // reduce sort to end while loop
 						}
 					}
 					prev++;
@@ -50,6 +50,19 @@ public class MinimumWindowSubstring {
 		}
 		if (minLen == Integer.MAX_VALUE) return "";
 		else return s.substring(minStart, minStart + minLen);
+	}
+
+	public static void main(String[] args) {
+		System.out.println(minWindow("ADBAC", "AB"));
+		System.out.println(minWindow("ADBAA", "AAB"));
+		System.out.println(minWindow("ADOBECODEBANC", "ABC"));
+
+		Set<Character> set = new HashSet<Character>();
+		set.add('a');
+		set.add('b');
+		set.add('c');
+		String s1 = "facebookaebcde";
+		System.out.println(minString(s1, set));
 	}
 	
 	// easier version
@@ -95,17 +108,5 @@ public class MinimumWindowSubstring {
 			}
 		}
 		return (res.length() == 0) ? null: res;
-	}
-	
-	
-	public static void main(String[] args) {
-		System.out.println(minWindow("ADOBECODEBANC", "ABC"));
-		
-		Set<Character> set = new HashSet<Character>();
-        set.add('a');
-        set.add('b');
-        set.add('c');
-        String s1 = "facebookaebcde";
-        System.out.println(minString(s1, set));
 	}
 }

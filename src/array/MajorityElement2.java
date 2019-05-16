@@ -61,7 +61,7 @@ public class MajorityElement2 {
 		List<Integer> result = new ArrayList<>();
 		if (nums == null) return result;
 		int n1 = 0, n2 = 0; // 2 distinct numbers
-		int c1 = 0, c2 = 0; // count of the 2 numbers
+		int c1 = 0, c2 = 0; // sort of the 2 numbers
 		for (int i = 0; i < nums.length; i++) {
 			int n3 = nums[i];
 			if (c1 > 0 && c2 > 0) {

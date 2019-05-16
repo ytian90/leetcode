@@ -16,11 +16,10 @@ import java.util.Set;
 public class WordBreak2 {
 
 	public List<String> wordBreak(String s, List<String> wordDict) {
-		Set<String> dict = new HashSet<>(wordDict);
-		return helper(s, dict, new HashMap<String, List<String>>());
+		return helper(s, wordDict, new HashMap<>());
 	}
 
-	public List<String> helper(String s, Set<String> dict, Map<String, List<String>> map) {
+	public List<String> helper(String s, List<String> dict, Map<String, List<String>> map) {
 		if (map.containsKey(s)) {
 			return map.get(s);
 		}

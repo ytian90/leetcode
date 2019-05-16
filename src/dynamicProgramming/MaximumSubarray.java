@@ -32,12 +32,15 @@ public class MaximumSubarray {
 	
 	// Solution 2: Dynamic programming Time ~O(N), Space ~O(1)
 	public static int maxSubArray2(int[] nums) {
-		int maxEndingHere = nums[0], maxSoFar = nums[0];
-		for (int i = 1; i < nums.length; i++) {
-			maxEndingHere = Math.max(maxEndingHere + nums[i], nums[i]);
-			maxSoFar = Math.max(maxEndingHere, maxSoFar);
+		if (nums == null || nums.length == 0) {
+			return 0;
 		}
-		return maxSoFar;
+		int max = nums[0], cmax = nums[0];
+		for (int i = 1; i < nums.length; i++) {
+			cmax = Math.max(nums[i], cmax + nums[i]);
+			max = Math.max(cmax, max);
+		}
+		return max;
 	}
 	
 	// Solution 2: Dynamic programming Time ~O(N), Space ~O(N)

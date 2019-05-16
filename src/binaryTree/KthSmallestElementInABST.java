@@ -14,7 +14,7 @@ public class KthSmallestElementInABST {
 
 	// DFS in-order recursive O(N)
 	public int kthSmallest0(TreeNode root, int k) {
-		int[] num = new int[]{0, k}; // 0: number, 1: count
+		int[] num = new int[]{0, k}; // 0: number, 1: sort
 		helper(root, num);
 		return num[0];
 	}

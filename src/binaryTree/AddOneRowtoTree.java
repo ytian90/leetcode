@@ -68,7 +68,7 @@ public class AddOneRowtoTree {
 		}
 	}
 
-	// DFS without helper
+	// DFS without sort
 	public static TreeNode addOneRow3(TreeNode root, int v, int d) {
 		if (d < 2) {
 			TreeNode nn = new TreeNode(v);

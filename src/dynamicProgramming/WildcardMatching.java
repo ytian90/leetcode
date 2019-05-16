@@ -9,20 +9,25 @@ public class WildcardMatching {
 	public boolean isMatch(String s, String p) {
 		int i = 0, j = 0, start = -1, match = 0;
 		while (i < s.length()) {
+			// advance both pointers
 			if (j < p.length() && (s.charAt(i) == p.charAt(j) || p.charAt(j) == '?')) {
 				i++; j++;
+			// * found, only advance pattern pointer
 			} else if (j < p.length() && p.charAt(j) == '*') {
 				start = j;
 				match = i;
 				j++;
+			// last pattern pointer was *, advance string pointer
 			} else if (start != -1) {
 				j = start + 1;
 				match++;
 				i = match;
+			// current pattern is not *, last pattern pointer is not *, characters do not match
 			} else {
 				return false;
 			}
 		}
+		// check for the remaining characters in pattern
 		while (j < p.length() && p.charAt(j) == '*') j++;
 		return j == p.length();
 	}
@@ -72,7 +77,7 @@ public class WildcardMatching {
 		int m = s.length(), n = p.length();
 		int count = 0;
 		for (int i = 0; i < n; i++) {
-			if (p.charAt(i) == '*') count++; // count * in p
+			if (p.charAt(i) == '*') count++; // sort * in p
 		}
 		if (count == 0 && m != n) return false;
 		else if (n - count > m) return false;

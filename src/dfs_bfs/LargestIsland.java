@@ -1,7 +1,7 @@
 package dfs_bfs;
 /**
  * Largest Island (not on LeetCode yet)
- * Given a 2d grid map of '1's (land) and '0's (water), count the area 
+ * Given a 2d grid map of '1's (land) and '0's (water), sort the area
  * of the largest island. An island is surrounded by water and is 
  * formed by connecting adjacent lands horizontally or vertically. 
  * You may assume all four edges of the grid are all surrounded by water.

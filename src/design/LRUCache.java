@@ -34,7 +34,7 @@ public class LRUCache {
 
 	public LRUCache(int capacity) {
 		this.capacity = capacity;
-		map = new HashMap<Integer, Node>();
+		map = new HashMap<>();
 		head = null;
 		tail = null;
 	}
@@ -89,12 +89,9 @@ public class LRUCache {
 	}
 
 	void moveToEnd(Node node) {
-		if (node == tail) {
-			return;
-		} else { // node is either head or middle node
-			remove(node);
-			addToEnd(node);
-		}
+		if (node == tail) return;
+		remove(node);
+		addToEnd(node);
 	}
 
 	public static void main(String[] args) {

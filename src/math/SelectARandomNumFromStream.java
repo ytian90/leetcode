@@ -18,18 +18,18 @@ public class SelectARandomNumFromStream {
 	}
 	
 	static int res; // the resultant random number
-	static int count = 0; // count of number visited so far
+	static int count = 0; // sort of number visited so far
 	public static int selectRandom(int x) {
-		count++; // increment the count of numbers seen so far
+		count++; // increment the sort of numbers seen so far
 		// If this is the first element from stream, return it
 		if (count == 1) {
 			res = x;
 		} else {
-			// Generate a random number from 0 to count - 1
+			// Generate a random number from 0 to sort - 1
 			Random rand = new Random();
 			int i = rand.nextInt(count);
 			
-			// Replace the prev random number with new number with 1/count probability
+			// Replace the prev random number with new number with 1/sort probability
 			if (i == count - 1)
 				res = x;
 		}

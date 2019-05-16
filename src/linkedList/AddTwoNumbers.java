@@ -35,6 +35,7 @@ public class AddTwoNumbers {
 		ListNode q = new ListNode(5);
 		q.next = new ListNode(6);
 		q.next.next = new ListNode(4);
+		q.next.next.next = new ListNode(1);
 		
 		ListNode ans = addTwoNumbers(p, q);
 		ListNode a = ans;

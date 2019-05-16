@@ -1,4 +1,7 @@
 package array;
+
+import java.util.Arrays;
+
 /**
  * 188. Best Time to Buy and Sell Stock IV
  * @author yutian
@@ -7,18 +10,24 @@ package array;
 public class BestTimeToBuyAndSellStock4 {
 
 	public int maxProfit(int k, int[] prices) {
-		int len = prices.length;
-		if (k >= len / 2) return helper(prices);
-
-		int[][] dp = new int[k + 1][len];
-		for (int i = 1; i <= k; i++) {
-			int tmpMax = -prices[0];
-			for (int j = 1; j < len; j++) {
-				dp[i][j] = Math.max(dp[i][j - 1], prices[j] + tmpMax);
-				tmpMax = Math.max(tmpMax, dp[i - 1][j - 1] - prices[j]);
-			}
+		if (prices == null || prices.length < 2 || k == 0) {
+			return 0;
 		}
-		return dp[k][len - 1];
+		int n = prices.length;
+		if (k >= n / 2) return helper(prices);
+
+		int[] buy = new int[k];
+		int[] sell = new int[k];
+		Arrays.fill(buy, Integer.MIN_VALUE);
+		for (int p : prices) {
+			for (int i = k - 1; i > 0; i--) {
+				sell[i] = Math.max(sell[i], buy[i] + p);
+				buy[i] = Math.max(buy[i], sell[i - 1] - p);
+			}
+			sell[0] = Math.max(sell[0], buy[0] + p);
+			buy[0] = Math.max(buy[0], -p);
+		}
+		return sell[k - 1];
 	}
 
 	public int helper(int[] prices) {
@@ -28,6 +37,21 @@ public class BestTimeToBuyAndSellStock4 {
 				profit += prices[i] - prices[i - 1];
 		}
 		return profit;
+	}
+
+	public int maxProfit0(int k, int[] prices) {
+		int n = prices.length;
+		if (k >= n / 2) return helper(prices);
+
+		int[][] dp = new int[k + 1][n];
+		for (int i = 1; i <= k; i++) {
+			int tmpMax = -prices[0];
+			for (int j = 1; j < n; j++) {
+				dp[i][j] = Math.max(dp[i][j - 1], prices[j] + tmpMax);
+				tmpMax = Math.max(tmpMax, dp[i - 1][j - 1] - prices[j]);
+			}
+		}
+		return dp[k][n - 1];
 	}
 
 	public static void main(String[] args) {

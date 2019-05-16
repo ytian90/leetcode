@@ -11,17 +11,48 @@ public class RemoveInvalidParentheses {
 
 	public static void main(String[] args) {
 		RemoveInvalidParentheses t = new RemoveInvalidParentheses();
-		System.out.println(t.removeInvalidParentheses("()())()"));
+		System.out.println(t.removeInvalidParentheses1("()())()"));
+		System.out.println(t.removeInvalidParentheses1("(r(()()("));
 		System.out.println(t.removeInvalidParentheses("(a)())()"));
 		System.out.println(t.removeInvalidParentheses(")("));
 		System.out.println(t.removeInvalidParentheses("((())())())()"));
 	}
 	
+	// METHOD 1
+	public List<String> removeInvalidParentheses1(String s) {
+		List<String> res = new ArrayList<>();
+		helper(s, res, 0, 0, new char[]{'(', ')'});
+		return res;
+	}
+
+	private void helper(String s, List<String> res, int last_i, int last_j, char[] c) {
+		for (int i = last_i, count = 0; i < s.length(); i++) {
+			if (s.charAt(i) == c[0]) count++;
+			if (s.charAt(i) == c[1]) count--;
+			if (count >= 0) continue;
+			for (int j = last_j; j <= i; j++) {
+				if (s.charAt(j) == c[1] && (j == last_j || s.charAt(j - 1) != c[1])) {
+					helper(s.substring(0, j) + s.substring(j + 1), res, i, j, c);
+				}
+			}
+			return;
+		}
+		String reversed = new StringBuilder(s).reverse().toString();
+		if (c[0] == '(') {
+			helper(reversed, res, 0, 0, new char[]{')', '('});
+		} else {
+			res.add(reversed);
+		}
+	}
+
+	// METHOD 2
 	// time ~ n * 2 ^ (n-1)
 	public List<String> removeInvalidParentheses(String s) {
 		List<String> res = new ArrayList<>();
-		if (s.length() == 0)
-			return new ArrayList<>(Arrays.asList(""));
+		if (s.length() == 0) {
+			res.add("");
+			return res;
+		}
 		Set<String> visited = new HashSet<>();
 		Queue<String> queue = new LinkedList<>();
 		visited.add(s);
@@ -49,7 +80,7 @@ public class RemoveInvalidParentheses {
 		}
 		return res;
 	}
-	
+
 	private boolean isValid(String s) {
 		int count = 0;
 		for (Character c : s.toCharArray()) {
@@ -62,34 +93,7 @@ public class RemoveInvalidParentheses {
 		return count == 0;
 	}
 
-	/*********************************************************************************************/
-	
-	public List<String> removeInvalidParentheses1(String s) {
-		List<String> res = new ArrayList<>();
-		remove(s, res, 0, 0, new char[]{'(', ')'});
-		return res;
-	}
-
-	private void remove(String s, List<String> res, int li, int lj, char[] par) {
-		for (int stack = 0, i = li; i < s.length(); i++) {
-			if (s.charAt(i) == par[0]) stack++;
-			if (s.charAt(i) == par[1]) stack--;
-			if (stack >= 0) continue;
-			for (int j = lj; j <= i; j++) {
-				if (s.charAt(j) == par[1] && (j == lj || s.charAt(j - 1) != par[1]))
-					remove(s.substring(0, j) + s.substring(j + 1), res, i, j, par);
-			}
-			return;
-		}
-		String reversed = new StringBuilder(s).reverse().toString();
-		if (par[0] == '(') {
-			remove(reversed, res, 0, 0, new char[]{')', '('});
-		} else {
-			res.add(reversed);
-		}
-	}
-	
-	/*********************************************************************************************/
+	// METHOD 3
 	// Since there are 2^n substrings, the time complexity is O(2^n)
 	public List<String> removeInvalidParentheses2(String s) {
         Set<String> result = new HashSet<>();

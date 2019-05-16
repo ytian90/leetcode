@@ -31,7 +31,8 @@ public class CoinChange {
     }
 	
 	public static void main(String[] args) {
-		System.out.println(coinChange(new int[]{186, 419, 83, 408}, 6249));
+		System.out.println(coinChange(new int[]{1, 2, 5}, 11));
+		System.out.println(coinChange(new int[]{2}, 3));
 	}
 
 }

@@ -17,10 +17,10 @@ public class AllOneDataStructure {
     private Bucket tail;
     // for accessing a specific Bucket among the Bucket list in O(1) time
     private Map<Integer, Bucket> countBucketMap;
-    // keep track of count of keys
+    // keep track of sort of keys
     private Map<String, Integer> keyCountMap;
 
-    // each Bucket contains all the keys with the same count
+    // each Bucket contains all the keys with the same sort
     private class Bucket {
         int count;
         Set<String> keySet;
@@ -78,7 +78,7 @@ public class AllOneDataStructure {
         return head.next == tail ? "" : (String) head.next.keySet.iterator().next();        
     }
     
-    // helper function to make change on given key according to offset
+    // sort function to make change on given key according to offset
     private void changeKey(String key, int offset) {
         int count = keyCountMap.get(key);
         int value = count + offset;

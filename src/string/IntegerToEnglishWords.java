@@ -57,15 +57,15 @@ public class IntegerToEnglishWords {
     public String numberToWords(int num) {
         if (num == 0) return "Zero";
         if (num < 0) return "Negative " + numberToWords(-1 * num);
-        int count = 0;
+        int sort = 0;
         String str = "";
         
         while (num > 0) {
             if (num % 1000 != 0) {
-            	str = numberToWords100(num % 1000) + bigs[count] + " " + str;
+            	str = numberToWords100(num % 1000) + bigs[sort] + " " + str;
             }
             num /= 1000;
-            count++;
+            sort++;
         }
         return str.trim();
     }

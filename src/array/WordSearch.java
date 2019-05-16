@@ -12,7 +12,7 @@ public class WordSearch {
         boolean[][] visited = new boolean[m][n];
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
-                if (dfs(board, word, visited, i, j, 0)) {
+                if (helper(board, i, j, 0, word, visited)) {
                     return true;
                 }
             }
@@ -20,21 +20,19 @@ public class WordSearch {
         return false;
     }
 
-	private boolean dfs(char[][] board, String word, boolean[][] visited, 
-			int i, int j, int index) {
-		if (index == word.length()) {
-            return true;
-        }
-        if (i < 0 || i >= board.length || j < 0 || j >= board[0].length 
-        		|| visited[i][j] || word.charAt(index) != board[i][j])
+	private boolean helper(char[][] b,
+			int i, int j, int curr, String word, boolean[][] visited) {
+        if (i < 0 || i >= b.length || j < 0 || j >= b[0].length || b[i][j] != word.charAt(curr) || visited[i][j]) {
             return false;
+        }
         visited[i][j] = true;
-        if (dfs(board, word, visited, i + 1, j, index + 1)) return true;
-        if (dfs(board, word, visited, i - 1, j, index + 1)) return true;
-        if (dfs(board, word, visited, i, j + 1, index + 1)) return true;
-        if (dfs(board, word, visited, i, j - 1, index + 1)) return true;
+        if (curr == word.length() - 1) return true;
+        boolean ch = helper(b, i + 1, j, curr + 1, word, visited)
+                || helper(b, i - 1, j, curr + 1, word, visited)
+                || helper(b, i, j + 1, curr + 1, word, visited)
+                || helper(b, i, j - 1, curr + 1, word, visited);
         visited[i][j] = false;
-        return false;
+        return ch;
 	}
 
 	public boolean exists(char[][] board, String word) {

@@ -1,10 +1,6 @@
 package sort;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * 56. Merge Intervals
@@ -30,9 +26,38 @@ public class MergeIntervals {
             }
         }
 		
-		// Add the last interval
+		// Add the last intervalzz
 		res.add(new Interval(start, end));
 		return res;
+	}
+
+	// int[][] interface
+	public static int[][] merge(int[][] intervals) {
+		if (intervals == null || intervals.length == 0)
+			return new int[][]{};
+		List<int[]> res = new ArrayList<>();
+		Arrays.sort(intervals, new Comparator<int[]>(){
+			@Override
+			public int compare(int[] a, int[] b) {
+				return a[0] - b[0];
+			}
+		});
+		int start = intervals[0][0], end = intervals[0][1];
+		for (int[] i : intervals) {
+			if (end >= i[0]) {
+				end = Math.max(end, i[1]);
+			} else {
+				res.add(new int[]{start, end});
+				start = i[0];
+				end = i[1];
+			}
+		}
+		res.add(new int[]{start, end});
+		int[][] ans = new int[res.size()][2];
+		for (int i = 0; i < ans.length; i++) {
+			ans[i] = res.get(i);
+		}
+		return ans;
 	}
 	
 	public static void main(String[] args) {

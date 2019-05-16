@@ -24,7 +24,10 @@ public class FlattenNestedListIterator implements Iterator<Integer> {
 
 	@Override
 	public Integer next() {
-		return stack.pop().getInteger();
+		if (hasNext()) {
+			return stack.pop().getInteger();
+		}
+		return -1;
 	}
 
 	@Override

@@ -10,8 +10,8 @@ import java.util.List;
 public class ReplaceString {
 
     /*
-    Time: Suppose len(orig) = m, len(find) = n, then we need O(mn) time to count
-    and O(m + count*n) time to replace.
+    Time: Suppose len(orig) = m, len(find) = n, then we need O(mn) time to sort
+    and O(m + sort*n) time to replace.
     Space: O(m), we need extra space to store the start index of a found pattern in the original string.
      */
     public static String replace(String origin, String find, String replace) {

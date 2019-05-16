@@ -25,6 +25,7 @@ import java.util.Arrays;
 public class RegularExpressionMatching {
 	
 	public static void main(String[] args) {
+        System.out.println(isMatch("aaa", "a*"));
 		System.out.println(isMatch("aa", "a"));
 		System.out.println(isMatch("aa", "aa"));
 		System.out.println(isMatch("aaa", "aa"));

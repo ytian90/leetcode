@@ -36,12 +36,8 @@ public class BasicCalculator2 {
 		return res;
 	}
 
-
-
-
 	public static void main(String[] args) {
 		System.out.println(calculate("1+2*3"));
-		
 	}
 
 	// Solution 1: One pass through the tokens

@@ -1,6 +1,6 @@
 package array;
 /**
- * 1-D count islands
+ * 1-D sort islands
  * http://www.1point3acres.com/bbs/thread-161878-1-1.html
  * @author yutian
  * @since Jan 6, 2016

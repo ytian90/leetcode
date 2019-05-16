@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.PriorityQueue;
 
 /**
- * Kth Largest Element in an Array
+ * 215. Kth Largest Element in an Array
  * https://segmentfault.com/a/1190000003704825
  * @author yutian
  * @since Aug 30, 2015
@@ -51,7 +51,7 @@ public class KthLargestElementInAnArray {
 	    }
 	    swap(a, i, hi);
 
-	    // count the nums that are <= pivot from lo
+	    // sort the nums that are <= pivot from lo
 	    int m = i - lo + 1;
 
 	    // pivot is the one!

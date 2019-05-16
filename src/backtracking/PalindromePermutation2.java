@@ -68,7 +68,7 @@ public class PalindromePermutation2 {
         List<String> res = new ArrayList<>();
         List<Character> list = new ArrayList<>();
         Map<Character, Integer> map = new HashMap<>();
-        // build character count map and count odds
+        // build character sort map and sort odds
         for (int i = 0; i < s.length(); i++) {
         	char c = s.charAt(i);
         	map.put(c, map.containsKey(c) ? map.get(c) + 1: 1);
@@ -76,7 +76,7 @@ public class PalindromePermutation2 {
         }
         // can't form any palindromic string
         if (odd > 1) return res;
-        // add half count of each character to list
+        // add half sort of each character to list
         for (Map.Entry<Character, Integer> entry: map.entrySet()) {
         	char key = entry.getKey();
         	int val = entry.getValue();

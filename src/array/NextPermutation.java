@@ -1,6 +1,6 @@
 package array;
 /**
- * Next Permutation
+ * 31. Next Permutation
  * @author yutian
  * @since Aug 18, 2015
  */
@@ -10,16 +10,16 @@ public class NextPermutation {
 	// ascending order, then from left to right, find the first number greater than
 	// partition number(curr - 1), swap it.
 	public static void nextPermutation(int[] nums) {
-		int curr = nums.length - 1;
-		while (curr > 0 && nums[curr - 1] >= nums[curr])
-			curr--;
-		reverse(nums, curr, nums.length - 1);
+		int i = nums.length - 1;
+		while (i > 0 && nums[i - 1] >= nums[i])
+			i--;
+		reverse(nums, i, nums.length - 1);
 		// swap num[curr - 1] and the first integer element on its right side
-		if (curr > 0) {
-			int next = curr;
-			curr--;
-			while (nums[curr] >= nums[next]) next++;
-			swap(nums, curr, next);
+		if (i > 0) {
+			int j = i;
+			i--;
+			while (nums[i] >= nums[j]) j++;
+			swap(nums, i, j);
 		}
 	}
 

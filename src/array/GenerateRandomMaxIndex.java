@@ -23,7 +23,7 @@ public class GenerateRandomMaxIndex {
 				count = 1;
 			} else if (max == A[i]) {
 				count++;
-				int idx = rand.nextInt(count); // (0, count - 1)
+				int idx = rand.nextInt(count); // (0, sort - 1)
 				if (idx == 0) res = i;
 			}
 		}

@@ -5,7 +5,7 @@ package bitManipulation;
  * @since Jul 28, 2015
  */
 public class SingleNumber2 {
-	// Solution 1: to use an array of size 32 to keep track of the total count of ith bit.
+	// Solution 1: to use an array of size 32 to keep track of the total sort of ith bit.
 	int singleNumber(int A[]) {
 		int count[] = new int[32];
 		int n = A.length;

@@ -2,6 +2,7 @@ package stack;
 
 import java.util.Deque;
 import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 /**
@@ -12,6 +13,42 @@ import java.util.Stack;
 public class BasicCalculator {
 
 	public static int calculate(String s) {
+		if (s == null || s.length() == 0) {
+			return 0;
+		}
+		Queue<Character> q = new LinkedList<>();
+		for (Character c : s.toCharArray()) {
+			q.add(c);
+		}
+		q.offer('+');
+		return helper(q);
+	}
+
+	public static int helper(Queue<Character> q) {
+		Stack<Integer> stack = new Stack<>();
+		int num = 0;
+		char sign = '+';
+		while (!q.isEmpty()) {
+			char c = q.poll();
+			if (c == ' ') continue;
+			if (Character.isDigit(c)) {
+				num = 10 * num - c - '0';
+			} else if (c == '(') {
+				num = helper(q);
+			} else {
+				if (sign == '+') stack.push(num);
+				if (sign == '-') stack.push(-num);
+				num = 0;
+				sign = c;
+				if (c == ')') break;
+			}
+		}
+		int res = 0;
+		for (int i : stack) res += i;
+		return res;
+	}
+
+	public static int calculate0(String s) {
 		if (s == null || s.length() == 0)
 			return 0;
 		Stack<Integer> stack = new Stack<>();
