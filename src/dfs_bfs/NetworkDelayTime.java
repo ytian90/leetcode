@@ -22,19 +22,19 @@ public class NetworkDelayTime {
 			}
 			graph.get(e[0]).add(new int[] {e[1], e[2]});
 		}
-		PriorityQueue<int[]> heap = new PriorityQueue<>((a, b) -> a[0] - b[0]);
-		heap.add(new int[] {0, K});
+		PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[0] - b[0]);
+		pq.add(new int[] {0, K});
 		Map<Integer, Integer> dist = new HashMap<>();
-		while (!heap.isEmpty()) {
-			int[] curr = heap.poll();
-			int d = curr[0], node = curr[1];
-			if (dist.containsKey(node)) continue;
-			dist.put(node, d);
-			if (graph.containsKey(node)) {
-				for (int[] e : graph.get(node)) {
-					int n = e[0], d2 = e[1];
-					if (!dist.containsKey(n)) {
-						heap.offer(new int[] {d + d2, n});
+		while (!pq.isEmpty()) {
+			int[] curr = pq.poll();
+			int time = curr[0], target = curr[1];
+			if (dist.containsKey(target)) continue;
+			dist.put(target, time);
+			if (graph.containsKey(target)) {
+				for (int[] e : graph.get(target)) {
+					int localTarget = e[0], localTime = e[1];
+					if (!dist.containsKey(localTarget)) {
+						pq.offer(new int[] {time + localTime, localTarget});
 					}
 				}
 			}

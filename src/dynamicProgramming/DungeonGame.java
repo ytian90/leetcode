@@ -11,28 +11,28 @@ public class DungeonGame {
         	return 0;
         int m = dungeon.length;
         int n = dungeon[0].length;
-        int[][] health = new int[m][n];
-        health[m - 1][n - 1] = Math.max(1 - dungeon[m - 1][n - 1], 1);
+        int[][] dp = new int[m][n];
+        dp[m - 1][n - 1] = Math.max(1 - dungeon[m - 1][n - 1], 1);
         
         // fill out the last column
         for (int i = m - 2; i >= 0; i--) {
-        	health[i][n - 1] = Math.max(health[i + 1][n - 1] - dungeon[i][n - 1], 1);
+        	dp[i][n - 1] = Math.max(dp[i + 1][n - 1] - dungeon[i][n - 1], 1);
         }
         
         // fill out the last row
         for (int j = n - 2; j >= 0; j--) {
-        	health[m - 1][j] = Math.max(health[m - 1][j + 1] - dungeon[m - 1][j], 1);
+        	dp[m - 1][j] = Math.max(dp[m - 1][j + 1] - dungeon[m - 1][j], 1);
         }
         
         // fill out the rest of dp
         for (int i = m - 2; i >= 0; i--) {
         	for (int j = n - 2; j >= 0; j--) {
-        		int down = Math.max(health[i + 1][j] - dungeon[i][j], 1);
-        		int right = Math.max(health[i][j + 1] - dungeon[i][j], 1);
-        		health[i][j] = Math.min(right, down); // this is MIN
+        		int down = Math.max(dp[i + 1][j] - dungeon[i][j], 1);
+        		int right = Math.max(dp[i][j + 1] - dungeon[i][j], 1);
+        		dp[i][j] = Math.min(right, down); // this is MIN
         	}
         }
-        return health[0][0];
+        return dp[0][0];
     }
 
 	public static void main(String[] args) {
@@ -40,7 +40,6 @@ public class DungeonGame {
 		int[][] test2 = new int[][]{{100}};
 		System.out.println(calculateMinimumHP(test1));
 		System.out.println(calculateMinimumHP(test2));
-
 	}
 
 }

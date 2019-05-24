@@ -1,5 +1,8 @@
 package mj.houzz;
 
+import java.util.Arrays;
+import java.util.Collections;
+
 /**
  * 给一个数列，数出inversion的数量（如果一个靠前的数字比靠后的数字大就算一个inversion）。没在地里见到过的题目，
  * 一开始只想出来暴力解法，面试官提醒了可以用NlogN的想到可以用类似merge sort的解法后写出来了。
@@ -24,48 +27,59 @@ public class CountInversion {
 
     static int res = 0;
 
-    // merge sort
+    // binary search
     public static int countInversion2(int[] nums) {
         if (nums.length < 2) {
             return 0;
         }
-        sort(nums, 0, nums.length);
-        return res;
+        int n = nums.length;
+        Integer[] sorted = new Integer[n];
+        for (int i = 0; i < n; i++) {
+            sorted[i] = nums[i];
+        }
+        Arrays.sort(sorted, Collections.reverseOrder());
+
+        int dec = 0;
+        for (int i = 0; i < n; i++) {
+            int index = binarySearchIterative(sorted, 0, n - 1, nums[i]);
+            if (index > i) dec += index - i;
+        }
+
+        return n * (n - 1) / 2 - dec;
     }
 
-    public static void sort(int[] nums, int l, int r) {
-        if (l < r)
-        {
-            // Find the middle point
-            int m = (l+r)/2;
-
-            // Sort first and second halves
-            sort(nums, l, m);
-            sort(nums , m+1, r);
-
-            // Merge the sorted halves
-            merge(nums, l, m, r);
+    public static int binarySearch(Integer[] array, int left, int right, int key) {
+        if (left > right) {
+            return -1;
+        }
+        int mid = left + (right - left) / 2;
+        if (array[mid] == key) {
+            return mid;
+        }
+        if (array[mid] > key) {
+            return binarySearch(array, mid + 1, right, key);
+        } else {
+            return binarySearch(array, left, mid - 1, key);
         }
     }
 
-    public static void merge(int[] nums, int l, int m, int r) {
-        int i = l, j = m + 1;
-        while (i <= m && j < r) {
-            if (nums[i] > nums[j]) {
-                res++;
-                i++;
+    public static int binarySearchIterative(Integer[] array, int left, int right, int key) {
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (array[mid] == key) {
+                return mid;
+            }
+            if (array[mid] > key) {
+                left = mid + 1;
             } else {
-                j++;
+                right = mid - 1;
             }
         }
-        while (i <= m) {
-            res++;
-            i++;
-        }
+        return -1;
     }
 
     public static void main(String[] args) {
-//        System.out.println(countInversion(new int[]{6, 5, 4, 3, 2, 1}));
-        System.out.println(countInversion2(new int[]{6, 5, 4, 3, 2, 1}));
+        System.out.println(countInversion(new int[]{6, 5, 4, 3, 2, 1}));
+        System.out.println(countInversion2(new int[]{6, 3, 5, 4, 1, 2}));
     }
 }
