@@ -22,7 +22,7 @@ public class Combinations {
 
     private void helper(int n, int k, int start, List<Integer> list, List<List<Integer>> res) {
         if (k == list.size()) {
-            res.add(new ArrayList<Integer>(list));
+            res.add(new ArrayList<>(list));
             return;
         }
         for (int i = start; i <= n; i++) {

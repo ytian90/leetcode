@@ -11,18 +11,18 @@ import java.util.List;
 public class TextJustification {
 	public List<String> fullJustify(String[] words, int maxWidth) {
 		List<String> res = new LinkedList<String>();
-		for (int i = 0, w; i < words.length; i = w) {
+		for (int i = 0, cwi; i < words.length; i = cwi) {
 			int len = -1;
-			for (w = i; w < words.length && len + words[w].length() + 1 <= maxWidth; w++) { // test2
-				len += words[w].length() + 1; // test4
+			for (cwi = i; cwi < words.length && len + words[cwi].length() + 1 <= maxWidth; cwi++) { // test2
+				len += words[cwi].length() + 1; // test4
 			}
 			StringBuilder sb = new StringBuilder(words[i]);
 			int space = 1, extra = 0;
-			if (w != i + 1 && w != words.length) { // w != i + 1 to make denominator non-zero
-				space = (maxWidth - len) / (w - i - 1) + 1; // w - i - 1 -> test2, + 1 -> test4
-				extra = (maxWidth - len) % (w - i - 1); // test1
+			if (cwi != i + 1 && cwi != words.length) { // w != i + 1 to make denominator non-zero
+				space = (maxWidth - len) / (cwi - i - 1) + 1; // w - i - 1 -> test2, + 1 -> test4
+				extra = (maxWidth - len) % (cwi - i - 1); // test1
 			}
-			for (int j = i + 1; j < w; j++) {
+			for (int j = i + 1; j < cwi; j++) {
 				for (int s = space; s > 0; s--) sb.append(' ');
 				if (extra-- > 0) sb.append(' '); // not while -> test5
 				sb.append(words[j]);
@@ -43,7 +43,7 @@ public class TextJustification {
 		System.out.println(t.fullJustify(test2, 6));
 		
 		String[] test3 = {"a","b","c,","d","e"};
-		System.out.println(t.fullJustify(test3, 1));
+		System.out.println(t.fullJustify(test3, 2));
 		
 		String[] test4 = {"a","b","c,","d","e"};
 		System.out.println(t.fullJustify(test4, 3));

@@ -5,21 +5,24 @@ import java.util.PriorityQueue;
 
 /**
  * leetcode 295
+ * https://www.1point3acres.com/bbs/thread-454843-1-1.html
  */
 public class MedianFinder {
 
     int count;
+    double sum;
     PriorityQueue<Integer> minPQ;
     PriorityQueue<Integer> maxPQ;
 
     public MedianFinder() {
         count = 0;
+        sum = 0;
         minPQ = new PriorityQueue<>();
         maxPQ = new PriorityQueue<>(Collections.reverseOrder());
     }
 
     // O(logn)
-    public void addNum(int num) {
+    public void compute(int num) {
         if (count % 2 == 0) {
             maxPQ.add(num);
             minPQ.add(maxPQ.poll());
@@ -28,6 +31,7 @@ public class MedianFinder {
             maxPQ.add(minPQ.poll());
         }
         count++;
+        sum += num;
     }
 
     // O(1)
@@ -38,12 +42,23 @@ public class MedianFinder {
             return minPQ.peek();
         }
     }
+
+    public double getSum() {
+        return sum;
+    }
+
+    public double getAverage() {
+        return sum / count;
+    }
+
     public static void main(String[] args) {
         MedianFinder t = new MedianFinder();
-        t.addNum(1);
-        t.addNum(2);
+        t.compute(1);
+        t.compute(2);
         System.out.println(t.findMedian());
-        t.addNum(3);
+        t.compute(3);
         System.out.println(t.findMedian());
+        System.out.println(t.getSum());
+        System.out.println(t.getAverage());
     }
 }
