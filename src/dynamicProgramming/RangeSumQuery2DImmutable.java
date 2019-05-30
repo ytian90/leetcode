@@ -10,10 +10,10 @@ public class RangeSumQuery2DImmutable {
 	// time O(mn)
 	public RangeSumQuery2DImmutable(int[][] matrix) {
         if (matrix == null || matrix.length == 0) return;
-        int m = matrix.length, n = matrix[0].length;
-        dp = new int[m + 1][n + 1];
-        for (int i = 1; i <= m; i++) {
-        	for (int j = 1; j <= n; j++) {
+        int n = matrix.length, m = matrix[0].length;
+        dp = new int[n + 1][m + 1];
+        for (int i = 1; i <= n; i++) {
+        	for (int j = 1; j <= m; j++) {
         		dp[i][j] = dp[i - 1][j] + dp[i][j - 1] - dp[i - 1][j - 1] 
         				+ matrix[i - 1][j - 1];
         	}

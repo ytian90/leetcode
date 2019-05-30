@@ -9,6 +9,10 @@ import java.util.List;
  *
  */
 public class PermutationinString {
+	/*
+	time: O(l1 + 26 * (l2 - l1))
+	space: O(1)
+	 */
 	
 	public static boolean checkInclusion(String s1, String s2) {
         int len1 = s1.length(), len2 = s2.length();
