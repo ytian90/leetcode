@@ -18,6 +18,88 @@ import java.util.Set;
  */
 public class WordLadder2 {
 
+    public List<List<String>> findLadders(String beginWord, String endWord, List<String> wordList) {
+        Set<String> dict = new HashSet<>(wordList);
+        Set<String> set1 = new HashSet<>();
+        Set<String> set2 = new HashSet<>();
+        Map<String, List<String>> map = new HashMap<>();
+        List<List<String>> res = new ArrayList<>();
+        List<String> list = new ArrayList<>();
+
+        set1.add(beginWord);
+        set2.add(endWord);
+        list.add(beginWord);
+
+        helper(dict, set1, set2, map, false);
+        generateList(beginWord, endWord, map, list, res);
+        return res;
+    }
+
+    public boolean helper(Set<String> dict, Set<String> set1, Set<String> set2, Map<String, List<String>> map, boolean flip) {
+        if (set1.isEmpty()) {
+            return false;
+        }
+        if (set1.size() > set2.size()) {
+            helper(dict, set2, set1, map, !flip);
+        }
+
+        dict.removeAll(set1);
+        dict.removeAll(set2);
+
+        boolean done = false;
+
+        Set<String> set = new HashSet<>();
+
+        for (String s : set1) {
+            for (int i = 0; i < s.length(); i++) {
+                char[] chars = s.toCharArray();
+                for (char c = 'a'; c <= 'z'; c++) {
+                    chars[i] = c;
+                    String word = new String(chars);
+                    String key = flip ? word : s;
+                    String value = flip ? s : word;
+
+                    List<String> list = map.containsKey(key) ? map.get(key) : new ArrayList<>();
+                    if (set2.contains(word)) {
+                        done = true;
+                        list.add(value);
+                        map.put(key, list);
+                    }
+                    if (!done && dict.contains(word)) {
+                        set.add(word);
+                        list.add(value);
+                        map.put(key, list);
+                    }
+                }
+            }
+        }
+        return done || helper(dict, set2, set, map, !flip);
+    }
+
+    public void generateList(String start, String end, Map<String, List<String>> map, List<String> list, List<List<String>> res) {
+        if (start.equals(end)) {
+            res.add(new ArrayList<>(list));
+            return;
+        }
+        if (!map.containsKey(start)) {
+            return;
+        }
+        for (String word : map.get(start)) {
+            list.add(word);
+            generateList(word, end, map, list, res);
+            list.remove(list.size() - 1);
+        }
+    }
+
+    public static void main(String[] args) {
+        WordLadder2 t = new WordLadder2();
+        System.out.println(t.findLadders("hot", "dog", new ArrayList<>(Arrays.asList
+                ("hot","cog","dog","tot","hog","hop","pot","dot"))));
+        System.out.println(t.findLadders("hit", "cog", new ArrayList<>(Arrays.asList
+                ("hot","dot","dog","lot","log"))));
+    }
+
+    // method 2
     public List<List<String>> findLadders(String beginWord, String endWord, Set<String> wordList) {
         List<List<String>> res = new ArrayList<>();
         Set<String> dict = new HashSet<>(wordList);
@@ -102,22 +184,7 @@ public class WordLadder2 {
     }
 
 
-    public static void main(String[] args) {
-        WordLadder2 t = new WordLadder2();
-//    	Set<String> set1 = new HashSet<String>(Arrays.asList
-//    			("hot","cog","dog","tot","hog","hop","pot","dot"));
-//
-//    	for (List<String> l : t.findLadders("hot", "dog", set1)) {
-//    		System.out.println(l);
-//    	}
 
-        Set<String> set2 = new HashSet<String>(Arrays.asList("a", "b", "c"));
-
-        for (List<String> l : t.findLadders("a", "c", set2)) {
-            System.out.println(l);
-        }
-
-    }
 	
 	// Method 1 dfs
 	public List<List<String>> findLadders1(String beginWord, String endWord, Set<String> wordList) {

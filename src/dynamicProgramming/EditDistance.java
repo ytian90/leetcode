@@ -4,7 +4,8 @@ package dynamicProgramming;
  * @author yutian
  * @since Sep 2, 2015
  */
-public class EditDistance {
+public class
+EditDistance {
 	public static int minDistance(String word1, String word2) {
 		if (word1.equals(word2)) {
 			return 0;

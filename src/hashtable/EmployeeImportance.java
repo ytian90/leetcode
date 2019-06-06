@@ -55,12 +55,12 @@ public class EmployeeImportance {
 	}
 	
 	class Employee {
-	    // It's the unique id of each node;
-	    // unique id of this employee
+	    // It's the unique userId of each node;
+	    // unique userId of this employee
 	    public int id;
 	    // the importance value of this employee
 	    public int importance;
-	    // the id of direct subordinates
+	    // the userId of direct subordinates
 	    public List<Integer> subordinates;
 	};
 

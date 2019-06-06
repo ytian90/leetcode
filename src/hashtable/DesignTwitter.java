@@ -19,46 +19,46 @@ public class DesignTwitter {
 	private Map<Integer, User> userMap;
 	
 	private class Tweet {
-		public int id;
+		public int tweetId;
 		public int time;
 		public Tweet next;
-		public Tweet(int id) {
-			this.id = id;
+		public Tweet(int tweetId) {
+			this.tweetId = tweetId;
 			time = timeStamp++;
 			next = null;
 		}
 	}
 	
 	public class User {
-		public int id;
+		public int userId;
 		public Set<Integer> followed;
-		public Tweet tweet_head;
+		public Tweet tweetHead;
 		
-		public User(int id) {
-			this.id = id;
+		public User(int userId) {
+			this.userId = userId;
 			followed = new HashSet<>();
-			follow(id);
-			tweet_head = null;
+			follow(userId);
+			tweetHead = null;
 		}
 		
-		public void follow(int id) {
-			followed.add(id);
+		public void follow(int userId) {
+			followed.add(userId);
 		}
 		
-		public void unfollow(int id) {
-			followed.remove(id);
+		public void unfollow(int userId) {
+			followed.remove(userId);
 		}
 		
-		public void post(int id) {
-			Tweet t = new Tweet(id);
-			t.next = tweet_head;
-			tweet_head = t;
+		public void post(int tweetId) {
+			Tweet t = new Tweet(tweetId);
+			t.next = tweetHead;
+			tweetHead = t;
 		}
 	}
 	
 	/** Initialize your data structure here. */
     public DesignTwitter() {
-        userMap = new HashMap<Integer, User>();
+        userMap = new HashMap<>();
     }
     
     /** Compose a new tweet. */
@@ -75,18 +75,18 @@ public class DesignTwitter {
         List<Integer> res = new LinkedList<>();
         if (!userMap.containsKey(userId)) return res;
         Set<Integer> users = userMap.get(userId).followed;
-        PriorityQueue<Tweet> q = new PriorityQueue<Tweet>
-        			(users.size(), (a, b) -> (b.time - a.time));
+        PriorityQueue<Tweet> pq = new PriorityQueue<>
+        			((a, b) -> (b.time - a.time));
         for (int user: users) {
-        	Tweet t = userMap.get(user).tweet_head;
-        	if (t != null) q.add(t);
+        	Tweet t = userMap.get(user).tweetHead;
+        	if (t != null) pq.add(t);
         }
-        int n = 0;
-        while (!q.isEmpty() && n < 10) {
-        	Tweet t = q.poll();
-        	res.add(t.id);
-        	n++;
-        	if (t.next != null) q.add(t.next);
+        int count = 0;
+        while (!pq.isEmpty() && count < 10) {
+        	Tweet t = pq.poll();
+        	res.add(t.tweetId);
+        	count++;
+        	if (t.next != null) pq.add(t.next);
         }
         return res;
     }

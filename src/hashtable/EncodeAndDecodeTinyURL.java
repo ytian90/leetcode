@@ -20,11 +20,12 @@ public class EncodeAndDecodeTinyURL {
             return HOST + longUrlMap.get(longUrl);
         }
         String charSet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        System.out.println(charSet.length());
         String key = null;
         do {
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < pathLength; i++) {
-                sb.append(charSet.charAt(rand.nextInt(62)));
+                sb.append(charSet.charAt(rand.nextInt(charSet.length())));
             }
             key = sb.toString();
         } while (tinyUrlMap.containsKey(key));

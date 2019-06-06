@@ -15,41 +15,41 @@ public class CourseSchedule2 {
 		Graph obj = new Graph(numCourses, prerequisites);
 		return obj.hasTopologicalOrder();
 	}
-	
-	public static class Graph {
-        private int V;
-        private int E;
-        private List<List<Integer>> adj;
+
+    public static class Graph {
+        int V;
+        int E;
+        List<List<Integer>> adj;
         private int[] indegree;
         private Queue<Integer> q;
-        
-        public Graph(int n, int[][] edges) {
-            this.V = n;
+
+        public Graph(int V, int[][] edges) {
+            this.V = V;
             this.E = edges.length;
-            adj = new ArrayList<>();
+            this.adj = new ArrayList<>();
             for (int i = 0; i < V; i++) {
                 adj.add(new ArrayList<>());
             }
             indegree = new int[V];
-            for (int i = 0; i < E; i++) {
-                int v = edges[i][1];
-                int w = edges[i][0];
-                adj.get(v).add(w);
-                indegree[w]++;
+            for (int[] e : edges) {
+                adj.get(e[1]).add(e[0]);
+                indegree[e[0]]++;
             }
         }
-        
+
         public boolean hasTopologicalOrder() {
             q = new LinkedList<>();
             for (int i = 0; i < V; i++) {
-                if (indegree[i] == 0) q.add(i);
+                if (indegree[i] == 0) {
+                    q.add(i);
+                }
             }
             int count = 0;
             while (!q.isEmpty()) {
-                int v = q.poll();
+                int curr = q.poll();
                 count++;
-                for (int w : adj.get(v)) {
-                    if (--indegree[w] == 0) q.add(w);
+                for (int n : adj.get(curr)) {
+                    if (--indegree[n] == 0) q.add(n);
                 }
             }
             return count == V ? true : false;

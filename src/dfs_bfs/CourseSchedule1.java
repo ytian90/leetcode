@@ -21,40 +21,40 @@ public class CourseSchedule1 {
         List<List<Integer>> adj;
         boolean hasCycle;
         boolean[] visited;
-        boolean[] onstack;
+        boolean[] onStack;
 
-        public Graph(int n, int[][] edges) {
-            this.V = n;
+        public Graph(int V, int[][] edges) {
+            this.V = V;
             this.E = edges.length;
-            adj = new ArrayList<>();
+            this.adj = new ArrayList<>();
             for (int i = 0; i < V; i++) {
                 adj.add(new ArrayList<>());
             }
-            for (int i = 0; i < E; i++) {
-                int a = edges[i][1];
-                int b = edges[i][0];
-                adj.get(a).add(b);
+            for (int[] e : edges) {
+                adj.get(e[1]).add(e[0]);
             }
         }
 
         public boolean hasTopologicalOrder() {
             visited = new boolean[V];
-            onstack = new boolean[V];
+            onStack = new boolean[V];
             for (int i = 0; i < V; i++) {
-                if (!visited[i]) dfs(i);
+                if (!visited[i]) {
+                    dfs(i);
+                }
             }
             return !hasCycle;
         }
 
         public void dfs(int i) {
+            if (hasCycle) return;
             visited[i] = true;
-            onstack[i] = true;
+            onStack[i] = true;
             for (int j : adj.get(i)) {
-                if (hasCycle) return;
-                else if (!visited[j]) dfs(j);
-                else if (onstack[j]) hasCycle = true;
+                if (!visited[j]) dfs(j);
+                else if (onStack[j]) hasCycle = true;
             }
-            onstack[i] = false;
+            onStack[i] = false;
         }
     }
 	

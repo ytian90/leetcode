@@ -19,7 +19,7 @@ public class CourseSchedule3 {
 		private List<List<Integer>> adj;
 		private boolean hasCycle;
 		private boolean[] visited, onStack;
-		private Stack<Integer> postorder; // modification: add post order
+		private Stack<Integer> memo; // modification: add post order
 		
 		public Graph(int n, int[][] edges) {
 			this.V = n;
@@ -28,14 +28,12 @@ public class CourseSchedule3 {
             for (int i = 0; i < V; i++) {
                 adj.add(new ArrayList<>());
             }
-			for (int i = 0; i < E; i++) {
-				int v = edges[i][1]; // prerequired
-                int w = edges[i][0]; // wanted
-                adj.get(v).add(w);
+			for (int[] e : edges) {
+				adj.get(e[1]).add(e[0]);
 			}
 			visited = new boolean[V];
 			onStack = new boolean[V];
-			postorder = new Stack<Integer>(); // modification: add post order
+			memo = new Stack<>(); // modification: add post order
 		}
 		
 		public int[] topologicalOrder() {
@@ -46,7 +44,7 @@ public class CourseSchedule3 {
 			else {
 				int[] order = new int[V];
 				for (int i = 0; i < V; i++) {
-					order[i] = postorder.pop();
+					order[i] = memo.pop();
 				}
 				return order;
 			}
@@ -60,7 +58,7 @@ public class CourseSchedule3 {
 				else if (!visited[j]) dfs(j);
 				else if (onStack[j]) hasCycle = true;
 			}
-			postorder.push(i); // modification: record postorder
+			memo.push(i); // modification: record memo
 			onStack[i] = false;
 		}
 	}
