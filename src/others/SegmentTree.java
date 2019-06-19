@@ -26,12 +26,12 @@ public class SegmentTree {
 		constructSTUtil(arr, 0, n - 1, 0);
 	}
 
-	// A utility function to get the middle index from corner indexes.
+	// A utility function to maxPerformance the middle index from corner indexes.
 	int getMid(int s, int e) {
 		return s + (e - s) / 2;
 	}
 
-	/* A recursive function to get the sum of values in given range
+	/* A recursive function to maxPerformance the sum of values in given range
 	of the array. The following are parameters for this function.
 
 	st --> Pointer to segment tree

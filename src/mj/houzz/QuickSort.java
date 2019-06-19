@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 public class QuickSort {
 
+    // worst O(n^2) best/average O(nlog(n)) space (1)
     public static int partition(int[] nums, int low, int high) {
         int pivot = nums[high];
         int i = low;

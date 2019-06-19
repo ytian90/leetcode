@@ -28,7 +28,7 @@ public class PermutationSequence {
 		// factorial[] = {1, 1, 2, 6, 24, ... n!}
 		
 		k--; // start from base 0!!
-		// create a list of numbers to get indices
+		// create a list of numbers to maxPerformance indices
 		for (int i = n; i >= 1; i--) {
 			int index = k / f[i - 1];
 			sb.append(nums.charAt(index));

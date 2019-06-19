@@ -28,13 +28,13 @@ public class FindAllLongestIncreasingSubsequence {
             if (dp[i] == len) {
                 int[] curr = new int[len];
                 curr[len - 1] = nums[i];
-                int index = len - 2, iCopy = i - 1;
+                int index = len - 2, p = i - 1;
                 while (index >= 0) {
-                    if (nums[iCopy] < curr[index + 1]) {
-                        curr[index] = nums[iCopy];
+                    if (nums[p] < curr[index + 1]) {
+                        curr[index] = nums[p];
                         index--;
                     }
-                    iCopy--;
+                    p--;
                 }
                 list.add(curr);
             }

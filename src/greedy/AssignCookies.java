@@ -8,8 +8,28 @@ import java.util.Arrays;
  *
  */
 public class AssignCookies {
-	
-	public static int findContentChildren(int[] g, int[] s) {
+
+    public static int findContentChildren(int[] g, int[] s) {
+        int res = 0;
+        if (g.length == 0 || s.length == 0) {
+            return res;
+        }
+        Arrays.sort(g);
+        Arrays.sort(s);
+        int i = g.length - 1, j = s.length - 1;
+        while (i >= 0 && j >= 0) {
+            if (g[i] <= s[j]) {
+                res++;
+                i--; j--;
+            } else {
+                i--;
+            }
+        }
+        return res;
+    }
+
+
+    public static int findContentChildren2(int[] g, int[] s) {
         Arrays.sort(g);
         Arrays.sort(s);
         int i = 0;

@@ -14,7 +14,7 @@ import java.util.*;
  就是把这个元素和array的最后一个元素交换，然后删除最后一个元素，同时减小array的size。这样就O(1)完成了删除。思想感觉和quick sort的in-place partition非常像。
  小哥这个三步走循循善诱，不然估计还想不出来嗯。
  最后直接实现最后一个，前两个都是在讨论。
- design题目是那个write/get/getRandom/deleteRandom都是O(1)的题目，我开始写的code和他想要的略有不同，
+ design题目是那个write/maxPerformance/getRandom/deleteRandom都是O(1)的题目，我开始写的code和他想要的略有不同，
  最正确解法是vector里面同时存key/val，hashtable里面存key，value是vector的index。我的vector里面只存了key，所以多用了一个hashtable，不过最后也经过提示找到了这种方法。
 
  */

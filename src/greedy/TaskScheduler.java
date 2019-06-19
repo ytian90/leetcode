@@ -12,8 +12,29 @@ import java.util.Queue;
  *
  */
 public class TaskScheduler {
-	
+
 	public static int leastInterval(char[] tasks, int n) {
+		int[] count = new int[26];
+		int max = 0, maxCount = 0;
+		for (char c : tasks) {
+			count[c - 'A']++;
+			if (count[c - 'A'] == max) {
+				maxCount++;
+			} else if (count[c - 'A'] > max) {
+				max = count[c - 'A'];
+				maxCount = 1;
+			}
+		}
+		int partCount = max - 1;
+		int partLength = n - (maxCount - 1);
+		int emptySlots = partCount * partLength;
+		int availableTasks = tasks.length - max * maxCount;
+		int idles = Math.max(0, emptySlots - availableTasks);
+
+		return tasks.length + idles;
+	}
+
+	public static int leastInterval1(char[] tasks, int n) {
 		if (n == 0) return tasks.length;
 		Map<Character, Integer> map = new HashMap<>();
 		for (char c : tasks) {

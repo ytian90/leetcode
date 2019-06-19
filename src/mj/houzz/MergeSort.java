@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 public class MergeSort {
 
+    // time: O(nlog(n)), space O(n)
     public static void mergeSort(int[] a, int n) {
         if (n < 2) {
             return;

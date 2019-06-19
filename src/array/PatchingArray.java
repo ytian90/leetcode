@@ -14,7 +14,7 @@ public class PatchingArray {
 			if (i < nums.length && nums[i] <= total) {
 				total += nums[i++];
 			} else {
-				total <<= 1; // double it
+				total += total; // double it
 				result++;
 			}
 		}

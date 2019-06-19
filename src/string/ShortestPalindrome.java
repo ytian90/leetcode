@@ -60,12 +60,12 @@ public class ShortestPalindrome {
 		String temp = s + "#" + new StringBuilder(s).reverse().toString();
 		int[] table = getTable(temp);
 		
-		// get the maximum palindrome part in s starts from 0
+		// maxPerformance the maximum palindrome part in s starts from 0
 		return new StringBuilder(s.substring(table[table.length - 1])).reverse().toString() + s;
 	}
 
 	private static int[] getTable(String s) {
-		// get lookup table
+		// maxPerformance lookup table
 		int[] table = new int[s.length()];
 		
 		// pointer that points to matched char in prefix part

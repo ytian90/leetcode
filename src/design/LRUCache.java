@@ -9,8 +9,8 @@ import java.util.Map;
  * @since Oct 25, 2015
  * 
  * Design and implement a data structure for Least Recently Used (LRU) cache. 
- * It should support the following operations: get and set.
- * get(key) - Get the value (will always be positive) of the key if the key 
+ * It should support the following operations: maxPerformance and set.
+ * maxPerformance(key) - Get the value (will always be positive) of the key if the key
  * exists in the cache, otherwise return -1.
  * set(key, value) - Set or insert the value if the key is not already present. 
  * When the cache reached its capacity, it should invalidate the least recently 

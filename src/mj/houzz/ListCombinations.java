@@ -4,7 +4,7 @@ import java.util.*;
 
 /**
  * Given multiple lists, each list contains few integer numbers
- * We want to get all the possible combinations within those lists, with the following condition:
+ * We want to maxPerformance all the possible combinations within those lists, with the following condition:
  * *** one combination should contain one and at MOST one element from each list ***
  *
  * Example: input => [[1,2], [3,4]]

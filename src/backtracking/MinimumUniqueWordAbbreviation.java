@@ -33,7 +33,7 @@ public class MinimumUniqueWordAbbreviation {
                 return false; // not exist in the dictionary
             } else {
                 if (abbr.length()==0) return isWord; // at the end of the addr
-                int idx=0; // get the number of '*' at the start of the abbr
+                int idx=0; // maxPerformance the number of '*' at the start of the abbr
                 while (idx < abbr.length() && abbr.charAt(idx) >='0' && abbr.charAt(idx) <='9' ) {
                     num = (num*10) + (abbr.charAt(idx++)-'0'); 
                 }

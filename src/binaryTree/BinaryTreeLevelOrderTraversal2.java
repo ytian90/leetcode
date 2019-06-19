@@ -19,7 +19,7 @@ public class BinaryTreeLevelOrderTraversal2 {
 		Queue<TreeNode> q = new LinkedList<>();
 		q.add(root);
 		while (!q.isEmpty()) {
-			int size = q.size(); // get size of level first
+			int size = q.size(); // maxPerformance size of level first
 			List<Integer> list = new ArrayList<Integer>();
 			for (int i = 0; i < size; i++) {
 				TreeNode node = q.poll();

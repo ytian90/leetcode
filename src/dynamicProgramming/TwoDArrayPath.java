@@ -3,7 +3,7 @@ package dynamicProgramming;
  * Uber
  * Given a 2-D integer array, -1 means obstacle, can't pass, 0 and 1 can pass, 1 is bonus.
  * Q1: Is there a valid pass from top left to bottom right with only go bottom and go right?
- * Q2: Give 4 directions pass(go incr/decr/left/right), try to get maximum bonus.
+ * Q2: Give 4 directions pass(go incr/decr/left/right), try to maxPerformance maximum bonus.
  * @author ytian
  *
  */

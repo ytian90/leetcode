@@ -14,13 +14,13 @@ public class MedianOfTwoSortedArrays {
 		while (lo <= hi) {
 			int mid2 = (lo + hi) / 2; // try cut 2
 			int mid1 = n1 + n2 - mid2; // calculate cut 1 accordingly
-			double l1 = (mid1 == 0) ? Integer.MIN_VALUE : nums1[(mid1 - 1) / 2]; // get l1, l2, r1, r2 respectively
+			double l1 = (mid1 == 0) ? Integer.MIN_VALUE : nums1[(mid1 - 1) / 2]; // maxPerformance l1, l2, r1, r2 respectively
 			double l2 = (mid2 == 0) ? Integer.MIN_VALUE : nums2[(mid2 - 1) / 2];
 			double r1 = (mid1 == n1 * 2) ? Integer.MAX_VALUE : nums1[(mid1) / 2];
 			double r2 = (mid2 == n2 * 2) ? Integer.MAX_VALUE : nums2[(mid2) / 2];
 			if (l1 > r2) lo = mid2 + 1; // A1's lower half is too big, need to move c1 left(c2 right)
 			else if (l2 > r1) hi = mid2 - 1; // A2's lower half is too big, need to move c2 left
-			else return (Math.max(l1, l2) + Math.min(r1, r2)) / 2; // othersize, get right cut
+			else return (Math.max(l1, l2) + Math.min(r1, r2)) / 2; // othersize, maxPerformance right cut
 		}
 		return -1;
 	}

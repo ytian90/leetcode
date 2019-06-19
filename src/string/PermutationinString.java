@@ -40,7 +40,7 @@ public class PermutationinString {
 		return true;
 	}
 
-	// get the locations of the substring
+	// maxPerformance the locations of the substring
 	// cc189 page 70
 	public static List<Integer> checkInclusion2(String s1, String s2) {
 		List<Integer> res = new ArrayList<>();

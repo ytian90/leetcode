@@ -40,7 +40,7 @@ public class RangeAddition {
 	 * index and end index (both inclusive). We update the negative value at the 
 	 * end index + 1, because the positive value of it should be only added at 
 	 * its previous indices (from start index to end index). Thus, when we 
-	 * accumulate the sum at the end for each index, we will get the correct 
+	 * accumulate the sum at the end for each index, we will maxPerformance the correct
 	 * values for each index. If the end index is the last index in the resulting 
 	 * array, we don't have to do the end index + 1 part, because there is no more 
 	 * index after the last index and there will be no error when we accumulate 

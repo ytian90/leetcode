@@ -15,7 +15,7 @@ public class DiameterOfABinaryTree {
 		int lh = height(root.left);
 		int rh = height(root.right);
 		
-		// get the diameter of left and right subtrees
+		// maxPerformance the diameter of left and right subtrees
 		int ld = diameter(root.left);
 		int rd = diameter(root.right);
 		
@@ -41,7 +41,7 @@ public class DiameterOfABinaryTree {
 			height.h = 0;
 			return 0;
 		}
-		// get the heights of left and right subtrees in lh and rh and store
+		// maxPerformance the heights of left and right subtrees in lh and rh and store
 		// the returned values in ld and rd
 		lh.h++; rh.h++;
 		int ld = diameterOpt(root.left, lh);

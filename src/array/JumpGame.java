@@ -5,6 +5,29 @@ package array;
  * @since Aug 19, 2015
  */
 public class JumpGame {
+
+	public static boolean canJump(int[] nums) {
+		if (nums.length < 2) {
+			return true;
+		}
+		int reach = nums[0];
+		for (int i = 1; i <= reach; i++) {
+			reach = Math.max(reach, nums[i] + i);
+			if (reach >= nums.length - 1) {
+				return true;
+			}
+		}
+		return reach >= nums.length - 1;
+	}
+
+	public static void main(String[] args) {
+		System.out.println(canJump(new int[]{2, 3, 1, 1, 4}));
+		System.out.println(canJump(new int[]{3, 2, 1, 0, 4}));
+		System.out.println(canJump(new int[]{2, 5, 0, 0}));
+		System.out.println(canJump(new int[]{0, 1}));
+		System.out.println(canJump(new int[]{1, 2, 3}));
+	}
+
 	// dp
 	public boolean canJump0(int[] nums) {
 		int max = 0;
@@ -20,7 +43,7 @@ public class JumpGame {
 	 * @param nums
 	 * @return
 	 */
-	public static boolean canJump(int[] nums) {
+	public static boolean canJump1(int[] nums) {
 		int reach = 0; // the rightmost that can jump to
 		for (int i = 0; i <= reach && reach < nums.length; i++) {
 			reach = Math.max(reach, i + nums[i]);
@@ -54,12 +77,6 @@ public class JumpGame {
 		}
 		return last <= 0;
 	}
-	
-	public static void main(String[] args) {
-		int[] a = new int[]{2, 3, 1, 1, 4};
-		int[] b = new int[]{3, 2, 1, 0, 4};
-		System.out.println(canJump(a));
-		System.out.println(canJump(b));
-	}
+
 	
 }

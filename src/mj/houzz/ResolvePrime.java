@@ -2,6 +2,17 @@ package mj.houzz;
 
 import java.math.BigInteger;
 
+/**
+ * Given 20, 11
+ * output:
+ * 20 = 2 * 2 * 5
+ * 11 = 11
+ * followup:
+ * 20 = 2 ^ 2 * 5
+ * followup2:
+ * 20 = 5 * 2 ^ 2
+ *
+ */
 public class ResolvePrime {
 
     // ???

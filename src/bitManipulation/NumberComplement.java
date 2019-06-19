@@ -6,7 +6,7 @@ package bitManipulation;
  */
 public class NumberComplement {
 
-	// 100110, its complement is 011001, the sum is 111111. So we only need get the min number large or equal
+	// 100110, its complement is 011001, the sum is 111111. So we only need maxPerformance the min number large or equal
 	// to num, then do substraction
 	public static int findComplement(int num) {
 		int i = 0, j = 0;
@@ -19,8 +19,8 @@ public class NumberComplement {
 	
 	/*
 	 * input: 5, output: 2
-	 * 5 is 101, to get the mask, use highestOneBit to get 100, left shift, 1000, 
-	 * minus 1, get 111, & with the negative number to get the flip result
+	 * 5 is 101, to maxPerformance the mask, use highestOneBit to maxPerformance 100, left shift, 1000,
+	 * minus 1, maxPerformance 111, & with the negative number to maxPerformance the flip result
 	 */
 	public static int findComplements(int num) {
         return ~num & ((Integer.highestOneBit(num) << 1) - 1);

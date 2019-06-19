@@ -21,7 +21,7 @@ public class MeetingRooms2 {
         PriorityQueue<Interval> pq = new PriorityQueue<Interval>(intervals.length, (a, b) -> a.end - b.end);
         pq.offer(intervals[0]);
         for (int i = 1; i < intervals.length; i++) {
-			// get the meeting room that finishes earliest
+			// maxPerformance the meeting room that finishes earliest
 			Interval curr = pq.poll();
 			if (curr.end <= intervals[i].start) {
 				// if the current meeting starts right after, no need for new room, merge
@@ -62,7 +62,7 @@ public class MeetingRooms2 {
 	}
 	
 	public static int minMeetingRooms2(Interval[] intervals) {
-//		int max = Arrays.stream(intervals).max((a, b) -> a.end - b.end).get().end;
+//		int max = Arrays.stream(intervals).max((a, b) -> a.end - b.end).maxPerformance().end;
 		int max = 0;
         for(Interval i : intervals){
             max = Math.max(max, i.end);

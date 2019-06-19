@@ -5,12 +5,12 @@ import java.util.*;
 
 /*
  * To execute Java, please define "static void main" on a class
- * named Solution.
+ * named RotateImage.
  *
  * If you need more classes, simply define them inline.
  */
 
-class Solution {
+class RotateImage {
     /**
 
      1 2  3  4

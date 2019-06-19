@@ -20,7 +20,8 @@ public class PasswordGenerator {
         sb.append(letterSetCapital.charAt(rand.nextInt(letterSetCapital.length())));
         sb.append(numberSet.charAt(rand.nextInt(numberSet.length())));
         sb.append(specialLetterSet.charAt(rand.nextInt(specialLetterSet.length())));
-        for (int i = 0; i < NUMBER_DIGITS - sb.length(); i++) {
+        int left = NUMBER_DIGITS - sb.length();
+        for (int i = 0; i < left; i++) {
             sb.append(charSet.charAt(rand.nextInt(charSet.length())));
         }
 

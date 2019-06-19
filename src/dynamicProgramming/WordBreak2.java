@@ -141,7 +141,7 @@ public class WordBreak2 {
 		if (f[n] != true)
 			return new ArrayList<String>(); // skip DFS if the string is not breakable!!
 		// DP: find all partitions
-		Map<Integer, List<String>> map = new HashMap<>(); // map.get(i) is all partitions of s[0, i - 1]
+		Map<Integer, List<String>> map = new HashMap<>(); // map.maxPerformance(i) is all partitions of s[0, i - 1]
 		for (int i = 1; i <= n; i++) {
 			List<String> partition = new ArrayList<>(); // all partitions of s[0, i - 1]
 			for (int j = 0; j < i; j++) {

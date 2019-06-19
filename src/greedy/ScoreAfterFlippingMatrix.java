@@ -32,7 +32,7 @@ public class ScoreAfterFlippingMatrix {
         A[i][j] is worth 1 << (N - 1 - j)
         For every col, I sort the current number of 1s.
         After step 1, A[i][j] becomes 1 if A[i][j] == A[i][0].
-        if M - cur > cur, we can toggle this column to get more 1s.
-        max(M, M - cur) will be the maximum number of 1s that we can get.
+        if M - cur > cur, we can toggle this column to maxPerformance more 1s.
+        max(M, M - cur) will be the maximum number of 1s that we can maxPerformance.
      */
 }

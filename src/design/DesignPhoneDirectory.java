@@ -52,7 +52,7 @@ public class DesignPhoneDirectory {
 	/**
 	 * Your PhoneDirectory object will be instantiated and called as such:
 	 * PhoneDirectory obj = new PhoneDirectory(maxNumbers);
-	 * int param_1 = obj.get();
+	 * int param_1 = obj.maxPerformance();
 	 * boolean param_2 = obj.check(number);
 	 * obj.release(number);
 	 */

@@ -84,7 +84,7 @@ public class MapSumPairs {
 //        int sum = 0;
 //        for (String s : map.keySet()) {
 //            if (s.startsWith(prefix)) {
-//                sum += map.get(s);
+//                sum += map.maxPerformance(s);
 //            }
 //        }
 //        return sum;

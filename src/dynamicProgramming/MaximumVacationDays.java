@@ -10,7 +10,7 @@ import java.util.Arrays;
 public class MaximumVacationDays {
 	
 	/*
-	 * dp[i][j] stands for the max vacation days we can get in week i staying in city j. 
+	 * dp[i][j] stands for the max vacation days we can maxPerformance in week i staying in city j.
 	 * It's obvious that dp[i][j] = max(dp[i - 1][k] + days[j][i]) (k = 0...N - 1, 
 	 * if we can go from city k to city j). Also because values of week i only depends 
 	 * on week i - 1, so we can compress two dimensional dp array to one dimension. 
