@@ -12,40 +12,49 @@ public class LetterCasePermutation {
 
     public static List<String> letterCasePermutation(String S) {
         List<String> res = new ArrayList<>();
-        helper(S.toCharArray(), 0, res);
+        compute(res, S.toCharArray(),0);
         return res;
     }
 
-    private static void helper(char[] chars, int pos, List<String> res) {
-        if (pos == chars.length) {
-            res.add(new String(chars));
-            return;
+    public static void compute(List<String> ans, char[] chars, int index)
+    {
+        if (index == chars.length)
+            ans.add(new String(chars));
+        else
+        {
+            if(Character.isLetter(chars[index]))
+            {
+                chars[index] = Character.toUpperCase(chars[index]);
+                compute(ans, chars,index + 1);
+                chars[index] = Character.toLowerCase(chars[index]);
+            }
+            compute(ans, chars,index + 1);
         }
-        if (Character.isLetter(chars[pos])) {
-            chars[pos] = Character.toLowerCase(chars[pos]);
-            helper(chars, pos + 1, res);
-            chars[pos] = Character.toUpperCase(chars[pos]);
-        }
-        helper(chars, pos + 1, res);
     }
 
-    public static List<String> letterCasePermutations(String S) {
-        if (S == null)
-            return new LinkedList<>();
-        Queue<String> q = new LinkedList<>();
-        q.add(S);
-        for (int i = 0; i < S.length(); i++) {
-            if (Character.isDigit(S.charAt(i))) continue;
-            int size = q.size();
-            for (int j = 0; j < size; j++) {
-                char[] chars = q.poll().toCharArray();
-                chars[i] = Character.toUpperCase(chars[i]);
-                q.add(new String(chars));
-                chars[i] = Character.toLowerCase(chars[i]);
-                q.add(new String(chars));
-            }
+    public static List<String> letterCasePermutation2(String S) {
+        List<String> res = new ArrayList<>();
+        if (S == null || S.length() == 0) {
+            return res;
         }
-        return new LinkedList<>(q);
+        res.add("");
+        for (char c : S.toCharArray()) {
+            List<String> next = new ArrayList<>();
+            if (Character.isLetter(c)) {
+
+                for (String a : res) {
+                    next.add(a + ("" + c).toLowerCase());
+                    next.add(a + ("" + c).toUpperCase());
+                }
+
+            } else {
+                for (String a : res) {
+                    next.add(a + c);
+                }
+            }
+            res = next;
+        }
+        return res;
     }
 
     public static void main(String[] args) {

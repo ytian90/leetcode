@@ -1,15 +1,91 @@
 package greedy;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * 759. Employee Free Time
  */
 public class EmployeeFreeTime {
+
+    public static List<Interval> employeeFreeTime2(List<List<Interval>> schedule) {
+
+        List<Interval> free = new ArrayList<>();
+        PriorityQueue<Interval> pq = new PriorityQueue<>((a, b) -> a.start - b.start);
+        for (List<Interval> list : schedule) {
+            pq.addAll(list);
+        }
+        Interval curr = pq.poll();
+        while (!pq.isEmpty()) {
+            Interval next = pq.poll();
+            if (curr.end < next.start) {
+                free.add(new Interval(curr.end, next.start));
+                curr = next;
+            } else {
+                curr.start = Math.min(curr.start, next.start);
+                curr.end = Math.max(curr.end, next.end);
+            }
+        }
+
+        return free;
+    }
+
+    public static void main(String[] args) {
+        List<List<Interval>> t = new ArrayList<>();
+        List<Interval> t1 = new ArrayList<>();
+        t1.add(new Interval(1, 2));
+        t1.add(new Interval(5, 6));
+        t.add(t1);
+        List<Interval> t2 = new ArrayList<>();
+        t2.add(new Interval(1, 3));
+        t.add(t2);
+        List<Interval> t3 = new ArrayList<>();
+        t3.add(new Interval(4, 10));
+        t.add(t3);
+        System.out.println(employeeFreeTime(t));
+    }
+
     public static List<Interval> employeeFreeTime(List<List<Interval>> schedule) {
+        List<Interval> work = new ArrayList<>();
+        List<Interval> free = new ArrayList<>();
+        PriorityQueue<Interval> pq = new PriorityQueue<>((a, b) -> a.start - b.start);
+        for (List<Interval> list : schedule) {
+            pq.addAll(list);
+        }
+        Interval curr = pq.poll();
+        while (!pq.isEmpty()) {
+            Interval next = pq.poll();
+            if (curr.end < next.start) {
+                work.add(curr);
+                curr = next;
+            } else {
+                curr.start = Math.min(curr.start, next.start);
+                curr.end = Math.max(curr.end, next.end);
+            }
+        }
+        work.add(curr);
+        for (int i = 1; i < work.size(); i++) {
+            free.add(new Interval(work.get(i - 1).end, work.get(i).start));
+        }
+        return free;
+    }
+
+    static class Interval {
+        public int start;
+        public int end;
+
+        public Interval() {}
+
+        public Interval(int _start,int _end) {
+            start = _start;
+            end = _end;
+        }
+
+        @Override
+        public String toString() {
+            return "[" + start + ", " + end + "]";
+        }
+    };
+    public static List<Interval> employeeFreeTime3(List<List<Interval>> schedule) {
         List<Interval> res = new ArrayList<>();
         List<Interval> intervals = new ArrayList<>();
         schedule.forEach(e -> intervals.addAll(e));
@@ -27,28 +103,4 @@ public class EmployeeFreeTime {
         return res;
     }
 
-    public static void main(String[] args) {
-        List<List<Interval>> t = new ArrayList<>();
-        List<Interval> tt = new ArrayList<>();
-        tt.add(new Interval(1, 2));
-        tt.add(new Interval(5, 6));
-        t.add(tt);
-        List<Interval> t2 = new ArrayList<>();
-        t2.add(new Interval(1, 3));
-        t.add(t2);
-        List<Interval> t3 = new ArrayList<>();
-        t3.add(new Interval(4, 10));
-        t.add(t3);
-        List<Interval> res = employeeFreeTime(t);
-        for (Interval i : res) {
-            System.out.println(i.start + "->" + i.end);
-        }
-    }
-
-    public static class Interval {
-        int start;
-        int end;
-        Interval() { start = 0; end = 0; }
-        Interval(int s, int e) { start = s; end = e; }
-    }
 }

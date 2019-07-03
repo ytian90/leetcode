@@ -50,9 +50,9 @@ public class BurstBalloons {
 
 	public static void main(String[] args) {
 		BurstBalloons t = new BurstBalloons();
-//		System.out.println(t.maxCoins(new int[]{3, 1, 5, 8}));
+		System.out.println(t.maxCoins(new int[]{3, 1, 5, 8}));
 //		System.out.println(t.maxCoins2(new int[]{3, 1, 5, 8}));
-		System.out.println(t.maxCoins2(new int[]{2, 3, 4}));
+//		System.out.println(t.maxCoins2(new int[]{2, 3, 4}));
 	}
 
 }

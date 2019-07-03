@@ -6,37 +6,42 @@ package backtracking;
  */
 public class BeautifulArrangement {
 
-	static int count = 0;
+	static int res = 0;
 
-	public int countArrangements(int N) {
-		dfs(N, N, new boolean[N + 1]);
-		return count;
+	public static int countArrangement(int N) {
+		if (N == 1) return N;
+		helper(N, 1, new boolean[N + 1]);
+		return res;
 	}
 
-	private void dfs(int N, int k, boolean[] visited) {
-		if (k == 0) {
-			count++;
+	public static void helper(int N, int pos, boolean[] visited) {
+		if (pos == N + 1) {
+			res++;
 			return;
 		}
 		for (int i = 1; i <= N; i++) {
-			if (visited[i] || k % i != 0 && i % k != 0) {
-				continue;
+			if (!visited[i] && (i % pos == 0 || pos % i == 0)) {
+				visited[i] = true;
+				helper(N, pos + 1, visited);
+				visited[i] = false;
 			}
-			visited[i] = true;
-			dfs(N, k - 1, visited);
-			visited[i] = false;
 		}
 	}
 
-	public static int countArrangement(int N) {
+	public static void main(String[] args) {
+		System.out.println(countArrangement(2));
+		System.out.println(countArrangement(3));
+	}
+
+	public static int countArrangement2(int N) {
         if (N == 0) return 0;
         helper(N, 1, new int[N + 1]);
-        return count;
+        return res;
     }
 
 	private static void helper(int N, int pos, int[] nums) {
 		if (pos > N) {
-			count++;
+			res++;
 			return;
 		}
 		for (int i = 1; i <= N; i++) {
@@ -46,11 +51,6 @@ public class BeautifulArrangement {
 				nums[i] = 0;
 			}
 		}
-	}
-
-	public static void main(String[] args) {
-		System.out.println(countArrangement(2));
-		System.out.println(countArrangement(8));
 	}
 
 }

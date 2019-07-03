@@ -59,7 +59,7 @@ public class PalindromePermutation2 {
 	public static void main(String[] args) {
 //		System.out.println(generatePalindromes("aabb"));
 //		System.out.println(generatePalindromes("abc"));
-		System.out.println(generatePalindromes3("aaaaa"));
+		System.out.println(generatePalindromes3("aaaaaa"));
 	}
 	
 	public static List<String> generatePalindromes(String s) {

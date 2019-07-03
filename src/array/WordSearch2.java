@@ -12,45 +12,41 @@ import java.util.List;
 public class WordSearch2 {
     public static List<String> findWords(char[][] board, String[] words) {
         List<String> res = new ArrayList<>();
-        if (board == null || board.length == 0 || words == null || words.length == 0)
-            return res;
         for (String word : words) {
-            if (isOnboard(word, board)) {
-                if (!res.contains(word)) {
-                    res.add(word);
-                }
+            if (find(board, word)) {
+                res.add(word);
             }
         }
         return res;
     }
 
-    public static boolean isOnboard(String word, char[][] board) {
-        boolean valid = false;
+    public static boolean find(char[][] board, String word) {
+        boolean[][] visited = new boolean[board.length][board[0].length];
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[0].length; j++) {
-                if (board[i][j] == word.charAt(0)) {
-                    boolean[][] visited = new boolean[board.length][board[0].length];
-                    valid = dfs(word, i, j, 0, board, visited);
-                    if (valid) return valid;
+                if (board[i][j] == word.charAt(0) && dfs(board, word, 0, i, j, visited)) {
+                    return true;
                 }
             }
         }
-        return valid;
+        return false;
     }
 
-    public static boolean dfs(String word, int i, int j, int k, char[][] board, boolean[][] visited) {
-        if (i < 0 || i >= board.length || j < 0 || j >= board[0].length || k >= word.length() || board[i][j] != word.charAt(k) || visited[i][j]) {
+    private static boolean dfs(char[][] board, String s, int start, int i, int j, boolean[][] visited) {
+        if (i < 0 || i >= board.length || j < 0 || j >= board[0].length || visited[i][j] || board[i][j] != s.charAt(start)) {
             return false;
         }
+        if (start == s.length() - 1) {
+            return true;
+        }
+        boolean ch = false;
         visited[i][j] = true;
-        if (k == word.length() - 1) return true;
-        boolean valid =
-                dfs(word, i + 1, j, k + 1, board, visited) ||
-                        dfs(word, i - 1, j, k + 1, board, visited) ||
-                        dfs(word, i, j - 1, k + 1, board, visited) ||
-                        dfs(word, i, j + 1, k + 1, board, visited);
+        ch = dfs(board, s, start + 1, i + 1, j, visited)
+                || dfs(board, s, start + 1, i - 1, j, visited)
+                || dfs(board, s, start + 1, i, j + 1, visited)
+                || dfs(board, s, start + 1, i, j - 1, visited);
         visited[i][j] = false;
-        return valid;
+        return ch;
     }
 
     public static void main(String[] args) {

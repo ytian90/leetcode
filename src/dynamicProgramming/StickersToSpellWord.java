@@ -45,7 +45,9 @@ public class StickersToSpellWord {
 			}
 			String s = sb.toString();
 			int tmp = helper(map, dp, s);
-			if (tmp != -1) ans = Math.min(ans, 1 + tmp);
+			if (tmp != -1) {
+				ans = Math.min(ans, 1 + tmp);
+			}
 		}
 		map.put(target, ans == Integer.MAX_VALUE ? -1 : ans);
 		return map.get(target);

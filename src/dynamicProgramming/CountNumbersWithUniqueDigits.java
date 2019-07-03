@@ -6,8 +6,31 @@ package dynamicProgramming;
  * @since Jul 16, 2016
  */
 public class CountNumbersWithUniqueDigits {
-	// DP Time O(1)
+
 	public static int countNumbersWithUniqueDigits(int n) {
+		if (n == 0) {
+			return 1;
+		}
+		int[] dp = new int[n + 1];
+		dp[1] = 10;
+		for (int i = 2; i <= n; i++) {
+			dp[i] = dp[i - 1] + 9 * factor(i - 1);
+		}
+		return dp[n];
+	}
+
+	public static int factor(int i) {
+		int res = 1, num = 9;
+		while (i > 0) {
+			res *= num;
+			num--;
+			i--;
+		}
+		return res;
+	}
+
+	// DP Time O(1)
+	public static int countNumbersWithUniqueDigits0(int n) {
 		if (n == 0) return 1;
 		int res = 10;
 		int uniqueDigits = 9, availableNum = 9;
