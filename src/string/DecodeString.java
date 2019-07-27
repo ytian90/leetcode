@@ -1,6 +1,7 @@
 package string;
 
-import java.util.Stack;
+import java.util.Deque;
+import java.util.LinkedList;
 
 /**
  * 394. Decode String
@@ -10,39 +11,33 @@ import java.util.Stack;
 public class DecodeString {
 
     public static String decodeString(String s) {
-        if (s == null || s.length() == 0)
-            return "";
-        int i = 0;
-        Stack<String> strs = new Stack<>();
-        Stack<Integer> times = new Stack<>();
-        String res = "";
-        while (i < s.length()) {
-            char c = s.charAt(i);
+        Deque<Character> q = new LinkedList<>();
+        for (char c : s.toCharArray()) {
+            q.add(c);
+        }
+        return helper(q);
+    }
+
+    public static String helper(Deque<Character> q) {
+        StringBuilder sb = new StringBuilder();
+        int num = 0;
+        while (!q.isEmpty()) {
+            char c = q.poll();
             if (Character.isDigit(c)) {
-                int count = 0;
-                while (i < s.length() && Character.isDigit(s.charAt(i))) {
-                    count = 10 * count + (s.charAt(i) - '0');
-                    i++;
-                }
-                times.add(count);
+                num = 10 * num + (c - '0');
             } else if (c == '[') {
-                strs.add(res);
-                res = "";
-                i++;
-            } else if (c == ']') {
-                int time = times.pop();
-                StringBuilder sb = new StringBuilder(strs.pop());
-                for (int j = 0; j < time; j++) {
-                    sb.append(res);
+                String sub = helper(q);
+                for (int i = 0; i < num; i++) {
+                    sb.append(sub);
                 }
-                res = sb.toString();
-                i++;
+                num = 0;
+            } else if (c == ']') {
+                break;
             } else {
-                res += s.charAt(i++);
+                sb.append(c);
             }
         }
-
-        return res;
+        return sb.toString();
     }
 
     public static void main(String[] args) {

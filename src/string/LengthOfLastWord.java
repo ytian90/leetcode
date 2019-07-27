@@ -6,14 +6,19 @@ package string;
  */
 public class LengthOfLastWord {
 	public static int lengthOfLastWord(String s) {
-		if (s == null || s.length() == 0) return 0;
-		int i = s.length() - 1, count = 0;
-		while (i >= 0 && s.charAt(i) == ' ') i--;
-		while (i >= 0 && s.charAt(i) != ' ') {
-			count++;
+		if (s == null || s.length() == 0) {
+			return 0;
+		}
+		int i = s.length() - 1;
+		while (i > 0 && s.charAt(i) == ' ') {
 			i--;
 		}
-		return count;
+		int j = 0;
+		while (i >= 0 && s.charAt(i) != ' ') {
+			i--;
+			j++;
+		}
+		return j;
 	}
 	
 	public static void main(String[] args) {

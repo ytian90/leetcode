@@ -79,7 +79,7 @@ public class SortAlgos {
 		while (right <= rightEnd) { // copy rest of right half
 			temp[k++] = a[right++];
 		}
-		// copy temp back
+		// copy test back
 		for (int i = 0; i < num; i++, rightEnd--) {
 			a[rightEnd] = temp[rightEnd];
 		}

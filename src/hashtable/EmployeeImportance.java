@@ -13,7 +13,7 @@ import java.util.Queue;
  */
 public class EmployeeImportance {
 	
-	// dfs
+	// helper
 	public int getImportance(List<Employee> employees, int id) {
 		Map<Integer, Employee> map = new HashMap<>();
 		for (Employee e : employees) {

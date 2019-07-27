@@ -16,7 +16,7 @@ public class EmployerEnployee {
 		>>A的下级D的名字
 		
 		reconstruct the tree by 2d array or list of linked list
-		then use dfs
+		then use helper
 	 */
 
 	public static void main(String[] args) {

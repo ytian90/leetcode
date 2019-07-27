@@ -70,7 +70,7 @@ public class WiggleSort2 {
 	
 //	public static void wiggleSort2(int[] nums) {
 //		int n = nums.length, mid = n % 2 == 0 ? n / 2 - 1: n / 2;
-//		int[] temp = Arrays.copyOf(nums, n);
+//		int[] test = Arrays.copyOf(nums, n);
 //		int i = 0, j = 0, k = n - 1;
 //		while (j <= k) {
 //			if (nums[j] > mid) {

@@ -11,7 +11,7 @@ import java.util.Arrays;
 public class LongestCommonPrefix {
 
 	// Time ~O(N) Best
-	public static String longestCommonPrefix3(String[] strs) {
+	public static String longestCommonPrefix(String[] strs) {
 		if (strs.length == 0)
 			return "";
 		String res = strs[0];
@@ -25,11 +25,16 @@ public class LongestCommonPrefix {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(longestCommonPrefix3(new String[] { "abcd", "ab", "abc" }));
+		System.out.println(longestCommonPrefix(new String[] {
+				"abcd", "ab", "abc" }));
+		System.out.println(longestCommonPrefix(new String[] {
+				"flower","flow","flight" }));
+		System.out.println(longestCommonPrefix(new String[] {
+				"dog","racecar","car" }));
 	}
 
 	// Time ~O(N^2)
-	public static String longestCommonPrefix(String[] strs) {
+	public static String longestCommonPrefix0(String[] strs) {
 		if (strs.length == 1)
 			return strs[0];
 

@@ -9,32 +9,48 @@ import java.util.List;
  * @since Aug 21, 2015
  */
 public class RestoreIPAddress {
-	public List<String> restoreIpAddresses(String s) {
+	public static List<String> restoreIpAddresses(String s) {
 		List<String> res = new ArrayList<>();
-		helper(s, 0, new StringBuilder(), res);
+		helper(s, new ArrayList<>(), res);
 		return res;
 	}
 
-	private void helper(String s, int pos, StringBuilder sb, List<String> list) {
-		if (pos == 3) {
-			if (isValidIp(s)) list.add(sb.toString() + s);
-		} else {
-			int len = sb.length();
-			for (int i = 1; i <= 3 && i <= s.length(); i++) {
-				String num = s.substring(0, i);
-				if (isValidIp(num)) {
-					helper(s.substring(i), pos + 1, sb.append(num).append('.'), list);
-				}
-				sb.delete(len, sb.length());
+	public static void helper(String s, List<String> list, List<String> res) {
+		if (list.size() > 4 || (list.size() == 4 && s.length() > 0)) {
+			return;
+		}
+		if (s.length() == 0) {
+			if (list.size() == 4) {
+				res.add(getIpAddress(list));
+				return;
+			}
+		}
+		for (int len = 1; len <= 3 && len <= s.length(); len++) {
+			String num = s.substring(0, len);
+			if (num.charAt(0) == '0' && num.length() > 1) {
+				continue;
+			}
+			if (Integer.valueOf(num) <= 255) {
+				list.add(num);
+				helper(s.substring(len), list, res);
+				list.remove(list.size() - 1);
 			}
 		}
 	}
 
-	private boolean isValidIp(String s) {
-		if (s.length() == 1 || s.length() >= 1 && s.length() <= 3 && !s.startsWith("0")) {
-			int num = Integer.parseInt(s);
-			if (num >= 0 && num <= 255) return true;
+	public static String getIpAddress(List<String> list) {
+		StringBuilder sb = new StringBuilder();
+		for (String i : list) {
+			sb.append(i);
+			sb.append(".");
 		}
-		return false;
+		sb.deleteCharAt(sb.length() - 1);
+		return sb.toString();
+	}
+
+	public static void main(String[] args) {
+		System.out.println(restoreIpAddresses("25525511135"));
+		System.out.println(restoreIpAddresses("010010"));
+		System.out.println(restoreIpAddresses("172162541"));
 	}
 }

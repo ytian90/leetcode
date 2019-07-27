@@ -186,7 +186,7 @@ public class WordLadder2 {
 
 
 	
-	// Method 1 dfs
+	// Method 1 helper
 	public List<List<String>> findLadders1(String beginWord, String endWord, Set<String> wordList) {
         Queue<String> q = new LinkedList<>();
         Map<String, Integer> map = new HashMap<>(); // add depth to avoid dead circle

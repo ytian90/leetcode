@@ -12,8 +12,39 @@ import java.util.List;
  * @since Aug 12, 2015
  */
 public class PermutationSequence {
-	
+
+	static int pos = 0;
+
 	public static String getPermutation(int n, int k) {
+		String[] res = new String[1];
+		StringBuilder sb = new StringBuilder();
+		helper(n, k, sb, res, new boolean[n + 1]);
+		return res[0];
+	}
+
+	public static void helper(int n, int k, StringBuilder sb, String[] res, boolean[] visited) {
+		if (sb.length() == n) {
+			pos++;
+			if (pos == k) {
+				res[0] = sb.toString();
+			}
+			return;
+		}
+		for (int i = 1; i <= n; i++) {
+			if (visited[i]) continue;
+			visited[i] = true;
+			sb.append(i);
+			helper(n, k, sb, res, visited);
+			visited[i] = false;
+			sb.deleteCharAt(sb.length() - 1);
+		}
+	}
+
+	public static void main(String[] args) {
+		System.out.println(getPermutation(3, 4));
+	}
+	
+	public static String getPermutation1(int n, int k) {
 		// Time: O(N^2) deleteCharAt() takes linear time, Space: O(N)
 		int[] f = new int[n + 1];
 		StringBuilder sb = new StringBuilder();
@@ -37,12 +68,7 @@ public class PermutationSequence {
 		}
 		return sb.toString();
 	}
-	
-	public static void main(String[] args) {
-		System.out.println(getPermutation(3, 4));
-	}
-	
-	
+
 	public String getPermutation2(int n, int k) {
 		// Time: O(N^2) deleteCharAt() takes linear time, Space: O(N)
 		// k = i0 * (n-1)! + i1 * (n-2)! + ... + i{n-1} * 0! => "i0 i1 ... i{n-1}"

@@ -13,45 +13,25 @@ public class CombinationSum3 {
     public static List<List<Integer>> combinationSum3(int k, int n) {
         List<List<Integer>> res = new ArrayList<>();
         List<Integer> list = new ArrayList<>();
-        helper(k, n, 1, 0, list, res);
+        helper(k, n, 0, 1, list, res);
         return res;
     }
 
-    private static void helper(int k, int n, int curr, int sum, List<Integer> list, List<List<Integer>> res) {
-        if (sum > n) return;
-        if (k == 0 && sum == n) {
-            res.add(new ArrayList<>(list));
-            return;
-        }
-        for (int i = curr; i <= 9; i++) {
-            list.add(i);
-            helper(k - 1, n, i + 1, sum + i, list, res);
-            list.remove(list.size() - 1);
-        }
-    }
-
-	List<List<Integer>> res = new ArrayList<>();
-    List<Integer> list = new ArrayList<>();
-    
-    public List<List<Integer>> combinationSumm3(int k, int n) {
-        helper(k, n, 1);
-        return res;
-    }
-    
-    void helper(int k, int n, int start) {
-        if (k < 0 || n < 0) return;
-        else if (k == 0 && n == 0) {
+    public static void helper(int k, int n, int sum, int start, List<Integer> list, List<List<Integer>> res) {
+        if (list.size() == k && sum == n) {
             res.add(new ArrayList<>(list));
             return;
         }
         for (int i = start; i <= 9; i++) {
+            if (list.contains(i)) continue;
             list.add(i);
-            helper(k - 1, n - i, i + 1);
+            helper(k, n, sum + i, i + 1, list, res);
             list.remove(list.size() - 1);
         }
     }
 
     public static void main(String[] args) {
+        System.out.println(combinationSum3(3, 15));
         System.out.println(combinationSum3(3, 7));
         System.out.println(combinationSum3(3, 9));
     }

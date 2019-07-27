@@ -12,6 +12,49 @@ public class PalindromePartitioning {
 
     public static List<List<String>> partition(String s) {
         List<List<String>> res = new ArrayList<>();
+        List<String> list = new ArrayList<>();
+        helper(s, list, res);
+        return res;
+    }
+
+    public static void helper(String s, List<String> list, List<List<String>> res) {
+        if (s.length() == 0) {
+            res.add(new ArrayList<>(list));
+            return;
+        }
+        for (int i = 1; i < s.length() + 1; i++) {
+            String sub = s.substring(0, i);
+            if (isPalindrome(sub)) {
+                list.add(sub);
+                helper(s.substring(i), list, res);
+                list.remove(list.size() - 1);
+            }
+        }
+    }
+
+    public static boolean isPalindrome(String s) {
+        if (s == null || s.length() == 0) {
+            return true;
+        }
+        int lo = 0, hi = s.length() - 1;
+        while (lo < hi) {
+            if (s.charAt(lo) != s.charAt(hi)) {
+                return false;
+            }
+            lo++;
+            hi--;
+        }
+        return true;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(partition("aab"));
+        System.out.println(partition("cdd"));
+        System.out.println(partition("aabcb"));
+    }
+
+    public static List<List<String>> partition1(String s) {
+        List<List<String>> res = new ArrayList<>();
         helper(s, 0, new ArrayList<>(), res);
         return res;
     }
@@ -30,7 +73,7 @@ public class PalindromePartitioning {
         }
     }
 
-    public static boolean isPalindrome(String s) {
+    public static boolean isPalindrome1(String s) {
         if (s == null || s.length() == 0)
             return true;
         int i = 0, j = s.length() - 1;
@@ -41,12 +84,6 @@ public class PalindromePartitioning {
             j--;
         }
         return true;
-    }
-
-    public static void main(String[] args) {
-        System.out.println(partition("aab"));
-        System.out.println(partition("cdd"));
-        System.out.println(partition("aabcb"));
     }
 	
 	// Solution 1

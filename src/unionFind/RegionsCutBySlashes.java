@@ -5,7 +5,7 @@ package unionFind;
  */
 public class RegionsCutBySlashes {
 
-    // dfs
+    // helper
     public static int regionsBySlashes(String[] grid) {
         int n = grid.length, m = grid[0].length();
         int count = 0;

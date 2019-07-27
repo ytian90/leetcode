@@ -70,7 +70,7 @@ public class MakeSmallerBigger {
 //			nums[i] = t % 10;
 //			t /= 10;
 //		}
-//		int temp;
+//		int test;
 //		
 //	}
 	

@@ -10,16 +10,15 @@ import java.util.List;
  * @since Aug 15, 2015
  */
 public class CombinationSum2 {
-	
-	List<List<Integer>> res = new ArrayList<>();
-    List<Integer> list = new ArrayList<>();
-	
-	public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+
+	public static List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        List<List<Integer>> res = new ArrayList<>();
+        List<Integer> list = new ArrayList<>();
         Arrays.sort(candidates);
-        dfs(candidates, 0, target);
+        helper(candidates, 0, target, list, res);
         return res;
     }
-    void dfs(int[] candidates, int start, int target) {
+    public static void helper(int[] candidates, int start, int target, List<Integer> list, List<List<Integer>> res) {
         if (target < 0) return;
         else if (target == 0) {
             res.add(new ArrayList<Integer>(list));
@@ -28,15 +27,12 @@ public class CombinationSum2 {
         for (int i = start; i < candidates.length; i++) {
             if (i != start && candidates[i - 1] == candidates[i]) continue;
             list.add(candidates[i]);
-            dfs(candidates, i + 1, target - candidates[i]);
+            helper(candidates, i + 1, target - candidates[i], list, res);
             list.remove(list.size() - 1);
         }
     }
     
     public static void main(String[] args) {
-    	CombinationSum2 t = new CombinationSum2();
-    	for (List<Integer> l : t.combinationSum2(new int[]{10,1,2,7,6,1,5}, 8)) {
-    		System.out.println(l);
-    	}
+        System.out.println(combinationSum2(new int[]{10,1,2,7,6,1,5},8));
     }
 }

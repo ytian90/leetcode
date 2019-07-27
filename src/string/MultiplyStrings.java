@@ -5,9 +5,46 @@ package string;
  * @since Aug 11, 2015
  */
 public class MultiplyStrings {
+
+	public String multiply(String num1, String num2) {
+		int n = num1.length(), m = num2.length();
+		int[] num = new int[n + m];
+		num1 = new StringBuilder(num1).reverse().toString();
+		num2 = new StringBuilder(num2).reverse().toString();
+		for (int i = 0; i < num1.length(); i++) {
+			for (int j = 0; j < num2.length(); j++) {
+				int a = num1.charAt(i) - '0';
+				int b = num2.charAt(j) - '0';
+				num[i + j] += a * b;
+			}
+		}
+		int carry = 0;
+		for (int i = 0; i < num.length; i++) {
+			num[i] += carry;
+			carry = num[i] / 10;
+			num[i] %= 10;
+		}
+		StringBuilder sb = new StringBuilder();
+		for (int i : num) {
+			sb.append(i);
+		}
+		while (sb.charAt(sb.length() - 1) == '0' && sb.length() > 1) {
+			sb.deleteCharAt(sb.length() - 1);
+		}
+		return sb.reverse().toString();
+	}
+
+	public static void main(String[] args) {
+		MultiplyStrings t = new MultiplyStrings();
+		System.out.println(t.multiply("102", "18"));
+		System.out.println(t.multiply("0", "0"));
+		System.out.println(t.multiply("98", "9"));
+		System.out.println(t.multiply("2", "3"));
+		System.out.println(t.multiply("123", "456"));
+	}
 	
 	// Solution 1 don't reverse the string better
-	public String multiply(String num1, String num2) {
+	public String multiply1(String num1, String num2) {
 		int m = num1.length(), n = num2.length();
         int[] p = new int[m + n];
         for (int i = m - 1; i >= 0; i--) {
@@ -27,13 +64,6 @@ public class MultiplyStrings {
         for (int i : p) sb.append(i);
         while (sb.length() > 1 && sb.charAt(0) == '0') sb.deleteCharAt(0);
         return sb.toString();
-	}
-	
-	public static void main(String[] args) {
-		MultiplyStrings t = new MultiplyStrings();
-		System.out.println(t.multiply("102", "18"));
-		System.out.println(t.multiply("0", "0"));
-		System.out.println(t.multiply("98", "9"));
 	}
 	
 	// Solution 2 reverse the string 
