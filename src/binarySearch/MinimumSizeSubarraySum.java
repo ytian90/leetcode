@@ -3,17 +3,20 @@ package binarySearch;
 import java.util.Arrays;
 
 /**
- * Minimum Size Subarray Sum
+ * 209. Minimum Size Subarray Sum
  * @author yutian
  * @since Aug 27, 2015
  */
 public class MinimumSizeSubarraySum {
 	// Solution 1: Two Pointers  Time ~ O(N), Space ~ O(1) 
-	public int minSubArrayLen(int s, int[] nums) {
+	public static int minSubArrayLen(int s, int[] nums) {
+		if (nums == null || nums.length == 0) {
+			return 0;
+		}
 		int prev = 0, sum = 0, res = Integer.MAX_VALUE;
 		for (int i = 0; i < nums.length; i++) {
 			sum += nums[i];
-			while (sum >= s) { // it should be while!! NOT IF
+			while (sum >= s) {
 				res = Math.min(res, i - prev + 1);
 				sum -= nums[prev++];
 			}
@@ -22,9 +25,9 @@ public class MinimumSizeSubarraySum {
 	}
 	
 	public static void main(String[] args) {
-		MinimumSizeSubarraySum t = new MinimumSizeSubarraySum();
-		System.out.println(t.minSubArrayLen(4, new int[]{1, 4, 4}));
-		System.out.println(t.minSubArrayLen(3, new int[]{1, 1}));
+		System.out.println(minSubArrayLen(7, new int[]{2, 3, 1, 2, 4, 3}));
+		System.out.println(minSubArrayLen(4, new int[]{1, 4, 4}));
+		System.out.println(minSubArrayLen(3, new int[]{1, 1}));
 	}
 	
 	// Solution 2: Binary Search Time ~ O(NlogN), Space ~ O(N)

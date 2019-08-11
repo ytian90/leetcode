@@ -10,8 +10,40 @@ import java.util.Map;
  */
 public class LongestSubstringWithAtMostKDistinctCharacters {
 
-	// Method 1: Using Unicode string with hashMap
 	public static int lengthOfLongestSubstringKDistinct(String s, int k) {
+		if (s == null || s.length() == 0) {
+			return 0;
+		}
+		Map<Character, Integer> map = new HashMap<>();
+		int prev = 0, res = 0;
+		for (int i = 0; i < s.length(); i++) {
+			char c = s.charAt(i);
+			if (map.containsKey(c)) {
+				map.put(c, map.get(c) + 1);
+			} else {
+				map.put(c, 1);
+			}
+			while (map.size() > k) {
+				char prevChar = s.charAt(prev);
+				map.put(prevChar, map.get(prevChar) - 1);
+				if (map.get(prevChar) == 0) {
+					map.remove(prevChar);
+				}
+				prev++;
+			}
+			res = Math.max(res, i - prev + 1);
+		}
+		return res;
+	}
+
+	public static void main(String[] args) {
+		System.out.println(lengthOfLongestSubstringKDistinct("eceba", 2));
+		System.out.println(lengthOfLongestSubstringKDistinct("abaccc", 2));
+		System.out.println(lengthOfLongestSubstringKDistinct("abccbcab", 2));
+	}
+
+	// Method 1: Using Unicode string with hashMap
+	public static int lengthOfLongestSubstringKDistinct0(String s, int k) {
 		if (s == null || s.length() == 0 || k == 0)
 			return 0;
 		int n = s.length(), start = 0, res = 0;
@@ -46,10 +78,6 @@ public class LongestSubstringWithAtMostKDistinctCharacters {
         return res;
     }
 
-	public static void main(String[] args) {
-		System.out.println(lengthOfLongestSubstringKDistinct("eceba", 2));
-		System.out.println(lengthOfLongestSubstringKDistinct("abaccc", 2));
-		System.out.println(lengthOfLongestSubstringKDistinct("abccbcab", 2));
-	}
+
 
 }

@@ -10,9 +10,45 @@ import java.util.Map;
  * @since Jan 22, 2016
  */
 public class LongestSubstringWithAtMostTwoDistinctCharacters {
+
+	public static int lengthOfLongestSubstringTwoDistinct(String s) {
+		if (s == null || s.length() == 0) {
+			return 0;
+		}
+		Map<Character, Integer> map = new HashMap<>();
+		int prev = 0, res = 1;
+		for (int i = 0; i < s.length(); i++) {
+			char c = s.charAt(i);
+			if (map.containsKey(c)) {
+				map.put(c, map.get(c) + 1);
+			} else {
+				map.put(c, 1);
+			}
+			while (map.size() > 2) {
+				char prevChar = s.charAt(prev);
+				map.put(prevChar, map.get(prevChar) - 1);
+				if (map.get(prevChar) == 0) {
+					map.remove(prevChar);
+				}
+				prev++;
+			}
+			res = Math.max(res, i - prev + 1);
+		}
+		return res;
+	}
+
+
+	public static void main(String[] args) {
+		System.out.println(lengthOfLongestSubstringTwoDistinct("eceba"));
+		System.out.println(lengthOfLongestSubstringTwoDistinct("ccaabbb"));
+		System.out.println(lengthOfLongestSubstringTwoDistinct("eceba"));
+		System.out.println(lengthOfLongestSubstringTwoDistinct("a"));
+		System.out.println(lengthOfLongestSubstringTwoDistinct("aac"));
+		System.out.println(lengthOfLongestSubstringTwoDistinct("abc"));
+	}
 	
 	// HashMap
-	public static int lengthOfLongestSubstringTwoDistinct(String s) {
+	public static int lengthOfLongestSubstringTwoDistinct1(String s) {
 		if (s == null || s.length() < 1) return 0;
         Map<Character, Integer> map = new HashMap<>();
         int prev = 0, max = 0;
@@ -49,11 +85,5 @@ public class LongestSubstringWithAtMostTwoDistinctCharacters {
         return max > (s.length() - i) ? max: s.length() - i; // aac
 	}
 
-	public static void main(String[] args) {
-		System.out.println(lengthOfLongestSubstringTwoDistinct2("eceba"));
-		System.out.println(lengthOfLongestSubstringTwoDistinct2("a"));
-		System.out.println(lengthOfLongestSubstringTwoDistinct2("aac"));
-		System.out.println(lengthOfLongestSubstringTwoDistinct2("abc"));
-	}
 
 }

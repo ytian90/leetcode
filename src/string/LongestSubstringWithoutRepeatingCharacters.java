@@ -1,6 +1,7 @@
 package string;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 3. Longest Substring Without Repeating Characters
@@ -8,8 +9,33 @@ import java.util.HashMap;
  * @since Jul 25, 2015
  */
 public class LongestSubstringWithoutRepeatingCharacters {
-	// Solution 1 Time ~O(N)
+
 	public static int lengthOfLongestSubstring(String s) {
+		if (s == null || s.length() == 0) {
+			return 0;
+		}
+		int start = 0, res = 0;
+		Map<Character, Integer> map = new HashMap<>();
+		for (int i = 0; i < s.length(); i++) {
+			char c = s.charAt(i);
+			if (map.containsKey(c) && map.get(c) >= start) {
+				start = map.get(c) + 1;
+			}
+			map.put(c, i);
+			res = Math.max(res, i - start + 1);
+		}
+		return res;
+	}
+
+	public static void main(String[] args) {
+		System.out.println(lengthOfLongestSubstring("abcabcbb"));
+		System.out.println(lengthOfLongestSubstring("bbbbb"));
+		System.out.println(lengthOfLongestSubstring("pwwkew"));
+	}
+
+
+	// Solution 1 Time ~O(N)
+	public static int lengthOfLongestSubstring1(String s) {
 		boolean[] exist = new boolean[256];
 		int start = 0, max = 0;
 		for (int i = 0; i < s.length(); i++) {
@@ -49,12 +75,6 @@ public class LongestSubstringWithoutRepeatingCharacters {
 			maxLen = Math.max(maxLen, i - start + 1);
 		}
 		return maxLen;
-	}
-
-	public static void main(String[] args) {
-		System.out.println(lengthOfLongestSubstring("abcabcbb"));
-		System.out.println(lengthOfLongestSubstring("bbbbb"));
-		System.out.println(lengthOfLongestSubstring("pwwkew"));
 	}
 
 }

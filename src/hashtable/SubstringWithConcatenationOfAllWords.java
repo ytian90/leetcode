@@ -14,44 +14,46 @@ public class SubstringWithConcatenationOfAllWords {
 
 	// time O(n * m), space O(m)
 	public static List<Integer> findSubstring(String s, String[] words) {
-		List<Integer> indexes = new ArrayList<>();
-		if (s == null || s.length() == 0 || words.length == 0) {
-			return indexes;
+		List<Integer> res = new ArrayList<>();
+		if (s == null || s.length() == 0) {
+			return res;
 		}
-		Map<String, Integer> counts = new HashMap<>();
+		Map<String, Integer> map = new HashMap<>();
 		for (String word : words) {
-			counts.put(word, counts.getOrDefault(word, 0) + 1);
+			map.put(word, map.getOrDefault(word, 0) + 1);
 		}
-		int n = s.length(), num = words.length, len = words[0].length();
-		for (int i = 0; i < n - num * len + 1; i++) {
+		int size = words[0].length(), n = words.length;
+		for (int i = 0; i < s.length() - n * size + 1; i++) {
 			Map<String, Integer> seen = new HashMap<>();
+			// j counts the number of current words
 			int j = 0;
-			while (j < num) {
-				String word = s.substring(i + j * len, i + (j + 1) * len);
-				if (counts.containsKey(word)) {
+			while (j < n) {
+				String word = s.substring(i + j * size, i + (j + 1) * size);
+				if (map.containsKey(word)) {
 					seen.put(word, seen.getOrDefault(word, 0) + 1);
-					if (seen.get(word) > counts.getOrDefault(word, 0)) {
+					// if seen count is larger than expect, break
+					if (seen.get(word) > map.getOrDefault(word, 0)) {
 						break;
 					}
 				} else {
+					// if word is not expect, break
 					break;
 				}
 				j++;
 			}
-			if (j == num) {
-				indexes.add(i);
+			if (j == n) {
+				res.add(i);
 			}
 		}
-		return indexes;
+		return res;
 	}
 
 	public static void main(String[] args) {
-		String s = "barfoothefoobarman";
-		String[] words = new String[]{"foo", "bar"};
-		List<Integer> l = findSubstring(s, words);
-		for (int i : l) System.out.print(i + " ");
+		System.out.println(findSubstring("barfoothefoobarman", new String[]{"foo","bar"}));
+		System.out.println(findSubstring("wordgoodgoodgoodbestword", new String[]{"word","good","best","word"}));
+		System.out.println(findSubstring("wordgoodgoodgoodbestword", new String[]{"word","good","best","good"}));
 	}
-	
+
 	/*
 	 * Build a map for words in L and its relative counts
 	 */

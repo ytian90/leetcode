@@ -10,24 +10,25 @@ import java.util.Stack;
  * @since Apr 8, 2016
  */
 public class FlattenNestedListIterator implements Iterator<Integer> {
-	Stack<NestedInteger> stack = new Stack<>();
+	Stack<NestedInteger> stack;
 
 	public FlattenNestedListIterator(List<NestedInteger> nestedList) {
-		addToStack(nestedList);
-	}
-
-	public void addToStack(List<NestedInteger> list) {
-		for (int i = list.size() - 1; i >= 0; i--) {
-			stack.push(list.get(i));
-		}
+		stack = new Stack<>();
+		pushListIntoStack(nestedList);
 	}
 
 	@Override
 	public Integer next() {
-		if (hasNext()) {
-			return stack.pop().getInteger();
+		return stack.pop().getInteger();
+	}
+
+	private void pushListIntoStack(List<NestedInteger> list) {
+		if (list == null) {
+			return;
 		}
-		return -1;
+		for (int i = list.size() - 1; i >= 0; i--) {
+			stack.push(list.get(i));
+		}
 	}
 
 	@Override
@@ -38,7 +39,7 @@ public class FlattenNestedListIterator implements Iterator<Integer> {
 				return true;
 			}
 			stack.pop();
-			addToStack(curr.getList());
+			pushListIntoStack(curr.getList());
 		}
 		return false;
 	}
