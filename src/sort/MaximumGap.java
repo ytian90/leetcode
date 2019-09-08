@@ -31,7 +31,7 @@ public class MaximumGap {
 		Arrays.fill(maxBucket, Integer.MIN_VALUE);
 		Arrays.fill(minBucket, Integer.MAX_VALUE);
 		
-		// put n - 2 numbers (except max and min) into n - 1 buckets
+		// add n - 2 numbers (except max and min) into n - 1 buckets
 		// by updating the corresponding bucket's min and max value
 		for (int i = 0; i < n; i++) {
 			if (nums[i] != max && nums[i] != min) {

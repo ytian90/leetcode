@@ -1,9 +1,6 @@
 package array;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * 239. Sliding Window Maximum
@@ -12,8 +9,57 @@ import java.util.Queue;
  * @since Jan 27, 2016
  */
 public class SlidingWindowMaximum {
-	
 	public static int[] maxSlidingWindow(int[] nums, int k) {
+		if (nums == null || nums.length == 0) {
+			return nums;
+		}
+		int n = nums.length;
+		int[] res = new int[n - k + 1];
+		PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+		for (int i = 0; i < k; i++) {
+			pq.add(nums[i]);
+		}
+		for (int i = k; i < n; i++) {
+			res[i - k] = pq.peek();
+			pq.add(nums[i]);
+			pq.remove(nums[i - k]);
+		}
+		res[n - k] = pq.peek();
+		return res;
+	}
+
+	public static int[] maxSlidingWindow1(int[] nums, int k) {
+		if (nums == null || nums.length == 0) {
+			return nums;
+		}
+		int n = nums.length;
+		int[] res = new int[n - k + 1];
+		int maxVal = Integer.MIN_VALUE;
+		for (int i = 0; i < k; i++) {
+			maxVal = Math.max(nums[i], maxVal);
+		}
+		res[0] = maxVal;
+		for (int i = k; i < n; i++) {
+			int newVal = nums[i];
+			if (newVal > maxVal) {
+				maxVal = newVal;
+			} else if (nums[i - k] == maxVal) {
+				maxVal = newVal;
+				for (int j = i - k + 1; j < i; j++) {
+					maxVal = Math.max(maxVal, nums[j]);
+				}
+			}
+			res[i - k + 1] = maxVal;
+		}
+		return res;
+	}
+
+	public static void main(String[] args) {
+		System.out.println(Arrays.toString(
+				maxSlidingWindow(new int[]{1,3,-1,-3,5,3,6,7}, 3)));
+	}
+	
+	public static int[] maxSlidingWindow2(int[] nums, int k) {
 		if (nums == null || nums.length == 0 || k < 0)
 			return new int[]{};
 		int n = nums.length;
@@ -35,15 +81,7 @@ public class SlidingWindowMaximum {
 
 		return res;
     }
-	
-	public static void main(String[] args) {
-		for (int i: maxSlidingWindow(new int[]{1, 3, -1, -3, 5, 3, 6, 7}, 3))
-			System.out.print(i + " ");
-		System.out.println();
-//		for (int i: maxSlidingWindow(new int[]{1, 3, -1}, 3))
-//			System.out.print(i + " ");
-	}
-	
+
 	public static int[] windowMax(int[] array, int width) {
 		Deque<Integer> q = new LinkedList<Integer>();
 		// calculate the first window max

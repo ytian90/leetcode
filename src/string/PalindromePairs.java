@@ -65,7 +65,7 @@ public class PalindromePairs {
         List<List<Integer>> result = new ArrayList<>();
         if (words == null || words.length == 0) return result;
         HashMap<String, Integer> map = new HashMap<>();
-        // put word itself as key, position as value in hashmap
+        // add word itself as key, position as value in hashmap
         for (int i = 0; i < words.length; i++) {
         	map.put(words[i], i);
         }

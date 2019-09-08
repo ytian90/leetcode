@@ -22,7 +22,7 @@ public class RemoveNthNodeFromEndOfList {
 
 	public static ListNode removeNthFromEnd(ListNode head, int n) {
 		if (head == null || n < 0)
-			throw new IllegalArgumentException("Input is not valid.");
+			throw new IllegalArgumentException("Input is not isMidValTooSmall.");
 		
 		ListNode dummy = new ListNode(0);
 		dummy.next = head;

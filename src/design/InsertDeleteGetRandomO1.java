@@ -1,8 +1,6 @@
 package design;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Random;
+import java.util.*;
 
 /**
  * 380. Insert Delete GetRandom O(1)
@@ -10,53 +8,59 @@ import java.util.Random;
  * @since Aug 31, 2016
  */
 public class InsertDeleteGetRandomO1 {
-	
-	ArrayList<Integer> nums;
-	HashMap<Integer, Integer> locs;
-	Random random;
-	
-	/** Initialize your data structure here. */
+
+    List<Integer> list;
+    Map<Integer, Integer> map;
+    Random random;
+
+    /** Initialize your data structure here. */
     public InsertDeleteGetRandomO1() {
-        nums = new ArrayList<>();
-        locs = new HashMap<Integer, Integer>();
+        list = new LinkedList<>();
+        map = new HashMap<>();
         random = new Random();
     }
-    
+
     /** Inserts a value to the set. Returns true if the set did not already contain the specified element. */
     public boolean insert(int val) {
-        if (locs.containsKey(val)) return false;
-        locs.put(val, nums.size());
-        nums.add(val);
+        if (map.containsKey(val)) {
+            return false;
+        }
+        map.put(val, list.size());
+        list.add(val);
         return true;
     }
-    
+
     /** Removes a value from the set. Returns true if the set contained the specified element. */
     public boolean remove(int val) {
-    	if (!locs.containsKey(val)) return false;
-    	int loc = locs.get(val);
-    	if (loc < nums.size() - 1) { // not the last one than swap the last one with this value
-    		int lastone = nums.get(nums.size() - 1);
-    		nums.set(loc, lastone);
-    		locs.put(lastone, loc);
-    	}
-    	locs.remove(val);
-    	nums.remove(nums.size() - 1);
-    	return true;
-    }
-    
-    /** Get a random element from the set. */
-    public int getRandom() {
-        return nums.get(random.nextInt(nums.size()));
+        if (!map.containsKey(val)) {
+            return false;
+        }
+        int replaceVal = list.get(list.size() - 1);
+        int valIndex = map.get(val);
+        if (replaceVal != val) {
+            list.set(valIndex, replaceVal);
+            map.put(replaceVal, valIndex);
+        }
+
+        list.remove(list.size() - 1);
+        map.remove(val);
+        return true;
     }
 
-	public static void main(String[] args) {
-        InsertDeleteGetRandomO1 obj = new InsertDeleteGetRandomO1();
-        System.out.println(obj.insert(1));
-        System.out.println(obj.insert(2));
-        System.out.println(obj.insert(2));
-        System.out.println(obj.getRandom());
-        System.out.println(obj.remove(1));
-        System.out.println(obj.getRandom());
-	}
+    /** Get a random element from the set. */
+    public int getRandom() {
+        return list.get(random.nextInt(list.size()));
+    }
+
+    public static void main(String[] args) {
+        InsertDeleteGetRandomO1 randomizedSet = new InsertDeleteGetRandomO1();
+        System.out.println(randomizedSet.insert(1));
+        System.out.println(randomizedSet.remove(2));
+        System.out.println(randomizedSet.insert(2));
+        System.out.println(randomizedSet.getRandom());
+        System.out.println(randomizedSet.remove(1));
+        System.out.println(randomizedSet.insert(2));
+        System.out.println(randomizedSet.getRandom());
+    }
 
 }

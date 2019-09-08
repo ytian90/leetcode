@@ -30,7 +30,7 @@ public class MeetingRooms2 {
 				// otherwise, this meeting needs a new room
 				pq.offer(intervals[i]);
 			}
-			// don't forget to put the meeting room back
+			// don't forget to add the meeting room back
 			pq.offer(curr);
 		}
         return pq.size();

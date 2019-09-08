@@ -22,9 +22,9 @@ public class RandomFlipMatrix {
 
     public int[] flip() {
         int pos = rand.nextInt(total--);
-        // check if we have already put something in this index
+        // check if we have already add something in this index
         int x = map.getOrDefault(pos, pos);
-        // swap - put total at index we generated
+        // swap - add total at index we generated
         map.put(pos, map.getOrDefault(total, total));
         return new int[]{x / n_cols, x % n_cols};
     }

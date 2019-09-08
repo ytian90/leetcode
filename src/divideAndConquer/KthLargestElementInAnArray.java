@@ -42,8 +42,8 @@ public class KthLargestElementInAnArray {
 	// return the index of the kth smallest number
 	static int quickSelect(int[] a, int lo, int hi, int target) {
 	    // use quick sort's idea
-	    // put nums that are <= pivot to the left
-	    // put nums that are  > pivot to the right
+	    // add nums that are <= pivot to the left
+	    // add nums that are  > pivot to the right
 	    int i = lo, j = hi, pivot = a[hi];
 	    while (i < j) {
 	      if (a[i++] > pivot) 

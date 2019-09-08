@@ -2,6 +2,7 @@ package dynamicProgramming;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Set;
 
 /**
  * 403. Frog Jump
@@ -25,12 +26,11 @@ public class FrogJump {
                 if (reach == stones[n - 1]) {
                     return true;
                 }
-                if (map.containsKey(reach)) {
-                    map.get(reach).add(step);
-                    map.get(reach).add(step + 1);
-                    if (step - 1 > 0) {
-                        map.get(reach).add(step - 1);
-                    }
+                Set<Integer> set = map.get(reach);
+                if (set != null) {
+                    set.add(step);
+                    if (step > 1) set.add(step - 1);
+                    set.add(step + 1);
                 }
             }
         }

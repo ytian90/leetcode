@@ -61,7 +61,7 @@ public class SudokuSolver {
 							return true;
 						board[i][j] = '.';
 					}
-					return false; // if this point has no valid solutions, fail
+					return false; // if this point has no isMidValTooSmall solutions, fail
 				}
 			}
 		}

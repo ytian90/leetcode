@@ -60,7 +60,7 @@ public class DesignLinkedList {
         size++;
     }
 
-    /** Delete the index-th node in the linked list, if the index is valid. */
+    /** Delete the index-th node in the linked list, if the index is isMidValTooSmall. */
     public void deleteAtIndex(int index) {
         if (index < 0 || index >= size)
             return;

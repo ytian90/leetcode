@@ -14,8 +14,62 @@ import java.util.stream.Collectors;
  *
  */
 public class FindDuplicateFileinSystem {
+	static final String ss = "/";
 
 	public static List<List<String>> findDuplicate(String[] paths) {
+		List<List<String>> res = new ArrayList<>();
+		if (paths.length == 0) {
+			return res;
+		}
+		Map<String, List<String>> map = new HashMap<>();
+		for (String s : paths) {
+			cleanUpData(s, map);
+		}
+		for (List<String> l : map.values()) {
+			if (l.size() > 1) {
+				res.add(l);
+			}
+		}
+		return res;
+	}
+
+	public static void cleanUpData(String s, Map<String, List<String>> map) {
+		if (s == null || s.length() == 0) {
+			return;
+		}
+		String[] strArr = s.split(" ");
+		int n = strArr.length;
+		if (n < 2) {
+			return;
+		}
+		for (int i = 1; i < n; i++) {
+			StringBuilder sb = new StringBuilder(strArr[0]);
+			sb.append(ss);
+			int index = strArr[i].indexOf('(');
+			if (index == -1) {
+				continue;
+			}
+			sb.append(strArr[i].substring(0, index));
+			int endIndex = strArr[i].indexOf(')');
+			String content = strArr[i].substring(index, endIndex);
+			if (!map.containsKey(content)) {
+				map.put(content, new ArrayList<>());
+			}
+			map.get(content).add(sb.toString());
+		}
+	}
+
+	public static void main(String[] args) {
+        System.out.println(findDuplicate(new String[]{
+                "root/a 1.txt(abcd) 2.txt(efgh)", "root/c 3.txt(abcd)", "root/c/d 4.txt(efgh)", "root 4.txt(efgh)"
+        }));
+
+		System.out.println(findDuplicate(new String[]{
+				"root/a 1.txt(abcd) 2.txt(efsfgh)","root/c 3.txt(abdfcd)","root/c/d 4.txt(efggdfh)"
+		}));
+	}
+
+	public static List<List<String>> findDuplicate2(String[] paths) {
 		List<List<String>> res = new ArrayList<>();
 		int n = paths.length;
 		if (n == 0) return res;
@@ -40,7 +94,7 @@ public class FindDuplicateFileinSystem {
 		return res;
 	}
 	
-	public static List<List<String>> findDuplicate2(String[] paths) {
+	public static List<List<String>> findDuplicate3(String[] paths) {
 		Map<String, List<String>> map = new HashMap<>();
 		for (String path : paths) {
 			String[] tokens = path.split(" ");
@@ -52,13 +106,6 @@ public class FindDuplicateFileinSystem {
 			}
 		}
 		return map.values().stream().filter(e -> e.size() > 1).collect(Collectors.toList());
-	}
-	
-	public static void main(String[] args) {
-		String[] test = new String[]{"root/a 1.txt(abcd) 2.txt(efgh)", "root/c 3.txt(abcd)", "root/c/d 4.txt(efgh)", "root 4.txt(efgh)"};
-		for (List<String> l : findDuplicate(test)) {
-			System.out.println(l);
-		}
 	}
 
 }

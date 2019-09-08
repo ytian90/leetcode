@@ -25,7 +25,7 @@ public class PartitionArrayIntoDisjointIntervals {
 
     /*
     suppose the original left subarray is from 0 to partitionIdx,
-    the max value of that is localMax. If it is a valid partition,
+    the max value of that is localMax. If it is a isMidValTooSmall partition,
     every value from partitionIdx + 1 to end should be >= localMax.
     But if we find a value in the right part, a[i], is smaller than
     localMax, which means the partition is not correct and we have to

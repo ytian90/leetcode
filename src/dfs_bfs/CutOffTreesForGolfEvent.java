@@ -14,7 +14,7 @@ public class CutOffTreesForGolfEvent {
             return 0;
         int n = forest.size(), m = forest.get(0).size();
         PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[2] - b[2]);
-        // put (row, col, height) in pq
+        // add (row, col, height) in pq
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
                 if (forest.get(i).get(j) > 1) {

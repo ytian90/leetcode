@@ -11,16 +11,17 @@ import java.util.Queue;
  * @author yutian
  * @since Aug 29, 2015
  */
-class Node {
-    String str;
-    TreeNode node;
-    public Node(String str, TreeNode node) {
-        this.str = str;
-        this.node = node;
-    }
-}
-
 public class BinaryTreePaths {
+
+    static class Node {
+        String str;
+        TreeNode node;
+        public Node(String str, TreeNode node) {
+            this.str = str;
+            this.node = node;
+        }
+    }
+
 	// recursion Time Complexity: O(n)
 	public static List<String> binaryTreePaths(TreeNode root) {
         List<String> result = new ArrayList<String>();

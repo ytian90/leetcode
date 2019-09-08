@@ -77,7 +77,7 @@ public class MapSumPairs {
 //    }
 //
 //    public void insert(String key, int val) {
-//        map.put(key, val);
+//        map.add(key, val);
 //    }
 //
 //    public int sum(String prefix) {

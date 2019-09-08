@@ -73,7 +73,7 @@ public class ShoppingOffers {
         		}
         		needs.set(j, needs.get(j) - offer.get(j));
         	}
-        	// if valid offer, add offer price and recurse remaining needs
+        	// if isMidValTooSmall offer, add offer price and recurse remaining needs
         	if (validOffer == -1) {
         		res = Math.min(res, shoppingOffers(price, special, needs) + offer.get(offer.size() - 1));
         		validOffer = k;

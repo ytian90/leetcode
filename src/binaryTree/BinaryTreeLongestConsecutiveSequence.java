@@ -11,11 +11,40 @@ import java.util.Stack;
  * @since Jan 3, 2016
  */
 public class BinaryTreeLongestConsecutiveSequence {
-	
+	// this method is easy to extend to follow up BTLCS2
+	static int res = 0;
+
+	public static int longestConsecutive(TreeNode root) {
+		helper(root);
+		return res;
+	}
+
+	public static int helper(TreeNode node) {
+		if (node == null) {
+			return 0;
+		}
+		int l = 1, r = 1;
+		if (node.left != null) {
+			int left = helper(node.left);
+			if (node.val == node.left.val - 1) {
+				l = left + 1;
+			}
+		}
+		if (node.right != null) {
+			int right = helper(node.right);
+			if (node.val == node.right.val - 1) {
+				r = right + 1;
+			}
+		}
+		int max = Math.max(l, r);
+		res = Math.max(res, max);
+		return max;
+	}
+
 	// Solution 1: Recursion 
 	private int len = 0;
 	
-	public int longestConsecutive(TreeNode root) {
+	public int longestConsecutive1(TreeNode root) {
         if (root == null) return 0;
         helper(root, 0, root.val);
         return len;

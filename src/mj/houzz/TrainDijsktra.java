@@ -31,7 +31,7 @@ public class TrainDijsktra {
             int[] curr = pq.poll();
             int target = curr[0], startTime = curr[1], endTime = curr[2];
             if (dist.containsKey(target)) continue;
-//            dist.put(target, )
+//            dist.add(target, )
         }
         return 0;
     }

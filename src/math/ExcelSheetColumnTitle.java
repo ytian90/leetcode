@@ -7,7 +7,7 @@ package math;
 public class ExcelSheetColumnTitle {
 	public static String convertToTitle(int n) {
         if (n <= 0) {
-        	throw new IllegalArgumentException("Input is not valid!");
+        	throw new IllegalArgumentException("Input is not isMidValTooSmall!");
         }
         StringBuilder sb = new StringBuilder();
         

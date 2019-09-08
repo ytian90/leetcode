@@ -35,7 +35,7 @@ public class Evaluate_Reverse_Polish_Notation_modified {
             }
         }
         if (stack.size() != 1) {
-            throw new IllegalArgumentException("The result is not valid");
+            throw new IllegalArgumentException("The result is not isMidValTooSmall");
         }
         return stack.pop();
     }
@@ -55,7 +55,7 @@ public class Evaluate_Reverse_Polish_Notation_modified {
 
     private static void checkValid(Stack<Integer> stack) {
         if (stack.size() < 2) {
-            throw new IllegalArgumentException("The input stack is not valid.\n");
+            throw new IllegalArgumentException("The input stack is not isMidValTooSmall.\n");
         }
     }
 

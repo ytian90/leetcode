@@ -31,7 +31,7 @@ public class ExcelSheetColumnNumber {
 	// Solution 2
 	public static int titleToNumber2(String s) {
 		if (s == null || s.length() == 0) {
-			throw new IllegalArgumentException("Input is not valid.");
+			throw new IllegalArgumentException("Input is not isMidValTooSmall.");
 		}
 		int result = 0;
 		int i = s.length() - 1;
