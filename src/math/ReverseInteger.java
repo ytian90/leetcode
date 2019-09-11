@@ -7,7 +7,7 @@ package math;
 public class ReverseInteger {
 	// Time ~O(N)
 	public static int reverse(int x) {
-		int res = 0;
+		long res = 0;
 		while (x != 0) {
 			res = res * 10 + x % 10;
 			x /= 10;
@@ -15,7 +15,7 @@ public class ReverseInteger {
 				return 0;
 			}
 		}
-		return res;
+		return (int) res;
 	}
 
 	public static void main(String[] args) {

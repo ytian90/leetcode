@@ -5,8 +5,36 @@ package string;
  * @since Jul 24, 2015
  */
 public class ImplementStrStr {
-	
 	public static int strStr(String haystack, String needle) {
+		if (needle.length() == 0) {
+			return 0;
+		}
+		for (int i = 0; i <= haystack.length() - needle.length(); i++) {
+			for (int j = 0; j < needle.length(); j++) {
+				if (haystack.charAt(i + j) == needle.charAt(j)) {
+					if (j == needle.length() - 1) {
+						return i;
+					}
+				} else {
+					break;
+				}
+			}
+		}
+		return -1;
+	}
+
+	public static void main(String[] args) {
+		System.out.println(strStr("", ""));
+		System.out.println(strStr("a", ""));
+		System.out.println(strStr("a", "a"));
+		System.out.println(strStr("hello", "ll"));
+		System.out.println(strStr("aaaaa", "bba"));
+		System.out.println(strStr("aaaba", "ba"));
+		System.out.println(strStr("mississippi", "a"));
+		System.out.println(strStr("mississippi", "issi"));
+	}
+	
+	public static int strStr0(String haystack, String needle) {
 		if (needle.isEmpty()) return 0;
 		for (int i = 0; i <= haystack.length() - needle.length(); i++) {
 			for (int j = 0; j < needle.length() && haystack.charAt(i + j) == needle.charAt(j); j++) {
@@ -61,11 +89,4 @@ public class ImplementStrStr {
 		return result;
 		
 	}
-
-	public static void main(String[] args) {
-		System.out.println(strStr("a", "a"));
-		System.out.println(strStr("aaaba", "ba"));
-		System.out.println(strStr("mississippi", "issi"));
-	}
-
 }

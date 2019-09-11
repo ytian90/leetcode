@@ -15,38 +15,47 @@ public class BinaryTreePreorderTraversal {
 
 	public static List<Integer> preorderTraversal(TreeNode root) {
 		List<Integer> res = new ArrayList<>();
+		if (root == null) {
+			return res;
+		}
 		helper(root, res);
 		return res;
 	}
 
-	private static void helper(TreeNode node, List<Integer> res) {
-		if (node == null) return;
+	public static void helper(TreeNode node, List<Integer> res) {
+		if (node == null) {
+			return;
+		}
 		res.add(node.val);
 		helper(node.left, res);
 		helper(node.right, res);
 	}
-	
-	// Time ~O(N) Space ~O(N)
-	public List<Integer> preorderTraversal1(TreeNode root) {
+
+	public static List<Integer> preorderTraversal_iterative(TreeNode root) {
 		List<Integer> res = new ArrayList<>();
-		if (root == null) return res;
-		Deque<TreeNode> stack = new LinkedList<>();
+		if (root == null) {
+			return res;
+		}
+		Stack<TreeNode> stack = new Stack<>();
 		stack.push(root);
 		while (!stack.isEmpty()) {
-			TreeNode node = stack.pop();
-			res.add(node.val);
-			if (node.right != null) stack.push(node.right);
-			if (node.left != null) stack.push(node.left);
+			TreeNode curr = stack.pop();
+			res.add(curr.val);
+			if (curr.right != null) {
+				stack.push(curr.right);
+			}
+			if (curr.left != null) {
+				stack.push(curr.left);
+			}
 		}
 		return res;
 	}
 
 	public static void main(String[] args) {
 		TreeNode n0 = new TreeNode(1);
-		TreeNode n1 = new TreeNode(2);
-		TreeNode n2 = new TreeNode(3);
-		n0.right = n1; n1.left = n2;
-
+		n0.right = new TreeNode(2);
+		n0.right.left = new TreeNode(3);
+		System.out.println(preorderTraversal(n0));
 	}
 	
 	// root-left-right

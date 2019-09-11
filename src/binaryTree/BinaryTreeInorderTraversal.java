@@ -8,37 +8,53 @@ import java.util.*;
  * @since Aug 17, 2015
  */
 public class BinaryTreeInorderTraversal {
-	
-	public static List<Integer> inorderTraversal(TreeNode root) {
-		List<Integer> result = new ArrayList<>();
-		Deque<TreeNode> stack = new LinkedList<>();
-		TreeNode curr = root;
-		while (curr != null || !stack.isEmpty()) {
-			while (curr != null) {
-				stack.push(curr);
-				curr = curr.left;
-			}
-			curr = stack.pop();
-			result.add(curr.val);
-			curr = curr.right;
-		}
-		return result;
-	}
 
-	public List<Integer> inorderTraversall(TreeNode root) {
+	public static List<Integer> inorderTraversal(TreeNode root) {
 		List<Integer> res = new ArrayList<>();
+		if (root == null) {
+			return res;
+		}
 		helper(root, res);
 		return res;
 	}
 
-	private void helper(TreeNode node, List<Integer> res) {
-		if (node == null) return;
+	public static void helper(TreeNode node, List<Integer> res) {
+		if (node == null) {
+			return;
+		}
 		helper(node.left, res);
 		res.add(node.val);
 		helper(node.right, res);
+
+	}
+
+	public static List<Integer> inorderTraversal_iterative(TreeNode root) {
+		List<Integer> res = new ArrayList<>();
+		if (root == null) {
+			return res;
+		}
+		Stack<TreeNode> stack = new Stack<>();
+		TreeNode node = root;
+
+		while (node != null || !stack.isEmpty()) {
+			while (node != null) {
+				stack.push(node);
+				node = node.left;
+			}
+			node = stack.pop();
+			res.add(node.val);
+			node = node.right;
+		}
+		return res;
 	}
 	
 	public static void main(String[] args) {
+
+		TreeNode n0 = new TreeNode(1);
+		n0.right = new TreeNode(2);
+		n0.right.left = new TreeNode(3);
+		System.out.println(inorderTraversal_iterative(n0));
+
 //		TreeNode n0 = new TreeNode(10);
 //		TreeNode n1 = new TreeNode(5);
 //		TreeNode n2 = new TreeNode(15);
@@ -67,7 +83,6 @@ public class BinaryTreeInorderTraversal {
 		n1.right = n2; n2.left = n3;
 
 		System.out.println(inorderTraversal2(n1));
-		
 		
 	}
 	
