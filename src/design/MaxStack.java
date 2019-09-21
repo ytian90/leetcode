@@ -9,22 +9,19 @@ public class MaxStack {
     Stack<Integer> stack;
     Stack<Integer> maxStack;
 
-    /**
-     * initialize your data structure here.
-     */
+    /** initialize your data structure here. */
     public MaxStack() {
-        stack = new Stack<>();
-        maxStack = new Stack<>();
+        this.stack = new Stack<>();
+        this.maxStack = new Stack<>();
     }
 
     public void push(int x) {
-        pushHelper(x);
-    }
-
-    public void pushHelper(int x) {
-        int t = maxStack.isEmpty() ? Integer.MIN_VALUE : maxStack.peek();
+        int currMax = maxStack.isEmpty() ? Integer.MIN_VALUE : maxStack.peek();
+        if (currMax < x) {
+            currMax = x;
+        }
         stack.push(x);
-        maxStack.push(Math.max(x, t));
+        maxStack.push(currMax);
     }
 
     public int pop() {
@@ -50,8 +47,7 @@ public class MaxStack {
         stack.pop();
         maxStack.pop();
         while (!temp.isEmpty()) {
-            int x = temp.pop();
-            pushHelper(x);
+            push(temp.pop());
         }
         return max;
     }

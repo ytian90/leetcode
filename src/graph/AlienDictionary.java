@@ -18,6 +18,63 @@ import java.util.Set;
  * @since Feb 6, 2016
  */
 public class AlienDictionary {
+	public static String alienOrder(String[] words) {
+		if (words.length == 0) {
+			return null;
+		}
+		Map<Character, Set<Character>> map = new HashMap<>();
+		Map<Character, Integer> degrees = new HashMap<>();
+		for (String s : words) {
+			for (char c : s.toCharArray()) {
+				degrees.put(c, 0);
+			}
+		}
+		for (int i = 0; i < words.length - 1; i++) {
+			String word1 = words[i];
+			String word2 = words[i + 1];
+			int len = Math.min(word1.length(), word2.length());
+			for (int j = 0; j < len; j++) {
+				char c1 = word1.charAt(j);
+				char c2 = word2.charAt(j);
+				if (c1 != c2) {
+					Set<Character> set = map.containsKey(c1) ? map.get(c1) : new HashSet<>();
+					if (!set.contains(c2)) {
+						set.add(c2);
+						map.put(c1, set);
+						degrees.put(c2, degrees.get(c2) + 1);
+					}
+					break;
+				}
+			}
+		}
+		Queue<Character> q = new LinkedList<>();
+		String res = "";
+		for (char c : degrees.keySet()) {
+			if (degrees.get(c) == 0) {
+				q.add(c);
+			}
+		}
+		while (!q.isEmpty()) {
+			char c = q.poll();
+			res += c;
+			if (map.containsKey(c)) {
+				for (char n : map.get(c)) {
+					degrees.put(n, degrees.get(n) - 1);
+					if (degrees.get(n) == 0) {
+						q.add(n);
+					}
+				}
+			}
+		}
+		if (res.length() != degrees.size()) {
+			return "";
+		}
+		return res;
+	}
+
+	public static void main(String[] args) {
+		System.out.println(alienOrder(new String[]{"wrt", "wrf", "er", "ett", "rftt"}));
+	}
 
 	private static final int N = 26;
 	/*
@@ -27,7 +84,7 @@ public class AlienDictionary {
 	 * visited[i] = 2. Visited.
 	 */
 	// DFS
-	public static String alienOrder(String[] words) {
+	public static String alienOrder1(String[] words) {
 		boolean[][] adj = new boolean[N][N];
 		int[] visited = new int[N];
 		buildGraph(words, adj, visited);
@@ -73,60 +130,6 @@ public class AlienDictionary {
 				}
 			}
 		}
-	}
-
-	public static void main(String[] args) {
-		String[] t = new String[]{"wrtkj","wrt"};
-		System.out.println(alienOrder(t));
-	}
-
-	public static String alienOrder1(String[] words) {
-		Map<Character, Set<Character>> map = new HashMap<>();
-		Map<Character, Integer> degree = new HashMap<>();
-		String result = "";
-		if (words == null || words.length == 0)
-			return result;
-		for (String s : words) {
-			for (char c : s.toCharArray()) {
-				degree.put(c, 0);
-			}
-		}
-		for (int i = 0; i < words.length - 1; i++) {
-			String curr = words[i];
-			String next = words[i + 1];
-			int length = Math.min(curr.length(), next.length());
-			for (int j = 0; j < length; j++) {
-				char c1 = curr.charAt(j);
-				char c2 = next.charAt(j);
-				if (c1 != c2) {
-					Set<Character> set = new HashSet<>();
-					if (map.containsKey(c1))
-						set = map.get(c1);
-					if (!set.contains(c2)) {
-						set.add(c2);
-						map.put(c1, set);
-						degree.put(c2, degree.get(c2) + 1);
-					}
-					break;
-				}
-			}
-		}
-		Queue<Character> q = new LinkedList<>();
-		for (char c : degree.keySet()) {
-			if (degree.get(c) == 0) q.add(c);
-		}
-		while (!q.isEmpty()) {
-			char c = q.remove();
-			result += c;
-			if (map.containsKey(c)) {
-				for (char c2 : map.get(c)) {
-					degree.put(c2, degree.get(c2) - 1);
-					if (degree.get(c2) == 0) q.add(c2);
-				}
-			}
-		}
-		if (result.length() != degree.size()) return "";
-		return result;
 	}
 
 	// BFS

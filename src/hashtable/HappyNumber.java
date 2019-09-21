@@ -10,27 +10,35 @@ import java.util.Set;
  * @since Aug 4, 2015
  */
 public class HappyNumber {
-
-	public static boolean isHappyy(int n) {
-		Set<Integer> set = new HashSet<>();
-		return helper(n, set);
+	public static boolean isHappy(int n) {
+		Set<Integer> visited = new HashSet<>();
+		return helper(n, visited);
 	}
 
-	private static boolean helper(int n, Set<Integer> set) {
-		set.add(n);
-		int sum = 0;
+	private static boolean helper(int n, Set<Integer> visited) {
+		if (n == 1) {
+			return true;
+		}
+		if (visited.contains(n)) {
+			return false;
+		}
+		visited.add(n);
+		int res = 0;
 		while (n != 0) {
-			int digit = n % 10;
-			sum += digit * digit;
+			res += Math.pow((n % 10), 2);
 			n /= 10;
 		}
-		if (sum == 1) return true;
-		if (set.contains(sum)) return false;
-		return helper(sum, set);
+		return helper(res, visited);
+	}
+
+	public static void main(String[] args) {
+		System.out.println(isHappy(1));
+		System.out.println(isHappy(7));
+		System.out.println(isHappy(19));
 	}
 	
 	// Solution 1 Set
-	public static boolean isHappy(int n) {
+	public static boolean isHappy3(int n) {
 		if (n <= 0) return false;
 		if (n == 1) return true;
 		int sum = 0;
@@ -64,10 +72,5 @@ public class HappyNumber {
             n = sum;
         }
         return false;
-	}
-	
-	public static void main(String[] args) {
-//		 System.out.println(isHappy(19));
-		System.out.println(isHappy(7));
 	}
 }
