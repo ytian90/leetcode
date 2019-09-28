@@ -11,6 +11,43 @@ public class WordLadder {
 
 	public static int ladderLength(String beginWord, String endWord, List<String> wordList) {
 		Set<String> dict = new HashSet<>(wordList);
+		Set<String> reached = new HashSet<>();
+		if (!dict.contains(endWord)) {
+			return 0;
+		}
+		reached.add(beginWord);
+		int res = 1, n = beginWord.length();
+
+		while (!reached.contains(endWord)) {
+			Set<String> next = new HashSet<>();
+			for (String s : reached) {
+				for (int i = 0; i < n; i++) {
+					char[] chars = s.toCharArray();
+					for (char c = 'a'; c <= 'z'; c++) {
+						chars[i] = c;
+						String newStr = new String(chars);
+						if (dict.contains(newStr)) {
+							next.add(newStr);
+							dict.remove(newStr);
+						}
+					}
+				}
+			}
+			res++;
+			if (next.size() == 0) {
+				return 0;
+			}
+			reached = next;
+		}
+		return res;
+	}
+
+	public static void main(String[] args) {
+		System.out.println(ladderLength("hit", "cog", Arrays.asList("hot", "dot", "dog", "lot", "log", "cog")));
+	}
+
+	public static int ladderLength1(String beginWord, String endWord, List<String> wordList) {
+		Set<String> dict = new HashSet<>(wordList);
 		Queue<String> q = new LinkedList<>();
 		q.add(beginWord);
 		int level = 0;
@@ -34,13 +71,6 @@ public class WordLadder {
 			level++;
 		}
 		return 0;
-	}
-
-	public static void main(String[] args) {
-		String beginword = "hit";
-		String endword = "cog";
-		List<String> wordList = new LinkedList<>(Arrays.asList("hot", "dot", "dog", "lot", "log"));
-		System.out.println(ladderLength(beginword, endword, wordList));
 	}
 
 	public static int ladderLength1(String start, String end, Set<String> dict) {

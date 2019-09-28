@@ -2,6 +2,8 @@ package array;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 350. Intersection of Two Arrays 2
@@ -11,18 +13,28 @@ import java.util.HashMap;
 public class IntersectionOfTwoArrays2 {
 	
 	public int[] intersect(int[] nums1, int[] nums2) {
-        HashMap<Integer, Integer> map = new HashMap<>();
-        ArrayList<Integer> res = new ArrayList<Integer>();
-        for (int n : nums1) {
-        	map.put(n, map.getOrDefault(n, 0) + 1);
-        }
-        for (int n : nums2) {
-        	if (map.containsKey(n) && map.get(n) > 0) {
-        		res.add(n);
-        		map.put(n, map.get(n) - 1);
-        	}
-        }
-        return res.stream().mapToInt(i -> i).toArray();
+		if (nums1.length == 0 || nums2.length == 0) {
+			return new int[]{};
+		}
+		Map<Integer, Integer> map = new HashMap<>();
+		List<Integer> res = new ArrayList<>();
+		for (int n : nums1) {
+			map.put(n, map.getOrDefault(n, 0) + 1);
+		}
+		for (int n : nums2) {
+			if (map.containsKey(n)) {
+				res.add(n);
+				map.put(n, map.get(n) - 1);
+				if (map.get(n) == 0) {
+					map.remove(n);
+				}
+			}
+		}
+		int[] ans = new int[res.size()];
+		for (int i = 0; i < ans.length; i++) {
+			ans[i] = res.get(i);
+		}
+		return ans;
     }
 
 	public static void main(String[] args) {

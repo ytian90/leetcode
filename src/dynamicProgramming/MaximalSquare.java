@@ -7,13 +7,13 @@ package dynamicProgramming;
 public class MaximalSquare {
 	// Solution 1: 2-d DP
 	public int maximalSquare(char[][] matrix) {
-		int m = matrix.length;
-		if (m == 0) return 0;
-		int n = matrix[0].length;
-		int[][] d = new int[m][n];
+		int n = matrix.length;
+		if (n == 0) return 0;
+		int m = matrix[0].length;
+		int[][] d = new int[n][m];
 		int max = 0;
-		for (int i = 0; i < m; i++) {
-			for (int j = 0; j < n; j++) {
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < m; j++) {
 				if (matrix[i][j] == '0') {
 					d[i][j] = 0;
 				} else {

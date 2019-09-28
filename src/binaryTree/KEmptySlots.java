@@ -23,7 +23,7 @@ public class KEmptySlots {
     }
 
     public static void main(String[] args) {
-        System.out.println(kEmptySlots(new int[]{1, 2, 3}, 1));
+//        System.out.println(kEmptySlots(new int[]{1, 2, 3}, 1));
         System.out.println(kEmptySlots(new int[]{1, 3, 2}, 1));
     }
 }

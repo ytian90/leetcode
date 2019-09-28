@@ -9,8 +9,49 @@ import java.util.Arrays;
  */
 public class CherryPickup {
 
-	// time O(N^3) space O(N^2)
 	public static int cherryPickup(int[][] grid) {
+		if (grid.length == 0) {
+			return 0;
+		}
+		int n = grid.length;
+		int[][][] dp = new int[n + 1][n + 1][n + 1];
+		for (int i = 0; i <= n; i++) {
+			for (int j = 0; j <= n; j++) {
+				Arrays.fill(dp[i][j], Integer.MIN_VALUE);
+			}
+		}
+		dp[1][1][1] = grid[0][0];
+		for (int x1 = 1; x1 <= n; x1++) {
+			for (int y1 = 1; y1 <= n; y1++) {
+				for (int x2 = 1; x2 <= n; x2++) {
+					int y2 = x1 + y1 - x2;
+					if (dp[x1][y1][x2] > 0 || y2 < 1 || y2 > n || grid[x1 - 1][y1 - 1] == -1 || grid[x2 - 1][y2 - 1] == -1) {
+						continue;
+					}
+					int curr = Math.max(Math.max(dp[x1 - 1][y1][x2 - 1], dp[x1][y1 - 1][x2 - 1]),
+							Math.max(dp[x1 - 1][y1][x2], dp[x1][y1 - 1][x2]));
+					if (curr < 0) {
+						continue;
+					}
+					dp[x1][y1][x2] = curr + grid[x1 - 1][y1 - 1];
+					if (x1 != x2) {
+						dp[x1][y1][x2] += grid[x2 - 1][y2 - 1];
+					}
+				}
+			}
+		}
+		return dp[n][n][n] < 0 ? 0 : dp[n][n][n];
+	}
+
+	public static void main(String[] args) {
+		System.out.println(cherryPickup(new int[][]{
+				{0, 1, -1},
+				{1, 0, -1},
+				{1, 1, 1}
+		}));
+	}
+	// time O(N^3) space O(N^2)
+	public static int cherryPickup1(int[][] grid) {
 		int N = grid.length;
 		int[][] dp = new int[N][N];
 		for (int[] row : dp) {
@@ -39,16 +80,6 @@ public class CherryPickup {
 			dp = dp2;
 		}
 		return Math.max(0, dp[N - 1][N - 1]);
-	}
-	
-	public static void main(String[] args) {
-		int[][] grid = new int[][] {
-			{0, 1, -1},
-			{1, 0, -1},
-			{1, 1, 1}
-		};
-		
-		System.out.println(cherryPickup(grid));
 	}
 
 	// time O(N^3) space O(N^3)

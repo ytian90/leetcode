@@ -14,9 +14,37 @@ import java.util.*;
  * @since Jan 28, 2016
  */
 public class IntersectionOfTwoArrays {
-	
+
+	public static int[] intersection(int[] nums1, int[] nums2) {
+		if (nums1.length == 0 || nums2.length == 0) {
+			return new int[]{};
+		}
+		Set<Integer> set = new HashSet<>();
+		List<Integer> res = new ArrayList<>();
+		for (int n : nums1) {
+			set.add(n);
+		}
+		for (int n : nums2) {
+			if (set.contains(n)) {
+				res.add(n);
+				set.remove(n);
+			}
+		}
+		int[] ans = new int[res.size()];
+		for (int i = 0; i < ans.length; i++) {
+			ans[i] = res.get(i);
+		}
+		return ans;
+	}
+
+	public static void main(String[] args) {
+		System.out.println(merge(new int[]{1, 2, 3, 4, 5, 6}, new int[]{4, 4, 5, 6, 7, 8}));
+		System.out.println(merge(new int[]{1, 1, 2, 2, 3}, new int[]{2, 2, 4, 5, 6}));
+		System.out.println(merge2(new int[]{2, 5, 3, 6, 10}, new int[]{7, 33, 4, 2}));
+	}
+
 	// use two has sets time : O(N)
-	public int[] intersection(int[] nums1, int[] nums2) {
+	public int[] intersection1(int[] nums1, int[] nums2) {
 		Set<Integer> set = new HashSet<>();
 		Set<Integer> res = new HashSet<>();
 		for (int i = 0; i < nums1.length; i++) {
@@ -77,10 +105,34 @@ public class IntersectionOfTwoArrays {
 		}
 		return false;
 	}
-	
-	
-	
+
 	//  http://www.1point3acres.com/bbs/thread-143059-3-1.html
+
+	public int[] intersectionn(int[] nums1, int[] nums2) {
+		if (nums1.length == 0 || nums2.length == 0) {
+			return new int[]{};
+		}
+		Map<Integer, Integer> map = new HashMap<>();
+		List<Integer> res = new ArrayList<>();
+		for (int n : nums1) {
+			map.put(n, map.getOrDefault(n, 0) + 1);
+		}
+		for (int n : nums2) {
+			if (map.containsKey(n)) {
+				res.add(n);
+				map.put(n, map.get(n) - 1);
+				if (map.get(n) == 0) {
+					map.remove(n);
+				}
+			}
+		}
+		int[] ans = new int[res.size()];
+		for (int i = 0; i < ans.length; i++) {
+			ans[i] = res.get(i);
+		}
+		return ans;
+	}
+
 	public static List<Integer> merge(int[] A, int[] B) {	
 		List<Integer> result = new ArrayList<>();
 		if (A.length == 0 || B.length == 0) return result;
@@ -116,11 +168,5 @@ public class IntersectionOfTwoArrays {
 		throw new IllegalArgumentException("No same item");
 	}
 
-	public static void main(String[] args) {
-//		System.out.println(merge(new int[]{1, 2, 3, 4, 5, 6}, new int[]{4, 4, 5, 6, 7, 8}));
-//		System.out.println(merge(new int[]{1, 1, 2, 2, 3}, new int[]{2, 2, 4, 5, 6}));
-		
-		System.out.println(merge2(new int[]{2, 5, 3, 6, 10}, new int[]{7, 33, 4, 2}));
-	}
 
 }

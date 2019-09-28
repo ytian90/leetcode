@@ -6,29 +6,32 @@ package binaryTree;
  */
 public class DiameterofBinaryTree {
 
+	private static int max = 0;
+
 	public static int diameterOfBinaryTree(TreeNode root) {
-		int[] res = new int[1];
-		helper(root, res);
-		return res[0];
+		if (root == null) {
+			return 0;
+		}
+		helper(root);
+		return max;
 	}
 
-	private static int helper(TreeNode node, int[] res) {
-		if (node == null) return 0;
-		int left = helper(node.left, res);
-		int right = helper(node.right, res);
-		res[0] = Math.max(res[0], left + right);
+	private static int helper(TreeNode node) {
+		if (node == null) {
+			return 0;
+		}
+		int left = helper(node.left);
+		int right = helper(node.right);
+		max = Math.max(max, left + right);
 		return 1 + Math.max(left, right);
 	}
 
 	public static void main(String[] args) {
 		TreeNode n0 = new TreeNode(1);
-		TreeNode n1 = new TreeNode(2);
-		TreeNode n2 = new TreeNode(3);
-		TreeNode n3 = new TreeNode(4);
-		TreeNode n4 = new TreeNode(5);
-		n0.left = n1; n0.right = n2;
-		n1.left = n3; n1.right = n4;
-		
+		n0.left = new TreeNode(2);
+		n0.right = new TreeNode(3);
+		n0.left.left = new TreeNode(4);
+		n0.left.right = new TreeNode(5);
 		System.out.println(diameterOfBinaryTree(n0));
 	}
 

@@ -13,7 +13,7 @@ public class Permutations {
 	
 	// Solution 2: backtracking time ~O(N!) Space ~O(N)
     public List<List<Integer>> permute_recur(int[] nums) {
-    		List<List<Integer>> res = new ArrayList<>();
+    	List<List<Integer>> res = new ArrayList<>();
         List<Integer> list = new ArrayList<>();
         helper(nums, list, res);
         return res;

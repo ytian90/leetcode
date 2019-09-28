@@ -4,16 +4,53 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * Same Tree
+ * 100. Same Tree
  * @author yutian
  * @since Aug 10, 2015
  */
 public class SameTree {
+	public static boolean isSameTree(TreeNode p, TreeNode q) {
+		if (p == null && q == null) {
+			return true;
+		} else if (p == null && q != null) {
+			return false;
+		} else if (p != null && q == null) {
+			return false;
+		} else if (p != null && q != null && p.val != q.val) {
+			return false;
+		}
+		return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+	}
+
+	public static void main(String[] args) {
+		TreeNode n0 = new TreeNode(1);
+		n0.left = new TreeNode(2);
+		n0.right = new TreeNode(3);
+		TreeNode n1 = new TreeNode(1);
+		n1.left = new TreeNode(2);
+		n1.right = new TreeNode(3);
+		System.out.println(isSameTree(n0, n1));
+
+		TreeNode n2 = new TreeNode(1);
+		n2.left = new TreeNode(2);
+		TreeNode n3 = new TreeNode(1);
+		n3.right = new TreeNode(2);
+		System.out.println(isSameTree(n2, n3));
+
+		TreeNode n4 = new TreeNode(1);
+		n4.left = new TreeNode(2);
+		n4.right = new TreeNode(1);
+		TreeNode n5 = new TreeNode(1);
+		n5.left = new TreeNode(1);
+		n5.right = new TreeNode(2);
+		System.out.println(isSameTree(n4, n5));
+	}
+
 	// recursion Time ~O(N) Space ~O(1)
-	public boolean isSameTree(TreeNode p, TreeNode q) {
+	public boolean isSameTree1(TreeNode p, TreeNode q) {
 		if (p == null && q == null) return true;
 		if (p == null || q == null || p.val != q.val) return false;
-		return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+		return isSameTree1(p.left, q.left) && isSameTree1(p.right, q.right);
 	}
 	
 	// queue Time ~O(N), Space ~O(N)

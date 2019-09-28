@@ -9,23 +9,21 @@ import java.util.Map;
  * @since Jul 26, 2015
  */
 public class CopyListWithRandomPointer {
-	
-	// Solution 0 Recursion
-	public RandomListNode copyRandomList(RandomListNode head) {
-		if (head == null) return null;
-		Map<RandomListNode, RandomListNode> map = new HashMap<>();
-		RandomListNode c = head;
-		// step1: copy all the nodes
-		while (c != null) {
-			map.put(c, new RandomListNode(c.label));
-			c = c.next;
+
+	public Node copyRandomList(Node head) {
+		Map<Node, Node> map = new HashMap<>();
+		Node curr = head;
+		while (curr != null) {
+			if (!map.containsKey(curr)) {
+				map.put(curr, new Node(curr.val));
+			}
+			curr = curr.next;
 		}
-		// step2: assign next and random nodes
-		c = head;
-		while (c != null) {
-			map.get(c).next = map.get(c.next);
-			map.get(c).random = map.get(c.random);
-			c = c.next;
+		curr = head;
+		while (curr != null) {
+			map.get(curr).next = map.get(curr.next);
+			map.get(curr).random = map.get(curr.random);
+			curr = curr.next;
 		}
 		return map.get(head);
 	}
@@ -53,12 +51,12 @@ public class CopyListWithRandomPointer {
 	}
 	
 	// Solution 2 Time O(n) Space O(1)
-	public RandomListNode copyRandomList2(RandomListNode head) {
+	public Node copyRandomList2(Node head) {
 		if (head == null) return null;
-		RandomListNode p = head;
+		Node p = head;
 		while (p != null) {
-			RandomListNode next = p.next;
-			RandomListNode copy = new RandomListNode(p.label);
+			Node next = p.next;
+			Node copy = new Node(p.val);
 			p.next = copy;
 			copy.next = next;
 			p = next;
@@ -69,15 +67,31 @@ public class CopyListWithRandomPointer {
 			p = p.next.next;
 		}
 		p = head;
-		RandomListNode headCopy = p.next;
+		Node headCopy = p.next;
 		while (p != null) {
-			RandomListNode copy = p.next;
+			Node copy = p.next;
 			p.next = copy.next;
 			p = p.next;
 			copy.next = (p != null) ? p.next: null;
 		}
 		return headCopy;
 	}
-	
-	
+
+	class Node {
+		public int val;
+		public Node next;
+		public Node random;
+
+		public Node() {}
+
+		public Node(int _val) {
+			val = _val;
+		}
+
+		public Node(int _val,Node _next,Node _random) {
+			val = _val;
+			next = _next;
+			random = _random;
+		}
+	};
 }

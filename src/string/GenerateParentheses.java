@@ -9,8 +9,31 @@ import java.util.List;
  * @since Aug 18, 2015
  */
 public class GenerateParentheses {
-	// Solution 1
 	public static List<String> generateParenthesis(int n) {
+		List<String> res = new ArrayList<>();
+		if (n == 0) {
+			return res;
+		}
+		helper("", n, n, n, res);
+		return res;
+	}
+
+	private static void helper(String s, int left, int right, int n, List<String> res) {
+		if (s.length() == 2 * n) {
+			res.add(s);
+			return;
+		}
+		if (left > right) return;
+		if (left > 0) {
+			helper(s + "(", left - 1, right, n, res);
+		}
+		if (right > 0) {
+			helper(s + ")", left, right - 1, n, res);
+		}
+	}
+
+	// Solution 1
+	public static List<String> generateParenthesis1(int n) {
 		List<String> list = new ArrayList<>();
 		helper("", list, n, n);
 		return list;
