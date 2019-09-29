@@ -50,6 +50,7 @@ public class WordSquares {
 	}
 
 	public static void main(String[] args) {
+		System.out.println(wordSquares(new String[]{"area","lead","wall","lady","ball"}));
 		System.out.println(wordSquares(new String[]{"abat","baba","atan","atal"}));
 		System.out.println(wordSquares(new String[]{"buff","ulus","buns","rump","cuts","stum","murk","wuss","putt","pubs",
 				"bust","chub","burp","bubs","suns","puns","buhr","ughs","mums","cunt","bhut","guff","pung","phut","flux",

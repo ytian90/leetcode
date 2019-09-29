@@ -10,8 +10,43 @@ import java.util.List;
  * @since Jan 6, 2016
  */
 public class StrobogrammaticNumber2 {
-	
+
+	static char[][] chars = {{'0', '0'}, {'1', '1'}, {'6', '9'}, {'8', '8'}, {'9', '6'}};
+
 	public static List<String> findStrobogrammatic(int n) {
+		List<String> res = new ArrayList<>();
+		if (n % 2 == 0) {
+			helper("", n, res);
+		} else {
+			helper("0", n, res);
+			helper("1", n, res);
+			helper("8", n, res);
+		}
+		return res;
+	}
+
+	private static void helper(String s, int n, List<String> res) {
+		if (s.length() == n) {
+			res.add(s);
+			return;
+		}
+		for (char[] c : chars) {
+			if (c[0] == '0' && s.length() + 2 >= n) {
+				continue;
+			}
+			s = c[0] + s + c[1];
+			helper(s, n, res);
+			s = s.substring(1, s.length() - 1);
+		}
+	}
+
+	public static void main(String[] args) {
+		System.out.println(findStrobogrammatic(2));
+		System.out.println(findStrobogrammatic(3));
+		System.out.println(findStrobogrammatic(4));
+	}
+	
+	public static List<String> findStrobogrammatic1(int n) {
 		return helper(n, n);
 	}
 
@@ -47,10 +82,6 @@ public class StrobogrammaticNumber2 {
 			r = next;
 		}
 		return r;
-	}
-
-	public static void main(String[] args) {
-		System.out.println(findStrobogrammatic2(4));
 	}
 
 }
