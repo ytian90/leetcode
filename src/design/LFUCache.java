@@ -15,44 +15,59 @@ public class LFUCache {
     int min = -1;
 
     public LFUCache(int capacity) {
+        this.vals = new HashMap<>();
+        this.counts = new HashMap<>();
+        this.lists = new HashMap<>();
+        this.lists.put(1, new LinkedHashSet<>());
         this.capacity = capacity;
-        vals = new HashMap<>();
-        counts = new HashMap<>();
-        lists = new HashMap<>();
-        lists.put(1, new LinkedHashSet<>());
     }
 
     public int get(int key) {
-        if (!vals.containsKey(key))
+        if (!vals.containsKey(key)) {
             return -1;
-        int count = counts.get(key);
-        counts.put(key, count + 1);
-        lists.get(count).remove(key);
-        if (count == min && lists.get(count).size() == 0)
-            min++;
-        if (!lists.containsKey(count + 1))
-            lists.put(count + 1, new LinkedHashSet<>());
-        lists.get(count + 1).add(key);
+        }
+        update(key);
         return vals.get(key);
     }
 
+    private void update(int key) {
+        int count = counts.get(key);
+        counts.put(key, count + 1);
+        lists.get(count).remove(key);
+        if (count == min && lists.get(count).size() == 0) {
+            min++;
+        }
+        addToList(count + 1, key);
+    }
+
+    private void addToList(int count, int key) {
+        lists.putIfAbsent(count, new LinkedHashSet<>());
+        lists.get(count).add(key);
+    }
+
     public void put(int key, int value) {
-        if (capacity <= 0) return;
-        if (vals.containsKey(key)) {
-            vals.put(key, value);
-            get(key);
+        if (capacity <= 0) {
             return;
         }
-        if (vals.size() >= capacity) {
-            int del = lists.get(min).iterator().next();
-            lists.get(min).remove(del);
-            vals.remove(del);
-            counts.remove(del);
+        if (vals.containsKey(key)) {
+            vals.put(key, value);
+            update(key);
+            return;
+        }
+        if (vals.size() == capacity) {
+            removeMinFreq();
         }
         vals.put(key, value);
         counts.put(key, 1);
+        addToList(1, key);
         min = 1;
-        lists.get(1).add(key);
+    }
+
+    private void removeMinFreq() {
+        int key = lists.get(min).iterator().next();
+        lists.get(min).remove(key);
+        vals.remove(key);
+        counts.remove(key);
     }
 
     public static void main(String[] args) {

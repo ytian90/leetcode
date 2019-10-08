@@ -8,23 +8,30 @@ import java.util.Arrays;
 public class RedundantConnection {
 
     public static int[] findRedundantConnection(int[][] edges) {
-        int[] p = new int[2001];
-        for (int i = 0; i < p.length; i++) {
-            p[i] = i;
+        if (edges == null || edges.length == 0) {
+            return new int[]{-1, -1};
+        }
+        int n = edges.length;
+        int[] nums = new int[n + 1];
+        for (int i = 0; i <= n; i++) {
+            nums[i] = i;
         }
         for (int[] e : edges) {
-            int f = e[0], t = e[1];
-            if (find(p, f) == find(p, t)) return e;
-            else p[find(p, f)] = find(p, t);
+            int x = find(nums, e[0]);
+            int y = find(nums, e[1]);
+            if (x == y) {
+                return new int[]{e[0], e[1]};
+            }
+            nums[x] = y;
         }
-        return new int[2];
+        return new int[]{-1, -1};
     }
 
-    public static int find(int[] p, int f) {
-        if (f != p[f]) {
-            p[f] = find(p, p[f]);
+    private static int find(int[] nums, int i) {
+        if (nums[i] == i) {
+            return i;
         }
-        return p[f];
+        return find(nums, nums[i]);
     }
 
     public static void main(String[] args) {
