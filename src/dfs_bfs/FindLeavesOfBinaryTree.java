@@ -1,5 +1,7 @@
 package dfs_bfs;
 
+import binaryTree.TreeNode;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,34 +12,31 @@ import java.util.List;
  */
 public class FindLeavesOfBinaryTree {
 
-	public static List<List<Integer>> findLeaves(TreeNode root) {
+	public static List<List<Integer>> findLeaves(binaryTree.TreeNode root) {
 		List<List<Integer>> res = new ArrayList<>();
 		helper(root, res);
 		return res;
 	}
 
-	private static int helper(TreeNode node, List<List<Integer>> res) {
-		if (node == null) return -1;
-		int level = 1 + Math.max(helper(node.left, res), helper(node.right, res));
-		if (res.size() - 1 < level) {
+	private static int helper(binaryTree.TreeNode root, List<List<Integer>> res) {
+		if (root == null) {
+			return -1;
+		}
+		int height = 1 + Math.max(helper(root.left, res), helper(root.right, res));
+		if (res.size() == height) {
 			res.add(new ArrayList<>());
 		}
-		res.get(level).add(node.val);
-		return level;
+		res.get(height).add(root.val);
+		return height;
 	}
 
 	public static void main(String[] args) {
-		TreeNode n0 = new TreeNode(1);
-		TreeNode n1 = new TreeNode(2);
-		TreeNode n2 = new TreeNode(3);
-		TreeNode n3 = new TreeNode(4);
-		TreeNode n4 = new TreeNode(5);
-		n0.left = n1; n0.right = n2;
-		n1.left = n3; n1.right = n4;
-		for (List<Integer> l : findLeaves(n0)) {
-			System.out.println(l);
-		}
-		
-	}
+		binaryTree.TreeNode n0 = new binaryTree.TreeNode(1);
+		n0.left = new binaryTree.TreeNode(2);
+		n0.right = new binaryTree.TreeNode(3);
+		n0.left.left = new binaryTree.TreeNode(4);
+		n0.left.right = new TreeNode(5);
 
+		System.out.println(findLeaves(n0));
+	}
 }
