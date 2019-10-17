@@ -19,36 +19,41 @@ import java.util.List;
  */
 public class SMSSplitting {
 
-    public static List<String> segmentMessage(String message) {
+    public static void segmentMessage(String message) {
         List<String> res = new ArrayList<>();
         int row = 0, start = 0, end = 154;
         if (message.length() <= 160) {
             res.add(message);
-            return res;
+            System.out.println(message);
+            return;
         }
         while (end < message.length()) {
-            if (message.charAt(end) != ' ') {
-                while (start <= end && message.charAt(end) != ' ' && message.charAt(end - 1) != ' ') {
+            if (message.charAt(end + 1) != ' ') {
+                while (start <= end && message.charAt(end) != ' ') {
                     end--;
                 }
             }
             res.add(message.substring(start, end));
-            start = end + 1;
+            start = end;
             end = start + 154;
             row += 1;
         }
         res.add(message.substring(start));
         row++;
-        List<String> ans = new ArrayList<>();
         for (int i = 0; i < row; i++) {
-            ans.add(res.get(i) + "(" + (i + 1) + "/" + row + ")");
+            String s = res.get(i) + "(" + (i + 1) + "/" + row + ")";
+            System.out.println(s.length());
+            System.out.println(s);
         }
-        return ans;
+        System.out.println();
     }
 
     public static void main(String[] args) {
-        String s = "njdksjfn jdfnds kjfdklsjf jsdofjsd f jdslkjfgdslkngdslkjg fljksdjflsfdsjfdslkfjdslkfmdsklmfgn ljsdglkdsfg d lkjgdslkgjdsljgdslkjgdsfjngds lkjsdlkgjdsgkldsjgsdlkg lkjdslkgjdslkgjdslgmnds glkjgdslkjgdslkjfgodsjfds g,mdsgkjdsngdlsknfgldsjfglkdsjfglkdsjglkdsjglkdsgjdsklgjdslk lkgjdslkgfjdslkgjdslkgjdsljfgdslkgjmdslkg kljghjdslkjgdslkjfg";
-        System.out.println(s.length());
-        System.out.println(segmentMessage(s));
+//        String s = "njdksjfn jdfnds kjfdklsjf jsdofjsd f jdslkjfgdslkngdslkjg fljksdjflsfdsjfdslkfjdslkfmdsklmfgn ljsdglkdsfg d lkjgdslkgjdsljgdslkjgdsfjngds lkjsdlkgjdsgkldsjgsdlkg lkjdslkgjdslkgjdslgmnds glkjgdslkjgdslkjfgodsjfds g,mdsgkjdsngdlsknfgldsjfglkdsjfglkdsjglkdsjglkdsgjdsklgjdslk lkgjdslkgfjdslkgjdslkgjdsljfgdslkgjmdslkg kljghjdslkjgdslkjfg";
+//        System.out.println(s.length());
+//        System.out.println(segmentMessage(s));
+        segmentMessage("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus consequat nec dui quis maximus. Praesent vehicula feugiat condimentum. Nunc porta vulputate elit sit amet lacinia. Vivamus volutpat accumsan consequat. Nulla mattis odio erat, vel convallis neque semper nec. Integer a pharetra purus.");
+        segmentMessage("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus consequat nec dui quis maximus. Praesent vehicula feugiat condimentum. Nunc portamludimi vulputate elit sit amet lacinia. Vivamus volutpat accumsan consequat. Nulla mattis odio erat, vel convallis neque semper nec. Integer a pharetra purus.");
+        segmentMessage("lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis partu sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore ver rup. Li Europe lingues es membres del sam familie. Lor separat existentie es un myth. Por scientie, musica, sport etc, litot Europa.");
     }
 }
