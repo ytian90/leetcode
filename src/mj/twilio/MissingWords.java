@@ -8,13 +8,16 @@ import java.util.*;
  */
 public class MissingWords {
     public static List<String> missingWords(String s, String t) {
-        if (s == null || s.length() == 0 || t == null || t.length() == 0) {
-            return null;
-        }
         List<String> res = new ArrayList<>();
+        if (s == null || s.length() == 0 || t == null || t.length() == 0) {
+            return res;
+        }
         String[] s1 = s.split(" ");
         Set<String> set = new HashSet<>(Arrays.asList(t.split(" ")));
         for (String str : s1) {
+            if (str.equals("")) {
+                continue;
+            }
             if (!set.contains(str)) {
                 res.add(str);
             }
@@ -23,6 +26,6 @@ public class MissingWords {
     }
 
     public static void main(String[] args) {
-        System.out.println(missingWords("I am using HackerRank to improve programming", "am HackerRank to improve"));
+        System.out.println(missingWords("I am using    HackerRank to improve programming", "am HackerRank to improve"));
     }
 }

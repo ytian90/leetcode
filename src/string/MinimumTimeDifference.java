@@ -8,6 +8,33 @@ import java.util.*;
 public class MinimumTimeDifference {
 
     public static int findMinDifference(List<String> timePoints) {
+        if (timePoints == null || timePoints.size() == 0) {
+            return -1;
+        }
+        List<Integer> times = new ArrayList<>();
+        for (String timePoint : timePoints) {
+            times.add(convert(timePoint));
+        }
+        Collections.sort(times);
+        int n = timePoints.size(), min = Integer.MAX_VALUE;
+        for (int i = 1; i < n; i++) {
+            min = Math.min(min, times.get(i) - times.get(i - 1));
+        }
+        min = Math.min(min, times.get(0) - times.get(n - 1) + 24 * 60);
+        return min;
+    }
+
+    private static int convert(String s) {
+        int h = Integer.valueOf(s.substring(0, 2));
+        int m = Integer.valueOf(s.substring(3));
+        return 60 * h + m;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(findMinDifference(Arrays.asList("23:59", "00:00")));
+    }
+
+    public static int findMinDifference1(List<String> timePoints) {
         PriorityQueue<Integer> pq = new PriorityQueue<>();
         for (String s : timePoints) {
             int h = Integer.valueOf(s.substring(0, 2));
@@ -43,10 +70,6 @@ public class MinimumTimeDifference {
     public static int helper(int ah, int bh, int am, int bm) {
         int res = Math.abs((bh - ah) * 60 + bm - am);
         return Math.min(res, 24 * 60 - res);
-    }
-
-    public static void main(String[] args) {
-        System.out.println(findMinDifferencc(new ArrayList<>(Arrays.asList("23:59", "00:00"))));
     }
 
     public static int findMinDifferencee(List<String> timePoints) {
