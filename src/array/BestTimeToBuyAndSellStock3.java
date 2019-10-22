@@ -5,13 +5,52 @@ package array;
  * @since Aug 22, 2015
  */
 public class BestTimeToBuyAndSellStock3 {
+
+	public static int maxProfit(int[] prices) {
+		if (prices == null || prices.length == 0) {
+			return 0;
+		}
+		int n = prices.length;
+		int[] first = new int[n];
+		int[] second = new int[n];
+		int minSoFar = prices[0];
+		for (int i = 1; i < n; i++) {
+			int profit = prices[i] - minSoFar;
+			first[i] = Math.max(first[i - 1], profit);
+			minSoFar = Math.min(prices[i], minSoFar);
+		}
+		int maxSoFar = prices[n - 1];
+		for (int i = n - 2; i >= 0; i--) {
+			int profit = maxSoFar - prices[i];
+			second[i] = Math.max(second[i + 1], profit);
+			maxSoFar = Math.max(prices[i], maxSoFar);
+		}
+		int res = 0;
+		for (int i = 0; i < n - 1; i++) {
+			res = Math.max(res, first[i] + second[i + 1]);
+		}
+		for (int i = 0; i < n; i++) {
+			res = Math.max(res, first[i]);
+		}
+		return res;
+	}
+
+	public static void main(String[] args) {
+		System.out.println(maxProfit(new int[]{3, 3, 5, 0, 0, 3, 1, 4}));
+		System.out.println(maxProfit(new int[]{1, 2, 3, 4, 5}));
+		System.out.println(maxProfit(new int[]{7, 6, 4, 3, 1}));
+		System.out.println(maxProfit(new int[]{3, 3}));
+		System.out.println(maxProfit(new int[]{3, 2, 1}));
+		System.out.println(maxProfit(new int[]{1, 2, 1, 2, 3}));
+	}
+
 	/**
 	 * Let d(i) be the max profit when 1st transaction is in [0, i],
 	 * and 2nd transaction is in[i, N - 1].
 	 * @param prices
 	 * @return
 	 */
-	public int maxProfit(int[] prices) {
+	public static int maxProfit1(int[] prices) {
 		// f(i) = max profit in [0, i]
 		// g(i) = max profit in [i + 1, n - 1]
 		// max profit in [0, n - 1] = max{f(i) + g(i), for all 0 <= i <= n - 1}
@@ -46,14 +85,6 @@ public class BestTimeToBuyAndSellStock3 {
 			hold1 = Math.max(hold1, -i); // the maximum if we've just buy 1st stock so far
 		}
 		return release2;
-	}
-
-	public static void main(String[] args) {
-		BestTimeToBuyAndSellStock3 t = new BestTimeToBuyAndSellStock3();
-		System.out.println(t.maxProfit(new int[]{3,3,5,0,0,3,1,4}));
-//		System.out.println(t.maxProfit(new int[]{3, 3}));
-//		System.out.println(t.maxProfit(new int[]{3, 2, 1}));
-//		System.out.println(t.maxProfit(new int[]{1, 2, 1, 2, 3}));
 	}
 
 	/**

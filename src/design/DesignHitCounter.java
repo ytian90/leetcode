@@ -11,7 +11,7 @@ import java.util.Queue;
  * @since Jul 4, 2016
  */
 public class DesignHitCounter {
-	
+	// Method 1
 	Queue<Integer> q;
 	
 	/** Initialize your data structure here. */
@@ -32,6 +32,41 @@ public class DesignHitCounter {
         	q.poll();
         }
         return q.size();
+    }
+
+    // Method 2
+    private int[] times;
+    private int[] hits;
+    private int period = 300;
+
+    /** Initialize your data structure here. */
+    public void HitCounter2() {
+        this.times = new int[period];
+        this.hits = new int[period];
+    }
+
+    /** Record a hit.
+     @param timestamp - The current timestamp (in seconds granularity). */
+    public void hit2(int timestamp) {
+        int index = timestamp % period;
+        if (times[index] == timestamp) {
+            hits[index]++;
+        } else {
+            times[index] = timestamp;
+            hits[index] = 1;
+        }
+    }
+
+    /** Return the number of hits in the past 5 minutes.
+     @param timestamp - The current timestamp (in seconds granularity). */
+    public int getHits2(int timestamp) {
+        int res = 0;
+        for (int i = 0; i < period; i++) {
+            if (timestamp - times[i] < 300) {
+                res += hits[i];
+            }
+        }
+        return res;
     }
 
 	public static void main(String[] args) {

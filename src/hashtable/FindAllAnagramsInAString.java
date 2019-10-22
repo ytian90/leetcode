@@ -1,6 +1,7 @@
 package hashtable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -9,8 +10,40 @@ import java.util.List;
  *
  */
 public class FindAllAnagramsInAString {
+
+    public static List<Integer> findAnagrams(String s, String p) {
+        List<Integer> res = new ArrayList<>();
+        if (s == null || s.length() == 0 || p == null || p.length() == 0 || p.length() > s.length()) {
+            return res;
+        }
+        int n = s.length(), m = p.length();
+        int[] pMap = new int[26];
+        for (char c : p.toCharArray()) {
+            pMap[c - 'a']++;
+        }
+        int[] sMap = new int[26];
+        for (int i = 0; i < m; i++) {
+            sMap[s.charAt(i) - 'a']++;
+        }
+        if (Arrays.equals(sMap, pMap)) {
+            res.add(0);
+        }
+        for (int i = m, prev = 0; i < n; i++, prev++) {
+            sMap[s.charAt(i) - 'a']++;
+            sMap[s.charAt(prev) - 'a']--;
+            if (Arrays.equals(sMap, pMap)) {
+                res.add(prev + 1);
+            }
+        }
+        return res;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(findAnagrams("cbaebabacd", "abc"));
+        System.out.println(findAnagrams("abab", "ab"));
+    }
 	
-	public static List<Integer> findAnagrams(String s, String p) {
+	public static List<Integer> findAnagrams1(String s, String p) {
         List<Integer> res = new ArrayList<>();
         if (s == null || s.length() == 0 || p == null || p.length() == 0) {
             return res;
@@ -57,11 +90,4 @@ public class FindAllAnagramsInAString {
         }
         return true;
     }
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		System.out.println(findAnagrams("cbaebabacd", "abc"));
-		System.out.println(findAnagrams("abab", "ab"));
-	}
-
 }

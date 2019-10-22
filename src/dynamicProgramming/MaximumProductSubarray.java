@@ -7,15 +7,23 @@ package dynamicProgramming;
 public class MaximumProductSubarray {
 	// 1-d DP: Time ~O(N), Space ~O(1)
 	public static int maxProduct(int[] nums) {
-		if (nums.length == 0) return 0;
-        int max = nums[0], min = nums[0], res = nums[0];
-        for (int i = 1; i < nums.length; i++) {
-            int mx = max, mn = min;
-            max = Math.max(Math.max(nums[i], mx * nums[i]), mn * nums[i]);
-            min = Math.min(Math.min(nums[i], mx * nums[i]), mn * nums[i]);
-            res = Math.max(max, res);
-        }
-        return res;
+		if (nums == null || nums.length == 0) {
+			return 0;
+		}
+		int n = nums.length;
+		int max = nums[0], min = nums[0], res = nums[0];
+		for (int i = 1; i < n; i++) {
+			int tMax = max, tMin = min;
+			max = Math.max(Math.max(nums[i], nums[i] * tMax), nums[i] * tMin);
+			min = Math.min(Math.min(nums[i], nums[i] * tMax), nums[i] * tMin);
+			res = Math.max(res, max);
+		}
+		return res;
+	}
+
+	public static void main(String[] args) {
+		System.out.println(maxProduct(new int[]{2, 3, -2, 4}));
+		System.out.println(maxProduct(new int[]{-4, -3, -2}));
 	}
 	
 	public static int maxProduct2(int[] nums) {
@@ -32,10 +40,5 @@ public class MaximumProductSubarray {
 			res = Math.max(res, max);
 		}
 		return res;
-	}
-	
-	public static void main(String[] args) {
-		int[] test = new int[]{2,3,-2,4};
-		System.out.println(maxProduct(test));
 	}
 }
