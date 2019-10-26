@@ -1,11 +1,9 @@
-package util;
+package dfs_bfs;
 
-import binaryTree.TreeNode;
+import java.util.HashSet;
+import java.util.Set;
 
-import java.util.*;
-
-public class test {
-
+public class RobotRoomCleaner {
     int[][] dirs = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
 
     public void cleanRoom(Robot robot) {
@@ -32,7 +30,6 @@ public class test {
         robot.turnLeft();
         robot.turnLeft();
     }
-
 
     interface Robot {
         boolean move();

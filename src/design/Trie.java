@@ -5,57 +5,59 @@ package design;
  * @since Aug 20, 2015
  */
 public class Trie {
-	
-	public static class TrieNode {
-		boolean eow; // end of word
-		TrieNode[] next;
-		// Initialize your data structure here.
+
+	public class TrieNode {
+		public TrieNode[] children;
+		public boolean eow;
+
 		public TrieNode() {
-			eow = false;
-			next = new TrieNode[26];
+			this.children = new TrieNode[26];
+			this.eow = false;
 		}
 	}
-	
-	private TrieNode root;
-	
+
+	TrieNode root;
+
+	/** Initialize your data structure here. */
 	public Trie() {
 		root = new TrieNode();
 	}
-	
-	// Insert a word into the trie
+
+	/** Inserts a word into the trie. */
 	public void insert(String word) {
-		root = put(root, word, 0);
-	}
-	
-	private TrieNode put(TrieNode node, String word, int i) {
-		if (node == null) node = new TrieNode();
-		if (i == word.length()) {
-			node.eow = true;
-			return node;
+		TrieNode curr = root;
+		for (int i = 0; i < word.length(); i++) {
+			int c = word.charAt(i) - 'a';
+			if (curr.children[c] == null) {
+				curr.children[c] = new TrieNode();
+			}
+			curr = curr.children[c];
 		}
-		int c = word.charAt(i) - 'a';
-		node.next[c] = put(node.next[c], word, i + 1);
-		return node;
+		curr.eow = true;
 	}
 
-	// Return if the word is in the trie.
+	/** Returns if the word is in the trie. */
 	public boolean search(String word) {
-		TrieNode node = get(root, word, 0);
-		return (node == null) ? false: node.eow;
+		TrieNode node = get(word);
+		return (node == null) ? false : node.eow;
 	}
 
-	// Returns if there is any word in the trie
-	// that starts with the given prefix
+	/** Returns if there is any word in the trie that starts with the given prefix. */
 	public boolean startsWith(String prefix) {
-		TrieNode node = get(root, prefix, 0);
-		return (node == null) ? false: true;
+		TrieNode node = get(prefix);
+		return (node == null) ? false : true;
 	}
 
-	private TrieNode get(TrieNode node, String str, int i) {
-		if (node == null) return null;
-		if (i == str.length()) return node;
-		int c = str.charAt(i) - 'a';
-		return get(node.next[c], str, i + 1);
+	public TrieNode get(String target) {
+		TrieNode curr = root;
+		for (int i = 0; i < target.length(); i++) {
+			int c = target.charAt(i) - 'a';
+			if (curr.children[c] == null) {
+				return null;
+			}
+			curr = curr.children[c];
+		}
+		return curr;
 	}
 	
 	public static void main(String[] args) {
@@ -63,6 +65,12 @@ public class Trie {
 		t.insert("somestring");
 		System.out.println(t.search("some"));
 		System.out.println(t.startsWith("some"));
+		t.insert("apple");
+		System.out.println(t.search("apple"));
+		System.out.println(t.search("app"));
+		System.out.println(t.startsWith("app"));
+		t.insert("app");
+		System.out.println(t.search("app"));
 	}
 }
 
