@@ -9,7 +9,6 @@ import java.util.Set;
  *
  */
 public class CrackingTheSafe {
-	
 	public static String crackSafe(int n, int k) {
 		StringBuilder sb = new StringBuilder();
 		int total = (int) (Math.pow(k, n));
@@ -18,27 +17,27 @@ public class CrackingTheSafe {
 		}
 		Set<String> visited = new HashSet<>();
 		visited.add(sb.toString());
-		dfs(sb, total, visited, n, k);
+		helper(n, k, total, sb, visited);
 		return sb.toString();
 	}
-	
-	private static boolean dfs(StringBuilder sb, int total, Set<String> visited, int n, int k) {
+
+	private static boolean helper(int n, int k, int total, StringBuilder sb, Set<String> visited) {
 		if (visited.size() == total) {
 			return true;
 		}
-		String prev = sb.substring(sb.length() - n + 1, sb.length());
+		String prev = sb.substring(sb.length() - n + 1);
 		for (int i = 0; i < k; i++) {
 			String next = prev + i;
-			if (!visited.contains(next)) {
-				visited.add(next);
-				sb.append(i);
-				if (dfs(sb, total, visited, n, k)) {
-					return true;
-				} else {
-					visited.remove(next);
-					sb.deleteCharAt(sb.length() - 1);
-				}
+			if (visited.contains(next)) {
+				continue;
 			}
+			visited.add(next);
+			sb.append(i);
+			if (helper(n, k, total, sb, visited)) {
+				return true;
+			}
+			visited.remove(next);
+			sb.deleteCharAt(sb.length() - 1);
 		}
 		return false;
 	}
@@ -47,5 +46,4 @@ public class CrackingTheSafe {
 		System.out.println(crackSafe(1, 2));
 		System.out.println(crackSafe(2, 2));
 	}
-
 }

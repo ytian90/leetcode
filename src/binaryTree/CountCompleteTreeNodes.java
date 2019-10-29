@@ -7,54 +7,41 @@ package binaryTree;
 public class CountCompleteTreeNodes {
 
 	public static int countNodes(TreeNode root) {
-		int h = height(root);
-		if (h < 0) return 0;
-		if (height(root.right) == h - 1) {
-			return (1 << h) + countNodes(root.right);
-		} else {
-			return (1 << h - 1) + countNodes(root.left);
+		if (root == null) {
+			return 0;
 		}
+		return 1 + countNodes(root.left) + countNodes(root.right);
 	}
 
-	public static int height (TreeNode node) {
-		return node == null? -1 : 1 + height(node.left);
+	public static int countNode(TreeNode root) {
+		if (root == null) {
+			return 0;
+		}
+		int l = height(root.left);
+		int r = height(root.right);
+		if (l == r) {
+			return countNode(root.right) + (1 << l);
+		}
+		return countNode(root.left) + (1 << r);
 	}
 
-	public static int countNodes1(TreeNode root) {
-		int nodes = 0, h = height(root);
-		while (root != null) {
-			if (height(root.right) == h - 1) {
-				nodes += 1 << h;
-				root = root.right;
-			} else {
-				nodes += 1 << h - 1;
-				root = root.left;
-			}
-			h--;
+	private static int height(TreeNode node) {
+		int h = 0;
+		while (node != null) {
+			h++;
+			node = node.left;
 		}
-		return nodes;
+		return h;
 	}
 
 	public static void main(String[] args) {
-
-	}
-
-	// Solution 1 time ~O(NlogN) Space ~O(1)
-	public static int countNodes2(TreeNode root) {
-		int leftHeight = 0, rightHeight = 0;
-		TreeNode left = root, right = root;
-		while (left != null) {
-			left = left.left;
-			leftHeight++;
-		}
-		while (right != null) {
-			right = right.right;
-			rightHeight++;
-		}
-		// if heights are same, counts = 2 ^ n - 1, instead of using Math.pow(2, n),
-		// we use bit manipulation: 1 << n, which is faster
-		if (leftHeight == rightHeight) return (1 << leftHeight) - 1;
-		else return 1 + countNodes(root.left) + countNodes(root.right);
+		TreeNode n0 = new TreeNode(1);
+		n0.left = new TreeNode(2);
+		n0.right = new TreeNode(3);
+		n0.left.left = new TreeNode(4);
+		n0.left.right = new TreeNode(5);
+		n0.right.left = new TreeNode(6);
+		System.out.println(countNodes(n0));
 	}
 
 }

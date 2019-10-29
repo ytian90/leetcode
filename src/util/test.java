@@ -1,43 +1,38 @@
 package util;
 
-import binaryTree.TreeNode;
-
 import java.util.*;
 
 public class test {
 
-    int[][] dirs = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
-
-    public void cleanRoom(Robot robot) {
-        Set<String> visited = new HashSet<>();
-        visited.add("0-0");
-        helper(robot, 0, 0, 0, visited);
-    }
-
-    private void helper(Robot robot, int x, int y, int currDir, Set<String> visited) {
-        robot.clean();
-        for (int i = 0; i < 4; i++) {
-            int nextDir = (currDir + i) % 4;
-            int newX = x + dirs[nextDir][0];
-            int newY = y + dirs[nextDir][1];
-            if (!visited.contains(newX + "-" + newY) && robot.move()) {
-                visited.add(newX + "-" + newY);
-                helper(robot, newX, newY, nextDir, visited);
-            }
-            robot.turnRight();
+    public static boolean isIsomorphic(String s, String t) {
+        if (s == null || t == null || s.length() != t.length()) {
+            return false;
         }
-        robot.turnRight();
-        robot.turnRight();
-        robot.move();
-        robot.turnLeft();
-        robot.turnLeft();
+        Map<Character, Character> map = new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            char a = s.charAt(i), b = t.charAt(i);
+            if (map.containsKey(a)) {
+                if (map.get(a) != b) {
+                    return false;
+                }
+            } else {
+                if (map.containsValue(b)) {
+                    return false;
+                }
+                map.put(a, b);
+            }
+        }
+        return true;
     }
 
+    public static boolean isIsomorphic2(String s, String t) {
+        return true;
+    }
 
-    interface Robot {
-        boolean move();
-        void turnLeft();
-        void turnRight();
-        void clean();
+    public static void main(String[] args) {
+        System.out.println(isIsomorphic("egg", "add")); // true
+        System.out.println(isIsomorphic("foo", "bar")); // false
+        System.out.println(isIsomorphic("paper", "title")); // true
+        System.out.println(isIsomorphic("ab", "aa")); // false
     }
 }
