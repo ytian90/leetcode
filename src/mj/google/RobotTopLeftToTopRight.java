@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * lc62 and lc63
  */
-public class robotTopLeftToTopRight {
+public class RobotTopLeftToTopRight {
 
     public int uniquePaths_lc62(int m, int n) {
         int min = Math.min(m, n), max = Math.max(m, n);
