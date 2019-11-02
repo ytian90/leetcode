@@ -34,15 +34,15 @@ public class CampusBikes2 {
     }
 
     public static void main(String[] args) {
-//        System.out.println(assignBikes(new int[][]{
-//                {0, 0},
-//                {1, 1},
-//                {2, 0}
-//        }, new int[][]{
-//                {1, 0},
-//                {2, 2},
-//                {2, 1}
-//        }));
+        System.out.println(assignBikes(new int[][]{
+                {0, 0},
+                {1, 1},
+                {2, 0}
+        }, new int[][]{
+                {1, 0},
+                {2, 2},
+                {2, 1}
+        }));
 
         System.out.println(assignBikes(new int[][]{
                 {0, 0},

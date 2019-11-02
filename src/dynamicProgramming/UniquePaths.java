@@ -9,6 +9,22 @@ import java.util.List;
  * @since Jul 31, 2015
  */
 public class UniquePaths {
+
+	// 1-d DP（滚动数组）: Time ~ O(M*N), Space ~ O(min{M, N})
+	public int uniquePaths4(int m, int n) {
+		int min = Math.min(m, n), max = Math.max(m, n);
+		int[] d = new int[min];
+		for (int i = 0; i < max; i++) {
+			for (int j = 0; j < min; j++) {
+				if (i == 0 && j == 0) {
+					d[j] = 1;
+				} else {
+					d[j] = ((i > 0) ? d[j] : 0) + ((j > 0) ? d[j - 1]: 0);
+				}
+			}
+		}
+		return d[min - 1];
+	}
 	
 	//  2-d DP: Time ~ O(M*N), Space ~ O(M*N) 
 	public static int uniquePaths2(int m, int n) {
@@ -37,22 +53,6 @@ public class UniquePaths {
 			}
 		}
 		return d[0][0];
-	}
-	
-	// 1-d DP（滚动数组）: Time ~ O(M*N), Space ~ O(min{M, N}) 
-	public int uniquePaths4(int m, int n) {
-		int min = Math.min(m, n), max = Math.max(m, n);
-		int[] d = new int[min];
-		for (int i = 0; i < max; i++) {
-			for (int j = 0; j < min; j++) {
-				if (i == 0 && j == 0) {
-					d[j] = 1;
-				} else {
-					d[j] = ((i > 0) ? d[j] : 0) + ((j > 0) ? d[j - 1]: 0);
-				}
-			}
-		}
-		return d[min - 1];
 	}
 	
 	// Solution 0: DP
