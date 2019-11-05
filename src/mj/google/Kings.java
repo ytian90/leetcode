@@ -15,7 +15,7 @@ public class Kings {
         tree.put(root, new ArrayList<>());
     }
 
-    public void brith(String parent, String name) {
+    public void birth(String parent, String name) {
         if (!tree.containsKey(parent)) {
             return;
         } else {

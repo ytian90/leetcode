@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * 13. LC815
  */
-public class ButRoute {
+public class BusRoute {
     public static int numBusesToDestination(int[][] routes, int S, int T) {
         if (routes.length == 0 || S < 0 || T < 0) {
             return -1;
