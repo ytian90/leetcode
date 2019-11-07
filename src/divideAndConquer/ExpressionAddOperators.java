@@ -21,17 +21,16 @@ public class ExpressionAddOperators {
 	private static void add(String num, long target, List<String> list, String expr, int pos, long prev, long multi) {
 		if (num.length() == pos && target == prev) {
 			list.add(expr);
-		} else {
-			for (int i = pos; i < num.length(); i++) {
-				if (i != pos && num.charAt(pos) == '0') return;
-				long curr = Long.parseLong(num.substring(pos, i + 1));
-				if (pos == 0) {
-					add(num, target, list, expr + curr, i + 1, curr, curr);
-				} else {
-					add(num, target, list, expr + "+" + curr, i + 1, curr + prev, curr);
-					add(num, target, list, expr + "-" + curr, i + 1, prev - curr, -curr);
-					add(num, target, list, expr + "*" + curr, i + 1, prev - multi + multi * curr, multi * curr);
-				}
+		}
+		for (int i = pos; i < num.length(); i++) {
+			if (i != pos && num.charAt(pos) == '0') break;
+			long curr = Long.parseLong(num.substring(pos, i + 1));
+			if (pos == 0) {
+				add(num, target, list, expr + curr, i + 1, curr, curr);
+			} else {
+				add(num, target, list, expr + "+" + curr, i + 1, curr + prev, curr);
+				add(num, target, list, expr + "-" + curr, i + 1, prev - curr, -curr);
+				add(num, target, list, expr + "*" + curr, i + 1, prev - multi + multi * curr, multi * curr);
 			}
 		}
 	}

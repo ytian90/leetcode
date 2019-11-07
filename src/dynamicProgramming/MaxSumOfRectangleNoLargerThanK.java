@@ -8,9 +8,36 @@ import java.util.TreeSet;
  * @since Jul 3, 2016
  */
 public class MaxSumOfRectangleNoLargerThanK {
-	
-	// TreeSet
 	public static int maxSumSubmatrix(int[][] matrix, int k) {
+		if (matrix.length == 0) {
+			return 0;
+		}
+		int n = matrix.length, m = matrix[0].length;
+		int res = Integer.MIN_VALUE;
+		for (int left = 0; left < m; left++) {
+			int[] sums = new int[n];
+			for (int right = left; right < m; right++) {
+				for (int i = 0; i < n;  i++) {
+					sums[i] += matrix[i][right];
+				}
+				TreeSet<Integer> set = new TreeSet<>();
+				set.add(0);
+				int currSum = 0;
+				for (int sum : sums) {
+					currSum += sum;
+					Integer num = set.ceiling(currSum - k);
+					if (num != null) {
+						res = Math.max(res, currSum - num);
+					}
+					set.add(currSum);
+				}
+			}
+		}
+		return res;
+	}
+
+	// TreeSet
+	public static int maxSumSubmatrix1(int[][] matrix, int k) {
         int row = matrix.length, col = matrix[0].length;
         int minDf = Integer.MAX_VALUE;
         for (int left = 0; left < col; left++) {
