@@ -10,10 +10,36 @@ import java.util.List;
  * @since Dec 31, 2015
  */
 public class BestMeetingPoint {
+	public static int minTotalDistance(int[][] grid) {
+		int n = grid.length, m = grid[0].length;
+		List<Integer> rows = new ArrayList<>();
+		List<Integer> cols = new ArrayList<>();
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < m; j++) {
+				if (grid[i][j] == 1) {
+					rows.add(i);
+					cols.add(j);
+				}
+			}
+		}
+		return getMin(rows) + getMin(cols);
+	}
+
+	private static int getMin(List<Integer> list) {
+		int res = 0;
+		Collections.sort(list);
+		int i = 0, j = list.size() - 1;
+		while (i < j) {
+			res += list.get(j) - list.get(i);
+			i++;
+			j--;
+		}
+		return res;
+	}
 
 	// help to understand: http://www.cnblogs.com/grandyang/p/5291058.html
 	// time complexity: O(mn), space complexity: O(mn)
-	public static int minTotalDistance(int[][] grid) {
+	public static int minTotalDistance0(int[][] grid) {
 		int n = grid.length, m = grid[0].length;
 		List<Integer> r = new ArrayList<>();
 		List<Integer> c = new ArrayList<>();

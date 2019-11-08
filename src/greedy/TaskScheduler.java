@@ -78,8 +78,7 @@ public class TaskScheduler {
     }
 
 	public static void main(String[] args) {
-		char[] t = new char[]{'A','A','A','B','B','B'};
-		System.out.println(leastInterval(t, 2));
+		System.out.println(leastInterval(new char[]{'A','A','A','B','B','B'}, 2));
 	}
 
 }
