@@ -3,6 +3,7 @@ package hashtable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 244. Shorteset Word Distance 2
@@ -11,34 +12,36 @@ import java.util.List;
  */
 public class ShortestWordDistance2 {
 
-    private static HashMap<String, List<Integer>> map;
+    Map<String, List<Integer>> map;
 
     public ShortestWordDistance2(String[] words) {
         map = new HashMap<>();
         for (int i = 0; i < words.length; i++) {
-            if (map.containsKey(words[i])) {
-                map.get(words[i]).add(i);
-            } else {
-                List<Integer> list = new ArrayList<>();
-                list.add(i);
-                map.put(words[i], list);
+            if (!map.containsKey(words[i])) {
+                map.put(words[i], new ArrayList<>());
             }
+            map.get(words[i]).add(i);
         }
     }
 
-    public static int shortest(String word1, String word2) {
+    public int shortest(String word1, String word2) {
         if (!map.containsKey(word1) || !map.containsKey(word2)) {
-            return 0;
+            return -1;
         }
         List<Integer> list1 = map.get(word1);
         List<Integer> list2 = map.get(word2);
-        int min = Integer.MAX_VALUE;
-        int i = 0, j = 0;
+        return shortestHelper(list1, list2);
+    }
+
+    private int shortestHelper(List<Integer> list1, List<Integer> list2) {
+        int i = 0, j = 0, min = Integer.MAX_VALUE;
         while (i < list1.size() && j < list2.size()) {
-            int a = list1.get(i), b = list2.get(j);
-            min = Math.min(min, Math.abs(a - b));
-            if (a < b) i++;
-            else j++;
+            min = Math.min(min, Math.abs(list1.get(i) - list2.get(j)));
+            if (list1.get(i) < list2.get(j)) {
+                i++;
+            } else {
+                j++;
+            }
         }
         return min;
     }

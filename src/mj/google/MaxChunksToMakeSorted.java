@@ -1,7 +1,5 @@
 package mj.google;
 
-import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
-
 /**
  * lc769 & lc768
  */

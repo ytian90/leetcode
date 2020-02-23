@@ -7,13 +7,24 @@ import java.util.Stack;
  * 739. Daily Temperatures
  */
 public class DailyTemperatures {
+    public static int[] dailyTemperatures(int[] T) {
+        int[] res = new int[T.length];
+        for (int i = 0; i < T.length - 1; i++) {
+            int j = i + 1;
+            while (j < T.length && T[i] >= T[j]) {
+                j++;
+            }
+            res[i] = j == T.length ? 0 : j - i;
+        }
+        return res;
+    }
 
     // time O(N), space O(N)
-    public static int[] dailyTemperatures(int[] temperatures) {
+    public static int[] dailyTemperatures1(int[] T) {
         Stack<Integer> stack = new Stack<>();
-        int[] res = new int[temperatures.length];
-        for (int i = 0; i < temperatures.length; i++) {
-            while (!stack.isEmpty() && temperatures[i] > temperatures[stack.peek()]) {
+        int[] res = new int[T.length];
+        for (int i = 0; i < T.length; i++) {
+            while (!stack.isEmpty() && T[i] > T[stack.peek()]) {
                 int index = stack.pop();
                 res[index] = i - index;
             }

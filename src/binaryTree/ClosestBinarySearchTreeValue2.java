@@ -1,8 +1,6 @@
 package binaryTree;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * 272. Closest Binary Search Tree Value II
@@ -10,8 +8,70 @@ import java.util.Stack;
  * @since Feb 15, 2016
  */
 public class ClosestBinarySearchTreeValue2 {
+    PriorityQueue<Node> pq = new PriorityQueue<Node>((a, b) -> b.delta.compareTo(a.delta));
+    double target;
+    int capacity;
+
+    public List<Integer> closestKValues(TreeNode root, double target, int k) {
+        this.target = target;
+        this.capacity = k;
+        pushAllNodes(root);
+        List<Integer> res = new ArrayList<>();
+        for (Node node : pq) {
+            res.add(node.nodeVal);
+        }
+        return res;
+    }
+
+    private void pushAllNodes(TreeNode node) {
+        if (node == null) {
+            return;
+
+        }
+        pushToPriorityQueue(node);
+        pushAllNodes(node.left);
+        pushAllNodes(node.right);
+    }
+
+    private void pushToPriorityQueue(TreeNode node) {
+        pq.add(getNode(target, node));
+        if (pq.size() == capacity + 1) {
+            pq.poll();
+        }
+    }
+
+    private Node getNode(double target, TreeNode node) {
+        return new Node(Math.abs(target - node.val), node.val);
+    }
+
+    class Node {
+        Double delta;
+        Integer nodeVal;
+
+        public Node(Double delta, Integer nodeVal) {
+            this.delta = delta;
+            this.nodeVal = nodeVal;
+        }
+    }
+
+    public static void main(String[] args) {
+        TreeNode n1 = new TreeNode(10);
+        TreeNode n2 = new TreeNode(5);
+        TreeNode n3 = new TreeNode(15);
+        TreeNode n4 = new TreeNode(2);
+        TreeNode n5 = new TreeNode(8);
+        TreeNode n6 = new TreeNode(12);
+        TreeNode n7 = new TreeNode(20);
+        n1.left = n2; n1.right = n3;
+        n2.left = n4; n2.right = n5;
+        n3.left = n6; n3.right = n7;
+
+        ClosestBinarySearchTreeValue2 t = new ClosestBinarySearchTreeValue2();
+        System.out.println(t.closestKValues(n1, 7, 3));
+    }
+
 	// time O(N)
-	public List<Integer> closestKValues(TreeNode root, double target, int k) {
+	public List<Integer> closestKValues1(TreeNode root, double target, int k) {
         LinkedList<Integer> result = new LinkedList<>();
         helper(root, target, k , result);
         return result;
@@ -28,23 +88,6 @@ public class ClosestBinarySearchTreeValue2 {
 		}
 		result.add(root.val);
 		helper(root.right, target, k, result);
-	}
-
-	public static void main(String[] args) {
-		TreeNode n1 = new TreeNode(10);
-		TreeNode n2 = new TreeNode(5);
-		TreeNode n3 = new TreeNode(15);
-		TreeNode n4 = new TreeNode(2);
-		TreeNode n5 = new TreeNode(8);
-		TreeNode n6 = new TreeNode(12);
-		TreeNode n7 = new TreeNode(20);
-		n1.left = n2; n1.right = n3;
-		n2.left = n4; n2.right = n5;
-		n3.left = n6; n3.right = n7;
-		
-		ClosestBinarySearchTreeValue2 t = new ClosestBinarySearchTreeValue2();
-		System.out.println(t.closestKValues(n1, 7, 3));
-		
 	}
 	
 	// time O(logn + k) optimal but too long
