@@ -13,7 +13,11 @@ import java.util.Map;
  * @since Aug 18, 2015
  */
 public class GroupAnagrams {
-	public List<List<String>> groupAnagrams(String[] strs) {
+	public static void main(String[] args) {
+		System.out.println(groupAnagrams(new String[]{"eat", "tea", "tan", "ate", "nat", "bat"}));
+	}
+
+	public static List<List<String>> groupAnagrams(String[] strs) {
 		List<List<String>> res = new ArrayList<>();
 		Map<String, List<String>> map = new HashMap<>();
 		for (String s : strs) {
@@ -55,15 +59,7 @@ public class GroupAnagrams {
 		}
 		return res;
 	}
-	
-	public static void main(String[] args) {
-		String[] test = new String[]{"eat", "tea", "tan", "ate", "nat", "bat"};
-		List<List<String>> result = groupAnagrams2(test);
-		for (List<String> l: result) {
-			System.out.println(l);
-		}
-	}
-	
+
 	public List<List<String>> groupAnagrams1(String[] strs) {
 		Map<String, List<String>> map = new HashMap<>();
 		for (String s : strs) {
