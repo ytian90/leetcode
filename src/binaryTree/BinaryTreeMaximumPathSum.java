@@ -21,19 +21,48 @@ public class BinaryTreeMaximumPathSum {
 		return res > 0 ? res : 0;
 	}
 
+	public static int maxPathSum1(TreeNode root) {
+		if (root == null) {
+			return 0;
+		}
+		int[] res = new int[1];
+		res[0] = Integer.MIN_VALUE;
+		dfs(root, res);
+		return res[0];
+	}
+
+	private static int dfs(TreeNode node, int[] res) {
+		if (node == null) {
+			return 0;
+		}
+		int left = Math.max(0, dfs(node.left, res));
+		int right = Math.max(0, dfs(node.right, res));
+		res[0] = Math.max(res[0], left + right + node.val);
+		return Math.max(left, right) + node.val;
+	}
+
 	public static void main(String[] args) {
 		TreeNode n0 = new TreeNode(1);
-		TreeNode n1 = new TreeNode(2);
-		TreeNode n2 = new TreeNode(3);
-		n0.left = n1; n0.right = n2;
+		n0.left = new TreeNode(2);
+		n0.right = new TreeNode(3);
 		System.out.println(maxPathSum(n0));
 
-		TreeNode n3 = new TreeNode(-10);
-		TreeNode n4 = new TreeNode(9);
-		TreeNode n5 = new TreeNode(20);
-		TreeNode n6 = new TreeNode(15);
-		TreeNode n7 = new TreeNode(7);
-		n3.left = n4; n3.right = n5; n5.left = n6; n5.right = n7;
+		TreeNode n1 = new TreeNode(-10);
+		n1.left = new TreeNode(9);
+		n1.right = new TreeNode(20);
+		n1.right.left = new TreeNode(15);
+		n1.right.right = new TreeNode(7);
+		System.out.println(maxPathSum(n1));
+
+		TreeNode n2 = new TreeNode(-2);
+		n2.left = new TreeNode(1);
+		System.out.println(maxPathSum(n2));
+
+		TreeNode n3 = new TreeNode(-3);
 		System.out.println(maxPathSum(n3));
+
+		TreeNode n4 = new TreeNode(-2);
+		n4.left = new TreeNode(-1);
+		System.out.println(maxPathSum(n4));
 	}
 }
