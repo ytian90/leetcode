@@ -7,10 +7,7 @@ import java.util.Arrays;
  * @author yutian
  * @since Nov 8, 2015
  */
-public class
-
-
-MaximalRectangle {
+public class MaximalRectangle {
 	
 	// DP
 	/*

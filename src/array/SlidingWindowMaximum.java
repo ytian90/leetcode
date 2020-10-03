@@ -10,6 +10,30 @@ import java.util.*;
  */
 public class SlidingWindowMaximum {
 	public static int[] maxSlidingWindow(int[] nums, int k) {
+		int n = nums.length;
+		int[] res = new int[n - k + 1];
+		int max = findMax(0, k, nums);
+		res[0] = max;
+		for (int i = 1; i < n; i++) {
+			if (nums[i - 1] == max && nums[i + k - 1] < max) {
+				max = findMax(i, i + k, nums);
+			}
+			max = Math.max(max, nums[i + k - 1]);
+			res[i] = max;
+		}
+		return res;
+	}
+
+	private static int findMax(int i, int k, int[] nums) {
+		int max = Integer.MIN_VALUE;
+		while (i < k) {
+			max = Math.max(nums[i], max);
+			i++;
+		}
+		return max;
+	}
+
+	public static int[] maxSlidingWindow0(int[] nums, int k) {
 		if (nums == null || nums.length == 0) {
 			return nums;
 		}
