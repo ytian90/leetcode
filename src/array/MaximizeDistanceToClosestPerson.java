@@ -5,6 +5,49 @@ package array;
  */
 public class MaximizeDistanceToClosestPerson {
     public static int maxDistToClosest(int[] seats) {
+        if (seats == null || seats.length == 0) {
+            return 0;
+        }
+        int prev = 0;
+        while (seats[prev] == 1) {
+            prev++;
+        }
+        int currLen = 1;
+        for (int i = prev; i < seats.length; i++) {
+            if (seats[i] == 0) {
+                if (i == seats.length - 1 && (i - prev + 1 > currLen)) {
+                    currLen = i - prev + 1;
+                }
+                continue;
+            } else {
+                if (prev == 0) {
+                    currLen = i;
+                } else if ((i - 1 - prev) / 2 + 1 > currLen) {
+                    currLen = (i - 1 - prev) / 2 + 1;
+                }
+                prev = i;
+                while (prev < seats.length && seats[prev] == 1) {
+                    prev++;
+                }
+                i = prev;
+            }
+        }
+        return currLen;
+    }
+
+    public int maxDistToClosest_BestSolution(int[] seats) {
+        int res = 0, n = seats.length, last = -1;
+        for (int i = 0; i < n; ++i) {
+            if (seats[i] == 1) {
+                res = last < 0 ? i : Math.max(res, (i - last) / 2);
+                last = i;
+            }
+        }
+        res = Math.max(res, n - last - 1);
+        return res;
+    }
+
+    public static int maxDistToClosest1(int[] seats) {
         int curr = -1;
         for (int i = 0; i < seats.length; i++) {
             if (seats[i] == 1) {
