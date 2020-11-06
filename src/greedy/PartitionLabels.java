@@ -9,8 +9,37 @@ import java.util.Map;
  * 763. Partition Labels
  */
 public class PartitionLabels {
-
     public static List<Integer> partitionLabels(String S) {
+        List<Integer> res = new ArrayList<>();
+        if (S == null || S.length() == 0) {
+            return res;
+        }
+        Map<Character, Integer> map = new HashMap<>();
+        for (int i = 0; i < S.length(); i++) {
+            map.put(S.charAt(i), i);
+        }
+        for (int i = 0, end = -1; i < S.length() && end != S.length() - 1; i++) {
+            char c = S.charAt(i);
+            end = map.get(c);
+            for (int j = i; j < end; j++) {
+                if (S.charAt(j) == c) {
+                    continue;
+                }
+                int temp = map.get(S.charAt(j));
+                end = Math.max(end, temp);
+            }
+            res.add(end - i + 1);
+            i = end;
+        }
+        return res;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(partitionLabels("ababcbacadefegdehijhklij"));
+        System.out.println(partitionLabels("eaaaabaaec"));
+    }
+
+    public static List<Integer> partitionLabels1(String S) {
         List<Integer> res = new ArrayList<>();
         if (S == null || S.length() == 0) {
             return res;
@@ -53,9 +82,5 @@ public class PartitionLabels {
         return res;
     }
 
-    public static void main(String[] args) {
-        System.out.println(partitionLabels("ababcbacadefegdehijhklij"));
-        System.out.println(partitionLabels("eaaaabaaec"));
-    }
 
 }

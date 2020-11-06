@@ -10,9 +10,9 @@ import java.util.TreeMap;
  */
 public class RangeModule {
 
-    TreeMap<Integer, Integer> map;
+    TreeMap<Integer, Integer> map = new TreeMap<>();
     public RangeModule() {
-        map = new TreeMap<>();
+
     }
 
     public void addRange(int left, int right) {
@@ -50,9 +50,7 @@ public class RangeModule {
         }
         // clean up intermediate intervals
         Map<Integer, Integer> subMap = map.subMap(left, true, right, false);
-        Set<Integer> set = new HashSet(subMap.keySet());
-        map.keySet().removeAll(set);
-
+        map.keySet().removeAll(subMap.keySet());
     }
 
 
