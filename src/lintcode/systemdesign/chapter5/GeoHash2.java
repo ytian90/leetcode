@@ -5,7 +5,7 @@ package lintcode.systemdesign.chapter5;
  */
 public class GeoHash2 {
     /*
-     * @param geohash: geohash a base32 string
+     * @param geohash: geohash a base32 leetcode.string
      * @return: latitude and longitude a location coordinate pair
      */
     public double[] decode(String geohash) {

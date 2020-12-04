@@ -17,7 +17,7 @@ public class FriendshipService {
 
     /*
      * @param user_id: An integer
-     * @return: all followers and sort by user_id
+     * @return: all followers and leetcode.sort by user_id
      */
     public List<Integer> getFollowers(int user_id) {
         // write your code here
@@ -29,7 +29,7 @@ public class FriendshipService {
 
     /*
      * @param user_id: An integer
-     * @return: all followings and sort by user_id
+     * @return: all followings and leetcode.sort by user_id
      */
     public List<Integer> getFollowings(int user_id) {
         // write your code here

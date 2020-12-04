@@ -14,9 +14,9 @@ public class MiniCassandra {
     }
 
     /*
-     * @param raw_key: a string
+     * @param raw_key: a leetcode.string
      * @param column_key: An integer
-     * @param column_value: a string
+     * @param column_value: a leetcode.string
      * @return: nothing
      */
     public void insert(String row_key, int column_key, String value) {
@@ -28,7 +28,7 @@ public class MiniCassandra {
     }
 
     /*
-     * @param row_key: a string
+     * @param row_key: a leetcode.string
      * @param column_start: An integer
      * @param column_end: An integer
      * @return: a list of Columns

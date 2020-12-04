@@ -5,7 +5,7 @@ public class GeoHash {
      * @param latitude: one of a location coordinate pair
      * @param longitude: one of a location coordinate pair
      * @param precision: an integer between 1 to 12
-     * @return: a base32 string
+     * @return: a base32 leetcode.string
      */
     public String encode(double latitude, double longitude, int precision) {
         String base32 = "0123456789bcdefghjkmnpqrstuvwxyz";

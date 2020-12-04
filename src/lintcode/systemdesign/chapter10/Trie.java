@@ -18,7 +18,7 @@ public class Trie {
         root = new TrieNode();
     }
 
-    /** Inserts a word into the trie. */
+    /** Inserts a word into the leetcode.trie. */
     public void insert(String word) {
         TrieNode curr = root;
         for (int i = 0; i < word.length(); i++) {
@@ -31,13 +31,13 @@ public class Trie {
         curr.eow = true;
     }
 
-    /** Returns if the word is in the trie. */
+    /** Returns if the word is in the leetcode.trie. */
     public boolean search(String word) {
         TrieNode node = get(word);
         return (node != null) && node.eow;
     }
 
-    /** Returns if there is any word in the trie that starts with the given prefix. */
+    /** Returns if there is any word in the leetcode.trie that starts with the given prefix. */
     public boolean startsWith(String prefix) {
         TrieNode node = get(prefix);
         return node != null;

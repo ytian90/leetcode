@@ -16,7 +16,7 @@ public class MergeKSortedArray {
 
     /**
      * @param arrays k sorted integer arrays
-     * @return a sorted array
+     * @return a sorted leetcode.array
      */
     public int[] mergekSortedArrays(int[][] arrays) {
         if (arrays == null) {

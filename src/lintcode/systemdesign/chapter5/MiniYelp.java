@@ -30,11 +30,11 @@ import java.util.*;
   };
   class GeoHash23 {
       public static String encode(Location location) {
-          // return convert location to a GeoHash string
+          // return convert location to a GeoHash leetcode.string
           return null;
       }
       public static Location decode(String hashcode) {
-           // return convert a GeoHash string to location
+           // return convert a GeoHash leetcode.string to location
           return null;
       }
   };
@@ -57,7 +57,7 @@ public class MiniYelp {
         restaurants = new TreeMap<String, Restaurant>();
     }
 
-    // @param name a string
+    // @param name a leetcode.string
     // @param location a Location
     public int addRestaurant(String name, Location location) {
         // Write your code here
@@ -82,7 +82,7 @@ public class MiniYelp {
 
     // @param location a Location
     // @param k an integer, distance smaller than k miles
-    // @return a list of restaurant's name and sort by 
+    // @return a list of restaurant's name and leetcode.sort by
     // distance from near to far.
     public List<String> neighbors(Location location, double k) {
         // Write your code here

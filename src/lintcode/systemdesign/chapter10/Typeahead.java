@@ -31,7 +31,7 @@ public class Typeahead {
     }
 
     /*
-     * @param str: a string
+     * @param str: a leetcode.string
      * @return: a list of words
      */
     public List<String> search(String str) {

@@ -24,7 +24,7 @@ public class CountingBloomFilter {
     }
 
     /*
-     * @param word: A string
+     * @param word: A leetcode.string
      * @return: nothing
      */
     public void add(String word) {
@@ -35,7 +35,7 @@ public class CountingBloomFilter {
     }
 
     /*
-     * @param word: A string
+     * @param word: A leetcode.string
      * @return: nothing
      */
     public void remove(String word) {
@@ -46,7 +46,7 @@ public class CountingBloomFilter {
     }
 
     /*
-     * @param word: A string
+     * @param word: A leetcode.string
      * @return: True if contains word
      */
     public boolean contains(String word) {

@@ -22,7 +22,7 @@ public class StandardBloomFilter {
     }
 
     /*
-     * @param word: A string
+     * @param word: A leetcode.string
      * @return: nothing
      */
     public void add(String word) {
@@ -33,7 +33,7 @@ public class StandardBloomFilter {
     }
 
     /*
-     * @param word: A string
+     * @param word: A leetcode.string
      * @return: True if contains word
      */
     public boolean contains(String word) {
