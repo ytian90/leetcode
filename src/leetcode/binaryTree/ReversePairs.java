@@ -8,6 +8,59 @@ import java.util.Arrays;
  *
  */
 public class ReversePairs {
+	private static int count = 0;
+	public static int reversePairs(int[] nums) {
+		if(nums == null || nums.length == 0)
+			return 0;
+		mergeSort(nums, 0, nums.length - 1);
+		return count;
+	}
+	private static void mergeSort(int[] nums, int left, int right){
+		if(left >= right)
+			return;
+		int mid = left + (right - left) / 2;
+		mergeSort(nums, left, mid);
+		mergeSort(nums, mid + 1, right);
+		merge(nums, left, mid, right);
+	}
+
+	private static void merge(int[] nums, int left, int mid, int right){
+		int[] temp = new int[right - left +1];
+		int p = left;
+		int q = mid + 1;
+		while(p <= mid && q <= right){
+			if((long)nums[p] > 2 * (long)nums[q]){
+				count += mid - p + 1;
+				q++;
+			}else{
+				p++;
+			}
+		}
+		mergeHelper(temp, nums, left, mid, mid + 1, right);
+		System.arraycopy(temp, 0, nums, left, right - left + 1);
+	}
+
+	private static void mergeHelper(int[] temp, int[] nums, int p, int mid, int q, int right) {
+		int index = 0;
+		while(p <= mid && q <= right){
+			if(nums[p] < nums[q]){
+				temp[index++] = nums[p++];
+			}else{
+				temp[index++] = nums[q++];
+			}
+		}
+		while(p <= mid){
+			temp[index++] = nums[p++];
+		}
+		while(q <= right){
+			temp[index++] = nums[q++];
+		}
+	}
+
+	public static void main(String[] args) {
+		System.out.println(reversePairs(new int[]{1,3,2,3,1}));
+//		System.out.println(reversePairs1(new int[]{2,4,3,5,1}));
+	}
 	
 	// BST time complexity can go as bad as O(n^2)
 	static class Node {
@@ -125,11 +178,6 @@ public class ReversePairs {
 		
 		System.arraycopy(merge, 0, nums, l, merge.length);
 		return res;
-	}
-
-	public static void main(String[] args) {
-		System.out.println(reversePairs1(new int[]{1,3,2,3,1}));
-		System.out.println(reversePairs1(new int[]{2,4,3,5,1}));
 	}
 
 }

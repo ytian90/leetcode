@@ -58,10 +58,10 @@ public class CreateMaximumNumber {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(Arrays.toString(maxArray(new int[]{9, 1, 2, 5, 8, 3}, 3)));
-		System.out.println(Arrays.toString(maxNumber(new int[]{3, 4, 6, 5}, new int[]{9, 1, 2, 5, 8, 3}, 5)));
+//		System.out.println(Arrays.toString(maxArray(new int[]{9, 1, 2, 5, 8, 3}, 3)));
+//		System.out.println(Arrays.toString(maxNumber(new int[]{3, 4, 6, 5}, new int[]{9, 1, 2, 5, 8, 3}, 5)));
 		System.out.println(Arrays.toString(maxNumber(new int[]{6, 7}, new int[]{6, 0, 4}, 5)));
-		System.out.println(Arrays.toString(maxNumber(new int[]{1, 2}, new int[]{}, 2)));
+//		System.out.println(Arrays.toString(maxNumber(new int[]{1, 2}, new int[]{}, 2)));
 	}
 
 }

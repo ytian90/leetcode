@@ -8,8 +8,42 @@ import java.util.PriorityQueue;
  * @since Aug 15, 2016
  */
 public class KthSmallestElementInASortedMatrix {
-	
+
 	public static int kthSmallest(int[][] matrix, int k) {
+		int n = matrix.length;
+		int lo = matrix[0][0], hi = matrix[n - 1][n - 1];
+		while (lo < hi) {
+			int mid = lo + (hi - lo) / 2;
+			int count = getLessEqual(matrix, mid);
+			if (count < k) {
+				lo = mid + 1;
+			} else {
+				hi = mid;
+			}
+		}
+		return lo;
+	}
+
+	private static int getLessEqual(int[][] matrix, int val) {
+		int res = 0;
+		int n = matrix.length, i = n - 1, j = 0;
+		while (i >= 0 && j < n) {
+			if (matrix[i][j] > val) {
+				i--;
+			} else {
+				res += i + 1;
+				j++;
+			}
+		}
+		return res;
+	}
+
+	public static void main(String[] args) {
+		int[][] t = new int[][]{{1, 5, 9}, {10, 11, 13}, {12, 13, 15}};
+		System.out.println(kthSmallest(t, 8));
+	}
+
+	public static int kthSmallest2(int[][] matrix, int k) {
         int n = matrix.length;
         PriorityQueue<Tuple> pq = new PriorityQueue<>();
         for (int j = 0; j < n; j++) {
@@ -22,12 +56,6 @@ public class KthSmallestElementInASortedMatrix {
         }
         return pq.poll().val;
     }
-	
-	public static void main(String[] args) {
-		int[][] t = new int[][]{{1, 5, 9}, {10, 11, 13}, {12, 13, 15}};
-		System.out.println(kthSmallest(t, 8));
-	}
-
 }
 
 class Tuple implements Comparable<Tuple> {
