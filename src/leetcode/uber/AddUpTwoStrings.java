@@ -8,9 +8,8 @@ package leetcode.uber;
  */
 public class AddUpTwoStrings {
     public static String addStrings(String a, String b) {
-        if (a == null && b == null || a.length() == 0 || b.length() == 0) {
-            return "";
-        }
+        if (a == null || a.length() == 0) return b;
+        if (b == null || b.length() == 0) return a;
         int n = a.length(), m = b.length();
         int[] sum = new int[Math.max(n, m)];
         int i = n - 1, j = m - 1, k = sum.length - 1;

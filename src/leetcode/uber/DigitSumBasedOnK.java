@@ -1,5 +1,9 @@
 package leetcode.uber;
 
+/**
+ * 给你一个int和k值，让你把这个int的位数分成k份，分别求值。不足k的位数直接放在后面。
+ * 一直到你这个值位数小于等于k。比如 1111122222，k=3，那你要111 112 222 2  -> 3462 -> 346 2 -> 132 返回132
+ */
 public class DigitSumBasedOnK {
 
     public static int calculate(int n, int k) {
