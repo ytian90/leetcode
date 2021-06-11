@@ -15,7 +15,6 @@ public class NestedInteger {
 	
 	public NestedInteger(int value) {
 		this.value = value;
-		
 	}
 	
 	public boolean isInteger() {

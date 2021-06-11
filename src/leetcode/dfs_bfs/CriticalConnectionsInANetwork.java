@@ -8,9 +8,58 @@ import java.util.List;
  * 1192. Critical Connections in a Network
  */
 public class CriticalConnectionsInANetwork {
+    public static List<List<Integer>> criticalConnections(int n, List<List<Integer>> connections) {
+        List<List<Integer>> graph = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            graph.add(new ArrayList<>());
+        }
+        for (List<Integer> conn : connections) {
+            graph.get(conn.get(0)).add(conn.get(1));
+            graph.get(conn.get(1)).add(conn.get(0));
+        }
+        boolean[] visited = new boolean[n];
+        int[] rank = new int[n];
+        List<List<Integer>> res = new ArrayList<>();
+        // call dfs on prev node and current node -> no previous, set prev to -1 to start.
+        dfs(graph, -1, 0, 0, rank, visited, res);
+        return res;
+    }
+
+    private static void dfs(List<List<Integer>> graph, int prev, int curr, int depth, int[] rank,
+                            boolean[] visited, List<List<Integer>> res) {
+        if (visited[curr]) return;
+        // set visited and update rank to be current depth
+        visited[curr] = true;
+        rank[curr] = depth;
+        for (int next : graph.get(curr)) {
+            // prev is same node as next, ignore and continue
+            if (prev == next) continue;
+            // dfs if value has not been visited
+            if (!visited[next]) {
+                dfs(graph, curr, next, depth + 1, rank, visited, res);
+            }
+            // update current node to be min -> keep us in track in case of cycle
+            rank[curr] = Math.min(rank[curr], rank[next]);
+            // if not cycle, new node has larger rank, and it is critical connection
+            if (rank[next] > depth) {
+                res.add(Arrays.asList(curr, next));
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        List<List<Integer>> conn = new ArrayList<>();
+        conn.add(Arrays.asList(0, 1));
+        conn.add(Arrays.asList(1, 2));
+        conn.add(Arrays.asList(2, 0));
+        conn.add(Arrays.asList(1, 3));
+        System.out.println(criticalConnections(4, conn));
+    }
+
+
     // low[u] records the lowest vertex u can reach
     // disc[u] records the time when u was discovered
-    public static List<List<Integer>> criticalConnections(int n, List<List<Integer>> connections) {
+    public static List<List<Integer>> criticalConnections2(int n, List<List<Integer>> connections) {
         int[] disc = new int[n], low = new int[n];
         List<Integer>[] graph = new ArrayList[n];
         List<List<Integer>> res = new ArrayList<>();
@@ -51,12 +100,4 @@ public class CriticalConnectionsInANetwork {
         }
     }
 
-    public static void main(String[] args) {
-        List<List<Integer>> conn = new ArrayList<>();
-        conn.add(new ArrayList<>(Arrays.asList(0, 1)));
-        conn.add(new ArrayList<>(Arrays.asList(1, 2)));
-        conn.add(new ArrayList<>(Arrays.asList(2, 0)));
-        conn.add(new ArrayList<>(Arrays.asList(1, 3)));
-        System.out.println(criticalConnections(4, conn));
-    }
 }
