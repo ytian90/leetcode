@@ -51,4 +51,8 @@ public class FactorCombinations {
             }
         }
     }
+    /**
+     * Time: O(NlogN)
+     * Space: O(logN)
+     */
 }
