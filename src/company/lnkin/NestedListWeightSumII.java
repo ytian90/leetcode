@@ -1,5 +1,6 @@
 package company.lnkin;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,7 +29,25 @@ import java.util.List;
  * 1*3 + 4*2 + 6*1 = 17
  */
 public class NestedListWeightSumII {
+    // unweighted: sum of all existing values in each level
     public int depthSumInverse(List<NestedInteger> nestedList) {
+        int unweighted = 0, weighted = 0;
+        while (!nestedList.isEmpty()) {
+            List<NestedInteger> next = new ArrayList<>();
+            for (NestedInteger n : nestedList) {
+                if (n.isInteger()) {
+                    unweighted += n.getInteger();
+                } else {
+                    next.addAll(n.getList());
+                }
+            }
+            weighted += unweighted;
+            nestedList = next;
+        }
+        return weighted;
+    }
+
+    public int depthSumInverse2(List<NestedInteger> nestedList) {
         int depth = getMaxDepth(nestedList);
         return helper(nestedList, depth);
     }

@@ -43,4 +43,9 @@ public class Permutations {
             visited[i] = false;
         }
     }
+    /**
+     * N(N - 1)..(N-k+1)
+     * Time: O(N * N!)
+     * Space: O(N!)
+     */
 }
