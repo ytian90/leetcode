@@ -54,4 +54,39 @@ public class PartitionToKEqualSumSubsets {
     }
     // Time: O(K * 2 ^ N)
     // Space: O(N)
+
+    // follow up: negative numbers are allowed
+    public static boolean canPartitionKSubsets_negative(int[] nums, int k) {
+        int sum = 0, max = 0;
+        for (int i : nums) {
+            sum += i;
+            max = Math.max(max, i);
+        }
+        if (sum % k != 0) {
+            return false;
+        }
+        return helper_negative(nums, k, new boolean[nums.length], 0, 0, sum / k);
+    }
+
+    private static boolean helper_negative(int[] nums, int k, boolean[] visited, int start, int currSum, int targetSum) {
+        if (k == 0) return true;
+        if (currSum == targetSum) {
+            return helper_negative(nums, k - 1, visited, 0, 0, targetSum);
+        }
+        for (int i = start; i < nums.length; i++) {
+            if (visited[i]) {
+                continue;
+            }
+            visited[i] = true;
+            if (helper_negative(nums, k, visited, i + 1, currSum + nums[i], targetSum)) {
+                return true;
+            }
+            visited[i] = false;
+        }
+        return false;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(canPartitionKSubsets_negative(new int[]{4, -1, 3, 2, 1, -5, 8}, 3));
+    }
 }

@@ -59,7 +59,7 @@ public class ShortesetWordDistanceII {
                 j++;
             }
         }
-        return res;
+        return res == Integer.MAX_VALUE / 2 ? -1 : res;
     }
 
     public static void main(String[] args) {

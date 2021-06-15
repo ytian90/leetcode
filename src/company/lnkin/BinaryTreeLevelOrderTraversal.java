@@ -30,7 +30,7 @@ import java.util.Queue;
  * Output: []
  */
 public class BinaryTreeLevelOrderTraversal {
-    public List<List<Integer>> levelOrder(TreeNode root) {
+    public List<List<Integer>> levelOrder_iterate(TreeNode root) {
         List<List<Integer>> res = new ArrayList<>();
         if (root == null) {
             return res;
@@ -54,4 +54,34 @@ public class BinaryTreeLevelOrderTraversal {
         }
         return res;
     }
+    /**
+     * Time: O(N)
+     * Space: O(N)
+     */
+
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> res = new ArrayList<>();
+        if (root == null) {
+            return res;
+        }
+        helper(root, 0, res);
+        return res;
+    }
+
+    private void helper(TreeNode node, int level, List<List<Integer>> res) {
+        if (res.size() == level) {
+            res.add(new ArrayList<>());
+        }
+        res.get(level).add(node.val);
+        if (node.left != null) {
+            helper(node.left, level + 1, res);
+        }
+        if (node.right != null) {
+            helper(node.right, level + 1, res);
+        }
+    }
+    /**
+     * Time: O(N)
+     * Space: O(N)
+     */
 }
