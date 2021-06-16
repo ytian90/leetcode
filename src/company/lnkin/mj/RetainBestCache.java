@@ -20,10 +20,10 @@ public class RetainBestCache<K, T extends Rankable> {
         if (map.containsKey(key)) {
             return map.get(key);
         }
-        T data = ds.get(key);
         if (map.size() == entriesToRetain) {
             evict();
         }
+        T data = ds.get(key);
         map.put(key, data);
         pq.offer(new Wrapper(key, data));
         return data;
