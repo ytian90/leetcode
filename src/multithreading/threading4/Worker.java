@@ -25,7 +25,7 @@ public class Worker {
         }
     }
 
-    public synchronized void stageTwo() {
+    public void stageTwo() {
         synchronized (lock2) {
             try {
                 Thread.sleep(1);

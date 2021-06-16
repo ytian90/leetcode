@@ -40,4 +40,10 @@ public class FindTheCelebrity {
     private boolean knows(int a, int b) {
         return true;
     }
+
+    /**
+     * Logical Deduction
+     * Time: O(N)
+     * Space: O(1)
+     */
 }

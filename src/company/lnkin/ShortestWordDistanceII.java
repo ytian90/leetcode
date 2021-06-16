@@ -31,10 +31,10 @@ import java.util.Map;
  * wordDistance.shortest("makes", "coding");    // return 1
  *
  */
-public class ShortesetWordDistanceII {
+public class ShortestWordDistanceII {
     Map<String, List<Integer>> map = new HashMap<>();
 
-    public ShortesetWordDistanceII(String[] wordsDict) {
+    public ShortestWordDistanceII(String[] wordsDict) {
         for (int i = 0; i < wordsDict.length; i++) {
             String word = wordsDict[i];
             if (!map.containsKey(word)) {
@@ -63,7 +63,7 @@ public class ShortesetWordDistanceII {
     }
 
     public static void main(String[] args) {
-        ShortesetWordDistanceII obj = new ShortesetWordDistanceII(new String[]{"practice", "makes", "perfect", "coding", "makes"});
+        ShortestWordDistanceII obj = new ShortestWordDistanceII(new String[]{"practice", "makes", "perfect", "coding", "makes"});
         System.out.println(obj.shortest("coding", "practice"));
         System.out.println(obj.shortest("makes", "coding"));
     }
