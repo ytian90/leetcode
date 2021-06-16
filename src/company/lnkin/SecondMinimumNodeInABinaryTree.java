@@ -2,6 +2,9 @@ package company.lnkin;
 
 import leetcode.binaryTree.TreeNode;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * LC 671. Second Minimum Node In a Binary Tree
  *
@@ -47,5 +50,28 @@ public class SecondMinimumNodeInABinaryTree {
                 return right;
             }
         }
+    }
+
+    public int findSecondMinimumValue_iterative(TreeNode root) {
+        if (root == null || root.left == null) {
+            return -1;
+        }
+        Queue<TreeNode> q = new LinkedList<>();
+        q.offer(root);
+        Integer res = null;
+        while (!q.isEmpty()) {
+            TreeNode curr = q.poll();
+            if (curr.val != root.val) {
+                if (res == null) res = curr.val;
+                else res = Math.min(res, curr.val);
+            }
+            if (curr.left != null) {
+                q.add(curr.left);
+            }
+            if (curr.right != null) {
+                q.add(curr.right);
+            }
+        }
+        return res == null ? -1 : res;
     }
 }

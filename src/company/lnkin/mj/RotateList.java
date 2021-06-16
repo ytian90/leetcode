@@ -44,4 +44,38 @@ public class RotateList {
         slow.next = null;
         return head;
     }
+
+
+    /**
+     * Reverse rotate list
+     */
+
+    public static ListNode rotateLeft(ListNode head, int k) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode fast = head, slow = head;
+        int count = 1;
+        while (fast.next != null) {
+            count++;
+            fast = fast.next;
+        }
+        int t = k % count;
+        for (int i = 0; i < t - 1; i++) {
+            slow = slow.next;
+        }
+        fast.next = head;
+        ListNode res = slow.next;
+        slow.next = null;
+        return res;
+    }
+
+    public static void main(String[] args) {
+        ListNode n0 = new ListNode(0);
+        n0.next = new ListNode(1);
+        n0.next.next = new ListNode(2);
+        n0.next.next.next = new ListNode(3);
+        n0.next.next.next.next = new ListNode(4);
+        System.out.println(rotateLeft(n0, 2).val);
+    }
 }

@@ -52,3 +52,8 @@ interface DataSource<K, T extends Rankable> {
 interface Rankable {
     long getRank();
 }
+
+/**
+ * followup问，如果每个元素的rank是可以动态调整的（比如说每次被get之后，rank就调整）怎么办。
+ *
+*/
