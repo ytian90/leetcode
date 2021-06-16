@@ -42,17 +42,17 @@ public class FindSmallestLetterGreaterThanTarget {
         else {
             target++;
         }
-        while (lo < hi) {
+        while (lo <= hi) {
             int mid = lo + (hi - lo) / 2;
             if (letters[mid] == target) {
                 return target;
             } else if (letters[mid] < target) {
                 lo = mid + 1;
             } else {
-                hi = mid;
+                hi = mid - 1;
             }
         }
-        return letters[hi];
+        return letters[lo];
     }
 
     public static void main(String[] args) {

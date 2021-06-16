@@ -40,6 +40,11 @@ public class FindLeavesOfBinaryTree {
         return height;
     }
 
+    /**
+     * Time: O(N)
+     * Space: O(N)
+     */
+
     class TreeNode {
         int val;
         TreeNode left;
