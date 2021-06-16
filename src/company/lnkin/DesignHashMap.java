@@ -81,7 +81,7 @@ public class DesignHashMap {
     }
 
     private int getIndex(int key) {
-        return Integer.hashCode(key) % nodes.length;
+        return key % nodes.length;
     }
 
     private Node findPrevNode(Node node, int key) {
