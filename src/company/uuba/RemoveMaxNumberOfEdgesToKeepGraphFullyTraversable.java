@@ -1,5 +1,7 @@
 package company.uuba;
 
+import java.util.Arrays;
+
 /**
  * LC 1579. Remove Max Number of Edges to Keep Graph Fully Traversable
  *
@@ -30,12 +32,63 @@ package company.uuba;
  */
 public class RemoveMaxNumberOfEdgesToKeepGraphFullyTraversable {
     public int maxNumEdgesToRemove(int n, int[][] edges) {
-        return 0;
+        Arrays.sort(edges, (a, b) -> (b[0] - a[0]));
+        int add = 0;
+        UnionFind alice = new UnionFind(n);
+        UnionFind bob = new UnionFind(n);
+        for (int[] e : edges) {
+            int type = e[0], a = e[1], b = e[2];
+            if (type == 3) {
+                // Both will run because it is using bitwise OR(|) and not logical OR(||)
+                if (alice.union(a, b) | bob.union(a, b)) {
+                    add++;
+                }
+            } else if (type == 2) {
+                if (bob.union(a, b)) {
+                    add++;
+                }
+            } else if (type == 1) {
+                if (alice.union(a, b)) {
+                    add++;
+                }
+            }
+        }
+        return (alice.united() && bob.united()) ? edges.length - add : -1;
     }
 
     private class UnionFind {
         int[] root;
         int n;
+
+        public UnionFind(int n) {
+            this.root = new int[n + 1];
+            for (int i = 0; i <= n; i++) {
+                root[i] = i;
+            }
+            this.n = n;
+        }
+
+        private boolean union(int a, int b) {
+            int x = find(a), y = find(b);
+            if (x != y) {
+                root[x] = y;
+                n--;
+                return true;
+            }
+            return false;
+        }
+
+        private int find(int i) {
+            while (root[i] != i) {
+                i = root[i];
+                root[i] = root[root[i]];
+            }
+            return i;
+        }
+
+        private boolean united() {
+            return n == 1;
+        }
 
     }
 }
