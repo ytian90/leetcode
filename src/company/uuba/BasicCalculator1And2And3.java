@@ -3,6 +3,8 @@ package company.uuba;
 import java.util.*;
 
 /**
+ * LC 224. Basic Calculator
+ * LC 227. Basic Calculator II
  * LC 772. Basic Calculator III
  * Implement a basic calculator to evaluate a simple expression string.
  *
@@ -33,19 +35,19 @@ import java.util.*;
  * Input: s = "0"
  * Output: 0
  */
-public class BasicCalculatorIII {
+public class BasicCalculator1And2And3 {
     public static int calculate(String s) {
-        Queue<Character> tokens = new ArrayDeque<>();
+        Queue<Character> q = new LinkedList<>();
         for (char c : s.toCharArray()) {
             if (c != ' ') {
-                tokens.add(c);
+                q.add(c);
             }
         }
-        tokens.offer('+');
-        return calculate(tokens);
+        q.add('+'); // put num inside
+        return helper(q);
     }
 
-    private static int calculate(Queue<Character> q) {
+    private static int helper(Queue<Character> q) {
         char prevOp = '+';
         int num = 0, sum = 0, prev = 0;
         while (!q.isEmpty()) {
@@ -53,7 +55,7 @@ public class BasicCalculatorIII {
             if (c >= '0' && c <= '9') {
                 num = 10 * num + (c - '0');
             } else if (c == '(') {
-                num = calculate(q);
+                num = helper(q);
             } else {
                 if (prevOp == '+') {
                     sum += prev;

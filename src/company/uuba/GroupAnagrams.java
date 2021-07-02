@@ -1,4 +1,4 @@
-package company.lnkin.mj;
+package company.uuba;
 
 import java.util.*;
 
