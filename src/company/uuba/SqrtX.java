@@ -1,4 +1,4 @@
-package company.lnkin;
+package company.uuba;
 
 /**
  * LC 69. Sqrt(x)

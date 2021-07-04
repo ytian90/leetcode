@@ -1,4 +1,4 @@
-package company.lnkin;
+package company.uuba;
 
 import leetcode.binaryTree.TreeNode;
 
