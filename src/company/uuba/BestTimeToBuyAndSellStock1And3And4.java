@@ -32,7 +32,7 @@ import java.util.Arrays;
  * Input: prices = [1]
  * Output: 0
  */
-public class BestTimeToBuyAndSellStock3And4 {
+public class BestTimeToBuyAndSellStock1And3And4 {
     public int maxProfit(int[] prices) {
         int n = prices.length;
         int[][] dp = new int[3][n];
@@ -78,6 +78,22 @@ public class BestTimeToBuyAndSellStock3And4 {
             sell2 = Math.max(sell2, p - buy2);
         }
         return sell2;
+    }
+    /**
+     * Time: O(N)
+     * Space: O(1)
+     */
+
+    public int maxProfitQ1(int[] prices) {
+        if (prices == null || prices.length == 0) {
+            return 0;
+        }
+        int res = 0, min = prices[0];
+        for (int i : prices) {
+            res = Math.max(res, i - min);
+            min = Math.min(min, i);
+        }
+        return res;
     }
     /**
      * Time: O(N)
