@@ -1,4 +1,4 @@
-package company.lnkin;
+package company.uuba.mj;
 
 import java.util.ArrayList;
 import java.util.List;
