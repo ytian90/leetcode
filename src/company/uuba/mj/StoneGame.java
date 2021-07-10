@@ -45,7 +45,7 @@ public class StoneGame {
             return memo[start][end];
         }
         int sum = sums[end] - sums[start] + piles[start];
-        int minNext = sum - Math.min(helper(piles, start + 1, end), helper(piles, start, end - 1));
-        return memo[start][end] = minNext;
+        int max = sum - Math.min(helper(piles, start + 1, end), helper(piles, start, end - 1));
+        return memo[start][end] = max;
     }
 }
