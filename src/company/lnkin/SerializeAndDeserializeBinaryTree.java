@@ -41,30 +41,34 @@ import java.util.List;
 public class SerializeAndDeserializeBinaryTree {
     // Encodes a tree to a single string.
     public String serialize(TreeNode root) {
-        List<String> list = new ArrayList<>();
-        serialize(root, list);
-        return String.join(",", list);
+        StringBuilder sb = new StringBuilder();
+        serialize(root, sb);
+        return sb.toString();
     }
 
-    private void serialize(TreeNode node, List<String> list) {
+    private void serialize(TreeNode node, StringBuilder sb) {
         if (node == null) {
-            list.add("NULL");
+            sb.append("#").append(",");
             return;
         }
-        list.add(node.val + "");
-        serialize(node.left, list);
-        serialize(node.right, list);
+        sb.append(node.val).append(",");
+        serialize(node.left, sb);
+        serialize(node.right, sb);
     }
 
     // Decodes your encoded data to tree.
     public TreeNode deserialize(String data) {
+        if (data == null || data.isEmpty()) {
+            return null;
+        }
         LinkedList<String> strs = new LinkedList<>(Arrays.asList(data.split(",")));
         return deserialize(strs);
     }
 
     private TreeNode deserialize(LinkedList<String> list) {
+        if (list.isEmpty()) return null;
         String s = list.removeFirst();
-        if ("NULL".equals(s)) {
+        if ("#".equals(s)) {
             return null;
         }
         TreeNode node = new TreeNode(Integer.valueOf(s));
