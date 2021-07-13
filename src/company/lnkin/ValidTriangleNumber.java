@@ -39,6 +39,11 @@ public class ValidTriangleNumber {
         return count;
     }
 
+    /**
+     * Time: O(N ^ 2)
+     * Space: O(1)
+     */
+
     public static void main(String[] args) {
         System.out.println(triangleNumber(new int[]{2, 2, 3, 4}));
         System.out.println(triangleNumber(new int[]{4, 2, 3, 4}));

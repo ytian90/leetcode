@@ -48,4 +48,17 @@ public class ClosestBinarySearchTreeValueII {
         res.add(node.val);
         helper(node.right, target, k, res);
     }
+
+    // LC 270. Closest Binary Search Tree Value
+    public int closestValue(TreeNode root, double target) {
+        if (root == null) {
+            return -1;
+        }
+        int res = root.val;
+        while (root != null) {
+            res = Math.abs(root.val - target) < Math.abs(res - target) ? root.val : res;
+            root = target < root.val ? root.left : root.right;
+        }
+        return res;
+    }
 }

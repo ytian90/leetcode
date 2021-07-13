@@ -2,6 +2,8 @@ package company.lnkin;
 
 import leetcode.linkedList.ListNode;
 
+import java.util.PriorityQueue;
+
 /**
  * LC 23. Merge K Sorted Lists
  *
@@ -58,6 +60,25 @@ public class MergeKSortedLists {
         }
         if (p != null) k.next = p;
         if (q != null) k.next = q;
+        return dummy.next;
+    }
+
+    public ListNode mergeKLists_pq(ListNode[] lists) {
+        if (lists == null || lists.length == 0)
+            return null;
+        PriorityQueue<ListNode> pq = new PriorityQueue<>(lists.length, (a, b) -> a.val - b.val);
+        for (ListNode n : lists)
+            if (n != null) pq.add(n);
+        ListNode dummy = new ListNode(0);
+        ListNode p = dummy;
+        while (!pq.isEmpty()) {
+            ListNode c = pq.poll();
+            p.next = c;
+            p = p.next;
+            if (c.next != null) {
+                pq.add(c.next);
+            }
+        }
         return dummy.next;
     }
 }

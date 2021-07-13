@@ -22,7 +22,7 @@ package company.lnkin;
 public class SqrtX {
     public int mySqrt(int x) {
         if (x == 0) return 0;
-        int lo = 1, hi = Integer.MAX_VALUE;
+        int lo = 1, hi = x;
         while (lo <= hi) {
             int mid = lo + (hi - lo) / 2;
             if (mid > x / mid) {
@@ -40,4 +40,23 @@ public class SqrtX {
      * Time: O(logN)
      * Space: O(1)
      */
+    public double mySqrt(double x, double precision) {
+        double min = 1, max = x;
+        while (min <= max) {
+            double mid = min + (max - min) / 2;
+            double square = mid * mid;
+            double delta = Math.abs((square / x) - 1);
+            if (delta <= precision) {
+                return mid;
+            } else {
+                if (square > x) {
+                    max = mid;
+                } else {
+                    min = mid;
+                }
+            }
+        }
+        return min;
+    }
+
 }

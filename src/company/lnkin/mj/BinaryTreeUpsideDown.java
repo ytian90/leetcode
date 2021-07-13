@@ -1,6 +1,7 @@
 package company.lnkin.mj;
 
 import leetcode.binaryTree.TreeNode;
+import leetcode.util.BTreePrinter;
 
 /**
  * LC 156. Binary Tree Upside Down
@@ -37,7 +38,7 @@ import leetcode.binaryTree.TreeNode;
  * Output: [1]
  */
 public class BinaryTreeUpsideDown {
-    public TreeNode upsideDownBinaryTree(TreeNode root) {
+    public static TreeNode upsideDownBinaryTree(TreeNode root) {
         if (root == null || root.left == null) {
             return root;
         }
@@ -47,6 +48,17 @@ public class BinaryTreeUpsideDown {
         root.left = null;
         root.right = null;
         return node;
+    }
+
+    public static void main(String[] args) {
+        TreeNode n0 = new TreeNode(1);
+        n0.left = new TreeNode(2);
+        n0.right = new TreeNode(3);
+        n0.left.left = new TreeNode(4);
+        n0.left.right = new TreeNode(5);
+
+        TreeNode res = upsideDownBinaryTree(n0);
+        BTreePrinter.printTreeNode(res);
     }
 
     public TreeNode upsideDownBinaryTree_iterative(TreeNode root) {

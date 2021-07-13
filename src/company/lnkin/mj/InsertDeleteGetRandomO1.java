@@ -38,7 +38,7 @@ public class InsertDeleteGetRandomO1 {
 
     /** Initialize your data structure here. */
     public InsertDeleteGetRandomO1() {
-        this.nums = new ArrayList<>();
+        this.nums = new LinkedList<>();
         this.locs = new HashMap<>();
         this.random = new Random();
     }
@@ -66,6 +66,50 @@ public class InsertDeleteGetRandomO1 {
         }
         nums.remove(nums.size() - 1);
         locs.remove(val);
+        return true;
+    }
+
+    /** Get a random element from the set. */
+    public int getRandom() {
+        return nums.get(random.nextInt(nums.size()));
+    }
+}
+
+class InsertDeleteGetRandomO1_Duplicate {
+    List<Integer> nums;
+    Map<Integer, List<Integer>> locs; // key - number value, value - location
+    Random random;
+
+    /** Initialize your data structure here. */
+    public InsertDeleteGetRandomO1_Duplicate() {
+        this.nums = new ArrayList<>();
+        this.locs = new HashMap<>();
+        this.random = new Random();
+    }
+
+    public boolean insert(int val) {
+        if (!locs.containsKey(val)) {
+            locs.put(val, new ArrayList<>());
+        }
+        locs.get(val).add(nums.size());
+        nums.add(val);
+        return true;
+    }
+
+    /** Removes a value from the set. Returns true if the set contained the specified element. */
+    public boolean remove(int val) {
+        if (!locs.containsKey(val)) {
+            return false;
+        }
+        List<Integer> list = locs.get(val);
+        int loc = list.get(list.size() - 1);
+        if (loc < nums.size() - 1) {
+            int lastVal = nums.get(nums.size() - 1);
+            nums.set(loc, lastVal);
+            locs.get(lastVal).add(loc);
+        }
+        nums.remove(nums.size() - 1);
+        list.remove(list.size() - 1);
         return true;
     }
 
